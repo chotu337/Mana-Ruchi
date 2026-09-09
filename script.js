@@ -3,8 +3,14 @@
 // =========================================
 
 const PRICE_PER_KG = 400;
+
 const MINIMUM_ORDER = 10;
-const QUANTITY_STEP = 10;
+
+// IMPORTANT:
+// Quantity now changes by 1 KG,
+// not by 10 KG.
+const QUANTITY_STEP = 1;
+
 const BUSINESS_WHATSAPP = "918367450301";
 
 
@@ -50,10 +56,9 @@ const increaseQuantity =
 function updateOrderSummary() {
 
     let quantity =
-        Number(quantityInput.value) || MINIMUM_ORDER;
+        Number(quantityInput.value);
 
-
-    if (quantity < MINIMUM_ORDER) {
+    if (!quantity || quantity < MINIMUM_ORDER) {
 
         quantity = MINIMUM_ORDER;
 
@@ -134,6 +139,35 @@ decreaseQuantity.addEventListener(
 
 
 // =========================================
+// MANUAL QUANTITY INPUT
+// =========================================
+
+quantityInput.addEventListener(
+    "input",
+    function () {
+
+        let quantity =
+            Number(quantityInput.value);
+
+
+        if (quantity < MINIMUM_ORDER) {
+
+            quantity = MINIMUM_ORDER;
+
+        }
+
+
+        quantityInput.value =
+            quantity;
+
+
+        updateOrderSummary();
+
+    }
+);
+
+
+// =========================================
 // ORDER FORM
 // =========================================
 
@@ -161,7 +195,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // NAME VALIDATION
+        // NAME
         // =================================
 
         if (!name) {
@@ -177,7 +211,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // PHONE VALIDATION
+        // PHONE
         // =================================
 
         const cleanPhone =
@@ -197,7 +231,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // QUANTITY VALIDATION
+        // QUANTITY
         // =================================
 
         if (
@@ -216,7 +250,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // ADDRESS VALIDATION
+        // ADDRESS
         // =================================
 
         if (!address) {
@@ -232,7 +266,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // CALCULATE TOTAL
+        // TOTAL
         // =================================
 
         const total =
@@ -240,7 +274,7 @@ orderForm.addEventListener(
 
 
         // =================================
-        // SHOW CONFIRMATION
+        // CONFIRMATION
         // =================================
 
         orderMessage.innerHTML =

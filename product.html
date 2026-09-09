@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mana Ruchi | Homemade Chilli Powder</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fffaf5;
+            color: #2b211d;
+        }
+
+        /* NAVIGATION */
+        header {
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 25px;
+            font-weight: 700;
+            color: #a52a20;
+        }
+
+        .logo-icon {
+            font-size: 25px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3d302b;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #c9372c;
+        }
+
+        /* PRODUCT HERO */
+        .product-section {
+            min-height: 85vh;
+            padding: 70px 7%;
+            display: flex;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .product-image {
+            flex: 1;
+            background: #f5e6d5;
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(95, 49, 25, 0.12);
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 600px;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        .image-placeholder {
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            color: #9a4b36;
+        }
+
+        .image-placeholder .chilli {
+            font-size: 120px;
+        }
+
+        .image-placeholder p {
+            font-size: 18px;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .small-title {
+            color: #a52a20;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .product-details h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .product-details h1 span {
+            color: #c9372c;
+        }
+
+        .description {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #665954;
+            margin-bottom: 25px;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: 700;
+            color: #a52a20;
+            margin-bottom: 25px;
+        }
+
+        .price small {
+            font-size: 15px;
+            color: #776963;
+            font-weight: normal;
+        }
+
+        /* QUANTITY */
+        .quantity-box {
+            margin-bottom: 25px;
+        }
+
+        .quantity-box label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 220px;
+            padding: 13px;
+            border: 1px solid #d7b9a4;
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+        }
+
+        /* BUTTONS */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #c9372c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a52a20;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #a52a20;
+            border: 1px solid #c9372c;
+        }
+
+        .btn-secondary:hover {
+            background: #fff0eb;
+        }
+
+        /* BENEFITS */
+        .benefits {
+            padding: 75px 7%;
+            background: #f7eee6;
+            text-align: center;
+        }
+
+        .benefits h2 {
+            font-size: 36px;
+            margin-bottom: 45px;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .benefit-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h3 {
+            color: #a52a20;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            color: #6d625d;
+            line-height: 1.5;
+        }
+
+        /* PRODUCT INFORMATION */
+        .information {
+            padding: 75px 7%;
+        }
+
+        .information h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .info-grid {
+            max-width: 950px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            border: 1px solid #ead9cc;
+        }
+
+        .info-card h3 {
+            color: #a52a20;
+            margin-bottom: 12px;
+        }
+
+        .info-card p,
+        .info-card li {
+            color: #655b56;
+            line-height: 1.7;
+        }
+
+        .info-card ul {
+            padding-left: 20px;
+        }
+
+        /* ORDER */
+        .order-section {
+            padding: 75px 7%;
+            background: #a52a20;
+            color: white;
+            text-align: center;
+        }
+
+        .order-section h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .order-section p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .order-section .btn {
+            background: white;
+            color: #a52a20;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #2d211c;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .product-section {
+                flex-direction: column;
+                padding-top: 45px;
+            }
+
+            .product-details h1 {
+                font-size: 40px;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .product-section {
+                padding: 40px 5%;
+                gap: 40px;
+            }
+
+            .product-details h1 {
+                font-size: 34px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .benefit-grid,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits,
+            .information,
+            .order-section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <div class="logo">
+            <span class="logo-icon">🌶️</span>
+            <span>Mana Ruchi</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="product.html" class="active">Product</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+
+    <!-- PRODUCT SECTION -->
+    <section class="product-section">
+
+        <!-- PRODUCT IMAGE -->
+        <div class="product-image">
+
+            <!--
+                LATER YOU CAN REPLACE THIS PLACEHOLDER
+                WITH YOUR CHILLI POWDER IMAGE.
+            -->
+
+            <div class="image-placeholder">
+                <div class="chilli">🌶️</div>
+                <p>Mana Ruchi Homemade Chilli Powder</p>
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT DETAILS -->
+        <div class="product-details">
+
+            <div class="small-title">
+                HOMEMADE WITH CARE
+            </div>
+
+            <h1>
+                Authentic Homemade
+                <span>Chilli Powder</span>
+            </h1>
+
+            <p class="description">
+                Freshly prepared chilli powder made from carefully
+                selected dried chillies. Our traditional homemade
+                preparation brings rich colour, aroma and authentic
+                taste to your everyday cooking.
+            </p>
+
+            <div class="price">
+                Contact for price
+                <small> • Available in different quantities</small>
+            </div>
+
+            <div class="quantity-box">
+                <label for="quantity">Select Quantity</label>
+
+                <select id="quantity">
+                    <option value="100g">100 g</option>
+                    <option value="250g">250 g</option>
+                    <option value="500g">500 g</option>
+                    <option value="1kg">1 kg</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+
+                <!--
+                    Replace the # below with your WhatsApp link later.
+                -->
+                <a href="#order" class="btn btn-primary">
+                    Order Now
+                </a>
+
+                <a href="index.html#contact" class="btn btn-secondary">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BENEFITS -->
+    <section class="benefits">
+
+        <h2>Why Choose Mana Ruchi?</h2>
+
+        <div class="benefit-grid">
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🌿</div>
+                <h3>100% Natural</h3>
+                <p>
+                    Made with carefully selected natural chillies.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🏠</div>
+                <h3>Homemade</h3>
+                <p>
+                    Prepared with traditional homemade care and attention.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🌶️</div>
+                <h3>Rich Colour & Aroma</h3>
+                <p>
+                    Enjoy vibrant colour, aroma and authentic chilli flavour.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>No Additives</h3>
+                <p>
+                    Pure chilli powder without unnecessary additives.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCT INFORMATION -->
+    <section class="information">
+
+        <h2>Product Information</h2>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h3>Ingredients</h3>
+                <p>
+                    Carefully selected dried red chillies,
+                    traditionally cleaned, dried and ground
+                    into fine chilli powder.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>Preparation</h3>
+                <p>
+                    Prepared in small quantities with attention
+                    to freshness, taste, colour and aroma.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>Available Quantities</h3>
+                <ul>
+                    <li>100 g</li>
+                    <li>250 g</li>
+                    <li>500 g</li>
+                    <li>1 kg</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Storage</h3>
+                <p>
+                    Store in a clean, dry and airtight container.
+                    Keep away from moisture and direct sunlight.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ORDER SECTION -->
+    <section class="order-section" id="order">
+
+        <h2>Bring Traditional Taste Home</h2>
+
+        <p>
+            Interested in Mana Ruchi Homemade Chilli Powder?
+            Contact us to place your order.
+        </p>
+
+        <a href="index.html#contact" class="btn">
+            Contact Us to Order
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Mana Ruchi. Homemade with care.
+        </p>
+
+    </footer>
+
+
+</body>
+</html>

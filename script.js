@@ -3,11 +3,8 @@
 // =========================================
 
 const PRICE_PER_KG = 400;
-
 const MINIMUM_ORDER = 10;
-
 const QUANTITY_STEP = 10;
-
 const BUSINESS_WHATSAPP = "918367450301";
 
 
@@ -47,7 +44,7 @@ const increaseQuantity =
 
 
 // =========================================
-// UPDATE SUMMARY
+// UPDATE ORDER SUMMARY
 // =========================================
 
 function updateOrderSummary() {
@@ -75,12 +72,11 @@ function updateOrderSummary() {
 
     totalPrice.textContent =
         "₹" + total.toLocaleString("en-IN");
-
 }
 
 
 // =========================================
-// INCREASE
+// INCREASE QUANTITY
 // =========================================
 
 increaseQuantity.addEventListener(
@@ -99,13 +95,12 @@ increaseQuantity.addEventListener(
 
 
         updateOrderSummary();
-
     }
 );
 
 
 // =========================================
-// DECREASE
+// DECREASE QUANTITY
 // =========================================
 
 decreaseQuantity.addEventListener(
@@ -132,7 +127,6 @@ decreaseQuantity.addEventListener(
 
 
         updateOrderSummary();
-
     }
 );
 
@@ -151,17 +145,22 @@ orderForm.addEventListener(
         const name =
             customerName.value.trim();
 
+
         const phone =
             customerPhone.value.trim();
 
+
         const quantity =
             Number(quantityInput.value);
+
 
         const address =
             addressInput.value.trim();
 
 
-        // NAME
+        // -------------------------
+        // NAME VALIDATION
+        // -------------------------
 
         if (!name) {
 
@@ -175,7 +174,9 @@ orderForm.addEventListener(
         }
 
 
-        // PHONE
+        // -------------------------
+        // PHONE VALIDATION
+        // -------------------------
 
         const cleanPhone =
             phone.replace(/\D/g, "");
@@ -193,7 +194,9 @@ orderForm.addEventListener(
         }
 
 
-        // QUANTITY
+        // -------------------------
+        // QUANTITY VALIDATION
+        // -------------------------
 
         if (
             !quantity ||
@@ -210,7 +213,9 @@ orderForm.addEventListener(
         }
 
 
-        // ADDRESS
+        // -------------------------
+        // ADDRESS VALIDATION
+        // -------------------------
 
         if (!address) {
 
@@ -224,13 +229,17 @@ orderForm.addEventListener(
         }
 
 
-        // TOTAL
+        // -------------------------
+        // CALCULATE TOTAL
+        // -------------------------
 
         const total =
             quantity * PRICE_PER_KG;
 
 
-        // CONFIRMATION
+        // -------------------------
+        // SHOW CONFIRMATION
+        // -------------------------
 
         orderMessage.innerHTML =
 
@@ -273,7 +282,9 @@ orderForm.addEventListener(
             "block";
 
 
+        // -------------------------
         // WHATSAPP MESSAGE
+        // -------------------------
 
         const message =
 
@@ -301,7 +312,9 @@ Please confirm my order.
 Thank you! 🌶️`;
 
 
+        // -------------------------
         // WHATSAPP URL
+        // -------------------------
 
         const whatsappURL =
             "https://api.whatsapp.com/send?phone=" +
@@ -310,7 +323,9 @@ Thank you! 🌶️`;
             encodeURIComponent(message);
 
 
+        // -------------------------
         // OPEN WHATSAPP
+        // -------------------------
 
         setTimeout(
             function () {
@@ -338,7 +353,6 @@ function escapeHTML(text) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
 
 

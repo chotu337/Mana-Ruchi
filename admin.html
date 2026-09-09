@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -17,16 +15,22 @@
 
     <title>Mana Ruchi - Admin Dashboard</title>
 
-    <link rel="stylesheet" href="admin.css">
-
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
 </head>
-
 
 <body>
 
-    <!-- LOGIN -->
+    <!-- =========================================
+         LOGIN SECTION
+    ========================================== -->
 
-    <section id="loginSection" class="login-section">
+    <section
+        id="loginSection"
+        class="login-section"
+    >
 
         <div class="login-card">
 
@@ -38,8 +42,12 @@
                 Mana Ruchi
             </h1>
 
+            <h2>
+                🔐 Admin Login
+            </h2>
+
             <p class="login-subtitle">
-                Admin Dashboard
+                Login to manage customer orders
             </p>
 
 
@@ -47,14 +55,15 @@
 
                 <div class="form-group">
 
-                    <label for="email">
-                        Admin Email
+                    <label for="adminEmail">
+                        Email
                     </label>
 
                     <input
                         type="email"
-                        id="email"
+                        id="adminEmail"
                         placeholder="Enter admin email"
+                        autocomplete="email"
                         required
                     >
 
@@ -63,14 +72,15 @@
 
                 <div class="form-group">
 
-                    <label for="password">
+                    <label for="adminPassword">
                         Password
                     </label>
 
                     <input
                         type="password"
-                        id="password"
+                        id="adminPassword"
                         placeholder="Enter password"
+                        autocomplete="current-password"
                         required
                     >
 
@@ -84,20 +94,22 @@
                     Login
                 </button>
 
+
+                <p
+                    id="loginMessage"
+                    class="login-message"
+                ></p>
+
             </form>
-
-
-            <p
-                id="loginError"
-                class="error-message"
-            ></p>
 
         </div>
 
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- =========================================
+         DASHBOARD SECTION
+    ========================================== -->
 
     <section
         id="dashboardSection"
@@ -105,17 +117,25 @@
         style="display: none;"
     >
 
-        <header class="dashboard-header">
+        <!-- HEADER -->
 
-            <div>
+        <header class="admin-header">
 
-                <div class="brand">
-                    🌶️ Mana Ruchi
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🌶️
                 </div>
 
-                <p>
-                    Order Management Dashboard
-                </p>
+                <div>
+                    <h1>
+                        Mana Ruchi
+                    </h1>
+
+                    <p>
+                        Admin Dashboard
+                    </p>
+                </div>
 
             </div>
 
@@ -123,6 +143,7 @@
             <button
                 id="logoutButton"
                 class="logout-button"
+                type="button"
             >
                 Logout
             </button>
@@ -130,153 +151,255 @@
         </header>
 
 
-        <main class="dashboard-container">
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
 
 
-            <!-- SUMMARY CARDS -->
+            <!-- PAGE TITLE -->
+
+            <div class="dashboard-title">
+
+                <div>
+
+                    <h2>
+                        Order Management
+                    </h2>
+
+                    <p>
+                        View and manage customer orders
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 STAT CARDS
+            ========================================== -->
 
             <div class="stats-grid">
 
+
+                <!-- TOTAL ORDERS -->
+
                 <div class="stat-card">
 
-                    <span>
-                        Total Orders
-                    </span>
+                    <div class="stat-icon">
+                        📦
+                    </div>
 
-                    <strong id="totalOrders">
-                        0
-                    </strong>
+                    <div class="stat-content">
+
+                        <p>
+                            Total Orders
+                        </p>
+
+                        <h3 id="totalOrders">
+                            0
+                        </h3>
+
+                    </div>
 
                 </div>
 
 
+                <!-- PENDING -->
+
                 <div class="stat-card">
 
-                    <span>
-                        Pending
-                    </span>
+                    <div class="stat-icon">
+                        ⏳
+                    </div>
 
-                    <strong id="pendingOrders">
-                        0
-                    </strong>
+                    <div class="stat-content">
+
+                        <p>
+                            Pending
+                        </p>
+
+                        <h3 id="pendingOrders">
+                            0
+                        </h3>
+
+                    </div>
 
                 </div>
 
 
+                <!-- CONFIRMED -->
+
                 <div class="stat-card">
 
-                    <span>
-                        Confirmed
-                    </span>
+                    <div class="stat-icon">
+                        ✅
+                    </div>
 
-                    <strong id="confirmedOrders">
-                        0
-                    </strong>
+                    <div class="stat-content">
+
+                        <p>
+                            Confirmed
+                        </p>
+
+                        <h3 id="confirmedOrders">
+                            0
+                        </h3>
+
+                    </div>
 
                 </div>
 
 
+                <!-- DELIVERED -->
+
                 <div class="stat-card">
 
-                    <span>
-                        Delivered
-                    </span>
+                    <div class="stat-icon">
+                        🚚
+                    </div>
 
-                    <strong id="deliveredOrders">
-                        0
-                    </strong>
+                    <div class="stat-content">
+
+                        <p>
+                            Delivered
+                        </p>
+
+                        <h3 id="deliveredOrders">
+                            0
+                        </h3>
+
+                    </div>
 
                 </div>
 
 
-                <div class="stat-card">
+                <!-- TOTAL SALES -->
 
-                    <span>
-                        Total Sales
-                    </span>
+                <div class="stat-card sales-card">
 
-                    <strong id="totalSales">
-                        ₹0
-                    </strong>
+                    <div class="stat-icon">
+                        💰
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Total Sales
+                        </p>
+
+                        <h3 id="totalSales">
+                            ₹0
+                        </h3>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- SEARCH / REFRESH -->
+            <!-- =========================================
+                 ORDER TOOLBAR
+            ========================================== -->
 
-            <div class="toolbar">
-
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search customer, phone or address..."
-                >
+            <div class="orders-section">
 
 
-                <button
-                    id="refreshButton"
-                    class="refresh-button"
-                >
-                    🔄 Refresh
-                </button>
+                <div class="orders-toolbar">
 
-            </div>
+                    <div class="search-box">
+
+                        <span class="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search by name, phone, address, status or order ID..."
+                            autocomplete="off"
+                        >
+
+                    </div>
 
 
-            <!-- ORDERS -->
+                    <div class="toolbar-buttons">
 
-            <div class="orders-card">
+                        <button
+                            id="refreshButton"
+                            type="button"
+                            class="toolbar-button"
+                        >
+                            🔄 Refresh
+                        </button>
 
-                <div class="orders-heading">
 
-                    <h2>
-                        Customer Orders
-                    </h2>
+                        <button
+                            id="downloadCsvButton"
+                            type="button"
+                            class="toolbar-button download-button"
+                        >
+                            📥 Download CSV
+                        </button>
 
-                    <span id="orderCount">
-                        0 orders
-                    </span>
+                    </div>
 
                 </div>
 
 
-                <div
-                    id="loadingMessage"
-                    class="loading"
-                >
-                    Loading orders...
-                </div>
-
+                <!-- =========================================
+                     ORDERS CONTAINER
+                ========================================== -->
 
                 <div
                     id="ordersContainer"
                     class="orders-container"
-                ></div>
-
-
-                <div
-                    id="emptyMessage"
-                    class="empty-message"
-                    style="display: none;"
                 >
-                    No orders found.
+
+                    <div class="loading">
+                        Loading orders...
+                    </div>
+
                 </div>
 
             </div>
 
+
         </main>
+
+
+        <!-- =========================================
+             FOOTER
+        ========================================== -->
+
+        <footer class="admin-footer">
+
+            <p>
+                © 2026 Mana Ruchi Homemade Chilli Powder
+            </p>
+
+            <p>
+                Admin Dashboard
+            </p>
+
+        </footer>
 
     </section>
 
 
-    <!-- SUPABASE -->
+    <!-- =========================================
+         SUPABASE
+    ========================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- =========================================
+         ADMIN JAVASCRIPT
+    ========================================== -->
 
     <script src="admin.js"></script>
 
 </body>
-
 </html>

@@ -1047,4 +1047,86 @@ body {
         font-size: 14px;
     }
 
+/* =========================================
+   BIG GREEN PLACE ORDER BUTTON
+   ========================================= */
+
+.green-place-order {
+    display: block;
+    width: 100%;
+    min-height: 68px;
+
+    margin-top: 20px;
+
+    background: #16a34a;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 14px;
+
+    font-family: inherit;
+    font-size: 23px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px rgba(22, 163, 74, 0.35);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover */
+
+.green-place-order:hover {
+    background: #15803d;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(22, 163, 74, 0.45);
+}
+
+
+/* Click */
+
+.green-place-order:active {
+    transform: scale(0.98);
+}
+
+
+/* Disabled while saving */
+
+.green-place-order:disabled {
+    background: #86efac;
+
+    color: #ffffff;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .green-place-order {
+        min-height: 64px;
+
+        font-size: 21px;
+
+        border-radius: 13px;
+    }
+
+}
 }

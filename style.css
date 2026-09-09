@@ -893,4 +893,92 @@ footer p {
         height: 45px;
     }
 }
+/* =========================================
+   ORDER SUMMARY
+   ========================================= */
+
+.order-summary {
+    margin-top: 25px;
+
+    padding: 22px;
+
+    background: #fff8f0;
+
+    border: 1px solid #ead5c0;
+
+    border-radius: 14px;
+}
+
+.order-summary h3 {
+    color: #8b0000;
+
+    text-align: center;
+
+    margin-bottom: 18px;
+
+    font-size: 20px;
+}
+
+.summary-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 8px 0;
+
+    font-size: 15px;
+}
+
+.summary-row strong {
+    text-align: right;
+
+    color: #555;
+}
+
+.summary-divider {
+    height: 1px;
+
+    background: #ddd;
+
+    margin: 12px 0;
+}
+
+.summary-total {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.summary-total strong {
+    color: #8b0000;
+
+    font-size: 25px;
+}
+
+@media (max-width: 600px) {
+
+    .order-summary {
+        padding: 18px;
+    }
+
+    .summary-row {
+        font-size: 14px;
+    }
+
+    .summary-total {
+        font-size: 18px;
+    }
+
+    .summary-total strong {
+        font-size: 22px;
+    }
+}
 }

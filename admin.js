@@ -1,19 +1,14 @@
 /* =========================================
-   MANA RUCHI ADMIN DASHBOARD
+   MANA RUCHI - ADMIN DASHBOARD
 ========================================= */
-/* =========================
-   ADMIN LOGIN
-========================= */
-/*
-   DEMO LOGIN DETAILS
-   Username: admin
-   Password: ManaRuchi123
-   IMPORTANT:
-   This is only suitable for testing.
-   Do NOT use this as real production security.
-*/
+/* =========================================
+   ADMIN LOGIN DETAILS
+========================================= */
 const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "ManaRuchi123";
+const ADMIN_PASSWORD = "ManaRuchi@2026";
+/* =========================================
+   GET HTML ELEMENTS
+========================================= */
 const loginSection =
     document.getElementById("loginSection");
 const dashboardSection =
@@ -24,9 +19,11 @@ const loginError =
     document.getElementById("loginError");
 const logoutBtn =
     document.getElementById("logoutBtn");
-/* =========================
-   CHECK LOGIN
-========================= */
+const clearOrdersBtn =
+    document.getElementById("clearOrdersBtn");
+/* =========================================
+   CHECK WHETHER ADMIN IS LOGGED IN
+========================================= */
 function checkLogin() {
     const loggedIn =
         sessionStorage.getItem("manaRuchiAdmin");
@@ -36,97 +33,136 @@ function checkLogin() {
         showLogin();
     }
 }
-/* =========================
-   LOGIN
-========================= */
-loginForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const username =
-        document.getElementById("username").value.trim();
-    const password =
-        document.getElementById("password").value;
-    if (
-        username === ADMIN_USERNAME &&
-        password === ADMIN_PASSWORD
-    ) {
-        sessionStorage.setItem(
-            "manaRuchiAdmin",
-            "true"
-        );
-        loginError.textContent = "";
-        showDashboard();
-    } else {
-        loginError.textContent =
-            "❌ Invalid username or password.";
-    }
-});
-/* =========================
-   SHOW LOGIN
-========================= */
+/* =========================================
+   SHOW LOGIN PAGE
+========================================= */
 function showLogin() {
     loginSection.classList.remove("hidden");
     dashboardSection.classList.add("hidden");
 }
-/* =========================
-   SHOW DASHBOARD
-========================= */
+/* =========================================
+   SHOW ADMIN DASHBOARD
+========================================= */
 function showDashboard() {
     loginSection.classList.add("hidden");
     dashboardSection.classList.remove("hidden");
     loadOrders();
 }
-/* =========================
-   LOGOUT
-========================= */
-logoutBtn.addEventListener("click", function() {
-    sessionStorage.removeItem(
-        "manaRuchiAdmin"
+/* =========================================
+   LOGIN
+========================================= */
+if (loginForm) {
+    loginForm.addEventListener(
+        "submit",
+        function(event) {
+            event.preventDefault();
+            const username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+            /* Check username and password */
+            if (
+                username === ADMIN_USERNAME &&
+                password === ADMIN_PASSWORD
+            ) {
+                sessionStorage.setItem(
+                    "manaRuchiAdmin",
+                    "true"
+                );
+                loginError.textContent = "";
+                loginForm.reset();
+                showDashboard();
+            } else {
+                loginError.textContent =
+                    "❌ Incorrect username or password.";
+            }
+        }
     );
-    showLogin();
-});
-/* =========================
+}
+/* =========================================
+   LOGOUT
+========================================= */
+if (logoutBtn) {
+    logoutBtn.addEventListener(
+        "click",
+        function() {
+            sessionStorage.removeItem(
+                "manaRuchiAdmin"
+            );
+            showLogin();
+        }
+    );
+}
+/* =========================================
    LOAD ORDERS
-========================= */
+========================================= */
 function loadOrders() {
     const orders =
         JSON.parse(
-            localStorage.getItem("manaRuchiOrders")
+            localStorage.getItem(
+                "manaRuchiOrders"
+            )
         ) || [];
     updateStatistics(orders);
     displayOrders(orders);
 }
-/* =========================
-   STATISTICS
-========================= */
+/* =========================================
+   UPDATE DASHBOARD STATISTICS
+========================================= */
 function updateStatistics(orders) {
     const total =
         orders.length;
     const pending =
         orders.filter(
-            order => order.status !== "Completed"
+            function(order) {
+                return order.status !== "Completed";
+            }
         ).length;
     const completed =
         orders.filter(
-            order => order.status === "Completed"
+            function(order) {
+                return order.status === "Completed";
+            }
         ).length;
-    document.getElementById(
-        "totalOrders"
-    ).textContent = total;
-    document.getElementById(
-        "pendingOrders"
-    ).textContent = pending;
-    document.getElementById(
-        "completedOrders"
-    ).textContent = completed;
+    const totalOrders =
+        document.getElementById(
+            "totalOrders"
+        );
+    const pendingOrders =
+        document.getElementById(
+            "pendingOrders"
+        );
+    const completedOrders =
+        document.getElementById(
+            "completedOrders"
+        );
+    if (totalOrders) {
+        totalOrders.textContent = total;
+    }
+    if (pendingOrders) {
+        pendingOrders.textContent = pending;
+    }
+    if (completedOrders) {
+        completedOrders.textContent = completed;
+    }
 }
-/* =========================
-   DISPLAY ORDERS
-========================= */
+/* =========================================
+   DISPLAY CUSTOMER ORDERS
+========================================= */
 function displayOrders(orders) {
     const container =
         document.getElementById(
             "ordersContainer"
         );
+    if (!container) {
+        return;
+    }
+    /* No orders */
     if (orders.length === 0) {
         container.innerHTML = `
             <div class="no-orders">
@@ -136,10 +172,13 @@ function displayOrders(orders) {
         return;
     }
     container.innerHTML = "";
+    /* Display every order */
     orders.forEach(
-        (order, index) => {
+        function(order, index) {
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
             card.className =
                 "order-card";
             const status =
@@ -150,22 +189,35 @@ function displayOrders(orders) {
                 </h3>
                 <div class="order-info">
                     <strong>Customer:</strong>
-                    ${escapeHTML(order.name || "N/A")}
+                    ${escapeHTML(
+                        order.name || "N/A"
+                    )}
                     <br>
                     <strong>Phone:</strong>
-                    ${escapeHTML(order.phone || "N/A")}
+                    ${escapeHTML(
+                        order.phone || "N/A"
+                    )}
                     <br>
                     <strong>Address:</strong>
-                    ${escapeHTML(order.address || "N/A")}
+                    ${escapeHTML(
+                        order.address || "N/A"
+                    )}
                     <br>
                     <strong>Product:</strong>
-                    ${escapeHTML(order.product || "Chilli Powder")}
+                    ${escapeHTML(
+                        order.product ||
+                        "Chilli Powder"
+                    )}
                     <br>
                     <strong>Quantity:</strong>
-                    ${escapeHTML(order.quantity || "N/A")}
+                    ${escapeHTML(
+                        order.quantity || "N/A"
+                    )}
                     <br>
-                    <strong>Order Date:</strong>
-                    ${escapeHTML(order.date || "N/A")}
+                    <strong>Date:</strong>
+                    ${escapeHTML(
+                        order.date || "N/A"
+                    )}
                 </div>
                 <span class="order-status">
                     ${escapeHTML(status)}
@@ -189,13 +241,15 @@ function displayOrders(orders) {
         }
     );
 }
-/* =========================
-   COMPLETE ORDER
-========================= */
+/* =========================================
+   MARK ORDER AS COMPLETED
+========================================= */
 function completeOrder(index) {
     const orders =
         JSON.parse(
-            localStorage.getItem("manaRuchiOrders")
+            localStorage.getItem(
+                "manaRuchiOrders"
+            )
         ) || [];
     if (!orders[index]) {
         return;
@@ -208,27 +262,30 @@ function completeOrder(index) {
     );
     loadOrders();
 }
-/* =========================
-   CLEAR ORDERS
-========================= */
-document
-    .getElementById("clearOrdersBtn")
-    .addEventListener("click", function() {
-        const confirmClear =
-            confirm(
-                "Are you sure you want to clear all orders?"
+/* =========================================
+   CLEAR ALL ORDERS
+========================================= */
+if (clearOrdersBtn) {
+    clearOrdersBtn.addEventListener(
+        "click",
+        function() {
+            const confirmation =
+                confirm(
+                    "Are you sure you want to delete all orders?"
+                );
+            if (!confirmation) {
+                return;
+            }
+            localStorage.removeItem(
+                "manaRuchiOrders"
             );
-        if (!confirmClear) {
-            return;
+            loadOrders();
         }
-        localStorage.removeItem(
-            "manaRuchiOrders"
-        );
-        loadOrders();
-    });
-/* =========================
-   BASIC HTML ESCAPING
-========================= */
+    );
+}
+/* =========================================
+   PROTECT AGAINST HTML IN CUSTOMER DATA
+========================================= */
 function escapeHTML(value) {
     return String(value)
         .replaceAll("&", "&amp;")
@@ -237,7 +294,7 @@ function escapeHTML(value) {
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 }
-/* =========================
-   START
-========================= */
+/* =========================================
+   START ADMIN DASHBOARD
+========================================= */
 checkLogin();

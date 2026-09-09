@@ -1,7 +1,3 @@
-/* =========================================
-   MANA RUCHI - MAIN STYLES
-========================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -43,9 +39,7 @@ body {
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
+/* HEADER */
 
 .header {
     background: #8b0000;
@@ -101,7 +95,6 @@ body {
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .nav a:hover {
@@ -109,17 +102,10 @@ body {
 }
 
 
-/* =========================================
-   HERO
-========================================= */
+/* HERO */
 
 .hero {
-    background: linear-gradient(
-        135deg,
-        #fff4e8,
-        #ffe6cc
-    );
-
+    background: linear-gradient(135deg, #fff4e8, #ffe6cc);
     padding: 80px 0;
 }
 
@@ -189,12 +175,10 @@ body {
     padding: 14px 28px;
     border-radius: 9px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .primary-button:hover {
     background: #b22222;
-    transform: translateY(-2px);
 }
 
 .hero-image-container {
@@ -212,9 +196,7 @@ body {
 }
 
 
-/* =========================================
-   TRUST HIGHLIGHTS - STEP 19
-========================================= */
+/* TRUST */
 
 .trust-section {
     background: #8b0000;
@@ -257,13 +239,10 @@ body {
 .trust-text span {
     font-size: 12px;
     opacity: 0.85;
-    margin-top: 2px;
 }
 
 
-/* =========================================
-   PRODUCT
-========================================= */
+/* PRODUCT */
 
 .product-section {
     background: white;
@@ -349,9 +328,7 @@ body {
 }
 
 
-/* =========================================
-   WHY CHOOSE US
-========================================= */
+/* WHY */
 
 .why-section {
     background: #fffaf5;
@@ -388,12 +365,10 @@ body {
 }
 
 
-/* =========================================
-   PRICING
-========================================= */
+/* PRICING */
 
 .pricing-section {
-    background: #ffffff;
+    background: white;
 }
 
 .pricing-card {
@@ -453,18 +428,14 @@ body {
     text-decoration: none;
     border-radius: 9px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .pricing-order-button:hover {
     background: #b22222;
-    transform: translateY(-2px);
 }
 
 
-/* =========================================
-   ORDER
-========================================= */
+/* ORDER */
 
 .order-section {
     background: #fffaf5;
@@ -514,14 +485,12 @@ body {
 }
 
 
-/* =========================================
-   QUANTITY
-========================================= */
+/* QUANTITY */
 
 .quantity-control {
     display: flex;
     align-items: center;
-    max-width: 250px;
+    max-width: 300px;
 }
 
 .quantity-button {
@@ -545,16 +514,13 @@ body {
 }
 
 
-/* =========================================
-   ORDER SUMMARY
-========================================= */
+/* SUMMARY */
 
 .order-summary {
     background: #fff8ef;
     border: 1px solid #ead5c0;
     border-radius: 12px;
     padding: 22px;
-    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -590,18 +556,14 @@ body {
     font-weight: bold;
     border-radius: 9px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .whatsapp-order-button:hover {
     background: #075e54;
-    transform: translateY(-2px);
 }
 
 
-/* =========================================
-   CONFIRMATION
-========================================= */
+/* CONFIRMATION */
 
 .order-message {
     display: none;
@@ -618,7 +580,6 @@ body {
 
 .confirmation-icon {
     font-size: 42px;
-    margin-bottom: 8px;
 }
 
 .confirmation-box h3 {
@@ -637,9 +598,7 @@ body {
 }
 
 
-/* =========================================
-   DELIVERY
-========================================= */
+/* DELIVERY */
 
 .delivery-section {
     background: white;
@@ -675,9 +634,7 @@ body {
 }
 
 
-/* =========================================
-   ABOUT
-========================================= */
+/* ABOUT */
 
 .about-section {
     background: #fffaf5;
@@ -711,9 +668,7 @@ body {
 }
 
 
-/* =========================================
-   FAQ
-========================================= */
+/* FAQ */
 
 .faq-section {
     background: #ffffff;
@@ -731,22 +686,15 @@ body {
     border: 1px solid #ead5c0;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    transition: 0.3s;
-}
-
-.faq-item:hover {
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
 }
 
 .faq-item summary {
-    padding: 20px 22px;
+    padding: 20px 55px 20px 22px;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
     cursor: pointer;
     list-style: none;
     position: relative;
-    padding-right: 55px;
 }
 
 .faq-item summary::-webkit-details-marker {
@@ -786,9 +734,7 @@ body {
 }
 
 
-/* =========================================
-   REVIEWS
-========================================= */
+/* REVIEWS */
 
 .reviews-section {
     background: #fffaf5;
@@ -823,9 +769,7 @@ body {
 }
 
 
-/* =========================================
-   CONTACT
-========================================= */
+/* CONTACT */
 
 .contact-section {
     background: white;
@@ -847,7 +791,6 @@ body {
     text-decoration: none;
     font-weight: bold;
     color: white;
-    transition: 0.3s;
 }
 
 .call-button {
@@ -873,9 +816,7 @@ body {
 }
 
 
-/* =========================================
-   FLOATING WHATSAPP
-========================================= */
+/* FLOATING WHATSAPP */
 
 .floating-whatsapp {
     position: fixed;
@@ -889,18 +830,14 @@ body {
     border-radius: 30px;
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    transition: 0.3s;
 }
 
 .floating-whatsapp:hover {
     background: #075e54;
-    transform: translateY(-3px);
 }
 
 
-/* =========================================
-   FOOTER
-========================================= */
+/* FOOTER */
 
 .footer {
     background: #4b0000;
@@ -933,19 +870,13 @@ body {
     font-size: 14px;
 }
 
-.footer-links a:hover {
-    color: #ffd8a8;
-}
-
 .copyright {
     font-size: 13px;
     opacity: 0.7 !important;
 }
 
 
-/* =========================================
-   TABLET
-========================================= */
+/* TABLET */
 
 @media (max-width: 900px) {
 
@@ -987,16 +918,10 @@ body {
         min-height: 300px;
     }
 
-    .delivery-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .delivery-grid,
     .reviews-grid {
         grid-template-columns: 1fr;
     }
-
-
-    /* TRUST TABLET */
 
     .trust-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1014,9 +939,7 @@ body {
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* MOBILE */
 
 @media (max-width: 600px) {
 
@@ -1030,10 +953,6 @@ body {
 
     .section h2 {
         font-size: 26px;
-    }
-
-    .header-container {
-        gap: 12px;
     }
 
     .logo-text strong {
@@ -1068,9 +987,6 @@ body {
         height: 280px;
     }
 
-
-    /* TRUST MOBILE */
-
     .trust-section {
         padding: 18px 0;
     }
@@ -1097,7 +1013,6 @@ body {
         font-size: 10px;
     }
 
-
     .product-info {
         padding: 25px;
     }
@@ -1115,18 +1030,9 @@ body {
         padding: 15px 18px;
     }
 
-    .faq-container {
-        margin-top: 20px;
-    }
-
     .faq-item summary {
         padding: 17px 50px 17px 17px;
         font-size: 15px;
-    }
-
-    .faq-item summary::after {
-        right: 17px;
-        font-size: 22px;
     }
 
     .faq-item p {

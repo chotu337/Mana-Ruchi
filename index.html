@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
 
     <meta
         name="description"
-        content="Mana Ruchi Homemade Chilli Powder - traditional flavour, fresh quality and bulk orders."
+        content="Mana Ruchi Homemade Chilli Powder - Fresh quality and traditional flavour. Bulk orders available."
     >
 
     <link rel="stylesheet" href="style.css">
@@ -16,445 +17,720 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
+    <!-- =========================================
+         HEADER
+         ========================================= -->
 
-<header>
+    <header class="header">
 
-    <div class="logo">
-        <span class="logo-icon">🌶️</span>
+        <div class="container nav-container">
 
-        <span class="logo-text">
-            <strong>MANA RUCHI</strong>
-            <small>Homemade Chilli Powder</small>
-        </span>
-    </div>
+            <div class="logo">
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#product">Product</a>
-        <a href="#order">Order</a>
-        <a href="#delivery">Delivery</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </nav>
+                <span class="logo-icon">🌶️</span>
 
-</header>
-
-
-<!-- ================= HERO ================= -->
-
-<section id="home" class="hero">
-
-    <div class="hero-content">
-
-        <span class="hero-tag">🌶️ HOMEMADE</span>
-
-        <h1>Mana Ruchi</h1>
-
-        <h2>Homemade Chilli Powder</h2>
-
-        <p>
-            Authentic taste, fresh quality and traditional flavour
-            made with care.
-        </p>
-
-        <p class="price">
-            ₹400 / KG
-        </p>
-
-        <p class="minimum-order">
-            Minimum Order: 10 KG
-        </p>
-
-        <a href="#order" class="btn">
-            Order Now 🌶️
-        </a>
-
-    </div>
-
-    <div class="hero-image-container">
-
-        <img
-            src="chili.jpeg"
-            alt="Mana Ruchi Homemade Chilli Powder"
-            class="hero-image"
-        >
-
-    </div>
-
-</section>
-
-
-<!-- ================= PRODUCT ================= -->
-
-<section id="product" class="product-section">
-
-    <h2>Our Product</h2>
-
-    <div class="product-container">
-
-        <div class="product-card">
-
-            <div class="product-image-wrapper">
-
-                <img
-                    src="chilli.jpg"
-                    alt="Mana Ruchi Homemade Chilli Powder"
-                >
-
-                <span class="product-badge">
-                    🌶️ Homemade
+                <span class="logo-text">
+                    <strong>MANA RUCHI</strong>
+                    <small>Homemade Chilli Powder</small>
                 </span>
 
             </div>
 
-            <h3>
-                Mana Ruchi Homemade Chilli Powder
-            </h3>
 
-            <p class="product-price">
-                ₹400 / KG
-            </p>
+            <nav class="nav">
 
-            <p>
-                Minimum Order: <strong>10 KG</strong>
-            </p>
+                <a href="#home">Home</a>
+                <a href="#product">Product</a>
+                <a href="#order">Order</a>
+                <a href="#delivery">Delivery</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
 
-            <p class="product-features">
-                Fresh • Homemade • Quality-focused
-            </p>
-
-            <a href="#order" class="btn">
-                Buy Now
-            </a>
+            </nav>
 
         </div>
 
-    </div>
-
-</section>
+    </header>
 
 
-<!-- ================= WHY CHOOSE US ================= -->
+    <!-- =========================================
+         HERO SECTION
+         ========================================= -->
 
-<section class="why-us">
+    <section id="home" class="hero">
 
-    <h2>Why Choose Mana Ruchi?</h2>
+        <div class="container hero-content">
 
-    <div class="features">
+            <div class="hero-text">
 
-        <div class="feature-card">
-            <div class="feature-icon">🏠</div>
-            <h3>Homemade</h3>
-            <p>
-                Prepared with care using a traditional approach.
-            </p>
-        </div>
+                <span class="hero-badge">
+                    🌶️ HOMEMADE
+                </span>
 
-        <div class="feature-card">
-            <div class="feature-icon">🌶️</div>
-            <h3>Fresh Quality</h3>
-            <p>
-                We focus on freshness and consistent quality.
-            </p>
-        </div>
+                <h1>
+                    Mana Ruchi
+                </h1>
 
-        <div class="feature-card">
-            <div class="feature-icon">📦</div>
-            <h3>Bulk Orders</h3>
-            <p>
-                Convenient ordering starting from 10 KG.
-            </p>
-        </div>
+                <h2>
+                    Homemade Chilli Powder
+                </h2>
 
-        <div class="feature-card">
-            <div class="feature-icon">📱</div>
-            <h3>Easy Ordering</h3>
-            <p>
-                Place your order easily through WhatsApp.
-            </p>
-        </div>
+                <p>
+                    Authentic taste, fresh quality and traditional
+                    flavour made with care.
+                </p>
 
-    </div>
+                <div class="hero-price">
+                    ₹400 <span>/ KG</span>
+                </div>
 
-</section>
+                <p class="minimum-order">
+                    Minimum Order: <strong>10 KG</strong>
+                </p>
+
+                <a href="#order" class="primary-button">
+                    🌶️ Order Now
+                </a>
+
+            </div>
 
 
-<!-- ================= ORDER ================= -->
+            <div class="hero-image-container">
 
-<section id="order" class="order-section">
-
-    <h2>Place Your Order</h2>
-
-    <div class="order-form-container">
-
-        <form id="orderForm" class="order-form">
-
-            <label for="customerName">
-                Customer Name
-            </label>
-
-            <input
-                type="text"
-                id="customerName"
-                placeholder="Enter your name"
-                required
-            >
-
-
-            <label for="customerPhone">
-                Mobile Number
-            </label>
-
-            <input
-                type="tel"
-                id="customerPhone"
-                placeholder="Enter 10-digit mobile number"
-                maxlength="10"
-                required
-            >
-
-
-            <label>
-                Quantity (KG)
-            </label>
-
-            <div class="quantity-control">
-
-                <button
-                    type="button"
-                    id="decreaseQuantity"
-                    class="quantity-button">
-                    −
-                </button>
-
-                <input
-                    type="number"
-                    id="quantity"
-                    min="10"
-                    step="10"
-                    value="10"
-                    readonly
+                <img
+                    src="chilli.jpg"
+                    alt="Mana Ruchi Homemade Chilli Powder"
+                    class="hero-image"
                 >
 
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PRODUCT SECTION
+         ========================================= -->
+
+    <section id="product" class="section">
+
+        <div class="container">
+
+            <h2>
+                Our Product
+            </h2>
+
+            <p class="section-subtitle">
+                Quality chilli powder prepared with care.
+            </p>
+
+
+            <div class="product-card">
+
+                <div class="product-image-container">
+
+                    <img
+                        src="chili.jpeg"
+                        alt="Homemade Chilli Powder"
+                        class="product-image"
+                    >
+
+                    <span class="product-badge">
+                        Homemade
+                    </span>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Mana Ruchi Homemade Chilli Powder
+                    </h3>
+
+                    <p>
+                        Fresh chilli powder with traditional flavour,
+                        suitable for everyday cooking.
+                    </p>
+
+                    <div class="product-price">
+                        ₹400 / KG
+                    </div>
+
+                    <p class="product-minimum">
+                        Minimum Order: 10 KG
+                    </p>
+
+                    <a href="#order" class="primary-button">
+                        Order Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         WHY CHOOSE US
+         ========================================= -->
+
+    <section class="section why-section">
+
+        <div class="container">
+
+            <h2>
+                Why Choose Mana Ruchi?
+            </h2>
+
+            <p class="section-subtitle">
+                Simple, quality-focused and easy to order.
+            </p>
+
+
+            <div class="why-grid">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        Homemade
+                    </h3>
+
+                    <p>
+                        Prepared with care for a traditional
+                        homemade taste.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🌶️
+                    </div>
+
+                    <h3>
+                        Quality
+                    </h3>
+
+                    <p>
+                        Quality-focused chilli powder for
+                        everyday cooking.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        📦
+                    </div>
+
+                    <h3>
+                        Bulk Orders
+                    </h3>
+
+                    <p>
+                        Bulk orders are welcome with a minimum
+                        order of 10 KG.
+                    </p>
+
+                </div>
+
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        Easy Ordering
+                    </h3>
+
+                    <p>
+                        Send your order directly through WhatsApp.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ORDER SECTION
+         ========================================= -->
+
+    <section id="order" class="section order-section">
+
+        <div class="container">
+
+            <h2>
+                Place Your Order
+            </h2>
+
+            <p class="section-subtitle">
+                Enter your details and send your order through WhatsApp.
+            </p>
+
+
+            <form id="orderForm" class="order-form">
+
+
+                <!-- CUSTOMER NAME -->
+
+                <div class="form-group">
+
+                    <label for="customerName">
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="customerPhone">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity (KG)
+                    </label>
+
+
+                    <div class="quantity-control">
+
+                        <button
+                            type="button"
+                            id="decreaseQuantity"
+                            class="quantity-button">
+                            −
+                        </button>
+
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            min="10"
+                            step="10"
+                            value="10"
+                            readonly
+                        >
+
+
+                        <button
+                            type="button"
+                            id="increaseQuantity"
+                            class="quantity-button">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+
+                    <label for="address">
+                        Delivery Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        rows="4"
+                        placeholder="Enter complete delivery address"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="order-summary">
+
+                    <h3>
+                        🧾 Order Summary
+                    </h3>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Product
+                        </span>
+
+                        <strong>
+                            Chilli Powder
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Price
+                        </span>
+
+                        <strong>
+                            ₹400 / KG
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Quantity
+                        </span>
+
+                        <strong id="summaryQuantity">
+                            10 KG
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="totalPrice">
+                            ₹4,000
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT BUTTON -->
+
                 <button
-                    type="button"
-                    id="increaseQuantity"
-                    class="quantity-button">
-                    +
+                    type="submit"
+                    class="whatsapp-order-button">
+                    💬 Order on WhatsApp
                 </button>
 
+
+                <!-- CONFIRMATION MESSAGE -->
+
+                <div
+                    id="orderMessage"
+                    class="order-message">
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         DELIVERY SECTION
+         ========================================= -->
+
+    <section id="delivery" class="section delivery-section">
+
+        <div class="container">
+
+            <h2>
+                Delivery Information
+            </h2>
+
+            <p class="section-subtitle">
+                We aim to make your order simple and convenient.
+            </p>
+
+
+            <div class="delivery-grid">
+
+                <div class="delivery-card">
+
+                    <div class="delivery-icon">
+                        📦
+                    </div>
+
+                    <h3>
+                        Bulk Orders
+                    </h3>
+
+                    <p>
+                        Minimum order quantity is 10 KG.
+                    </p>
+
+                </div>
+
+
+                <div class="delivery-card">
+
+                    <div class="delivery-icon">
+                        🚚
+                    </div>
+
+                    <h3>
+                        Delivery
+                    </h3>
+
+                    <p>
+                        Delivery details will be discussed
+                        after placing your order.
+                    </p>
+
+                </div>
+
+
+                <div class="delivery-card">
+
+                    <div class="delivery-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        Order Confirmation
+                    </h3>
+
+                    <p>
+                        We will contact you through WhatsApp
+                        to confirm your order.
+                    </p>
+
+                </div>
+
             </div>
 
-            <small class="input-help">
-                Minimum order is 10 KG
-            </small>
+        </div>
+
+    </section>
 
 
-            <label for="address">
-                Delivery Address
-            </label>
+    <!-- =========================================
+         ABOUT SECTION
+         ========================================= -->
 
-            <textarea
-                id="address"
-                placeholder="Enter complete delivery address"
-                required
-            ></textarea>
+    <section id="about" class="section about-section">
 
+        <div class="container">
 
-            <!-- ORDER SUMMARY -->
+            <h2>
+                About Mana Ruchi
+            </h2>
 
-            <div class="order-summary">
+            <div class="about-content">
 
-                <h3>🧾 Order Summary</h3>
+                <p>
+                    Mana Ruchi is a homemade chilli powder brand
+                    focused on delivering fresh quality and
+                    traditional flavour.
+                </p>
 
-                <div class="summary-row">
+                <p>
+                    Our goal is to provide a simple ordering
+                    experience for customers looking for
+                    homemade chilli powder in bulk quantities.
+                </p>
 
-                    <span>Product</span>
-
-                    <strong>
-                        Chilli Powder
-                    </strong>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>Price</span>
-
-                    <strong>
-                        ₹400 / KG
-                    </strong>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>Quantity</span>
-
-                    <strong id="summaryQuantity">
-                        10 KG
-                    </strong>
-
-                </div>
-
-                <div class="summary-divider"></div>
-
-                <div class="summary-total">
-
-                    <span>Total</span>
-
-                    <strong id="totalPrice">
-                        ₹4,000
-                    </strong>
-
-                </div>
+                <p>
+                    For orders and enquiries, contact us directly
+                    through phone or WhatsApp.
+                </p>
 
             </div>
 
-
-            <button
-                type="submit"
-                class="whatsapp-button">
-
-                💬 Order on WhatsApp
-
-            </button>
-
-
-            <p
-                id="orderMessage"
-                class="order-message">
-            </p>
-
-        </form>
-
-    </div>
-
-</section>
-
-
-<!-- ================= DELIVERY ================= -->
-
-<section id="delivery" class="delivery-section">
-
-    <h2>Delivery Information</h2>
-
-    <div class="delivery-cards">
-
-        <div class="delivery-card">
-            <div class="delivery-icon">📦</div>
-            <h3>Bulk Orders</h3>
-            <p>
-                Minimum order quantity is 10 KG.
-            </p>
         </div>
 
-        <div class="delivery-card">
-            <div class="delivery-icon">🚚</div>
-            <h3>Delivery</h3>
-            <p>
-                Delivery details will be confirmed after placing your order.
+    </section>
+
+
+    <!-- =========================================
+         CONTACT SECTION - STEP 15
+         ========================================= -->
+
+    <section id="contact" class="section contact-section">
+
+        <div class="container">
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p class="section-subtitle">
+                Have questions or want to place a bulk order?
+                Contact Mana Ruchi directly.
             </p>
+
+
+            <div class="contact-card">
+
+
+                <!-- CALL -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        📞
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Call Us
+                        </h3>
+
+                        <p>
+                            +91 8367450301
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="tel:+918367450301"
+                    class="call-button">
+                    📞 Call Now
+                </a>
+
+
+                <!-- WHATSAPP -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        💬
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            WhatsApp
+                        </h3>
+
+                        <p>
+                            Chat with us for orders and enquiries
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="https://api.whatsapp.com/send?phone=918367450301"
+                    class="whatsapp-contact-button"
+                    target="_blank"
+                    rel="noopener">
+                    💬 Chat on WhatsApp
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="delivery-card">
-            <div class="delivery-icon">📱</div>
-            <h3>WhatsApp</h3>
+    </section>
+
+
+    <!-- =========================================
+         FLOATING WHATSAPP
+         ========================================= -->
+
+    <a
+        href="https://api.whatsapp.com/send?phone=918367450301"
+        class="floating-whatsapp"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat with Mana Ruchi on WhatsApp">
+
+        💬 WhatsApp
+
+    </a>
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <h3>
+                🌶️ MANA RUCHI
+            </h3>
+
             <p>
-                Contact us directly for order confirmation.
+                Homemade Chilli Powder
             </p>
+
+            <p>
+                ₹400 / KG | Minimum Order: 10 KG
+            </p>
+
+            <p class="copyright">
+                © 2026 Mana Ruchi. All Rights Reserved.
+            </p>
+
         </div>
 
-        <div class="delivery-card">
-            <div class="delivery-icon">🤝</div>
-            <h3>Order Support</h3>
-            <p>
-                We are available to help with your order.
-            </p>
-        </div>
-
-    </div>
-
-</section>
+    </footer>
 
 
-<!-- ================= ABOUT ================= -->
+    <!-- JAVASCRIPT -->
 
-<section id="about" class="about">
-
-    <h2>About Mana Ruchi</h2>
-
-    <p>
-        Mana Ruchi is a homemade chilli powder brand focused on
-        traditional flavour, freshness and quality.
-        We prepare our product with care and offer convenient
-        bulk ordering through WhatsApp.
-    </p>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-
-<section id="contact" class="contact">
-
-    <h2>Contact Us</h2>
-
-    <p>
-        📞 Phone:
-        <a href="tel:+918367450301">
-            +91 8367450301
-        </a>
-    </p>
-
-    <p>
-        💬 WhatsApp:
-        <a
-            href="https://api.whatsapp.com/send?phone=918367450301"
-            target="_blank"
-            rel="noopener">
-            Chat with us
-        </a>
-    </p>
-
-    <p>
-        🌶️ Mana Ruchi — Homemade Chilli Powder
-    </p>
-
-</section>
-
-
-<!-- ================= FLOATING WHATSAPP ================= -->
-
-<a
-    href="https://api.whatsapp.com/send?phone=918367450301"
-    class="floating-whatsapp"
-    target="_blank"
-    rel="noopener"
-    aria-label="Chat with Mana Ruchi on WhatsApp">
-
-    💬 WhatsApp
-
-</a>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <p>
-        © 2026 Mana Ruchi. All Rights Reserved.
-    </p>
-
-    <p>
-        🌶️ Homemade Chilli Powder
-    </p>
-
-</footer>
-
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>

@@ -1,0 +1,463 @@
+/* =========================================
+   MANA RUCHI ADMIN DASHBOARD
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f6f8;
+    color: #222;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+
+.login-logo {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+
+.login-card h1 {
+    font-size: 30px;
+    color: #8b0000;
+}
+
+
+.login-subtitle {
+    margin-top: 8px;
+    margin-bottom: 30px;
+    color: #777;
+}
+
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+
+.form-group input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+
+.form-group input:focus {
+    outline: none;
+    border-color: #8b0000;
+}
+
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #8b0000;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.login-button:hover {
+    background: #6f0000;
+}
+
+
+.error-message {
+    color: #c62828;
+    margin-top: 15px;
+}
+
+
+/* =========================================
+   DASHBOARD HEADER
+========================================= */
+
+.dashboard-header {
+    background: #8b0000;
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.brand {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.dashboard-header p {
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+
+.logout-button {
+    background: white;
+    color: #8b0000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.dashboard-container {
+    width: 94%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+
+/* =========================================
+   STAT CARDS
+========================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+
+.stat-card span {
+    display: block;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+
+.stat-card strong {
+    font-size: 25px;
+    color: #8b0000;
+}
+
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+
+#searchInput {
+    flex: 1;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+
+.refresh-button {
+    border: none;
+    background: #8b0000;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   ORDERS
+========================================= */
+
+.orders-card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+.orders-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.orders-heading h2 {
+    color: #333;
+}
+
+
+.orders-heading span {
+    color: #777;
+}
+
+
+/* =========================================
+   ORDER CARD
+========================================= */
+
+.order-item {
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+
+.customer-name {
+    font-size: 19px;
+    font-weight: bold;
+    color: #8b0000;
+}
+
+
+.order-id {
+    color: #777;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+.order-status {
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+
+.status-confirmed {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+
+.status-delivered {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+.status-cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+.order-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+
+.detail-box {
+    background: #f8f8f8;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+
+.detail-label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+
+.detail-value {
+    font-weight: 600;
+    word-break: break-word;
+}
+
+
+.order-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    gap: 15px;
+}
+
+
+.status-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+
+.call-button {
+    text-decoration: none;
+    background: #128c7e;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   LOADING / EMPTY
+========================================= */
+
+.loading,
+.empty-message {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .dashboard-header {
+        padding: 16px;
+    }
+
+
+    .dashboard-header {
+        align-items: flex-start;
+    }
+
+
+    .brand {
+        font-size: 20px;
+    }
+
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+
+    .orders-card {
+        padding: 15px;
+    }
+
+
+    .orders-heading {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+
+    .order-top {
+        flex-direction: column;
+    }
+
+
+    .order-details {
+        grid-template-columns: 1fr;
+    }
+
+
+    .order-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .status-select,
+    .call-button {
+        width: 100%;
+        text-align: center;
+    }
+
+}

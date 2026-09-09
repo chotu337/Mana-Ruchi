@@ -1,80 +1,65 @@
 // =========================================
-// MANA RUCHI ADMIN DASHBOARD
+// MANA RUCHI - ADMIN DASHBOARD
 // =========================================
 
-
-// SUPABASE CONNECTION
-
-const SUPABASE_URL =
-    "https://iwkrwidehhklaapbfful.supabase.co";
+// Supabase Configuration
+const SUPABASE_URL = "https://iwkrwidehhklaapbfful.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_lI-jEvVEXPHxXRFxIy3vlA_ZF84WGO0";
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
 
 
 // =========================================
-// ELEMENTS
+// GET HTML ELEMENTS
 // =========================================
 
-const loginSection =
-    document.getElementById("loginSection");
+const loginSection = document.getElementById("loginSection");
+const dashboardSection = document.getElementById("dashboardSection");
 
-const dashboardSection =
-    document.getElementById("dashboardSection");
+const loginForm = document.getElementById("loginForm");
+const emailInput = document.getElementById("adminEmail");
+const passwordInput = document.getElementById("adminPassword");
+const loginMessage = document.getElementById("loginMessage");
 
-const loginForm =
-    document.getElementById("loginForm");
+const logoutButton = document.getElementById("logoutButton");
 
-const loginError =
-    document.getElementById("loginError");
-
-const logoutButton =
-    document.getElementById("logoutButton");
+const searchInput = document.getElementById("searchInput");
+const refreshButton = document.getElementById("refreshButton");
+const downloadCsvButton =
+    document.getElementById("downloadCsvButton");
 
 const ordersContainer =
     document.getElementById("ordersContainer");
 
-const loadingMessage =
-    document.getElementById("loadingMessage");
 
-const emptyMessage =
-    document.getElementById("emptyMessage");
+// =========================================
+// DASHBOARD STAT ELEMENTS
+// =========================================
 
-const refreshButton =
-    document.getElementById("refreshButton");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-
-// STAT ELEMENTS
-
-const totalOrders =
+const totalOrdersElement =
     document.getElementById("totalOrders");
 
-const pendingOrders =
+const pendingOrdersElement =
     document.getElementById("pendingOrders");
 
-const confirmedOrders =
+const confirmedOrdersElement =
     document.getElementById("confirmedOrders");
 
-const deliveredOrders =
+const deliveredOrdersElement =
     document.getElementById("deliveredOrders");
 
-const totalSales =
+const totalSalesElement =
     document.getElementById("totalSales");
 
-const orderCount =
-    document.getElementById("orderCount");
 
-
+// =========================================
 // STORE ORDERS
+// =========================================
 
 let allOrders = [];
 
@@ -89,14 +74,16 @@ async function checkLogin() {
         data: { session }
     } = await supabaseClient.auth.getSession();
 
-
     if (session) {
 
         showDashboard();
 
+        await loadOrders();
+
     } else {
 
         showLogin();
+
     }
 }
 
@@ -107,9 +94,13 @@ async function checkLogin() {
 
 function showLogin() {
 
-    loginSection.style.display = "flex";
+    if (loginSection) {
+        loginSection.style.display = "block";
+    }
 
-    dashboardSection.style.display = "none";
+    if (dashboardSection) {
+        dashboardSection.style.display = "none";
+    }
 }
 
 
@@ -119,128 +110,183 @@ function showLogin() {
 
 function showDashboard() {
 
-    loginSection.style.display = "none";
+    if (loginSection) {
+        loginSection.style.display = "none";
+    }
 
-    dashboardSection.style.display = "block";
-
-    loadOrders();
+    if (dashboardSection) {
+        dashboardSection.style.display = "block";
+    }
 }
 
 
 // =========================================
-// LOGIN
+// ADMIN LOGIN
 // =========================================
 
-loginForm.addEventListener(
-    "submit",
-    async function (event) {
+if (loginForm) {
+
+    loginForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        loginError.textContent = "";
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
 
-        const email =
-            document
-                .getElementById("email")
-                .value
-                .trim();
+        if (!email || !password) {
 
-        const password =
-            document
-                .getElementById("password")
-                .value;
+            showLoginMessage(
+                "Please enter email and password.",
+                "error"
+            );
 
+            return;
+        }
+
+        showLoginMessage(
+            "Logging in...",
+            "info"
+        );
 
         const {
             data,
             error
-        } =
-            await supabaseClient.auth.signInWithPassword({
-
-                email: email,
-
-                password: password
-
-            });
-
+        } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
 
         if (error) {
 
             console.error(error);
 
-            loginError.textContent =
-                "Invalid email or password.";
+            showLoginMessage(
+                "Invalid email or password.",
+                "error"
+            );
 
             return;
         }
 
+        if (data.session) {
 
-        showDashboard();
+            showLoginMessage(
+                "Login successful!",
+                "success"
+            );
+
+            setTimeout(async function () {
+
+                showDashboard();
+
+                await loadOrders();
+
+            }, 500);
+        }
+
+    });
+
+}
+
+
+// =========================================
+// LOGIN MESSAGE
+// =========================================
+
+function showLoginMessage(message, type) {
+
+    if (!loginMessage) {
+        return;
     }
-);
+
+    loginMessage.textContent = message;
+
+    loginMessage.className =
+        "login-message " + type;
+}
 
 
 // =========================================
 // LOGOUT
 // =========================================
 
-logoutButton.addEventListener(
-    "click",
-    async function () {
+if (logoutButton) {
 
-        await supabaseClient.auth.signOut();
+    logoutButton.addEventListener(
+        "click",
+        async function () {
 
-        showLogin();
-    }
-);
+            const {
+                error
+            } = await supabaseClient.auth.signOut();
+
+            if (error) {
+
+                console.error(error);
+
+                alert("Unable to logout.");
+
+                return;
+            }
+
+            allOrders = [];
+
+            showLogin();
+
+            if (loginForm) {
+                loginForm.reset();
+            }
+
+        }
+    );
+
+}
 
 
 // =========================================
-// LOAD ORDERS
+// LOAD ORDERS FROM SUPABASE
 // =========================================
 
 async function loadOrders() {
 
-    loadingMessage.style.display = "block";
+    if (!ordersContainer) {
+        return;
+    }
 
-    emptyMessage.style.display = "none";
-
-    ordersContainer.innerHTML = "";
-
+    ordersContainer.innerHTML = `
+        <div class="loading">
+            Loading orders...
+        </div>
+    `;
 
     const {
-        data,
+        data: orders,
         error
-    } =
-        await supabaseClient
-            .from("orders")
-            .select("*")
-            .order("created_at", {
-                ascending: false
-            });
-
-
-    loadingMessage.style.display = "none";
-
+    } = await supabaseClient
+        .from("orders")
+        .select("*")
+        .order("created_at", {
+            ascending: false
+        });
 
     if (error) {
 
         console.error(error);
 
         ordersContainer.innerHTML = `
-            <div class="empty-message">
+            <div class="error-box">
                 Unable to load orders.
-                Please refresh the page.
+                <br>
+                Please check your connection and Supabase settings.
             </div>
         `;
 
         return;
     }
 
+    allOrders = orders || [];
 
-    allOrders = data || [];
-
-    updateStatistics();
+    updateStats();
 
     displayOrders(allOrders);
 }
@@ -252,224 +298,380 @@ async function loadOrders() {
 
 function displayOrders(orders) {
 
-    ordersContainer.innerHTML = "";
+    if (!ordersContainer) {
+        return;
+    }
 
-    orderCount.textContent =
-        orders.length +
-        (orders.length === 1 ? " order" : " orders");
+    if (!orders || orders.length === 0) {
 
-
-    if (orders.length === 0) {
-
-        emptyMessage.style.display = "block";
+        ordersContainer.innerHTML = `
+            <div class="empty-box">
+                <h3>No Orders Found</h3>
+                <p>There are currently no orders to display.</p>
+            </div>
+        `;
 
         return;
     }
 
-
-    emptyMessage.style.display = "none";
-
-
-    orders.forEach(function (order) {
-
-        const orderElement =
-            createOrderElement(order);
-
-        ordersContainer.appendChild(
-            orderElement
-        );
-    });
+    ordersContainer.innerHTML = orders
+        .map(order => createOrderCard(order))
+        .join("");
 }
 
 
 // =========================================
-// CREATE ORDER ELEMENT
+// CREATE ORDER CARD
 // =========================================
 
-function createOrderElement(order) {
+function createOrderCard(order) {
 
-    const item =
-        document.createElement("div");
+    const orderDate = order.created_at
+        ? new Date(order.created_at).toLocaleString("en-IN")
+        : "N/A";
 
-    item.className = "order-item";
+    const safeName =
+        escapeHTML(order.customer_name);
 
+    const safePhone =
+        escapeHTML(order.customer_phone);
 
-    const statusClass =
-        getStatusClass(order.status);
+    const safeAddress =
+        escapeHTML(order.address);
 
+    const safeStatus =
+        escapeHTML(order.status);
 
-    const formattedDate =
-        new Date(order.created_at)
-            .toLocaleString("en-IN");
+    const quantity =
+        Number(order.quantity) || 0;
 
+    const total =
+        Number(order.total_amount) || 0;
 
-    item.innerHTML = `
+    return `
+        <div class="order-card">
 
-        <div class="order-top">
+            <div class="order-header">
 
-            <div>
+                <div>
+                    <h3>
+                        Order #${order.id}
+                    </h3>
 
-                <div class="customer-name">
-                    ${escapeHTML(order.customer_name)}
+                    <p class="order-date">
+                        ${orderDate}
+                    </p>
                 </div>
 
-                <div class="order-id">
-                    Order #${order.id}
-                    • ${formattedDate}
+                <div>
+                    <select
+                        class="status-select"
+                        data-order-id="${order.id}"
+                        onchange="changeOrderStatus(this)"
+                    >
+
+                        <option value="Pending"
+                            ${safeStatus === "Pending" ? "selected" : ""}>
+                            Pending
+                        </option>
+
+                        <option value="Confirmed"
+                            ${safeStatus === "Confirmed" ? "selected" : ""}>
+                            Confirmed
+                        </option>
+
+                        <option value="Delivered"
+                            ${safeStatus === "Delivered" ? "selected" : ""}>
+                            Delivered
+                        </option>
+
+                        <option value="Cancelled"
+                            ${safeStatus === "Cancelled" ? "selected" : ""}>
+                            Cancelled
+                        </option>
+
+                    </select>
                 </div>
 
             </div>
 
 
-            <span
-                class="order-status ${statusClass}"
-            >
-                ${escapeHTML(order.status)}
-            </span>
+            <div class="order-details">
+
+                <div class="detail-item">
+                    <strong>Customer</strong>
+                    <span>${safeName}</span>
+                </div>
+
+
+                <div class="detail-item">
+                    <strong>Phone</strong>
+
+                    <span>
+                        ${safePhone}
+
+                        <a
+                            href="tel:${encodeURIComponent(order.customer_phone)}"
+                            class="call-button"
+                        >
+                            📞 Call
+                        </a>
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+                    <strong>Quantity</strong>
+                    <span>${quantity} KG</span>
+                </div>
+
+
+                <div class="detail-item">
+                    <strong>Price / KG</strong>
+                    <span>₹${Number(order.price_per_kg || 400).toLocaleString("en-IN")}</span>
+                </div>
+
+
+                <div class="detail-item">
+                    <strong>Total Amount</strong>
+                    <span class="order-total">
+                        ₹${total.toLocaleString("en-IN")}
+                    </span>
+                </div>
+
+
+                <div class="detail-item address-item">
+                    <strong>Delivery Address</strong>
+                    <span>${safeAddress}</span>
+                </div>
+
+            </div>
 
         </div>
-
-
-        <div class="order-details">
-
-
-            <div class="detail-box">
-
-                <div class="detail-label">
-                    📱 Phone
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHTML(order.customer_phone)}
-                </div>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <div class="detail-label">
-                    📦 Quantity
-                </div>
-
-                <div class="detail-value">
-                    ${order.quantity} KG
-                </div>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <div class="detail-label">
-                    💰 Total Amount
-                </div>
-
-                <div class="detail-value">
-                    ₹${Number(order.total_amount)
-                        .toLocaleString("en-IN")}
-                </div>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <div class="detail-label">
-                    🏠 Delivery Address
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHTML(order.address)}
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="order-actions">
-
-            <select
-                class="status-select"
-                data-order-id="${order.id}"
-            >
-
-                <option value="Pending"
-                    ${order.status === "Pending" ? "selected" : ""}>
-                    Pending
-                </option>
-
-                <option value="Confirmed"
-                    ${order.status === "Confirmed" ? "selected" : ""}>
-                    Confirmed
-                </option>
-
-                <option value="Delivered"
-                    ${order.status === "Delivered" ? "selected" : ""}>
-                    Delivered
-                </option>
-
-                <option value="Cancelled"
-                    ${order.status === "Cancelled" ? "selected" : ""}>
-                    Cancelled
-                </option>
-
-            </select>
-
-
-            <a
-                class="call-button"
-                href="tel:${escapeHTML(order.customer_phone)}"
-            >
-                📞 Call Customer
-            </a>
-
-        </div>
-
     `;
+}
 
 
-    const statusSelect =
-        item.querySelector(".status-select");
+// =========================================
+// CHANGE ORDER STATUS
+// =========================================
+
+async function changeOrderStatus(selectElement) {
+
+    const orderId =
+        selectElement.dataset.orderId;
+
+    const newStatus =
+        selectElement.value;
+
+    selectElement.disabled = true;
+
+    const {
+        error
+    } = await supabaseClient
+        .from("orders")
+        .update({
+            status: newStatus
+        })
+        .eq("id", orderId);
+
+    selectElement.disabled = false;
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to update order status."
+        );
+
+        return;
+    }
+
+    // Update local order
+    const order = allOrders.find(
+        item => String(item.id) === String(orderId)
+    );
+
+    if (order) {
+        order.status = newStatus;
+    }
+
+    updateStats();
+
+}
 
 
-    statusSelect.addEventListener(
-        "change",
+// =========================================
+// SEARCH ORDERS
+// =========================================
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
         function () {
 
-            updateOrderStatus(
-                order.id,
-                this.value
-            );
+            const searchTerm =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+            if (!searchTerm) {
+
+                displayOrders(allOrders);
+
+                return;
+            }
+
+            const filteredOrders =
+                allOrders.filter(order => {
+
+                    return (
+
+                        String(order.id)
+                            .toLowerCase()
+                            .includes(searchTerm)
+
+                        ||
+
+                        String(order.customer_name || "")
+                            .toLowerCase()
+                            .includes(searchTerm)
+
+                        ||
+
+                        String(order.customer_phone || "")
+                            .toLowerCase()
+                            .includes(searchTerm)
+
+                        ||
+
+                        String(order.address || "")
+                            .toLowerCase()
+                            .includes(searchTerm)
+
+                        ||
+
+                        String(order.status || "")
+                            .toLowerCase()
+                            .includes(searchTerm)
+
+                    );
+
+                });
+
+            displayOrders(filteredOrders);
 
         }
     );
 
-
-    return item;
 }
 
 
 // =========================================
-// UPDATE ORDER STATUS
+// REFRESH ORDERS
 // =========================================
 
-async function updateOrderStatus(
-    orderId,
-    newStatus
-) {
+if (refreshButton) {
 
+    refreshButton.addEventListener(
+        "click",
+        async function () {
+
+            await loadOrders();
+
+        }
+    );
+
+}
+
+
+// =========================================
+// UPDATE DASHBOARD STATS
+// =========================================
+
+function updateStats() {
+
+    const totalOrders =
+        allOrders.length;
+
+    const pendingOrders =
+        allOrders.filter(
+            order => order.status === "Pending"
+        ).length;
+
+    const confirmedOrders =
+        allOrders.filter(
+            order => order.status === "Confirmed"
+        ).length;
+
+    const deliveredOrders =
+        allOrders.filter(
+            order => order.status === "Delivered"
+        ).length;
+
+    const totalSales =
+        allOrders
+            .filter(
+                order => order.status !== "Cancelled"
+            )
+            .reduce(
+                (sum, order) =>
+                    sum +
+                    Number(order.total_amount || 0),
+                0
+            );
+
+
+    if (totalOrdersElement) {
+        totalOrdersElement.textContent =
+            totalOrders;
+    }
+
+    if (pendingOrdersElement) {
+        pendingOrdersElement.textContent =
+            pendingOrders;
+    }
+
+    if (confirmedOrdersElement) {
+        confirmedOrdersElement.textContent =
+            confirmedOrders;
+    }
+
+    if (deliveredOrdersElement) {
+        deliveredOrdersElement.textContent =
+            deliveredOrders;
+    }
+
+    if (totalSalesElement) {
+
+        totalSalesElement.textContent =
+            "₹" +
+            totalSales.toLocaleString("en-IN");
+
+    }
+
+}
+
+
+// =========================================
+// DOWNLOAD ORDERS AS CSV
+// =========================================
+
+async function downloadOrdersCSV() {
+
+    // Get latest orders from Supabase
     const {
+        data: orders,
         error
-    } =
-        await supabaseClient
-            .from("orders")
-            .update({
-                status: newStatus
-            })
-            .eq("id", orderId);
+    } = await supabaseClient
+        .from("orders")
+        .select("*")
+        .order("created_at", {
+            ascending: false
+        });
 
 
     if (error) {
@@ -477,206 +679,150 @@ async function updateOrderStatus(
         console.error(error);
 
         alert(
-            "Could not update the order status."
+            "Unable to download orders."
         );
 
         return;
     }
 
 
-    // Update local order
+    if (!orders || orders.length === 0) {
 
-    const order =
-        allOrders.find(
-            item => item.id === orderId
+        alert(
+            "There are no orders to download."
         );
 
-
-    if (order) {
-
-        order.status = newStatus;
+        return;
     }
 
 
-    updateStatistics();
-
-    displayOrders(
-        filterOrders(searchInput.value)
-    );
-}
-
-
-// =========================================
-// SEARCH
-// =========================================
-
-searchInput.addEventListener(
-    "input",
-    function () {
-
-        const filteredOrders =
-            filterOrders(this.value);
-
-        displayOrders(filteredOrders);
-    }
-);
+    // CSV column headings
+    const headers = [
+        "Order ID",
+        "Customer Name",
+        "Phone",
+        "Quantity (KG)",
+        "Price per KG",
+        "Total Amount",
+        "Address",
+        "Status",
+        "Order Date"
+    ];
 
 
-function filterOrders(searchTerm) {
+    // Convert orders into rows
+    const rows = orders.map(order => [
 
-    const term =
-        searchTerm
-            .toLowerCase()
-            .trim();
+        order.id,
+
+        order.customer_name,
+
+        order.customer_phone,
+
+        order.quantity,
+
+        order.price_per_kg,
+
+        order.total_amount,
+
+        order.address,
+
+        order.status,
+
+        order.created_at
+            ? new Date(
+                order.created_at
+            ).toLocaleString("en-IN")
+            : ""
+
+    ]);
 
 
-    if (!term) {
+    // Create CSV text
+    const csv = [
+        headers,
+        ...rows
+    ]
+        .map(row => {
 
-        return allOrders;
-    }
+            return row
+                .map(value => {
+
+                    const text =
+                        String(
+                            value ?? ""
+                        );
+
+                    return `"${text.replace(
+                        /"/g,
+                        '""'
+                    )}"`;
+
+                })
+                .join(",");
+
+        })
+        .join("\n");
 
 
-    return allOrders.filter(
-        function (order) {
-
-            return (
-
-                String(order.id)
-                    .toLowerCase()
-                    .includes(term)
-
-                ||
-
-                order.customer_name
-                    .toLowerCase()
-                    .includes(term)
-
-                ||
-
-                order.customer_phone
-                    .toLowerCase()
-                    .includes(term)
-
-                ||
-
-                order.address
-                    .toLowerCase()
-                    .includes(term)
-
-                ||
-
-                order.status
-                    .toLowerCase()
-                    .includes(term)
-
-            );
+    // Create downloadable file
+    const blob = new Blob(
+        [
+            "\uFEFF" + csv
+        ],
+        {
+            type:
+                "text/csv;charset=utf-8;"
         }
     );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "mana-ruchi-orders.csv";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+
+    URL.revokeObjectURL(url);
+
 }
 
 
 // =========================================
-// REFRESH
+// DOWNLOAD BUTTON
 // =========================================
 
-refreshButton.addEventListener(
-    "click",
-    function () {
+if (downloadCsvButton) {
 
-        loadOrders();
-    }
-);
+    downloadCsvButton.addEventListener(
+        "click",
+        downloadOrdersCSV
+    );
 
-
-// =========================================
-// STATISTICS
-// =========================================
-
-function updateStatistics() {
-
-    const total =
-        allOrders.length;
-
-
-    const pending =
-        allOrders.filter(
-            order => order.status === "Pending"
-        ).length;
-
-
-    const confirmed =
-        allOrders.filter(
-            order => order.status === "Confirmed"
-        ).length;
-
-
-    const delivered =
-        allOrders.filter(
-            order => order.status === "Delivered"
-        ).length;
-
-
-    const sales =
-        allOrders
-            .filter(
-                order =>
-                    order.status !== "Cancelled"
-            )
-            .reduce(
-                function (sum, order) {
-
-                    return sum +
-                        Number(order.total_amount);
-
-                },
-                0
-            );
-
-
-    totalOrders.textContent = total;
-
-    pendingOrders.textContent = pending;
-
-    confirmedOrders.textContent = confirmed;
-
-    deliveredOrders.textContent = delivered;
-
-    totalSales.textContent =
-        "₹" +
-        sales.toLocaleString("en-IN");
 }
 
 
 // =========================================
-// STATUS CLASS
+// HTML SECURITY
 // =========================================
 
-function getStatusClass(status) {
+function escapeHTML(value) {
 
-    switch (status) {
-
-        case "Confirmed":
-            return "status-confirmed";
-
-        case "Delivered":
-            return "status-delivered";
-
-        case "Cancelled":
-            return "status-cancelled";
-
-        default:
-            return "status-pending";
-    }
-}
-
-
-// =========================================
-// HTML ESCAPE
-// =========================================
-
-function escapeHTML(text) {
-
-    return String(text)
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -686,7 +832,28 @@ function escapeHTML(text) {
 
 
 // =========================================
-// START
+// SUPABASE AUTH STATE
+// =========================================
+
+supabaseClient.auth.onAuthStateChange(
+    function (event, session) {
+
+        if (session) {
+
+            showDashboard();
+
+        } else {
+
+            showLogin();
+
+        }
+
+    }
+);
+
+
+// =========================================
+// START ADMIN APP
 // =========================================
 
 checkLogin();

@@ -2,11 +2,6 @@
 // MANA RUCHI - ORDER SYSTEM
 // =========================================
 
-
-// =========================================
-// BUSINESS SETTINGS
-// =========================================
-
 const PRICE_PER_KG = 400;
 
 const MINIMUM_ORDER = 10;
@@ -17,7 +12,7 @@ const BUSINESS_WHATSAPP = "918367450301";
 
 
 // =========================================
-// GET HTML ELEMENTS
+// GET ELEMENTS
 // =========================================
 
 const orderForm =
@@ -52,7 +47,7 @@ const increaseQuantity =
 
 
 // =========================================
-// UPDATE ORDER SUMMARY
+// UPDATE SUMMARY
 // =========================================
 
 function updateOrderSummary() {
@@ -65,8 +60,8 @@ function updateOrderSummary() {
 
         quantity = MINIMUM_ORDER;
 
-        quantityInput.value = quantity;
-
+        quantityInput.value =
+            quantity;
     }
 
 
@@ -85,7 +80,7 @@ function updateOrderSummary() {
 
 
 // =========================================
-// INCREASE QUANTITY
+// INCREASE
 // =========================================
 
 increaseQuantity.addEventListener(
@@ -110,7 +105,7 @@ increaseQuantity.addEventListener(
 
 
 // =========================================
-// DECREASE QUANTITY
+// DECREASE
 // =========================================
 
 decreaseQuantity.addEventListener(
@@ -156,22 +151,17 @@ orderForm.addEventListener(
         const name =
             customerName.value.trim();
 
-
         const phone =
             customerPhone.value.trim();
 
-
         const quantity =
             Number(quantityInput.value);
-
 
         const address =
             addressInput.value.trim();
 
 
-        // =====================================
-        // NAME VALIDATION
-        // =====================================
+        // NAME
 
         if (!name) {
 
@@ -185,9 +175,7 @@ orderForm.addEventListener(
         }
 
 
-        // =====================================
-        // PHONE VALIDATION
-        // =====================================
+        // PHONE
 
         const cleanPhone =
             phone.replace(/\D/g, "");
@@ -205,9 +193,7 @@ orderForm.addEventListener(
         }
 
 
-        // =====================================
-        // QUANTITY VALIDATION
-        // =====================================
+        // QUANTITY
 
         if (
             !quantity ||
@@ -224,9 +210,7 @@ orderForm.addEventListener(
         }
 
 
-        // =====================================
-        // ADDRESS VALIDATION
-        // =====================================
+        // ADDRESS
 
         if (!address) {
 
@@ -240,17 +224,13 @@ orderForm.addEventListener(
         }
 
 
-        // =====================================
-        // CALCULATE TOTAL
-        // =====================================
+        // TOTAL
 
         const total =
             quantity * PRICE_PER_KG;
 
 
-        // =====================================
-        // SHOW ORDER CONFIRMATION
-        // =====================================
+        // CONFIRMATION
 
         orderMessage.innerHTML =
 
@@ -293,9 +273,7 @@ orderForm.addEventListener(
             "block";
 
 
-        // =====================================
         // WHATSAPP MESSAGE
-        // =====================================
 
         const message =
 
@@ -323,21 +301,16 @@ Please confirm my order.
 Thank you! 🌶️`;
 
 
-        // =====================================
         // WHATSAPP URL
-        // =====================================
 
         const whatsappURL =
-
             "https://api.whatsapp.com/send?phone=" +
             BUSINESS_WHATSAPP +
             "&text=" +
             encodeURIComponent(message);
 
 
-        // =====================================
         // OPEN WHATSAPP
-        // =====================================
 
         setTimeout(
             function () {

@@ -95,6 +95,7 @@ increaseQuantity.addEventListener(
 
 
         updateOrderSummary();
+
     }
 );
 
@@ -127,6 +128,7 @@ decreaseQuantity.addEventListener(
 
 
         updateOrderSummary();
+
     }
 );
 
@@ -158,9 +160,9 @@ orderForm.addEventListener(
             addressInput.value.trim();
 
 
-        // -------------------------
+        // =================================
         // NAME VALIDATION
-        // -------------------------
+        // =================================
 
         if (!name) {
 
@@ -174,9 +176,9 @@ orderForm.addEventListener(
         }
 
 
-        // -------------------------
+        // =================================
         // PHONE VALIDATION
-        // -------------------------
+        // =================================
 
         const cleanPhone =
             phone.replace(/\D/g, "");
@@ -194,9 +196,9 @@ orderForm.addEventListener(
         }
 
 
-        // -------------------------
+        // =================================
         // QUANTITY VALIDATION
-        // -------------------------
+        // =================================
 
         if (
             !quantity ||
@@ -213,9 +215,9 @@ orderForm.addEventListener(
         }
 
 
-        // -------------------------
+        // =================================
         // ADDRESS VALIDATION
-        // -------------------------
+        // =================================
 
         if (!address) {
 
@@ -229,17 +231,17 @@ orderForm.addEventListener(
         }
 
 
-        // -------------------------
+        // =================================
         // CALCULATE TOTAL
-        // -------------------------
+        // =================================
 
         const total =
             quantity * PRICE_PER_KG;
 
 
-        // -------------------------
+        // =================================
         // SHOW CONFIRMATION
-        // -------------------------
+        // =================================
 
         orderMessage.innerHTML =
 
@@ -282,9 +284,9 @@ orderForm.addEventListener(
             "block";
 
 
-        // -------------------------
+        // =================================
         // WHATSAPP MESSAGE
-        // -------------------------
+        // =================================
 
         const message =
 
@@ -312,9 +314,9 @@ Please confirm my order.
 Thank you! 🌶️`;
 
 
-        // -------------------------
+        // =================================
         // WHATSAPP URL
-        // -------------------------
+        // =================================
 
         const whatsappURL =
             "https://api.whatsapp.com/send?phone=" +
@@ -323,9 +325,9 @@ Thank you! 🌶️`;
             encodeURIComponent(message);
 
 
-        // -------------------------
+        // =================================
         // OPEN WHATSAPP
-        // -------------------------
+        // =================================
 
         setTimeout(
             function () {

@@ -61,8 +61,6 @@ function updateOrderSummary() {
         Number(quantityInput.value) || MINIMUM_ORDER;
 
 
-    // Make sure quantity is not below minimum
-
     if (quantity < MINIMUM_ORDER) {
 
         quantity = MINIMUM_ORDER;
@@ -155,10 +153,6 @@ orderForm.addEventListener(
         event.preventDefault();
 
 
-        // =====================================
-        // GET CUSTOMER DETAILS
-        // =====================================
-
         const name =
             customerName.value.trim();
 
@@ -176,7 +170,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // VALIDATE NAME
+        // NAME VALIDATION
         // =====================================
 
         if (!name) {
@@ -192,7 +186,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // VALIDATE PHONE
+        // PHONE VALIDATION
         // =====================================
 
         const cleanPhone =
@@ -212,7 +206,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // VALIDATE QUANTITY
+        // QUANTITY VALIDATION
         // =====================================
 
         if (
@@ -231,7 +225,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // VALIDATE ADDRESS
+        // ADDRESS VALIDATION
         // =====================================
 
         if (!address) {
@@ -255,7 +249,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // SHOW CONFIRMATION
+        // SHOW ORDER CONFIRMATION
         // =====================================
 
         orderMessage.innerHTML =
@@ -300,7 +294,7 @@ orderForm.addEventListener(
 
 
         // =====================================
-        // CREATE WHATSAPP MESSAGE
+        // WHATSAPP MESSAGE
         // =====================================
 
         const message =
@@ -330,7 +324,7 @@ Thank you! 🌶️`;
 
 
         // =====================================
-        // CREATE WHATSAPP URL
+        // WHATSAPP URL
         // =====================================
 
         const whatsappURL =
@@ -360,7 +354,7 @@ Thank you! 🌶️`;
 
 
 // =========================================
-// BASIC HTML ESCAPE
+// HTML ESCAPE
 // =========================================
 
 function escapeHTML(text) {
@@ -376,7 +370,7 @@ function escapeHTML(text) {
 
 
 // =========================================
-// INITIAL SUMMARY
+// INITIALIZE
 // =========================================
 
 updateOrderSummary();

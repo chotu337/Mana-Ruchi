@@ -2,15 +2,22 @@
 // MANA RUCHI - ORDER SYSTEM
 // =========================================
 
+
+// =========================================
+// BUSINESS SETTINGS
+// =========================================
+
 const PRICE_PER_KG = 400;
+
 const MINIMUM_ORDER = 10;
+
 const QUANTITY_STEP = 10;
 
 const BUSINESS_WHATSAPP = "918367450301";
 
 
 // =========================================
-// GET ELEMENTS
+// GET HTML ELEMENTS
 // =========================================
 
 const orderForm =
@@ -45,7 +52,7 @@ const increaseQuantity =
 
 
 // =========================================
-// UPDATE SUMMARY
+// UPDATE ORDER SUMMARY
 // =========================================
 
 function updateOrderSummary() {
@@ -53,14 +60,29 @@ function updateOrderSummary() {
     let quantity =
         Number(quantityInput.value) || MINIMUM_ORDER;
 
+
+    // Make sure quantity is not below minimum
+
+    if (quantity < MINIMUM_ORDER) {
+
+        quantity = MINIMUM_ORDER;
+
+        quantityInput.value = quantity;
+
+    }
+
+
     const total =
         quantity * PRICE_PER_KG;
+
 
     summaryQuantity.textContent =
         quantity + " KG";
 
+
     totalPrice.textContent =
         "₹" + total.toLocaleString("en-IN");
+
 }
 
 
@@ -75,11 +97,16 @@ increaseQuantity.addEventListener(
         let quantity =
             Number(quantityInput.value) || MINIMUM_ORDER;
 
+
         quantity += QUANTITY_STEP;
 
-        quantityInput.value = quantity;
+
+        quantityInput.value =
+            quantity;
+
 
         updateOrderSummary();
+
     }
 );
 
@@ -95,6 +122,7 @@ decreaseQuantity.addEventListener(
         let quantity =
             Number(quantityInput.value) || MINIMUM_ORDER;
 
+
         if (quantity > MINIMUM_ORDER) {
 
             quantity -= QUANTITY_STEP;
@@ -102,17 +130,22 @@ decreaseQuantity.addEventListener(
         } else {
 
             quantity = MINIMUM_ORDER;
+
         }
 
-        quantityInput.value = quantity;
+
+        quantityInput.value =
+            quantity;
+
 
         updateOrderSummary();
+
     }
 );
 
 
 // =========================================
-// ORDER SUBMISSION
+// ORDER FORM
 // =========================================
 
 orderForm.addEventListener(
@@ -122,24 +155,35 @@ orderForm.addEventListener(
         event.preventDefault();
 
 
+        // =====================================
+        // GET CUSTOMER DETAILS
+        // =====================================
+
         const name =
             customerName.value.trim();
+
 
         const phone =
             customerPhone.value.trim();
 
+
         const quantity =
             Number(quantityInput.value);
+
 
         const address =
             addressInput.value.trim();
 
 
-        // NAME VALIDATION
+        // =====================================
+        // VALIDATE NAME
+        // =====================================
 
         if (!name) {
 
-            alert("Please enter your name.");
+            alert(
+                "Please enter your name."
+            );
 
             customerName.focus();
 
@@ -147,10 +191,13 @@ orderForm.addEventListener(
         }
 
 
-        // PHONE VALIDATION
+        // =====================================
+        // VALIDATE PHONE
+        // =====================================
 
         const cleanPhone =
             phone.replace(/\D/g, "");
+
 
         if (cleanPhone.length !== 10) {
 
@@ -164,7 +211,9 @@ orderForm.addEventListener(
         }
 
 
-        // QUANTITY VALIDATION
+        // =====================================
+        // VALIDATE QUANTITY
+        // =====================================
 
         if (
             !quantity ||
@@ -175,11 +224,15 @@ orderForm.addEventListener(
                 "Minimum order is 10 KG."
             );
 
+            quantityInput.focus();
+
             return;
         }
 
 
-        // ADDRESS VALIDATION
+        // =====================================
+        // VALIDATE ADDRESS
+        // =====================================
 
         if (!address) {
 
@@ -193,61 +246,69 @@ orderForm.addEventListener(
         }
 
 
-        // TOTAL
+        // =====================================
+        // CALCULATE TOTAL
+        // =====================================
 
         const total =
             quantity * PRICE_PER_KG;
 
 
-        // =========================================
+        // =====================================
         // SHOW CONFIRMATION
-        // =========================================
+        // =====================================
 
         orderMessage.innerHTML =
-`
-<div class="confirmation-box">
 
-    <div class="confirmation-icon">
-        ✅
-    </div>
+        `
+        <div class="confirmation-box">
 
-    <h3>
-        Order Ready!
-    </h3>
+            <div class="confirmation-icon">
+                ✅
+            </div>
 
-    <p>
-        Thank you, <strong>${name}</strong>.
-    </p>
+            <h3>
+                Order Ready!
+            </h3>
 
-    <p>
-        Your order for
-        <strong>${quantity} KG</strong>
-        has been prepared.
-    </p>
+            <p>
+                Thank you,
+                <strong>${escapeHTML(name)}</strong>.
+            </p>
 
-    <p class="confirmation-total">
-        Total: ₹${total.toLocaleString("en-IN")}
-    </p>
+            <p>
+                Your order for
+                <strong>${quantity} KG</strong>
+                has been prepared.
+            </p>
 
-    <p>
-        Opening WhatsApp...
-    </p>
+            <p class="confirmation-total">
+                Total:
+                ₹${total.toLocaleString("en-IN")}
+            </p>
 
-</div>
-`;
+            <p>
+                Opening WhatsApp...
+            </p>
+
+        </div>
+        `;
+
 
         orderMessage.style.display =
             "block";
 
 
-        // =========================================
-        // WHATSAPP MESSAGE
-        // =========================================
+        // =====================================
+        // CREATE WHATSAPP MESSAGE
+        // =====================================
 
         const message =
+
 `🌶️ MANA RUCHI - NEW ORDER
 
 👤 Customer Name: ${name}
+
 📱 Customer Phone: ${phone}
 
 📦 Product:
@@ -268,30 +329,50 @@ Please confirm my order.
 Thank you! 🌶️`;
 
 
-        // =========================================
-        // WHATSAPP URL
-        // =========================================
+        // =====================================
+        // CREATE WHATSAPP URL
+        // =====================================
 
         const whatsappURL =
+
             "https://api.whatsapp.com/send?phone=" +
             BUSINESS_WHATSAPP +
             "&text=" +
             encodeURIComponent(message);
 
 
-        // =========================================
+        // =====================================
         // OPEN WHATSAPP
-        // =========================================
+        // =====================================
 
-        setTimeout(function () {
+        setTimeout(
+            function () {
 
-            window.location.href =
-                whatsappURL;
+                window.location.href =
+                    whatsappURL;
 
-        }, 800);
+            },
+            800
+        );
 
     }
 );
+
+
+// =========================================
+// BASIC HTML ESCAPE
+// =========================================
+
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
 
 
 // =========================================

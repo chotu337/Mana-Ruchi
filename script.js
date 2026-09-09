@@ -1,18 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==========================================
-    // SUPABASE CONFIGURATION
+    // SUPABASE
     // ==========================================
 
-    const SUPABASE_URL = "https://iwkrwidehhklaapbfful.supabase.co";
+    const SUPABASE_URL =
+        "https://iwkrwidehhklaapbfful.supabase.co";
 
     const SUPABASE_PUBLISHABLE_KEY =
         "sb_publishable_lI-jEvVEXPHxXRFxIy3vlA_ZF84WGO0";
 
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
 
 
     // ==========================================
@@ -24,21 +27,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // GET HTML ELEMENTS
+    // HTML ELEMENTS
     // ==========================================
 
-    const orderForm = document.getElementById("orderForm");
+    const orderForm =
+        document.getElementById("orderForm");
 
-    const customerNameInput =
+    const customerName =
         document.getElementById("customerName");
 
-    const customerPhoneInput =
+    const customerPhone =
         document.getElementById("customerPhone");
 
-    const quantityInput =
+    const quantity =
         document.getElementById("quantity");
 
-    const addressInput =
+    const address =
         document.getElementById("address");
 
     const summaryQuantity =
@@ -61,46 +65,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // CHECK REQUIRED ELEMENTS
+    // SAFETY CHECK
     // ==========================================
 
-    if (!orderForm || !quantityInput || !placeOrderButton) {
+    if (!orderForm) {
         console.error(
-            "Mana Ruchi: Required order form elements are missing."
+            "Mana Ruchi: orderForm not found."
         );
+
         return;
     }
 
 
     // ==========================================
-    // UPDATE ORDER SUMMARY
+    // UPDATE SUMMARY
     // ==========================================
 
     function updateSummary() {
 
-        let quantity = Number(quantityInput.value);
+        let kg = Number(quantity.value);
 
         if (
-            !Number.isFinite(quantity) ||
-            quantity < MINIMUM_ORDER
+            !Number.isFinite(kg) ||
+            kg < MINIMUM_ORDER
         ) {
-            quantity = MINIMUM_ORDER;
+            kg = MINIMUM_ORDER;
         }
 
-        quantity = Math.floor(quantity);
+        kg = Math.floor(kg);
 
-        quantityInput.value = quantity;
+        quantity.value = kg;
 
-        const total = quantity * PRICE_PER_KG;
+
+        const total =
+            kg * PRICE_PER_KG;
+
 
         if (summaryQuantity) {
+
             summaryQuantity.textContent =
-                quantity + " KG";
+                kg + " KG";
         }
 
+
         if (totalPrice) {
+
             totalPrice.textContent =
-                "₹" + total.toLocaleString("en-IN");
+                "₹" +
+                total.toLocaleString("en-IN");
         }
     }
 
@@ -109,33 +121,56 @@ document.addEventListener("DOMContentLoaded", function () {
     // SHOW MESSAGE
     // ==========================================
 
-    function showOrderMessage(message, type) {
+    function showMessage(text, type) {
 
         if (!orderMessage) {
             return;
         }
 
-        orderMessage.textContent = message;
+
+        orderMessage.textContent = text;
+
 
         if (type === "success") {
-            orderMessage.style.color = "#15803d";
-            orderMessage.style.backgroundColor = "#dcfce7";
+
+            orderMessage.style.color =
+                "#15803d";
+
+            orderMessage.style.backgroundColor =
+                "#dcfce7";
+
             orderMessage.style.border =
                 "1px solid #86efac";
-            orderMessage.style.padding = "14px";
-            orderMessage.style.borderRadius = "10px";
+
+            orderMessage.style.padding =
+                "14px";
+
+            orderMessage.style.borderRadius =
+                "10px";
+
         }
 
         else if (type === "error") {
-            orderMessage.style.color = "#b91c1c";
-            orderMessage.style.backgroundColor = "#fee2e2";
+
+            orderMessage.style.color =
+                "#b91c1c";
+
+            orderMessage.style.backgroundColor =
+                "#fee2e2";
+
             orderMessage.style.border =
                 "1px solid #fca5a5";
-            orderMessage.style.padding = "14px";
-            orderMessage.style.borderRadius = "10px";
+
+            orderMessage.style.padding =
+                "14px";
+
+            orderMessage.style.borderRadius =
+                "10px";
+
         }
 
         else {
+
             orderMessage.style.color = "";
             orderMessage.style.backgroundColor = "";
             orderMessage.style.border = "";
@@ -146,27 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // CLEAR MESSAGE
-    // ==========================================
-
-    function clearOrderMessage() {
-
-        if (!orderMessage) {
-            return;
-        }
-
-        orderMessage.textContent = "";
-
-        orderMessage.style.color = "";
-        orderMessage.style.backgroundColor = "";
-        orderMessage.style.border = "";
-        orderMessage.style.padding = "";
-        orderMessage.style.borderRadius = "";
-    }
-
-
-    // ==========================================
-    // DECREASE QUANTITY
+    // DECREASE
     // ==========================================
 
     if (decreaseQuantity) {
@@ -175,19 +190,24 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                let quantity =
-                    Number(quantityInput.value);
+                let kg =
+                    Number(quantity.value);
+
 
                 if (
-                    !Number.isFinite(quantity) ||
-                    quantity <= MINIMUM_ORDER
+                    !Number.isFinite(kg) ||
+                    kg <= MINIMUM_ORDER
                 ) {
-                    quantity = MINIMUM_ORDER;
+
+                    kg = MINIMUM_ORDER;
+
                 } else {
-                    quantity--;
+
+                    kg--;
                 }
 
-                quantityInput.value = quantity;
+
+                quantity.value = kg;
 
                 updateSummary();
             }
@@ -196,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // INCREASE QUANTITY
+    // INCREASE
     // ==========================================
 
     if (increaseQuantity) {
@@ -205,16 +225,20 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                let quantity =
-                    Number(quantityInput.value);
+                let kg =
+                    Number(quantity.value);
 
-                if (!Number.isFinite(quantity)) {
-                    quantity = MINIMUM_ORDER;
+
+                if (!Number.isFinite(kg)) {
+
+                    kg = MINIMUM_ORDER;
                 }
 
-                quantity++;
 
-                quantityInput.value = quantity;
+                kg++;
+
+
+                quantity.value = kg;
 
                 updateSummary();
             }
@@ -223,44 +247,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // MANUAL QUANTITY INPUT
+    // QUANTITY INPUT
     // ==========================================
 
-    quantityInput.addEventListener(
+    quantity.addEventListener(
         "input",
         function () {
 
-            let value = quantityInput.value;
+            quantity.value =
+                quantity.value.replace(
+                    /[^\d]/g,
+                    ""
+                );
 
-            // Remove decimal point and other characters
-            value = value.replace(/[^\d]/g, "");
 
-            quantityInput.value = value;
+            if (quantity.value !== "") {
 
-            if (value !== "") {
-                updateSummary();
+                const kg =
+                    Number(quantity.value);
+
+
+                if (Number.isFinite(kg)) {
+
+                    const total =
+                        kg * PRICE_PER_KG;
+
+
+                    if (summaryQuantity) {
+
+                        summaryQuantity.textContent =
+                            kg + " KG";
+                    }
+
+
+                    if (totalPrice) {
+
+                        totalPrice.textContent =
+                            "₹" +
+                            total.toLocaleString("en-IN");
+                    }
+                }
             }
         }
     );
 
 
-    quantityInput.addEventListener(
+    // ==========================================
+    // QUANTITY BLUR
+    // ==========================================
+
+    quantity.addEventListener(
         "blur",
         function () {
 
-            let quantity =
-                Number(quantityInput.value);
+            let kg =
+                Number(quantity.value);
+
 
             if (
-                !Number.isFinite(quantity) ||
-                quantity < MINIMUM_ORDER
+                !Number.isFinite(kg) ||
+                kg < MINIMUM_ORDER
             ) {
-                quantity = MINIMUM_ORDER;
+
+                kg = MINIMUM_ORDER;
             }
 
-            quantity = Math.floor(quantity);
 
-            quantityInput.value = quantity;
+            kg = Math.floor(kg);
+
+            quantity.value = kg;
 
             updateSummary();
         }
@@ -268,28 +323,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // PHONE NUMBER INPUT
+    // PHONE INPUT
     // ==========================================
 
-    if (customerPhoneInput) {
+    if (customerPhone) {
 
-        customerPhoneInput.addEventListener(
+        customerPhone.addEventListener(
             "input",
             function () {
 
-                let phone =
-                    customerPhoneInput.value;
-
-                phone = phone.replace(/\D/g, "");
-
-                customerPhoneInput.value = phone;
+                customerPhone.value =
+                    customerPhone.value.replace(
+                        /\D/g,
+                        ""
+                    );
             }
         );
     }
 
 
     // ==========================================
-    // FORM SUBMIT
+    // PLACE ORDER
     // ==========================================
 
     orderForm.addEventListener(
@@ -298,24 +352,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             event.preventDefault();
 
-            clearOrderMessage();
-
 
             // --------------------------------------
-            // GET CUSTOMER DETAILS
+            // GET VALUES
             // --------------------------------------
 
             const name =
-                customerNameInput.value.trim();
+                customerName.value.trim();
 
             const phone =
-                customerPhoneInput.value.trim();
+                customerPhone.value.trim();
 
-            const address =
-                addressInput.value.trim();
+            const kg =
+                Number(quantity.value);
 
-            const quantity =
-                Number(quantityInput.value);
+            const customerAddress =
+                address.value.trim();
 
 
             // --------------------------------------
@@ -324,12 +376,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (name.length < 2) {
 
-                showOrderMessage(
+                showMessage(
                     "❌ Please enter your full name.",
                     "error"
                 );
 
-                customerNameInput.focus();
+                customerName.focus();
 
                 return;
             }
@@ -341,12 +393,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!/^\d{10,15}$/.test(phone)) {
 
-                showOrderMessage(
+                showMessage(
                     "❌ Please enter a valid phone number.",
                     "error"
                 );
 
-                customerPhoneInput.focus();
+                customerPhone.focus();
 
                 return;
             }
@@ -357,16 +409,16 @@ document.addEventListener("DOMContentLoaded", function () {
             // --------------------------------------
 
             if (
-                !Number.isInteger(quantity) ||
-                quantity < MINIMUM_ORDER
+                !Number.isInteger(kg) ||
+                kg < MINIMUM_ORDER
             ) {
 
-                showOrderMessage(
+                showMessage(
                     "❌ Minimum order is 10 KG. Please enter a whole number.",
                     "error"
                 );
 
-                quantityInput.focus();
+                quantity.focus();
 
                 return;
             }
@@ -376,25 +428,25 @@ document.addEventListener("DOMContentLoaded", function () {
             // VALIDATE ADDRESS
             // --------------------------------------
 
-            if (address.length < 5) {
+            if (customerAddress.length < 5) {
 
-                showOrderMessage(
+                showMessage(
                     "❌ Please enter your complete delivery address.",
                     "error"
                 );
 
-                addressInput.focus();
+                address.focus();
 
                 return;
             }
 
 
             // --------------------------------------
-            // CALCULATE TOTAL
+            // TOTAL
             // --------------------------------------
 
             const total =
-                quantity * PRICE_PER_KG;
+                kg * PRICE_PER_KG;
 
 
             // --------------------------------------
@@ -407,17 +459,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 "⏳ PLACING ORDER...";
 
 
-            showOrderMessage(
-                "Please wait... Your order is being placed.",
+            showMessage(
+                "Please wait... Saving your order.",
                 "normal"
             );
 
 
             try {
 
-                // ----------------------------------
-                // SAVE ORDER TO SUPABASE
-                // ----------------------------------
+                // ==================================
+                // SAVE DIRECTLY TO SUPABASE
+                // ==================================
 
                 const { error } =
                     await supabaseClient
@@ -428,9 +480,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 customer_phone: phone,
 
-                                quantity: quantity,
+                                quantity: kg,
 
-                                address: address,
+                                address: customerAddress,
 
                                 price_per_kg:
                                     PRICE_PER_KG,
@@ -438,19 +490,20 @@ document.addEventListener("DOMContentLoaded", function () {
                                 total_amount:
                                     total,
 
-                                status: "Pending"
+                                status:
+                                    "Pending"
                             }
                         ]);
 
 
-                // ----------------------------------
-                // HANDLE SUPABASE ERROR
-                // ----------------------------------
+                // ==================================
+                // ERROR
+                // ==================================
 
                 if (error) {
 
                     console.error(
-                        "Supabase order error:",
+                        "Supabase error:",
                         error
                     );
 
@@ -458,90 +511,91 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // ----------------------------------
+                // ==================================
                 // SUCCESS
-                // ----------------------------------
+                // ==================================
 
-                showOrderMessage(
+                showMessage(
                     "✅ ORDER PLACED SUCCESSFULLY! Your order has been received. We will contact you for confirmation.",
                     "success"
                 );
 
 
-                // ----------------------------------
-                // CHANGE BUTTON
-                // ----------------------------------
+                // ==================================
+                // RESET FORM
+                // ==================================
+
+                customerName.value = "";
+
+                customerPhone.value = "";
+
+                quantity.value =
+                    MINIMUM_ORDER;
+
+                address.value = "";
+
+
+                updateSummary();
+
+
+                // ==================================
+                // BUTTON SUCCESS STATE
+                // ==================================
 
                 placeOrderButton.textContent =
                     "✅ ORDER PLACED";
 
 
-                // ----------------------------------
-                // RESET FORM
-                // ----------------------------------
+                // ==================================
+                // RESTORE BUTTON
+                // ==================================
 
-                customerNameInput.value = "";
+                setTimeout(
+                    function () {
 
-                customerPhoneInput.value = "";
+                        placeOrderButton.disabled =
+                            false;
 
-                addressInput.value = "";
+                        placeOrderButton.textContent =
+                            "🛒 PLACE ORDER";
 
-                quantityInput.value =
-                    MINIMUM_ORDER;
-
-                updateSummary();
-
-
-                // ----------------------------------
-                // RESTORE BUTTON AFTER DELAY
-                // ----------------------------------
-
-                setTimeout(function () {
-
-                    placeOrderButton.disabled = false;
-
-                    placeOrderButton.textContent =
-                        "🛒 PLACE ORDER";
-
-                }, 3000);
-
+                    },
+                    3000
+                );
 
             }
+
 
             catch (error) {
 
                 console.error(
-                    "Order placement failed:",
+                    "Order failed:",
                     error
                 );
 
 
-                // ----------------------------------
-                // ERROR MESSAGE
-                // ----------------------------------
-
-                showOrderMessage(
-                    "❌ We could not place your order. Please try again.",
+                showMessage(
+                    "❌ Order could not be placed. Please try again.",
                     "error"
                 );
 
 
-                // ----------------------------------
-                // RESTORE BUTTON
-                // ----------------------------------
-
-                placeOrderButton.disabled = false;
+                placeOrderButton.disabled =
+                    false;
 
                 placeOrderButton.textContent =
                     "🛒 PLACE ORDER";
             }
+
         }
     );
 
 
     // ==========================================
-    // INITIAL SUMMARY
+    // INITIALIZE
     // ==========================================
+
+    quantity.value = MINIMUM_ORDER;
 
     updateSummary();
 

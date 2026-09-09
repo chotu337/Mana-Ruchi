@@ -13,7 +13,8 @@ const BUSINESS_WHATSAPP = "918367450301";
 // GET ELEMENTS
 // =========================================
 
-const orderForm = document.getElementById("orderForm");
+const orderForm =
+    document.getElementById("orderForm");
 
 const customerName =
     document.getElementById("customerName");
@@ -30,6 +31,9 @@ const addressInput =
 const totalPrice =
     document.getElementById("totalPrice");
 
+const summaryQuantity =
+    document.getElementById("summaryQuantity");
+
 const orderMessage =
     document.getElementById("orderMessage");
 
@@ -41,16 +45,19 @@ const increaseQuantity =
 
 
 // =========================================
-// CALCULATE TOTAL
+// UPDATE ORDER SUMMARY
 // =========================================
 
-function calculateTotal() {
+function updateOrderSummary() {
 
-    const quantity =
+    let quantity =
         Number(quantityInput.value) || MINIMUM_ORDER;
 
     const total =
         quantity * PRICE_PER_KG;
+
+    summaryQuantity.textContent =
+        quantity + " KG";
 
     totalPrice.textContent =
         "₹" + total.toLocaleString("en-IN");
@@ -72,7 +79,7 @@ increaseQuantity.addEventListener(
 
         quantityInput.value = quantity;
 
-        calculateTotal();
+        updateOrderSummary();
     }
 );
 
@@ -99,13 +106,13 @@ decreaseQuantity.addEventListener(
 
         quantityInput.value = quantity;
 
-        calculateTotal();
+        updateOrderSummary();
     }
 );
 
 
 // =========================================
-// WHATSAPP ORDER
+// ORDER SUBMISSION
 // =========================================
 
 orderForm.addEventListener(
@@ -128,7 +135,7 @@ orderForm.addEventListener(
             addressInput.value.trim();
 
 
-        // NAME VALIDATION
+        // NAME
 
         if (!name) {
 
@@ -140,7 +147,7 @@ orderForm.addEventListener(
         }
 
 
-        // PHONE VALIDATION
+        // PHONE
 
         const cleanPhone =
             phone.replace(/\D/g, "");
@@ -157,7 +164,7 @@ orderForm.addEventListener(
         }
 
 
-        // QUANTITY VALIDATION
+        // QUANTITY
 
         if (
             !quantity ||
@@ -168,13 +175,11 @@ orderForm.addEventListener(
                 "Minimum order is 10 KG."
             );
 
-            quantityInput.focus();
-
             return;
         }
 
 
-        // ADDRESS VALIDATION
+        // ADDRESS
 
         if (!address) {
 
@@ -201,6 +206,7 @@ orderForm.addEventListener(
 
 👤 Customer Name: ${name}
 📱 Customer Phone: ${phone}
+📦 Product: Homemade Chilli Powder
 📦 Quantity: ${quantity} KG
 💰 Price: ₹${PRICE_PER_KG} per KG
 💵 Total Amount: ₹${total.toLocaleString("en-IN")}
@@ -220,16 +226,12 @@ Thank you for choosing Mana Ruchi! 🌶️`;
             encodeURIComponent(message);
 
 
-        // SHOW MESSAGE
-
         orderMessage.textContent =
             "✅ Opening WhatsApp...";
 
         orderMessage.style.display =
             "block";
 
-
-        // OPEN WHATSAPP
 
         window.location.href =
             whatsappURL;
@@ -239,7 +241,7 @@ Thank you for choosing Mana Ruchi! 🌶️`;
 
 
 // =========================================
-// INITIAL TOTAL
+// INITIAL DISPLAY
 // =========================================
 
-calculateTotal();
+updateOrderSummary();

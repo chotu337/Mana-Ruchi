@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Mana Ruchi - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<body>
+
+    <!-- LOGIN -->
+
+    <section id="loginSection" class="login-section">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                🌶️
+            </div>
+
+            <h1>
+                Mana Ruchi
+            </h1>
+
+            <p class="login-subtitle">
+                Admin Dashboard
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter admin email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <p
+                id="loginError"
+                class="error-message"
+            ></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+
+    <section
+        id="dashboardSection"
+        class="dashboard-section"
+        style="display: none;"
+    >
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <div class="brand">
+                    🌶️ Mana Ruchi
+                </div>
+
+                <p>
+                    Order Management Dashboard
+                </p>
+
+            </div>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </header>
+
+
+        <main class="dashboard-container">
+
+
+            <!-- SUMMARY CARDS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span>
+                        Total Orders
+                    </span>
+
+                    <strong id="totalOrders">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong id="pendingOrders">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Confirmed
+                    </span>
+
+                    <strong id="confirmedOrders">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Delivered
+                    </span>
+
+                    <strong id="deliveredOrders">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Total Sales
+                    </span>
+
+                    <strong id="totalSales">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH / REFRESH -->
+
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search customer, phone or address..."
+                >
+
+
+                <button
+                    id="refreshButton"
+                    class="refresh-button"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <!-- ORDERS -->
+
+            <div class="orders-card">
+
+                <div class="orders-heading">
+
+                    <h2>
+                        Customer Orders
+                    </h2>
+
+                    <span id="orderCount">
+                        0 orders
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="loadingMessage"
+                    class="loading"
+                >
+                    Loading orders...
+                </div>
+
+
+                <div
+                    id="ordersContainer"
+                    class="orders-container"
+                ></div>
+
+
+                <div
+                    id="emptyMessage"
+                    class="empty-message"
+                    style="display: none;"
+                >
+                    No orders found.
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

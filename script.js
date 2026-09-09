@@ -1,83 +1,202 @@
-// Mana Ruchi - WhatsApp Order System
+// =========================================
+// MANA RUCHI - ORDER SYSTEM
+// =========================================
 
 const PRICE_PER_KG = 400;
 const MINIMUM_ORDER = 10;
+const QUANTITY_STEP = 10;
+
 const BUSINESS_WHATSAPP = "918367450301";
 
+
+// =========================================
+// GET ELEMENTS
+// =========================================
+
 const orderForm = document.getElementById("orderForm");
-const customerName = document.getElementById("customerName");
-const customerPhone = document.getElementById("customerPhone");
-const quantityInput = document.getElementById("quantity");
-const addressInput = document.getElementById("address");
-const totalPrice = document.getElementById("totalPrice");
-const orderMessage = document.getElementById("orderMessage");
+
+const customerName =
+    document.getElementById("customerName");
+
+const customerPhone =
+    document.getElementById("customerPhone");
+
+const quantityInput =
+    document.getElementById("quantity");
+
+const addressInput =
+    document.getElementById("address");
+
+const totalPrice =
+    document.getElementById("totalPrice");
+
+const orderMessage =
+    document.getElementById("orderMessage");
+
+const decreaseQuantity =
+    document.getElementById("decreaseQuantity");
+
+const increaseQuantity =
+    document.getElementById("increaseQuantity");
 
 
-// Calculate total
+// =========================================
+// CALCULATE TOTAL
+// =========================================
+
 function calculateTotal() {
-    const quantity = Number(quantityInput.value) || 0;
-    const total = quantity * PRICE_PER_KG;
+
+    const quantity =
+        Number(quantityInput.value) || MINIMUM_ORDER;
+
+    const total =
+        quantity * PRICE_PER_KG;
 
     totalPrice.textContent =
         "₹" + total.toLocaleString("en-IN");
 }
 
 
-// Update total when quantity changes
-quantityInput.addEventListener("input", calculateTotal);
+// =========================================
+// INCREASE QUANTITY
+// =========================================
 
+increaseQuantity.addEventListener(
+    "click",
+    function () {
 
-// Submit order
-orderForm.addEventListener("submit", function(event) {
+        let quantity =
+            Number(quantityInput.value) || MINIMUM_ORDER;
 
-    event.preventDefault();
+        quantity += QUANTITY_STEP;
 
-    const name = customerName.value.trim();
-    const phone = customerPhone.value.trim();
-    const quantity = Number(quantityInput.value);
-    const address = addressInput.value.trim();
+        quantityInput.value = quantity;
 
-
-    // Validate name
-    if (!name) {
-        alert("Please enter your name.");
-        customerName.focus();
-        return;
+        calculateTotal();
     }
+);
 
 
-    // Validate phone
-    const cleanPhone = phone.replace(/\D/g, "");
+// =========================================
+// DECREASE QUANTITY
+// =========================================
 
-    if (cleanPhone.length !== 10) {
-        alert("Please enter a valid 10-digit mobile number.");
-        customerPhone.focus();
-        return;
+decreaseQuantity.addEventListener(
+    "click",
+    function () {
+
+        let quantity =
+            Number(quantityInput.value) || MINIMUM_ORDER;
+
+        if (quantity > MINIMUM_ORDER) {
+
+            quantity -= QUANTITY_STEP;
+
+        } else {
+
+            quantity = MINIMUM_ORDER;
+        }
+
+        quantityInput.value = quantity;
+
+        calculateTotal();
     }
+);
 
 
-    // Validate quantity
-    if (!quantity || quantity < MINIMUM_ORDER) {
-        alert("Minimum order is 10 KG.");
-        quantityInput.focus();
-        return;
-    }
+// =========================================
+// WHATSAPP ORDER
+// =========================================
+
+orderForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
 
 
-    // Validate address
-    if (!address) {
-        alert("Please enter your delivery address.");
-        addressInput.focus();
-        return;
-    }
+        const name =
+            customerName.value.trim();
+
+        const phone =
+            customerPhone.value.trim();
+
+        const quantity =
+            Number(quantityInput.value);
+
+        const address =
+            addressInput.value.trim();
 
 
-    // Calculate total
-    const total = quantity * PRICE_PER_KG;
+        // NAME VALIDATION
+
+        if (!name) {
+
+            alert("Please enter your name.");
+
+            customerName.focus();
+
+            return;
+        }
 
 
-    // WhatsApp message
-    const message =
+        // PHONE VALIDATION
+
+        const cleanPhone =
+            phone.replace(/\D/g, "");
+
+        if (cleanPhone.length !== 10) {
+
+            alert(
+                "Please enter a valid 10-digit mobile number."
+            );
+
+            customerPhone.focus();
+
+            return;
+        }
+
+
+        // QUANTITY VALIDATION
+
+        if (
+            !quantity ||
+            quantity < MINIMUM_ORDER
+        ) {
+
+            alert(
+                "Minimum order is 10 KG."
+            );
+
+            quantityInput.focus();
+
+            return;
+        }
+
+
+        // ADDRESS VALIDATION
+
+        if (!address) {
+
+            alert(
+                "Please enter your delivery address."
+            );
+
+            addressInput.focus();
+
+            return;
+        }
+
+
+        // TOTAL
+
+        const total =
+            quantity * PRICE_PER_KG;
+
+
+        // WHATSAPP MESSAGE
+
+        const message =
 `🌶️ MANA RUCHI - NEW ORDER
 
 👤 Customer Name: ${name}
@@ -92,26 +211,35 @@ ${address}
 Thank you for choosing Mana Ruchi! 🌶️`;
 
 
-    // Create working WhatsApp URL
-    const whatsappURL =
-        "https://api.whatsapp.com/send?phone=" +
-        BUSINESS_WHATSAPP +
-        "&text=" +
-        encodeURIComponent(message);
+        // WHATSAPP URL
+
+        const whatsappURL =
+            "https://api.whatsapp.com/send?phone=" +
+            BUSINESS_WHATSAPP +
+            "&text=" +
+            encodeURIComponent(message);
 
 
-    // Show confirmation
-    orderMessage.textContent =
-        "✅ Opening WhatsApp...";
+        // SHOW MESSAGE
 
-    orderMessage.style.display = "block";
+        orderMessage.textContent =
+            "✅ Opening WhatsApp...";
 
-
-    // Open WhatsApp
-    window.location.href = whatsappURL;
-
-});
+        orderMessage.style.display =
+            "block";
 
 
-// Initial calculation
+        // OPEN WHATSAPP
+
+        window.location.href =
+            whatsappURL;
+
+    }
+);
+
+
+// =========================================
+// INITIAL TOTAL
+// =========================================
+
 calculateTotal();

@@ -1,25 +1,16 @@
-/* =========================================
-   MANA RUCHI ADMIN DASHBOARD
-========================================= */
-
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f6f8;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
     color: #222;
 }
-
-
-/* =========================================
+/* =========================
    LOGIN
-========================================= */
-
+========================= */
 .login-section {
     min-height: 100vh;
     display: flex;
@@ -27,437 +18,235 @@ body {
     align-items: center;
     padding: 20px;
 }
-
-
-.login-card {
+.login-box {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
     background: white;
-    padding: 40px 30px;
-    border-radius: 18px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.12);
     text-align: center;
 }
-
-
-.login-logo {
+.logo {
     font-size: 55px;
     margin-bottom: 10px;
 }
-
-
-.login-card h1 {
-    font-size: 30px;
-    color: #8b0000;
+.login-box h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
 }
-
-
-.login-subtitle {
-    margin-top: 8px;
-    margin-bottom: 30px;
-    color: #777;
+.login-box h2 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    color: #666;
 }
-
-
-.form-group {
+.login-box form {
     text-align: left;
-    margin-bottom: 20px;
 }
-
-
-.form-group label {
+.login-box label {
     display: block;
-    margin-bottom: 8px;
+    margin-top: 15px;
+    margin-bottom: 7px;
     font-weight: 600;
 }
-
-
-.form-group input {
+.login-box input {
     width: 100%;
     padding: 13px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
-}
-
-
-.form-group input:focus {
     outline: none;
-    border-color: #8b0000;
 }
-
-
-.login-button {
+.login-box input:focus {
+    border-color: #25D366;
+}
+.login-btn {
     width: 100%;
+    margin-top: 22px;
     padding: 14px;
+    background: #25D366;
+    color: white;
     border: none;
     border-radius: 8px;
-    background: #8b0000;
-    color: white;
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
 }
-
-
-.login-button:hover {
-    background: #6f0000;
+.login-btn:hover {
+    background: #128C7E;
 }
-
-
-.error-message {
-    color: #c62828;
-    margin-top: 15px;
+.login-error {
+    color: #d32f2f;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
 }
-
-
-/* =========================================
-   DASHBOARD HEADER
-========================================= */
-
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #128C7E;
+    text-decoration: none;
+}
+/* =========================
+   DASHBOARD
+========================= */
+.dashboard-section {
+    min-height: 100vh;
+}
+.hidden {
+    display: none !important;
+}
+/* HEADER */
 .dashboard-header {
-    background: #8b0000;
+    background: #222;
     color: white;
-    padding: 20px 5%;
+    padding: 18px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-
-.brand {
-    font-size: 25px;
-    font-weight: bold;
+.dashboard-header h1 {
+    font-size: 23px;
 }
-
-
 .dashboard-header p {
-    margin-top: 5px;
-    opacity: 0.9;
+    margin-top: 3px;
+    color: #ccc;
 }
-
-
-.logout-button {
-    background: white;
-    color: #8b0000;
+.logout-btn {
+    background: #d32f2f;
+    color: white;
     border: none;
     padding: 10px 18px;
     border-radius: 7px;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
 }
-
-
-/* =========================================
-   CONTAINER
-========================================= */
-
-.dashboard-container {
-    width: 94%;
-    max-width: 1400px;
-    margin: 30px auto;
+.logout-btn:hover {
+    background: #b71c1c;
 }
-
-
-/* =========================================
-   STAT CARDS
-========================================= */
-
-.stats-grid {
+/* CONTENT */
+.dashboard-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+}
+.dashboard-content > h2 {
+    margin-bottom: 20px;
+}
+/* STAT CARDS */
+.stats {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
 }
-
-
 .stat-card {
     background: white;
-    padding: 22px;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
 }
-
-
 .stat-card span {
-    display: block;
-    color: #777;
-    font-size: 14px;
+    font-size: 30px;
+}
+.stat-card h3 {
+    font-size: 30px;
+    margin: 10px 0 5px;
+}
+.stat-card p {
+    color: #666;
+}
+/* ORDERS */
+.orders-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
+}
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.clear-btn {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.clear-btn:hover {
+    background: #b71c1c;
+}
+/* ORDER CARD */
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+.order-card h3 {
     margin-bottom: 10px;
 }
-
-
-.stat-card strong {
-    font-size: 25px;
-    color: #8b0000;
+.order-info {
+    line-height: 1.7;
+    color: #555;
 }
-
-
-/* =========================================
-   TOOLBAR
-========================================= */
-
-.toolbar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-
-#searchInput {
-    flex: 1;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 15px;
-}
-
-
-.refresh-button {
-    border: none;
-    background: #8b0000;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-
-/* =========================================
-   ORDERS
-========================================= */
-
-.orders-card {
-    background: white;
-    border-radius: 14px;
-    padding: 25px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
-}
-
-
-.orders-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-
-.orders-heading h2 {
-    color: #333;
-}
-
-
-.orders-heading span {
-    color: #777;
-}
-
-
-/* =========================================
-   ORDER CARD
-========================================= */
-
-.order-item {
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 15px;
-}
-
-
-.order-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-
-.customer-name {
-    font-size: 19px;
-    font-weight: bold;
-    color: #8b0000;
-}
-
-
-.order-id {
-    color: #777;
-    font-size: 13px;
-    margin-top: 5px;
-}
-
-
 .order-status {
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-
-.status-pending {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border-radius: 15px;
     background: #fff3cd;
     color: #856404;
-}
-
-
-.status-confirmed {
-    background: #dbeafe;
-    color: #1e40af;
-}
-
-
-.status-delivered {
-    background: #dcfce7;
-    color: #166534;
-}
-
-
-.status-cancelled {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-
-.order-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-
-.detail-box {
-    background: #f8f8f8;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-
-.detail-label {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 5px;
-}
-
-
-.detail-value {
-    font-weight: 600;
-    word-break: break-word;
-}
-
-
-.order-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 18px;
-    gap: 15px;
-}
-
-
-.status-select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 7px;
-    font-size: 14px;
-}
-
-
-.call-button {
-    text-decoration: none;
-    background: #128c7e;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 7px;
+    font-size: 13px;
     font-weight: bold;
 }
-
-
-/* =========================================
-   LOADING / EMPTY
-========================================= */
-
-.loading,
-.empty-message {
+.complete-btn {
+    margin-top: 12px;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 6px;
+    background: #25D366;
+    color: white;
+    cursor: pointer;
+}
+/* NO ORDERS */
+.no-orders {
     text-align: center;
     padding: 40px;
     color: #777;
 }
-
-
-/* =========================================
+/* =========================
    MOBILE
-========================================= */
-
-@media (max-width: 900px) {
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
+========================= */
+@media (max-width: 700px) {
     .dashboard-header {
-        padding: 16px;
-    }
-
-
-    .dashboard-header {
+        padding: 15px;
         align-items: flex-start;
     }
-
-
-    .brand {
-        font-size: 20px;
+    .dashboard-header h1 {
+        font-size: 19px;
     }
-
-
-    .stats-grid {
+    .stats {
         grid-template-columns: 1fr;
     }
-
-
-    .toolbar {
-        flex-direction: column;
-    }
-
-
-    .orders-card {
+    .orders-section {
         padding: 15px;
     }
-
-
-    .orders-heading {
+    .orders-header {
         align-items: flex-start;
         gap: 10px;
-        flex-direction: column;
     }
-
-
-    .order-top {
-        flex-direction: column;
+    .login-box {
+        padding: 25px 20px;
     }
-
-
-    .order-details {
-        grid-template-columns: 1fr;
-    }
-
-
-    .order-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-
-    .status-select,
-    .call-button {
-        width: 100%;
-        text-align: center;
-    }
-
 }

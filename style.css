@@ -213,6 +213,55 @@ body {
 
 
 /* =========================================
+   TRUST HIGHLIGHTS - STEP 19
+========================================= */
+
+.trust-section {
+    background: #8b0000;
+    padding: 25px 0;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 10px;
+    color: white;
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.trust-item:last-child {
+    border-right: none;
+}
+
+.trust-icon {
+    font-size: 30px;
+}
+
+.trust-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.trust-text strong {
+    font-size: 16px;
+}
+
+.trust-text span {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+
+/* =========================================
    PRODUCT
 ========================================= */
 
@@ -663,7 +712,7 @@ body {
 
 
 /* =========================================
-   FAQ - STEP 18
+   FAQ
 ========================================= */
 
 .faq-section {
@@ -946,6 +995,22 @@ body {
         grid-template-columns: 1fr;
     }
 
+
+    /* TRUST TABLET */
+
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trust-item:nth-child(2) {
+        border-right: none;
+    }
+
+    .trust-item:nth-child(3),
+    .trust-item:nth-child(4) {
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
 }
 
 
@@ -1002,6 +1067,36 @@ body {
     .hero-image {
         height: 280px;
     }
+
+
+    /* TRUST MOBILE */
+
+    .trust-section {
+        padding: 18px 0;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+
+    .trust-item {
+        padding: 15px 8px;
+        gap: 7px;
+    }
+
+    .trust-icon {
+        font-size: 24px;
+    }
+
+    .trust-text strong {
+        font-size: 13px;
+    }
+
+    .trust-text span {
+        font-size: 10px;
+    }
+
 
     .product-info {
         padding: 25px;

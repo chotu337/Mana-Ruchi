@@ -1,434 +1,644 @@
+/* ==========================================
+   GENERAL
+========================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
     background: #fffaf5;
     color: #333;
-    line-height: 1.6;
 }
-/* =========================
+
+
+/* ==========================================
    NAVIGATION
-========================= */
+========================================== */
+
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 8%;
-    background: white;
-    box-shadow:
-        0 3px 15px rgba(0,0,0,0.1);
+
+    padding: 18px 7%;
+
+    background: #8b0000;
+    color: white;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
+
 .logo {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
 }
+
 nav {
     display: flex;
-    gap: 25px;
+    gap: 20px;
 }
+
 nav a {
+    color: white;
     text-decoration: none;
-    color: #333;
     font-weight: bold;
 }
+
 nav a:hover {
-    color: #d32f2f;
+    text-decoration: underline;
 }
-/* =========================
-   HERO
-========================= */
+
+
+/* ==========================================
+   HOME / HERO
+========================================== */
+
 .hero {
-    min-height: 650px;
+    min-height: 600px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 70px 8%;
+
     gap: 50px;
+
+    padding: 70px 8%;
+
+    background: #fff1e6;
 }
+
 .hero-text {
-    max-width: 600px;
+    max-width: 550px;
 }
+
 .small-title {
-    color: #d32f2f;
     font-size: 18px;
     font-weight: bold;
-}
-.hero h1 {
-    font-size: 65px;
-    margin: 10px 0;
-}
-.hero h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-.hero-text > p {
-    font-size: 18px;
-}
-.price-home {
-    margin-top: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    color: #d32f2f;
-}
-.price-home span {
-    font-size: 20px;
-    color: #555;
-}
-.minimum-order {
-    margin-top: 10px;
-    font-size: 20px;
-}
-.button {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 15px 32px;
-    background: #d32f2f;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.button:hover {
-    transform: translateY(-2px);
-}
-/* =========================
-   HERO IMAGE
-========================= */
-.hero-image img {
-    width: 430px;
-    height: 430px;
-    object-fit: cover;
-    border-radius: 25px;
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.2);
-}
-/* =========================
-   PRODUCT
-========================= */
-.products {
-    padding: 80px 8%;
-    text-align: center;
-    background: white;
-}
-.products h2,
-.why-us h2,
-.about h2,
-.contact h2,
-.order-section h2 {
-    font-size: 40px;
     margin-bottom: 10px;
 }
-.section-description {
-    margin-bottom: 40px;
-    color: #666;
+
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 5px;
 }
-/* PRODUCT CARD */
-.product-card {
-    width: 380px;
-    max-width: 100%;
-    margin: auto;
-    padding: 30px;
-    background: #fffaf5;
-    border-radius: 20px;
-    box-shadow:
-        0 8px 30px rgba(0,0,0,0.12);
+
+.hero h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
 }
-.product-card img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 15px;
+
+.hero-text > p {
+    font-size: 18px;
+    margin-bottom: 20px;
 }
-.product-card h3 {
-    font-size: 25px;
-    margin: 20px 0 10px;
-}
-.price {
-    font-size: 38px;
+
+.price-home {
+    font-size: 40px;
     font-weight: bold;
-    color: #d32f2f;
     margin: 15px 0;
 }
-.price span {
+
+.price-home span {
     font-size: 20px;
-    color: #555;
+    font-weight: normal;
 }
+
+.minimum-order {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.button {
+    display: inline-block;
+
+    padding: 13px 25px;
+
+    background: #8b0000;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    background: #650000;
+}
+
+
+/* ==========================================
+   HERO IMAGE
+========================================== */
+
+.hero-image img {
+    width: 420px;
+    max-width: 100%;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==========================================
+   SECTIONS
+========================================== */
+
+.products,
+.why-us,
+.order-section,
+.delivery,
+.about,
+.contact {
+    padding: 70px 8%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    margin-bottom: 35px;
+}
+
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.product-card {
+    max-width: 400px;
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.product-card img {
+    width: 100%;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.product-card h3 {
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.price span {
+    font-size: 17px;
+    font-weight: normal;
+}
+
 .minimum {
     margin-bottom: 10px;
 }
-/* =========================
+
+.product-info {
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================
    WHY CHOOSE US
-========================= */
+========================================== */
+
 .why-us {
-    padding: 80px 8%;
-    text-align: center;
-    background: #fffaf5;
+    background: #fff1e6;
 }
+
 .features {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    margin-top: 40px;
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
 }
+
 .feature-card {
-    width: 230px;
-    padding: 30px 20px;
     background: white;
-    border-radius: 15px;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
-.feature-card:hover {
-    transform: translateY(-5px);
-}
+
 .feature-icon {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
-.feature-card h3 {
-    font-size: 21px;
+    font-size: 35px;
     margin-bottom: 10px;
 }
-.feature-card p {
-    color: #666;
-    font-size: 15px;
+
+.feature-card h3 {
+    margin-bottom: 10px;
 }
-/* =========================
+
+
+/* ==========================================
    ORDER FORM
-========================= */
+========================================== */
+
 .order-section {
-    padding: 80px 20px;
-    text-align: center;
-    background: white;
+    background: #fff;
 }
-.order-section > p {
-    margin-bottom: 35px;
-    color: #666;
-}
-#orderForm {
+
+.order-section form {
     max-width: 550px;
-    margin: auto;
-    padding: 35px;
-    background: #fffaf5;
-    border-radius: 20px;
-    box-shadow:
-        0 8px 30px rgba(0,0,0,0.12);
+
+    margin: 30px auto 0;
+
     text-align: left;
+
+    padding: 30px;
+
+    background: #fffaf5;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
-#orderForm label {
+
+.order-section label {
     display: block;
-    margin-top: 18px;
-    margin-bottom: 7px;
+
+    margin-top: 15px;
+    margin-bottom: 6px;
+
     font-weight: bold;
 }
-#orderForm input,
-#orderForm textarea {
+
+.order-section input,
+.order-section textarea {
     width: 100%;
+
     padding: 13px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
     font-size: 16px;
-    font-family: Arial, sans-serif;
+
+    font-family: inherit;
 }
-#orderForm input:focus,
-#orderForm textarea:focus {
-    outline: none;
-    border-color: #d32f2f;
+
+.order-section textarea {
+    resize: vertical;
 }
-/* ORDER SUMMARY */
+
 .order-summary {
-    margin-top: 25px;
-    padding: 20px;
+    margin-top: 20px;
+
+    padding: 18px;
+
     background: white;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 18px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ddd;
 }
+
 .order-summary p {
-    margin: 8px;
+    display: flex;
+    justify-content: space-between;
+
+    margin: 5px 0;
 }
-.order-summary strong {
-    color: #d32f2f;
-}
-/* WHATSAPP */
+
+
+/* ==========================================
+   WHATSAPP ORDER BUTTON
+========================================== */
+
 .whatsapp-button {
     width: 100%;
-    margin-top: 25px;
-    padding: 16px;
-    border: none;
-    border-radius: 8px;
-    background: #25D366;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.whatsapp {
-    display: inline-block;
+
     margin-top: 20px;
-    padding: 15px 30px;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
+
+    padding: 15px;
+
+    border: none;
+
     border-radius: 8px;
+
+    background: #25D366;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-2px);
+}
+
+.order-message {
+    text-align: center;
+
+    margin-top: 15px;
+
     font-weight: bold;
 }
-/* =========================
+
+
+/* ==========================================
+   DELIVERY
+========================================== */
+
+.delivery {
+    background: #fff1e6;
+}
+
+.delivery-container {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.delivery-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.delivery-icon {
+    font-size: 35px;
+
+    margin-bottom: 10px;
+}
+
+.delivery-card h3 {
+    margin-bottom: 10px;
+}
+
+
+/* ==========================================
    ABOUT
-========================= */
+========================================== */
+
 .about {
-    padding: 80px 15%;
-    text-align: center;
-}
-.about p {
-    max-width: 750px;
-    margin: 15px auto;
-    color: #555;
-    font-size: 17px;
-}
-/* =========================
-   CONTACT
-========================= */
-.contact {
-    padding: 80px 15%;
-    text-align: center;
     background: white;
 }
-.contact p {
-    margin: 12px;
+
+.about p {
+    max-width: 750px;
+
+    margin: 10px auto;
+
+    font-size: 17px;
 }
-/* =========================
+
+
+/* ==========================================
+   CONTACT
+========================================== */
+
+.contact {
+    background: #fff1e6;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+
+.contact a {
+    color: #8b0000;
+    font-weight: bold;
+}
+
+.contact .whatsapp {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 13px 22px;
+
+    background: #25D366;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================
+   FLOATING WHATSAPP
+========================================== */
+
+.floating-whatsapp {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 20px;
+
+    background: #25D366;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 50px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+
+    transition: 0.3s;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.06);
+}
+
+
+/* ==========================================
    FOOTER
-========================= */
+========================================== */
+
 footer {
     padding: 25px;
-    text-align: center;
-    background: #222;
+
+    background: #8b0000;
+
     color: white;
+
+    text-align: center;
 }
-/* =========================
-   MOBILE
-========================= */
-@media (max-width: 768px) {
+
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
     header {
         flex-direction: column;
-        gap: 15px;
-    }
-    nav {
         gap: 12px;
+    }
+
+    nav {
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .hero {
         flex-direction: column;
+
         text-align: center;
-        padding: 50px 5%;
+
+        padding: 50px 6%;
     }
+
     .hero h1 {
-        font-size: 48px;
+        font-size: 45px;
     }
+
     .hero h2 {
         font-size: 25px;
     }
-    .hero-image img {
-        width: 300px;
-        height: 300px;
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
     }
-    .products h2,
-    .why-us h2,
-    .about h2,
-    .contact h2,
-    .order-section h2 {
-        font-size: 32px;
+
+    .delivery-container {
+        grid-template-columns: repeat(2, 1fr);
     }
-    .feature-card {
-        width: 100%;
-        max-width: 330px;
-    }
-    #orderForm {
-        padding: 25px 20px;
-    }
-/* =========================
-   DELIVERY SECTION
-========================= */
-.delivery {
-    padding: 80px 8%;
-    text-align: center;
-    background: #fffaf5;
 }
-.delivery h2 {
-    font-size: 40px;
-    margin-bottom: 40px;
-}
-.delivery-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-.delivery-card {
-    width: 230px;
-    min-height: 220px;
-    padding: 30px 20px;
-    background: white;
-    border-radius: 15px;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
-.delivery-card:hover {
-    transform: translateY(-5px);
-}
-.delivery-icon {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
-.delivery-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-.delivery-card p {
-    color: #666;
-    font-size: 15px;
-    line-height: 1.6;
-}
-/* =========================
-   ORDER MESSAGE
-========================= */
-.order-message {
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
-}
-/* =========================
-   PRODUCT INFO
-========================= */
-.product-info {
-    margin: 15px 0;
-    color: #666;
-}
-/* =========================
-   MOBILE DELIVERY
-========================= */
+
+
 @media (max-width: 600px) {
-    .delivery h2 {
-        font-size: 32px;
+
+    header {
+        padding: 15px 5%;
     }
-    .delivery-card {
-        width: 100%;
-        max-width: 330px;
+
+    .logo {
+        font-size: 21px;
     }
-}
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 40px 5%;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .hero-text > p {
+        font-size: 16px;
+    }
+
+    .price-home {
+        font-size: 34px;
+    }
+
+    .products,
+    .why-us,
+    .order-section,
+    .delivery,
+    .about,
+    .contact {
+        padding: 50px 5%;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .delivery-container {
+        grid-template-columns: 1fr;
+    }
+
+    .order-section form {
+        padding: 20px;
+    }
+
+    .floating-whatsapp {
+        right: 15px;
+        bottom: 15px;
+
+        padding: 12px 17px;
+
+        font-size: 14px;
+    }
 }

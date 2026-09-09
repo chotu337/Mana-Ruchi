@@ -1150,4 +1150,64 @@ footer {
         font-size: 18px;
     }
 
+/* =========================================
+   MANA RUCHI - WHATSAPP SHARE BUTTON
+   ========================================= */
+.whatsapp-share-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px auto;
+    padding: 10px;
+}
+.whatsapp-share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: #ffffff !important;
+    padding: 14px 25px;
+    min-width: 220px;
+    border-radius: 30px;
+    border: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none !important;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+}
+/* WhatsApp icon */
+.whatsapp-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+/* Hover */
+.whatsapp-share:hover {
+    background: #128C7E;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(18, 140, 126, 0.35);
+}
+/* Click */
+.whatsapp-share:active {
+    transform: scale(0.97);
+}
+/* Mobile */
+@media (max-width: 600px) {
+    .whatsapp-share {
+        width: 90%;
+        max-width: 320px;
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    .whatsapp-icon {
+        font-size: 21px;
+    }
+}
 }

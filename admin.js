@@ -9,24 +9,17 @@ const ADMIN_PASSWORD = "ManaRuchi@2026";
 /* =========================================
    GET HTML ELEMENTS
 ========================================= */
-const loginSection =
-    document.getElementById("loginSection");
-const dashboardSection =
-    document.getElementById("dashboardSection");
-const loginForm =
-    document.getElementById("loginForm");
-const loginError =
-    document.getElementById("loginError");
-const logoutBtn =
-    document.getElementById("logoutBtn");
-const clearOrdersBtn =
-    document.getElementById("clearOrdersBtn");
+const loginSection = document.getElementById("loginSection");
+const dashboardSection = document.getElementById("dashboardSection");
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+const logoutBtn = document.getElementById("logoutBtn");
+const clearOrdersBtn = document.getElementById("clearOrdersBtn");
 /* =========================================
-   CHECK WHETHER ADMIN IS LOGGED IN
+   CHECK LOGIN
 ========================================= */
 function checkLogin() {
-    const loggedIn =
-        sessionStorage.getItem("manaRuchiAdmin");
+    const loggedIn = sessionStorage.getItem("manaRuchiAdmin");
     if (loggedIn === "true") {
         showDashboard();
     } else {
@@ -34,101 +27,111 @@ function checkLogin() {
     }
 }
 /* =========================================
-   SHOW LOGIN PAGE
+   SHOW LOGIN
 ========================================= */
 function showLogin() {
-    loginSection.classList.remove("hidden");
-    dashboardSection.classList.add("hidden");
+    if (loginSection) {
+        loginSection.classList.remove("hidden");
+    }
+    if (dashboardSection) {
+        dashboardSection.classList.add("hidden");
+    }
 }
 /* =========================================
-   SHOW ADMIN DASHBOARD
+   SHOW DASHBOARD
 ========================================= */
 function showDashboard() {
-    loginSection.classList.add("hidden");
-    dashboardSection.classList.remove("hidden");
+    if (loginSection) {
+        loginSection.classList.add("hidden");
+    }
+    if (dashboardSection) {
+        dashboardSection.classList.remove("hidden");
+    }
     loadOrders();
 }
 /* =========================================
-   LOGIN
+   ADMIN LOGIN
 ========================================= */
 if (loginForm) {
-    loginForm.addEventListener(
-        "submit",
-        function(event) {
-            event.preventDefault();
-            const username =
-                document
-                    .getElementById("username")
-                    .value
-                    .trim();
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-            /* Check username and password */
-            if (
-                username === ADMIN_USERNAME &&
-                password === ADMIN_PASSWORD
-            ) {
-                sessionStorage.setItem(
-                    "manaRuchiAdmin",
-                    "true"
-                );
+    loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const usernameInput =
+            document.getElementById("username");
+        const passwordInput =
+            document.getElementById("password");
+        const username =
+            usernameInput.value.trim();
+        const password =
+            passwordInput.value;
+        /* Check credentials */
+        if (
+            username === ADMIN_USERNAME &&
+            password === ADMIN_PASSWORD
+        ) {
+            /* Save login */
+            sessionStorage.setItem(
+                "manaRuchiAdmin",
+                "true"
+            );
+            /* Remove error */
+            if (loginError) {
                 loginError.textContent = "";
-                loginForm.reset();
-                showDashboard();
-            } else {
+            }
+            /* Clear form */
+            loginForm.reset();
+            /* Open dashboard */
+            showDashboard();
+        } else {
+            if (loginError) {
                 loginError.textContent =
                     "❌ Incorrect username or password.";
             }
         }
-    );
+    });
 }
 /* =========================================
    LOGOUT
 ========================================= */
 if (logoutBtn) {
-    logoutBtn.addEventListener(
-        "click",
-        function() {
-            sessionStorage.removeItem(
-                "manaRuchiAdmin"
-            );
-            showLogin();
-        }
-    );
+    logoutBtn.addEventListener("click", function() {
+        sessionStorage.removeItem(
+            "manaRuchiAdmin"
+        );
+        showLogin();
+    });
 }
 /* =========================================
    LOAD ORDERS
 ========================================= */
 function loadOrders() {
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "manaRuchiOrders"
-            )
-        ) || [];
+    let orders = [];
+    try {
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "manaRuchiOrders"
+                )
+            ) || [];
+    } catch (error) {
+        orders = [];
+    }
     updateStatistics(orders);
     displayOrders(orders);
 }
 /* =========================================
-   UPDATE DASHBOARD STATISTICS
+   UPDATE STATISTICS
 ========================================= */
 function updateStatistics(orders) {
     const total =
         orders.length;
     const pending =
-        orders.filter(
-            function(order) {
-                return order.status !== "Completed";
-            }
-        ).length;
+        orders.filter(function(order) {
+            return order.status !== "Completed";
+        }).length;
     const completed =
-        orders.filter(
-            function(order) {
-                return order.status === "Completed";
-            }
-        ).length;
+        orders.filter(function(order) {
+            return order.status === "Completed";
+        }).length;
     const totalOrders =
         document.getElementById(
             "totalOrders"
@@ -152,7 +155,7 @@ function updateStatistics(orders) {
     }
 }
 /* =========================================
-   DISPLAY CUSTOMER ORDERS
+   DISPLAY ORDERS
 ========================================= */
 function displayOrders(orders) {
     const container =
@@ -172,85 +175,79 @@ function displayOrders(orders) {
         return;
     }
     container.innerHTML = "";
-    /* Display every order */
-    orders.forEach(
-        function(order, index) {
-            const card =
-                document.createElement(
-                    "div"
-                );
-            card.className =
-                "order-card";
-            const status =
-                order.status || "Pending";
-            card.innerHTML = `
-                <h3>
-                    📦 Order #${index + 1}
-                </h3>
-                <div class="order-info">
-                    <strong>Customer:</strong>
-                    ${escapeHTML(
-                        order.name || "N/A"
-                    )}
-                    <br>
-                    <strong>Phone:</strong>
-                    ${escapeHTML(
-                        order.phone || "N/A"
-                    )}
-                    <br>
-                    <strong>Address:</strong>
-                    ${escapeHTML(
-                        order.address || "N/A"
-                    )}
-                    <br>
-                    <strong>Product:</strong>
-                    ${escapeHTML(
-                        order.product ||
-                        "Chilli Powder"
-                    )}
-                    <br>
-                    <strong>Quantity:</strong>
-                    ${escapeHTML(
-                        order.quantity || "N/A"
-                    )}
-                    <br>
-                    <strong>Date:</strong>
-                    ${escapeHTML(
-                        order.date || "N/A"
-                    )}
-                </div>
-                <span class="order-status">
-                    ${escapeHTML(status)}
-                </span>
-                ${
-                    status !== "Completed"
-                    ?
-                    `
-                    <br>
-                    <button
-                        class="complete-btn"
-                        onclick="completeOrder(${index})">
-                        ✅ Mark Completed
-                    </button>
-                    `
-                    :
-                    ""
-                }
-            `;
-            container.appendChild(card);
-        }
-    );
+    /* Display orders */
+    orders.forEach(function(order, index) {
+        const card =
+            document.createElement("div");
+        card.className =
+            "order-card";
+        const status =
+            order.status || "Pending";
+        card.innerHTML = `
+            <h3>
+                📦 Order #${index + 1}
+            </h3>
+            <div class="order-info">
+                <strong>Customer:</strong>
+                ${escapeHTML(order.name || "N/A")}
+                <br>
+                <strong>Phone:</strong>
+                ${escapeHTML(order.phone || "N/A")}
+                <br>
+                <strong>Address:</strong>
+                ${escapeHTML(order.address || "N/A")}
+                <br>
+                <strong>Product:</strong>
+                ${escapeHTML(
+                    order.product || "Chilli Powder"
+                )}
+                <br>
+                <strong>Quantity:</strong>
+                ${escapeHTML(
+                    order.quantity || "N/A"
+                )}
+                <br>
+                <strong>Date:</strong>
+                ${escapeHTML(
+                    order.date || "N/A"
+                )}
+            </div>
+            <span class="order-status">
+                ${escapeHTML(status)}
+            </span>
+            ${
+                status !== "Completed"
+                ?
+                `
+                <br>
+                <button
+                    class="complete-btn"
+                    onclick="completeOrder(${index})">
+                    ✅ Mark Completed
+                </button>
+                `
+                :
+                ""
+            }
+        `;
+        container.appendChild(card);
+    });
 }
 /* =========================================
-   MARK ORDER AS COMPLETED
+   MARK ORDER COMPLETED
 ========================================= */
 function completeOrder(index) {
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "manaRuchiOrders"
-            )
-        ) || [];
+    let orders = [];
+    try {
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "manaRuchiOrders"
+                )
+            ) || [];
+    } catch (error) {
+        orders = [];
+    }
     if (!orders[index]) {
         return;
     }
@@ -284,7 +281,7 @@ if (clearOrdersBtn) {
     );
 }
 /* =========================================
-   PROTECT AGAINST HTML IN CUSTOMER DATA
+   ESCAPE HTML
 ========================================= */
 function escapeHTML(value) {
     return String(value)
@@ -295,6 +292,6 @@ function escapeHTML(value) {
         .replaceAll("'", "&#039;");
 }
 /* =========================================
-   START ADMIN DASHBOARD
+   START DASHBOARD
 ========================================= */
 checkLogin();

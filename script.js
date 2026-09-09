@@ -1,111 +1,189 @@
-// Mana Ruchi - Order System
+// ==========================================
+// MANA RUCHI - WHATSAPP ORDER SYSTEM
+// ==========================================
 
 const PRICE_PER_KG = 400;
 const MINIMUM_ORDER = 10;
 
-// Mana Ruchi WhatsApp Number
+// WhatsApp business number
+// 8367450301 → 918367450301
 const BUSINESS_WHATSAPP = "918367450301";
 
-// Get form elements
+// Get HTML elements
 const orderForm = document.getElementById("orderForm");
+const customerName = document.getElementById("customerName");
+const customerPhone = document.getElementById("customerPhone");
 const quantityInput = document.getElementById("quantity");
-const totalAmount = document.getElementById("totalAmount");
+const addressInput = document.getElementById("address");
+const totalPrice = document.getElementById("totalPrice");
 const orderMessage = document.getElementById("orderMessage");
 
-// Calculate total price
+
+// ==========================================
+// CALCULATE TOTAL
+// ==========================================
+
 function calculateTotal() {
+
     const quantity = Number(quantityInput.value);
 
     if (!quantity || quantity < 0) {
-        totalAmount.textContent = "₹0";
+        totalPrice.textContent = "₹0";
         return;
     }
 
     const total = quantity * PRICE_PER_KG;
 
-    totalAmount.textContent =
+    totalPrice.textContent =
         "₹" + total.toLocaleString("en-IN");
 }
 
-// Update total when quantity changes
+
+// Calculate when quantity changes
 if (quantityInput) {
     quantityInput.addEventListener("input", calculateTotal);
 }
 
-// Handle order form
-if (orderForm) {
-    orderForm.addEventListener("submit", function (event) {
 
+// ==========================================
+// ORDER FORM
+// ==========================================
+
+if (orderForm) {
+
+    orderForm.addEventListener("submit", function(event) {
+
+        // Stop normal form submission
         event.preventDefault();
 
-        // Get customer information
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const quantity = Number(quantityInput.value);
-        const address = document.getElementById("address").value.trim();
 
-        // Validate name
+        // Get customer details
+        const name = customerName.value.trim();
+        const phone = customerPhone.value.trim();
+        const quantity = Number(quantityInput.value);
+        const address = addressInput.value.trim();
+
+
+        // ==========================================
+        // VALIDATION
+        // ==========================================
+
         if (name === "") {
+
             alert("Please enter your name.");
+
+            customerName.focus();
+
             return;
         }
 
-        // Validate phone number
+
+        // Remove spaces and non-numbers
         const cleanPhone = phone.replace(/\D/g, "");
 
+
         if (cleanPhone.length !== 10) {
+
             alert("Please enter a valid 10-digit mobile number.");
+
+            customerPhone.focus();
+
             return;
         }
 
-        // Validate minimum order
+
         if (!quantity || quantity < MINIMUM_ORDER) {
-            alert("Minimum order is " + MINIMUM_ORDER + " KG.");
+
+            alert(
+                "Minimum order quantity is " +
+                MINIMUM_ORDER +
+                " KG."
+            );
+
+            quantityInput.focus();
+
             return;
         }
 
-        // Validate address
+
         if (address === "") {
+
             alert("Please enter your delivery address.");
+
+            addressInput.focus();
+
             return;
         }
 
-        // Calculate total
+
+        // ==========================================
+        // CALCULATE ORDER TOTAL
+        // ==========================================
+
         const total = quantity * PRICE_PER_KG;
 
-        // Create WhatsApp message
-        const message =
-            "🌶️ *Mana Ruchi - New Order*%0A%0A" +
-            "👤 *Customer Name:* " + encodeURIComponent(name) + "%0A" +
-            "📱 *Customer Phone:* " + encodeURIComponent(phone) + "%0A" +
-            "📦 *Quantity:* " + quantity + " KG%0A" +
-            "💰 *Price:* ₹" + PRICE_PER_KG + " per KG%0A" +
-            "💵 *Total Amount:* ₹" +
-            total.toLocaleString("en-IN") +
-            "%0A%0A" +
-            "🏠 *Delivery Address:*%0A" +
-            encodeURIComponent(address) +
-            "%0A%0A" +
-            "Thank you for ordering from Mana Ruchi! 🌶️";
 
-        // Create WhatsApp URL
+        // ==========================================
+        // CREATE WHATSAPP MESSAGE
+        // ==========================================
+
+        const message =
+`🌶️ *MANA RUCHI - NEW ORDER*
+
+👤 Customer Name: ${name}
+
+📱 Customer Phone: ${phone}
+
+📦 Quantity: ${quantity} KG
+
+💰 Price: ₹${PRICE_PER_KG} per KG
+
+💵 Total Amount: ₹${total.toLocaleString("en-IN")}
+
+🏠 Delivery Address:
+${address}
+
+Thank you for choosing Mana Ruchi! 🌶️`;
+
+
+
+        // ==========================================
+        // CREATE WHATSAPP URL
+        // ==========================================
+
         const whatsappURL =
-            "https://wa.me/" +
+            "https://wa.me/918367450301" +
             BUSINESS_WHATSAPP +
             "?text=" +
-            message;
+            encodeURIComponent(message);
 
-        // Show confirmation
+
+        // ==========================================
+        // SHOW MESSAGE
+        // ==========================================
+
         if (orderMessage) {
-            orderMessage.innerHTML =
-                "✅ Order details ready! Opening WhatsApp...";
+
+            orderMessage.textContent =
+                "✅ Opening WhatsApp...";
+
             orderMessage.style.display = "block";
         }
 
-        // Open WhatsApp
+
+        // ==========================================
+        // OPEN WHATSAPP
+        // ==========================================
+
         window.open(whatsappURL, "_blank");
+
     });
+
 }
 
-// Set initial total
+
+// ==========================================
+// INITIAL TOTAL
+// ==========================================
+
 calculateTotal();

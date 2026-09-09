@@ -981,4 +981,65 @@ footer p {
         font-size: 22px;
     }
 }
+/* =========================================
+   ORDER CONFIRMATION
+   ========================================= */
+
+.confirmation-box {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f0fff4;
+
+    border: 1px solid #b7e4c7;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    animation: confirmationAppear 0.3s ease;
+}
+
+.confirmation-icon {
+    font-size: 42px;
+
+    margin-bottom: 8px;
+}
+
+.confirmation-box h3 {
+    color: #218838;
+
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.confirmation-box p {
+    margin: 6px 0;
+
+    color: #444;
+}
+
+.confirmation-total {
+    font-size: 21px;
+
+    font-weight: bold;
+
+    color: #8b0000 !important;
+}
+
+@keyframes confirmationAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
 }

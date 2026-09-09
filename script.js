@@ -45,7 +45,7 @@ const increaseQuantity =
 
 
 // =========================================
-// UPDATE ORDER SUMMARY
+// UPDATE SUMMARY
 // =========================================
 
 function updateOrderSummary() {
@@ -135,7 +135,7 @@ orderForm.addEventListener(
             addressInput.value.trim();
 
 
-        // NAME
+        // NAME VALIDATION
 
         if (!name) {
 
@@ -147,7 +147,7 @@ orderForm.addEventListener(
         }
 
 
-        // PHONE
+        // PHONE VALIDATION
 
         const cleanPhone =
             phone.replace(/\D/g, "");
@@ -164,7 +164,7 @@ orderForm.addEventListener(
         }
 
 
-        // QUANTITY
+        // QUANTITY VALIDATION
 
         if (
             !quantity ||
@@ -179,7 +179,7 @@ orderForm.addEventListener(
         }
 
 
-        // ADDRESS
+        // ADDRESS VALIDATION
 
         if (!address) {
 
@@ -199,25 +199,78 @@ orderForm.addEventListener(
             quantity * PRICE_PER_KG;
 
 
+        // =========================================
+        // SHOW CONFIRMATION
+        // =========================================
+
+        orderMessage.innerHTML =
+`
+<div class="confirmation-box">
+
+    <div class="confirmation-icon">
+        ✅
+    </div>
+
+    <h3>
+        Order Ready!
+    </h3>
+
+    <p>
+        Thank you, <strong>${name}</strong>.
+    </p>
+
+    <p>
+        Your order for
+        <strong>${quantity} KG</strong>
+        has been prepared.
+    </p>
+
+    <p class="confirmation-total">
+        Total: ₹${total.toLocaleString("en-IN")}
+    </p>
+
+    <p>
+        Opening WhatsApp...
+    </p>
+
+</div>
+`;
+
+        orderMessage.style.display =
+            "block";
+
+
+        // =========================================
         // WHATSAPP MESSAGE
+        // =========================================
 
         const message =
 `🌶️ MANA RUCHI - NEW ORDER
 
 👤 Customer Name: ${name}
 📱 Customer Phone: ${phone}
-📦 Product: Homemade Chilli Powder
+
+📦 Product:
+Mana Ruchi Homemade Chilli Powder
+
 📦 Quantity: ${quantity} KG
+
 💰 Price: ₹${PRICE_PER_KG} per KG
-💵 Total Amount: ₹${total.toLocaleString("en-IN")}
+
+💵 Total Amount:
+₹${total.toLocaleString("en-IN")}
 
 🏠 Delivery Address:
 ${address}
 
-Thank you for choosing Mana Ruchi! 🌶️`;
+Please confirm my order.
+
+Thank you! 🌶️`;
 
 
+        // =========================================
         // WHATSAPP URL
+        // =========================================
 
         const whatsappURL =
             "https://api.whatsapp.com/send?phone=" +
@@ -226,22 +279,23 @@ Thank you for choosing Mana Ruchi! 🌶️`;
             encodeURIComponent(message);
 
 
-        orderMessage.textContent =
-            "✅ Opening WhatsApp...";
+        // =========================================
+        // OPEN WHATSAPP
+        // =========================================
 
-        orderMessage.style.display =
-            "block";
+        setTimeout(function () {
 
+            window.location.href =
+                whatsappURL;
 
-        window.location.href =
-            whatsappURL;
+        }, 800);
 
     }
 );
 
 
 // =========================================
-// INITIAL DISPLAY
+// INITIAL SUMMARY
 // =========================================
 
 updateOrderSummary();

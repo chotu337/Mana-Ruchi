@@ -2,404 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="robots"
-        content="noindex, nofollow"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mana Ruchi - Admin Dashboard</title>
-
-    <link
-        rel="stylesheet"
-        href="admin.css"
-    >
+    <link rel="stylesheet" href="admin.css">
 </head>
-
 <body>
-
-    <!-- =========================================
-         LOGIN SECTION
-    ========================================== -->
-
-    <section
-        id="loginSection"
-        class="login-section"
-    >
-
-        <div class="login-card">
-
-            <div class="login-logo">
+    <!-- LOGIN SECTION -->
+    <section id="loginSection" class="login-section">
+        <div class="login-box">
+            <div class="logo">
                 🌶️
             </div>
-
-            <h1>
-                Mana Ruchi
-            </h1>
-
-            <h2>
-                🔐 Admin Login
-            </h2>
-
-            <p class="login-subtitle">
-                Login to manage customer orders
-            </p>
-
-
+            <h1>Mana Ruchi</h1>
+            <h2>Admin Login</h2>
             <form id="loginForm">
-
-                <div class="form-group">
-
-                    <label for="adminEmail">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="adminEmail"
-                        placeholder="Enter admin email"
-                        autocomplete="email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="adminPassword">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="adminPassword"
-                        placeholder="Enter password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="login-button"
+                <label for="username">
+                    Username
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    required
                 >
-                    Login
+                <label for="password">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                >
+                <button type="submit" class="login-btn">
+                    🔐 Login
                 </button>
-
-
-                <p
-                    id="loginMessage"
-                    class="login-message"
-                ></p>
-
+                <p id="loginError" class="login-error"></p>
             </form>
-
+            <a href="index.html" class="back-link">
+                ← Back to Mana Ruchi
+            </a>
         </div>
-
     </section>
-
-
-    <!-- =========================================
-         DASHBOARD SECTION
-    ========================================== -->
-
-    <section
-        id="dashboardSection"
-        class="dashboard-section"
-        style="display: none;"
-    >
-
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboardSection" class="dashboard-section hidden">
         <!-- HEADER -->
-
-        <header class="admin-header">
-
-            <div class="brand">
-
-                <div class="brand-icon">
-                    🌶️
-                </div>
-
-                <div>
-                    <h1>
-                        Mana Ruchi
-                    </h1>
-
-                    <p>
-                        Admin Dashboard
-                    </p>
-                </div>
-
+        <header class="dashboard-header">
+            <div>
+                <h1>🌶️ Mana Ruchi</h1>
+                <p>Admin Dashboard</p>
             </div>
-
-
-            <button
-                id="logoutButton"
-                class="logout-button"
-                type="button"
-            >
+            <button id="logoutBtn" class="logout-btn">
                 Logout
             </button>
-
         </header>
-
-
         <!-- MAIN CONTENT -->
-
-        <main class="dashboard-main">
-
-
-            <!-- PAGE TITLE -->
-
-            <div class="dashboard-title">
-
-                <div>
-
-                    <h2>
-                        Order Management
-                    </h2>
-
-                    <p>
-                        View and manage customer orders
-                    </p>
-
+        <main class="dashboard-content">
+            <h2>Dashboard</h2>
+            <!-- STAT CARDS -->
+            <div class="stats">
+                <div class="stat-card">
+                    <span>📦</span>
+                    <h3 id="totalOrders">0</h3>
+                    <p>Total Orders</p>
                 </div>
-
+                <div class="stat-card">
+                    <span>⏳</span>
+                    <h3 id="pendingOrders">0</h3>
+                    <p>Pending Orders</p>
+                </div>
+                <div class="stat-card">
+                    <span>✅</span>
+                    <h3 id="completedOrders">0</h3>
+                    <p>Completed Orders</p>
+                </div>
             </div>
-
-
-            <!-- =========================================
-                 STAT CARDS
-            ========================================== -->
-
-            <div class="stats-grid">
-
-
-                <!-- TOTAL ORDERS -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        📦
-                    </div>
-
-                    <div class="stat-content">
-
-                        <p>
-                            Total Orders
-                        </p>
-
-                        <h3 id="totalOrders">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <!-- PENDING -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        ⏳
-                    </div>
-
-                    <div class="stat-content">
-
-                        <p>
-                            Pending
-                        </p>
-
-                        <h3 id="pendingOrders">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONFIRMED -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        ✅
-                    </div>
-
-                    <div class="stat-content">
-
-                        <p>
-                            Confirmed
-                        </p>
-
-                        <h3 id="confirmedOrders">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <!-- DELIVERED -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🚚
-                    </div>
-
-                    <div class="stat-content">
-
-                        <p>
-                            Delivered
-                        </p>
-
-                        <h3 id="deliveredOrders">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <!-- TOTAL SALES -->
-
-                <div class="stat-card sales-card">
-
-                    <div class="stat-icon">
-                        💰
-                    </div>
-
-                    <div class="stat-content">
-
-                        <p>
-                            Total Sales
-                        </p>
-
-                        <h3 id="totalSales">
-                            ₹0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- =========================================
-                 ORDER TOOLBAR
-            ========================================== -->
-
+            <!-- ORDERS -->
             <div class="orders-section">
-
-
-                <div class="orders-toolbar">
-
-                    <div class="search-box">
-
-                        <span class="search-icon">
-                            🔍
-                        </span>
-
-                        <input
-                            type="text"
-                            id="searchInput"
-                            placeholder="Search by name, phone, address, status or order ID..."
-                            autocomplete="off"
-                        >
-
-                    </div>
-
-
-                    <div class="toolbar-buttons">
-
-                        <button
-                            id="refreshButton"
-                            type="button"
-                            class="toolbar-button"
-                        >
-                            🔄 Refresh
-                        </button>
-
-
-                        <button
-                            id="downloadCsvButton"
-                            type="button"
-                            class="toolbar-button download-button"
-                        >
-                            📥 Download CSV
-                        </button>
-
-                    </div>
-
+                <div class="orders-header">
+                    <h2>Customer Orders</h2>
+                    <button
+                        id="clearOrdersBtn"
+                        class="clear-btn">
+                        Clear Orders
+                    </button>
                 </div>
-
-
-                <!-- =========================================
-                     ORDERS CONTAINER
-                ========================================== -->
-
-                <div
-                    id="ordersContainer"
-                    class="orders-container"
-                >
-
-                    <div class="loading">
-                        Loading orders...
+                <div id="ordersContainer">
+                    <div class="no-orders">
+                        <p>📭 No orders available.</p>
                     </div>
-
                 </div>
-
             </div>
-
-
         </main>
-
-
-        <!-- =========================================
-             FOOTER
-        ========================================== -->
-
-        <footer class="admin-footer">
-
-            <p>
-                © 2026 Mana Ruchi Homemade Chilli Powder
-            </p>
-
-            <p>
-                Admin Dashboard
-            </p>
-
-        </footer>
-
     </section>
-
-
-    <!-- =========================================
-         SUPABASE
-    ========================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-    <!-- =========================================
-         ADMIN JAVASCRIPT
-    ========================================== -->
-
     <script src="admin.js"></script>
-
 </body>
 </html>

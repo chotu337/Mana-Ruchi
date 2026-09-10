@@ -43,7 +43,6 @@ const { data, error } = await db
             address: customerAddress,
             price_per_kg: PRICE_PER_KG,
             total_amount: totalAmount,
-            product_name: "Mana Ruchi Homemade Chilli Powder",
             status: "New"
         }
     ])
@@ -61,7 +60,6 @@ if (error) {
     return;
 }
 
-// Supabase automatically gives the order ID
 const orderID = data.id;
 
 showMessage(
@@ -71,7 +69,6 @@ showMessage(
     totalAmount.toLocaleString("en-IN"),
     "success"
 );
-
 
 // =========================================
 // GET QUANTITY

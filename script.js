@@ -33,19 +33,22 @@ const db = window.supabase.createClient(
 // =========================================
 // GET HTML ELEMENTS
 // =========================================
-const { error } = await db
+const { data, error } = await db
     .from("orders")
     .insert([
         {
+            order_id: orderID,
             customer_name: name,
             customer_phone: phone,
             quantity: quantity,
             address: customerAddress,
             price_per_kg: PRICE_PER_KG,
             total_amount: totalAmount,
-            status: "Pending"
+            product_name: "Mana Ruchi Homemade Chilli Powder",
+            status: "New"
         }
-    ]);
+    ])
+    .select();
 
 
 // =========================================

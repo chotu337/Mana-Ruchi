@@ -1,10 +1,6 @@
 /* =========================================
-   MANA RUCHI - CUSTOMER ORDER SYSTEM
+   MANA RUCHI - ORDER SYSTEM
 ========================================= */
-
-// =========================================
-// SUPABASE CONFIGURATION
-// =========================================
 
 const SUPABASE_URL =
     "https://iwkrwidehhklaapbfful.supabase.co";
@@ -19,12 +15,11 @@ const OWNER_WHATSAPP = "918367450301";
 
 
 // =========================================
-// CHECK SUPABASE
+// SUPABASE
 // =========================================
 
 if (!window.supabase) {
-    console.error("Supabase library is not loaded.");
-    alert("Supabase failed to load. Please refresh the page.");
+    console.error("Supabase library not loaded.");
     throw new Error("Supabase library not loaded.");
 }
 
@@ -35,7 +30,7 @@ const db = window.supabase.createClient(
 
 
 // =========================================
-// GET HTML ELEMENTS
+// HTML ELEMENTS
 // =========================================
 
 const orderForm =
@@ -73,6 +68,36 @@ const placeOrderButton =
 
 
 // =========================================
+// MESSAGE
+// =========================================
+
+function showMessage(message, type) {
+
+    if (!orderMessage) {
+        alert(message);
+        return;
+    }
+
+    orderMessage.textContent = message;
+
+    orderMessage.style.display = "block";
+
+    if (type === "success") {
+
+        orderMessage.style.background = "#e8f5e9";
+        orderMessage.style.color = "#1b5e20";
+        orderMessage.style.border = "1px solid #66bb6a";
+
+    } else {
+
+        orderMessage.style.background = "#ffebee";
+        orderMessage.style.color = "#b71c1c";
+        orderMessage.style.border = "1px solid #ef5350";
+    }
+}
+
+
+// =========================================
 // QUANTITY
 // =========================================
 
@@ -92,10 +117,6 @@ function getQuantity() {
 }
 
 
-// =========================================
-// UPDATE ORDER SUMMARY
-// =========================================
-
 function updateOrderSummary() {
 
     const quantity = getQuantity();
@@ -103,7 +124,9 @@ function updateOrderSummary() {
     const total =
         quantity * PRICE_PER_KG;
 
-    quantityInput.value = quantity;
+    if (quantityInput) {
+        quantityInput.value = quantity;
+    }
 
     if (summaryQuantity) {
         summaryQuantity.textContent =
@@ -118,7 +141,7 @@ function updateOrderSummary() {
 
 
 // =========================================
-// DECREASE QUANTITY
+// MINUS BUTTON
 // =========================================
 
 if (decreaseQuantity) {
@@ -144,7 +167,7 @@ if (decreaseQuantity) {
 
 
 // =========================================
-// INCREASE QUANTITY
+// PLUS BUTTON
 // =========================================
 
 if (increaseQuantity) {
@@ -168,60 +191,15 @@ if (increaseQuantity) {
 
 
 // =========================================
-// MANUAL QUANTITY CHANGE
+// QUANTITY INPUT
 // =========================================
 
 if (quantityInput) {
 
     quantityInput.addEventListener(
         "input",
-        function () {
-
-            updateOrderSummary();
-        }
+        updateOrderSummary
     );
-}
-
-
-// =========================================
-// SHOW MESSAGE
-// =========================================
-
-function showMessage(
-    message,
-    type
-) {
-
-    if (!orderMessage) return;
-
-    orderMessage.textContent =
-        message;
-
-    orderMessage.style.display =
-        "block";
-
-    if (type === "success") {
-
-        orderMessage.style.background =
-            "#e8f5e9";
-
-        orderMessage.style.color =
-            "#1b5e20";
-
-        orderMessage.style.border =
-            "1px solid #66bb6a";
-
-    } else {
-
-        orderMessage.style.background =
-            "#ffebee";
-
-        orderMessage.style.color =
-            "#b71c1c";
-
-        orderMessage.style.border =
-            "1px solid #ef5350";
-    }
 }
 
 
@@ -238,12 +216,12 @@ if (orderForm) {
             event.preventDefault();
 
             console.log(
-                "Place Order button clicked."
+                "MANA RUCHI: Place Order clicked"
             );
 
 
             // -----------------------------
-            // GET CUSTOMER DATA
+            // CUSTOMER DETAILS
             // -----------------------------
 
             const name =
@@ -260,7 +238,7 @@ if (orderForm) {
 
 
             // -----------------------------
-            // VALIDATE NAME
+            // VALIDATION
             // -----------------------------
 
             if (!name) {
@@ -275,10 +253,6 @@ if (orderForm) {
                 return;
             }
 
-
-            // -----------------------------
-            // VALIDATE PHONE
-            // -----------------------------
 
             if (!phone) {
 
@@ -310,34 +284,21 @@ if (orderForm) {
             }
 
 
-            // -----------------------------
-            // VALIDATE QUANTITY
-            // -----------------------------
-
-            if (
-                quantity <
-                MINIMUM_QUANTITY
-            ) {
+            if (quantity < MINIMUM_QUANTITY) {
 
                 showMessage(
-                    "Minimum order quantity is 10 kg.",
+                    "Minimum order is 10 kg.",
                     "error"
                 );
-
-                quantityInput.focus();
 
                 return;
             }
 
 
-            // -----------------------------
-            // VALIDATE ADDRESS
-            // -----------------------------
-
             if (!customerAddress) {
 
                 showMessage(
-                    "Please enter your delivery address.",
+                    "Please enter your address.",
                     "error"
                 );
 
@@ -348,7 +309,7 @@ if (orderForm) {
 
 
             // -----------------------------
-            // CALCULATE TOTAL
+            // TOTAL
             // -----------------------------
 
             const totalAmount =
@@ -356,13 +317,12 @@ if (orderForm) {
 
 
             // -----------------------------
-            // DISABLE BUTTON
+            // BUTTON
             // -----------------------------
 
             if (placeOrderButton) {
 
-                placeOrderButton.disabled =
-                    true;
+                placeOrderButton.disabled = true;
 
                 placeOrderButton.textContent =
                     "Placing Order...";
@@ -375,11 +335,16 @@ if (orderForm) {
             );
 
 
-            // =================================
-            // SAVE ORDER TO SUPABASE
-            // =================================
-
             try {
+
+                console.log(
+                    "Sending order to Supabase..."
+                );
+
+
+                // =================================
+                // INSERT INTO ORDERS TABLE
+                // =================================
 
                 const { data, error } =
                     await db
@@ -412,9 +377,9 @@ if (orderForm) {
                         .single();
 
 
-                // -----------------------------
+                // =================================
                 // DATABASE ERROR
-                // -----------------------------
+                // =================================
 
                 if (error) {
 
@@ -424,7 +389,8 @@ if (orderForm) {
                     );
 
                     showMessage(
-                        "Order could not be placed. Please check your database table or permissions.",
+                        "❌ Order failed: " +
+                        error.message,
                         "error"
                     );
 
@@ -433,7 +399,7 @@ if (orderForm) {
 
 
                 // =================================
-                // ORDER SAVED SUCCESSFULLY
+                // ORDER SUCCESS
                 // =================================
 
                 console.log(
@@ -442,14 +408,9 @@ if (orderForm) {
                 );
 
 
-                // Supabase automatically created ID
                 const orderID =
                     data.id;
 
-
-                // =================================
-                // CONFIRMATION MESSAGE
-                // =================================
 
                 showMessage(
                     "✅ Your Order is Confirmed! " +
@@ -462,15 +423,16 @@ if (orderForm) {
 
 
                 // =================================
-                // WHATSAPP MESSAGE TO OWNER
+                // WHATSAPP
                 // =================================
 
-                const whatsappText =
+                const whatsappMessage =
+
                     "🌶️ MANA RUCHI - NEW ORDER\n\n" +
 
                     "Order ID: " +
                     orderID +
-                    "\n" +
+                    "\n\n" +
 
                     "Customer: " +
                     name +
@@ -501,25 +463,20 @@ if (orderForm) {
                     OWNER_WHATSAPP +
                     "?text=" +
                     encodeURIComponent(
-                        whatsappText
+                        whatsappMessage
                     );
 
 
-                // =================================
-                // OPEN WHATSAPP
-                // =================================
+                // Open WhatsApp after confirmation
 
-                setTimeout(
-                    function () {
+                setTimeout(function () {
 
-                        window.open(
-                            whatsappURL,
-                            "_blank"
-                        );
+                    window.open(
+                        whatsappURL,
+                        "_blank"
+                    );
 
-                    },
-                    800
-                );
+                }, 1000);
 
 
                 // =================================
@@ -542,7 +499,8 @@ if (orderForm) {
                 );
 
                 showMessage(
-                    "Something went wrong. Please try again.",
+                    "❌ Something went wrong: " +
+                    error.message,
                     "error"
                 );
 
@@ -563,13 +521,13 @@ if (orderForm) {
 } else {
 
     console.error(
-        "orderForm was not found."
+        "ERROR: orderForm not found."
     );
 }
 
 
 // =========================================
-// WHATSAPP FLOATING BUTTON
+// FLOATING WHATSAPP
 // =========================================
 
 const floatingWhatsApp =
@@ -601,7 +559,7 @@ if (floatingWhatsApp) {
 
 
 // =========================================
-// WHATSAPP SHARE BUTTON
+// SHARE ON WHATSAPP
 // =========================================
 
 const shareWhatsApp =
@@ -615,17 +573,17 @@ if (shareWhatsApp) {
         "click",
         function () {
 
-            const shareText =
+            const text =
                 encodeURIComponent(
                     "🌶️ Check out Mana Ruchi Homemade Chilli Powder!\n\n" +
-                    "₹400/kg\n" +
+                    "₹400 per kg\n" +
                     "Minimum order: 10 kg.\n\n" +
                     window.location.href
                 );
 
             window.open(
                 "https://wa.me/?text=" +
-                shareText,
+                text,
                 "_blank"
             );
         }
@@ -634,7 +592,7 @@ if (shareWhatsApp) {
 
 
 // =========================================
-// INITIALIZE
+// INITIAL LOAD
 // =========================================
 
 updateOrderSummary();

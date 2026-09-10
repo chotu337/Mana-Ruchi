@@ -1,8 +1,8 @@
 /* =====================================================
-   MANA RUCHI - ORDER SYSTEM
+   MANA RUCHI - CUSTOMER ORDER SYSTEM
 ===================================================== */
 
-console.log("Mana Ruchi script loaded");
+console.log("🌶️ Mana Ruchi script loaded");
 
 
 /* =====================================================
@@ -10,35 +10,36 @@ console.log("Mana Ruchi script loaded");
 ===================================================== */
 
 const SUPABASE_URL =
-    "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+    "https://iwkrwidehhklaapbfful.supabase.co";
 
 const SUPABASE_ANON_KEY =
-    "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+    "sb_publishable_lI-jEvVEXPHxXRFxIy3vlA_ZF84WGO0";
 
 
 /* =====================================================
-   SETTINGS
+   SHOP SETTINGS
 ===================================================== */
 
 const PRICE_PER_KG = 400;
-
 const MINIMUM_QUANTITY = 10;
-
 const OWNER_WHATSAPP = "918367450301";
 
 
 /* =====================================================
-   CHECK SUPABASE
+   CHECK SUPABASE LIBRARY
 ===================================================== */
 
-if (
-    typeof window.supabase === "undefined"
-) {
+if (typeof window.supabase === "undefined") {
 
     console.error(
-        "Supabase library was not loaded."
+        "❌ Supabase library was not loaded."
     );
 
+} else {
+
+    console.log(
+        "✅ Supabase library loaded."
+    );
 }
 
 
@@ -46,15 +47,14 @@ if (
    CREATE SUPABASE CLIENT
 ===================================================== */
 
-const db =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
 
 
 /* =====================================================
-   GET ELEMENTS
+   GET HTML ELEMENTS
 ===================================================== */
 
 const orderForm =
@@ -92,10 +92,13 @@ const placeOrderButton =
 
 
 /* =====================================================
-   CHECK HTML ELEMENTS
+   CHECK ELEMENTS
 ===================================================== */
 
-console.log("Order form:", orderForm);
+console.log(
+    "Order form:",
+    orderForm
+);
 
 console.log(
     "Place order button:",
@@ -104,7 +107,7 @@ console.log(
 
 
 /* =====================================================
-   UPDATE SUMMARY
+   UPDATE ORDER SUMMARY
 ===================================================== */
 
 function updateSummary() {
@@ -125,12 +128,18 @@ function updateSummary() {
     const total =
         qty * PRICE_PER_KG;
 
-    summaryQuantity.textContent =
-        qty + " kg";
+    if (summaryQuantity) {
 
-    totalPrice.textContent =
-        "₹" +
-        total.toLocaleString("en-IN");
+        summaryQuantity.textContent =
+            qty + " kg";
+    }
+
+    if (totalPrice) {
+
+        totalPrice.textContent =
+            "₹" +
+            total.toLocaleString("en-IN");
+    }
 }
 
 
@@ -138,63 +147,80 @@ function updateSummary() {
    DECREASE QUANTITY
 ===================================================== */
 
-decreaseQuantity.addEventListener(
-    "click",
-    function () {
+if (decreaseQuantity) {
 
-        let qty =
-            parseInt(quantity.value);
+    decreaseQuantity.addEventListener(
+        "click",
+        function () {
 
-        if (
-            isNaN(qty) ||
-            qty <= MINIMUM_QUANTITY
-        ) {
+            let qty =
+                parseInt(quantity.value);
 
-            qty = MINIMUM_QUANTITY;
+            if (
+                isNaN(qty) ||
+                qty <= MINIMUM_QUANTITY
+            ) {
 
-        } else {
+                qty = MINIMUM_QUANTITY;
 
-            qty--;
+            } else {
+
+                qty--;
+            }
+
+            quantity.value = qty;
+
+            updateSummary();
         }
-
-        quantity.value = qty;
-
-        updateSummary();
-
-    }
-);
+    );
+}
 
 
 /* =====================================================
    INCREASE QUANTITY
 ===================================================== */
 
-increaseQuantity.addEventListener(
-    "click",
-    function () {
+if (increaseQuantity) {
 
-        let qty =
-            parseInt(quantity.value) ||
-            MINIMUM_QUANTITY;
+    increaseQuantity.addEventListener(
+        "click",
+        function () {
 
-        qty++;
+            let qty =
+                parseInt(quantity.value);
 
-        quantity.value = qty;
+            if (
+                isNaN(qty) ||
+                qty < MINIMUM_QUANTITY
+            ) {
 
-        updateSummary();
+                qty = MINIMUM_QUANTITY;
+            }
 
-    }
-);
+            qty++;
+
+            quantity.value = qty;
+
+            updateSummary();
+        }
+    );
+}
 
 
 /* =====================================================
    QUANTITY INPUT
 ===================================================== */
 
-quantity.addEventListener(
-    "input",
-    updateSummary
-);
+if (quantity) {
+
+    quantity.addEventListener(
+        "input",
+        function () {
+
+            updateSummary();
+        }
+    );
+}
 
 
 /* =====================================================
@@ -210,15 +236,19 @@ updateSummary();
 
 function showError(message) {
 
+    if (!orderMessage) return;
+
     orderMessage.style.display =
         "block";
 
     orderMessage.innerHTML = `
+
         <div class="order-error-box">
 
             ❌ ${message}
 
         </div>
+
     `;
 
     orderMessage.scrollIntoView({
@@ -238,6 +268,8 @@ function showSuccess(
     qty,
     total
 ) {
+
+    if (!orderMessage) return;
 
     orderMessage.style.display =
         "block";
@@ -282,12 +314,13 @@ function showSuccess(
                 ₹${total.toLocaleString("en-IN")}
             </p>
 
-            <p>
+            <p class="success-note">
                 We will contact you regarding
                 your delivery.
             </p>
 
         </div>
+
     `;
 
     orderMessage.scrollIntoView({
@@ -298,129 +331,162 @@ function showSuccess(
 
 
 /* =====================================================
-   PLACE ORDER
+   ORDER FORM SUBMISSION
 ===================================================== */
 
-orderForm.addEventListener(
-    "submit",
-    async function (event) {
+if (orderForm) {
 
-        event.preventDefault();
+    orderForm.addEventListener(
+        "submit",
+        async function (event) {
 
-        console.log(
-            "Place Order button clicked"
-        );
-
-
-        /* =============================================
-           GET VALUES
-        ============================================= */
-
-        const name =
-            customerName.value.trim();
-
-        const phone =
-            customerPhone.value.trim();
-
-        const qty =
-            parseInt(quantity.value);
-
-        const customerAddress =
-            address.value.trim();
-
-
-        /* =============================================
-           VALIDATION
-        ============================================= */
-
-        if (!name) {
-
-            showError(
-                "Please enter your name."
-            );
-
-            return;
-        }
-
-
-        if (
-            !/^[0-9]{10}$/.test(phone)
-        ) {
-
-            showError(
-                "Please enter a valid 10-digit mobile number."
-            );
-
-            return;
-        }
-
-
-        if (
-            isNaN(qty) ||
-            qty < MINIMUM_QUANTITY
-        ) {
-
-            showError(
-                "Minimum order quantity is 10 kg."
-            );
-
-            return;
-        }
-
-
-        if (!customerAddress) {
-
-            showError(
-                "Please enter your delivery address."
-            );
-
-            return;
-        }
-
-
-        /* =============================================
-           TOTAL
-        ============================================= */
-
-        const total =
-            qty * PRICE_PER_KG;
-
-
-        /* =============================================
-           ORDER NUMBER
-        ============================================= */
-
-        const orderNumber =
-            "MR-" +
-            Date.now()
-                .toString()
-                .slice(-8);
-
-
-        /* =============================================
-           BUTTON LOADING
-        ============================================= */
-
-        placeOrderButton.disabled =
-            true;
-
-        placeOrderButton.innerHTML =
-            "⏳ Placing Order...";
-
-
-        try {
+            event.preventDefault();
 
             console.log(
-                "Attempting Supabase insert..."
+                "🛒 Place Order clicked"
             );
 
 
             /* =========================================
-               INSERT
+               CLEAR OLD MESSAGE
             ========================================= */
 
-            const result =
-                await db
+            if (orderMessage) {
+
+                orderMessage.style.display =
+                    "none";
+
+                orderMessage.innerHTML =
+                    "";
+            }
+
+
+            /* =========================================
+               GET CUSTOMER DETAILS
+            ========================================= */
+
+            const name =
+                customerName.value.trim();
+
+            const phone =
+                customerPhone.value.trim();
+
+            const qty =
+                parseInt(quantity.value);
+
+            const customerAddress =
+                address.value.trim();
+
+
+            /* =========================================
+               VALIDATE NAME
+            ========================================= */
+
+            if (!name) {
+
+                showError(
+                    "Please enter your name."
+                );
+
+                return;
+            }
+
+
+            /* =========================================
+               VALIDATE PHONE
+            ========================================= */
+
+            if (
+                !/^[0-9]{10}$/.test(phone)
+            ) {
+
+                showError(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+            }
+
+
+            /* =========================================
+               VALIDATE QUANTITY
+            ========================================= */
+
+            if (
+                isNaN(qty) ||
+                qty < MINIMUM_QUANTITY
+            ) {
+
+                showError(
+                    "Minimum order quantity is 10 kg."
+                );
+
+                return;
+            }
+
+
+            /* =========================================
+               VALIDATE ADDRESS
+            ========================================= */
+
+            if (!customerAddress) {
+
+                showError(
+                    "Please enter your delivery address."
+                );
+
+                return;
+            }
+
+
+            /* =========================================
+               CALCULATE TOTAL
+            ========================================= */
+
+            const total =
+                qty * PRICE_PER_KG;
+
+
+            /* =========================================
+               CREATE ORDER NUMBER
+            ========================================= */
+
+            const orderNumber =
+                "MR-" +
+                Date.now()
+                    .toString()
+                    .slice(-8);
+
+
+            /* =========================================
+               DISABLE BUTTON
+            ========================================= */
+
+            if (placeOrderButton) {
+
+                placeOrderButton.disabled =
+                    true;
+
+                placeOrderButton.innerHTML =
+                    "⏳ Placing Order...";
+            }
+
+
+            try {
+
+                console.log(
+                    "📤 Sending order to Supabase..."
+                );
+
+
+                /* =====================================
+                   INSERT ORDER
+                ===================================== */
+
+                const {
+                    data,
+                    error
+                } = await db
                     .from("orders")
                     .insert([
                         {
@@ -454,114 +520,133 @@ orderForm.addEventListener(
                     ]);
 
 
-            console.log(
-                "Supabase result:",
-                result
-            );
+                /* =====================================
+                   CHECK ERROR
+                ===================================== */
+
+                if (error) {
+
+                    console.error(
+                        "❌ SUPABASE ERROR:",
+                        error
+                    );
+
+                    showError(
+                        "Order could not be saved. Please check your Supabase table and policies."
+                    );
+
+                    return;
+                }
 
 
-            /* =========================================
-               DATABASE ERROR
-            ========================================= */
+                /* =====================================
+                   SUCCESS
+                ===================================== */
 
-            if (result.error) {
+                console.log(
+                    "✅ ORDER SAVED:",
+                    orderNumber
+                );
+
+                console.log(
+                    "Supabase response:",
+                    data
+                );
+
+
+                showSuccess(
+                    name,
+                    orderNumber,
+                    qty,
+                    total
+                );
+
+
+                /* =====================================
+                   WHATSAPP MESSAGE
+                ===================================== */
+
+                const whatsappMessage =
+                    `🌶️ NEW MANA RUCHI ORDER\n\n` +
+                    `Order No: ${orderNumber}\n` +
+                    `Customer: ${name}\n` +
+                    `Phone: ${phone}\n` +
+                    `Quantity: ${qty} kg\n` +
+                    `Total: ₹${total}\n` +
+                    `Address: ${customerAddress}`;
+
+
+                const whatsappURL =
+                    "https://wa.me/" +
+                    OWNER_WHATSAPP +
+                    "?text=" +
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+
+                /* =====================================
+                   OPEN WHATSAPP
+                ===================================== */
+
+                setTimeout(
+                    function () {
+
+                        window.open(
+                            whatsappURL,
+                            "_blank"
+                        );
+
+                    },
+                    1200
+                );
+
+
+                /* =====================================
+                   RESET FORM
+                ===================================== */
+
+                orderForm.reset();
+
+                quantity.value =
+                    MINIMUM_QUANTITY;
+
+                updateSummary();
+
+
+            } catch (error) {
 
                 console.error(
-                    "DATABASE ERROR:",
-                    result.error
+                    "❌ ORDER ERROR:",
+                    error
                 );
 
                 showError(
-                    "Order could not be saved. Please check your Supabase settings."
+                    "Something went wrong while placing the order."
                 );
 
-                return;
+
+            } finally {
+
+                if (placeOrderButton) {
+
+                    placeOrderButton.disabled =
+                        false;
+
+                    placeOrderButton.innerHTML =
+                        "🛒 Place Order";
+                }
             }
 
-
-            /* =========================================
-               SUCCESS
-            ========================================= */
-
-            showSuccess(
-                name,
-                orderNumber,
-                qty,
-                total
-            );
-
-
-            /* =========================================
-               WHATSAPP
-            ========================================= */
-
-            const whatsappMessage =
-                `🌶️ NEW MANA RUCHI ORDER\n\n` +
-                `Order No: ${orderNumber}\n` +
-                `Customer: ${name}\n` +
-                `Phone: ${phone}\n` +
-                `Quantity: ${qty} kg\n` +
-                `Total: ₹${total}\n` +
-                `Address: ${customerAddress}`;
-
-
-            const whatsappURL =
-                "https://wa.me/" +
-                OWNER_WHATSAPP +
-                "?text=" +
-                encodeURIComponent(
-                    whatsappMessage
-                );
-
-
-            setTimeout(
-                function () {
-
-                    window.open(
-                        whatsappURL,
-                        "_blank"
-                    );
-
-                },
-                1000
-            );
-
-
-            /* =========================================
-               RESET FORM
-            ========================================= */
-
-            orderForm.reset();
-
-            quantity.value =
-                MINIMUM_QUANTITY;
-
-            updateSummary();
-
-
-        } catch (error) {
-
-            console.error(
-                "ORDER ERROR:",
-                error
-            );
-
-            showError(
-                "Something went wrong. Please try again."
-            );
-
-
-        } finally {
-
-            placeOrderButton.disabled =
-                false;
-
-            placeOrderButton.innerHTML =
-                "🛒 Place Order";
         }
+    );
 
-    }
-);
+} else {
+
+    console.error(
+        "❌ orderForm was not found in index.html"
+    );
+}
 
 
 /* =====================================================

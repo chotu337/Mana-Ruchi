@@ -1,500 +1,292 @@
-/* =========================================================
-   MANA RUCHI - CUSTOMER ORDER SYSTEM
-   Supabase + WhatsApp
-========================================================= */
-/* =========================================================
-   1. SUPABASE CONFIGURATION
-   ---------------------------------------------------------
-   Replace ONLY these two values with your Supabase details.
-========================================================= */
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_URL_HERE";
-const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
-/* =========================================================
-   2. CREATE SUPABASE CLIENT
-========================================================= */
-const { createClient } = supabase;
-const db = createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
-/* =========================================================
-   3. PRODUCT SETTINGS
-========================================================= */
-const PRICE_PER_KG = 400;
-const MINIMUM_QUANTITY = 10;
-/* =========================================================
-   4. GET HTML ELEMENTS
-========================================================= */
-const orderForm =
-    document.getElementById("orderForm");
-const customerName =
-    document.getElementById("customerName");
-const customerPhone =
-    document.getElementById("customerPhone");
-const quantityInput =
-    document.getElementById("quantity");
-const addressInput =
-    document.getElementById("address");
-const decreaseButton =
-    document.getElementById("decreaseQuantity");
-const increaseButton =
-    document.getElementById("increaseQuantity");
-const summaryQuantity =
-    document.getElementById("summaryQuantity");
-const totalPrice =
-    document.getElementById("totalPrice");
-const orderMessage =
-    document.getElementById("orderMessage");
-const placeOrderButton =
-    document.getElementById("placeOrderButton");
-/* =========================================================
-   5. FORMAT RUPEE
-========================================================= */
-function formatRupees(amount) {
-    return "₹" + Number(amount).toLocaleString("en-IN");
-}
-/* =========================================================
-   6. UPDATE ORDER SUMMARY
-========================================================= */
-function updateOrderSummary() {
-    let quantity =
-        parseInt(quantityInput.value, 10);
-    if (isNaN(quantity) || quantity < MINIMUM_QUANTITY) {
-        quantity = MINIMUM_QUANTITY;
-        quantityInput.value = quantity;
-    }
-    const total =
-        quantity * PRICE_PER_KG;
-    summaryQuantity.textContent =
-        `${quantity} KG`;
-    totalPrice.textContent =
-        formatRupees(total);
-}
-/* =========================================================
-   7. INCREASE QUANTITY
-========================================================= */
-increaseButton.addEventListener("click", function () {
-    let quantity =
-        parseInt(quantityInput.value, 10) || MINIMUM_QUANTITY;
-    quantity++;
-    quantityInput.value = quantity;
-    updateOrderSummary();
-});
-/* =========================================================
-   8. DECREASE QUANTITY
-========================================================= */
-decreaseButton.addEventListener("click", function () {
-    let quantity =
-        parseInt(quantityInput.value, 10) || MINIMUM_QUANTITY;
-    if (quantity > MINIMUM_QUANTITY) {
-        quantity--;
-    }
-    quantityInput.value = quantity;
-    updateOrderSummary();
-});
-/* =========================================================
-   9. MANUAL QUANTITY CHANGE
-========================================================= */
-quantityInput.addEventListener("input", function () {
-    let quantity =
-        parseInt(quantityInput.value, 10);
-    if (isNaN(quantity)) {
-        return;
-    }
-    if (quantity < MINIMUM_QUANTITY) {
-        quantity = MINIMUM_QUANTITY;
-        quantityInput.value = quantity;
-    }
-    updateOrderSummary();
-});
-/* =========================================================
-   10. SHOW MESSAGE
-========================================================= */
-function showMessage(message, type) {
-    orderMessage.textContent = message;
-    orderMessage.className =
-        "order-message " + type;
-}
-/* =========================================================
-   11. CLEAR MESSAGE
-========================================================= */
-function clearMessage() {
-    orderMessage.textContent = "";
-    orderMessage.className =
-        "order-message";
-}
-/* =========================================================
-   12. VALIDATE PHONE NUMBER
-========================================================= */
-function validatePhone(phone) {
-    const cleaned =
-        phone.replace(/\D/g, "");
-    return (
-        cleaned.length === 10 &&
-        /^[6-9]/.test(cleaned)
-    );
-}
-/* =========================================================
-   13. ESCAPE WHATSAPP MESSAGE
-========================================================= */
-function encodeMessage(text) {
-    return encodeURIComponent(text);
-}
-/* =========================================================
-   14. CREATE WHATSAPP MESSAGE
-========================================================= */
-function createWhatsAppMessage(
-    orderId,
-    name,
-    phone,
-    quantity,
-    total,
-    address
-) {
-    return `
-🌶️ *MANA RUCHI - NEW ORDER*
-━━━━━━━━━━━━━━━━━━
-🆔 *Order ID:* ${orderId}
-👤 *Customer:* ${name}
-📞 *Phone:* ${phone}
-🌶️ *Product:* Homemade Chilli Powder
-📦 *Quantity:* ${quantity} KG
-💰 *Price:* ₹${PRICE_PER_KG} / KG
-💵 *Total:* ₹${total.toLocaleString("en-IN")}
-📍 *Delivery Address:*
-${address}
-━━━━━━━━━━━━━━━━━━
-Thank you for ordering from Mana Ruchi.
-`;
-}
-/* =========================================================
-   15. OPEN WHATSAPP
-========================================================= */
-function sendWhatsAppNotification(
-    orderId,
-    name,
-    phone,
-    quantity,
-    total,
-    address
-) {
-    /*
-       IMPORTANT:
-       Replace the number below with the Mana Ruchi
-       owner's WhatsApp number.
-       Format:
-       91XXXXXXXXXX
-       Do NOT use +, spaces or brackets.
-    */
-    const OWNER_WHATSAPP =
-        "918367450301";
-    const message =
-        createWhatsAppMessage(
-            orderId,
-            name,
-            phone,
-            quantity,
-            total,
-            address
-        );
-    const whatsappURL =
-        "https://wa.me/" +
-        OWNER_WHATSAPP +
-        "?text=" +
-        encodeMessage(message);
-    window.open(
-        whatsappURL,
-        "_blank",
-        "noopener,noreferrer"
-    );
-}
-/* =========================================================
-   16. PLACE ORDER
-========================================================= */
-orderForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    clearMessage();
-    /* ---------------------------------------------
-       GET CUSTOMER DETAILS
-    --------------------------------------------- */
-    const name =
-        customerName.value.trim();
-    const phone =
-        customerPhone.value.trim();
-    const address =
-        addressInput.value.trim();
-    let quantity =
-        parseInt(quantityInput.value, 10);
-    /* ---------------------------------------------
-       VALIDATE NAME
-    --------------------------------------------- */
-    if (name.length < 2) {
-        showMessage(
-            "Please enter your full name.",
-            "error"
-        );
-        customerName.focus();
-        return;
-    }
-    /* ---------------------------------------------
-       VALIDATE PHONE
-    --------------------------------------------- */
-    if (!validatePhone(phone)) {
-        showMessage(
-            "Please enter a valid 10-digit Indian mobile number.",
-            "error"
-        );
-        customerPhone.focus();
-        return;
-    }
-    /* ---------------------------------------------
-       VALIDATE QUANTITY
-    --------------------------------------------- */
-    if (
-        isNaN(quantity) ||
-        quantity < MINIMUM_QUANTITY
-    ) {
-        showMessage(
-            "Minimum order quantity is 10 KG.",
-            "error"
-        );
-        quantityInput.value =
-            MINIMUM_QUANTITY;
-        updateOrderSummary();
-        quantityInput.focus();
-        return;
-    }
-    /* ---------------------------------------------
-       VALIDATE ADDRESS
-    --------------------------------------------- */
-    if (address.length < 10) {
-        showMessage(
-            "Please enter your complete delivery address.",
-            "error"
-        );
-        addressInput.focus();
-        return;
-    }
-    /* ---------------------------------------------
-       CALCULATE TOTAL
-    --------------------------------------------- */
-    const total =
-        quantity * PRICE_PER_KG;
-    /* ---------------------------------------------
-       DISABLE BUTTON
-    --------------------------------------------- */
-    placeOrderButton.disabled = true;
-    placeOrderButton.textContent =
-        "⏳ PLACING ORDER...";
-    try {
-        /* -----------------------------------------
-           CHECK SUPABASE CONFIG
-        ----------------------------------------- */
-        if (
-            SUPABASE_URL.includes("PASTE_YOUR") ||
-            SUPABASE_ANON_KEY.includes("PASTE_YOUR")
-        ) {
-            throw new Error(
-                "Supabase configuration has not been added."
-            );
-        }
-        /* -----------------------------------------
-           INSERT ORDER INTO SUPABASE
-        ----------------------------------------- */
-        const { data, error } =
-            await db
-                .from("orders")
-                .insert([
-                    {
-                        customer_name: name,
-                        phone: phone,
-                        quantity: quantity,
-                        address: address,
-                        price_per_kg: PRICE_PER_KG,
-                        total_amount: total,
-                        product_name:
-                            "Mana Ruchi Homemade Chilli Powder",
-                        status: "New"
-                    }
-                ])
-                .select()
-                .single();
-        /* -----------------------------------------
-           HANDLE SUPABASE ERROR
-        ----------------------------------------- */
-        if (error) {
-            console.error(
-                "Supabase order error:",
-                error
-            );
-            throw error;
-        }
-        /* -----------------------------------------
-           ORDER ID
-        ----------------------------------------- */
-        const orderId =
-            data.id;
-        /* -----------------------------------------
-           SUCCESS MESSAGE
-        ----------------------------------------- */
-        showMessage(
-            `✅ Order placed successfully! Your Order ID is ${orderId}.`,
-            "success"
-        );
-        /* -----------------------------------------
-           WHATSAPP NOTIFICATION
-        ----------------------------------------- */
-        sendWhatsAppNotification(
-            orderId,
-            name,
-            phone,
-            quantity,
-            total,
-            address
-        );
-        /* -----------------------------------------
-           CUSTOMER CONFIRMATION
-        ----------------------------------------- */
-        alert(
-            "🌶️ Mana Ruchi\n\n" +
-            "Your order has been placed successfully!\n\n" +
-            "Order ID: " +
-            orderId +
-            "\n\n" +
-            "Quantity: " +
-            quantity +
-            " KG\n\n" +
-            "Total: ₹" +
-            total.toLocaleString("en-IN") +
-            "\n\n" +
-            "Thank you for ordering!"
-        );
-        /* -----------------------------------------
-           RESET FORM
-        ----------------------------------------- */
-        orderForm.reset();
-        quantityInput.value =
-            MINIMUM_QUANTITY;
-        updateOrderSummary();
-    } catch (error) {
-        console.error(
-            "ORDER SUBMISSION FAILED:",
-            error
-        );
-        /* -----------------------------------------
-           USER-FRIENDLY ERROR
-        ----------------------------------------- */
-        let message =
-            "Unable to place your order right now.";
-        if (
-            error.message &&
-            error.message.includes(
-                "Supabase configuration"
-            )
-        ) {
-            message =
-                "Supabase configuration is missing. Please contact the website administrator.";
-        }
-        if (
-            error.code === "42501"
-        ) {
-            message =
-                "Order permission is blocked by Supabase security settings.";
-        }
-        if (
-            error.code === "PGRST205"
-        ) {
-            message =
-                "The orders table was not found in Supabase.";
-        }
-        showMessage(
-            "❌ " + message,
-            "error"
-        );
-    } finally {
-        /* -----------------------------------------
-           ENABLE BUTTON
-        ----------------------------------------- */
-        placeOrderButton.disabled = false;
-        placeOrderButton.textContent =
-            "🛒 PLACE ORDER";
-    }
-});
-/* =========================================================
-   17. INITIAL SUMMARY
-========================================================= */
-updateOrderSummary();
-/* =========================================================
-   18. PREVENT INVALID QUANTITY
-========================================================= */
-quantityInput.addEventListener(
-    "blur",
-    function () {
-        let quantity =
-            parseInt(quantityInput.value, 10);
-        if (
-            isNaN(quantity) ||
-            quantity < MINIMUM_QUANTITY
-        ) {
-            quantity =
-                MINIMUM_QUANTITY;
-        }
-        quantityInput.value =
-            quantity;
-        updateOrderSummary();
-    }
-);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+    <title>Mana Ruchi | Admin Dashboard</title>
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+</head>
+<body>
+<!-- =====================================
+     LOGIN PAGE
+====================================== -->
+<main
+    id="loginSection"
+    class="login-section"
+>
+    <div class="login-card">
+        <!-- BRAND -->
+        <div class="brand">
+            <div class="brand-icon">
+                🌶️
+            </div>
+            <h1>
+                Mana Ruchi
+            </h1>
+            <p>
+                Admin Portal
+            </p>
+        </div>
+        <!-- LOGIN TITLE -->
+        <div class="login-title">
+            <h2>
+                Welcome Back
+            </h2>
+            <p>
+                Sign in to manage your orders
+            </p>
+        </div>
+        <!-- LOGIN FORM -->
+        <form
+            id="loginForm"
+            autocomplete="off"
+        >
+            <!-- USERNAME -->
+            <div class="input-group">
+                <label for="username">
+                    Username
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+            <!-- PASSWORD -->
+            <div class="input-group">
+                <label for="password">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+            <!-- LOGIN BUTTON -->
+            <button
+                type="submit"
+                class="login-button"
+            >
+                <span>
+                    🔐
+                </span>
+                Sign In
+            </button>
+            <!-- LOGIN ERROR -->
+            <p
+                id="loginError"
+                class="login-error"
+                aria-live="polite"
+            ></p>
+        </form>
+        <!-- BACK TO WEBSITE -->
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            ← Back to Mana Ruchi
+        </a>
+        <!-- FOOTER -->
+        <div class="login-footer">
+            <span>
+                🔒 Secure Admin Area
+            </span>
+        </div>
+    </div>
+</main>
+<!-- =====================================
+     DASHBOARD
+====================================== -->
+<section
+    id="dashboardSection"
+    class="dashboard-section hidden"
+>
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div class="dashboard-brand">
+            <div class="dashboard-logo">
+                🌶️
+            </div>
+            <div>
+                <h1>
+                    Mana Ruchi
+                </h1>
+                <p>
+                    Admin Dashboard
+                </p>
+            </div>
+        </div>
+        <button
+            id="logoutBtn"
+            class="logout-button"
+        >
+            Logout
+        </button>
+    </header>
+    <!-- DASHBOARD CONTENT -->
+    <main class="dashboard-content">
+        <!-- TITLE -->
+        <div class="dashboard-title">
+            <div>
+                <h2>
+                    Dashboard
+                </h2>
+                <p>
+                    Manage your customer orders
+                </p>
+            </div>
+        </div>
+        <!-- STATISTICS -->
+        <div class="stats-grid">
+            <!-- TOTAL -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    📦
+                </div>
+                <div>
+                    <h3 id="totalOrders">
+                        0
+                    </h3>
+                    <p>
+                        Total Orders
+                    </p>
+                </div>
+            </div>
+            <!-- PENDING -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    ⏳
+                </div>
+                <div>
+                    <h3 id="pendingOrders">
+                        0
+                    </h3>
+                    <p>
+                        Pending Orders
+                    </p>
+                </div>
+            </div>
+            <!-- COMPLETED -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    ✅
+                </div>
+                <div>
+                    <h3 id="completedOrders">
+                        0
+                    </h3>
+                    <p>
+                        Completed Orders
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- ORDERS -->
+        <section class="orders-section">
+            <div class="orders-header">
+                <div>
+                    <h2>
+                        Customer Orders
+                    </h2>
+                    <p>
+                        Recent orders from Mana Ruchi customers
+                    </p>
+                </div>
+                <button
+                    id="clearOrdersBtn"
+                    class="clear-button"
+                    type="button"
+                >
+                    🗑️ Clear Orders
+                </button>
+            </div>
+            <!-- DATABASE STATUS -->
+            <div
+                id="databaseMessage"
+                class="database-message"
+                aria-live="polite"
+            ></div>
+            <!-- ORDERS CONTAINER -->
+            <div
+                id="ordersContainer"
+                class="orders-container"
+            >
+                <div class="no-orders">
+                    <div class="no-orders-icon">
+                        ⏳
+                    </div>
+                    <h3>
+                        Loading Orders...
+                    </h3>
+                    <p>
+                        Please wait.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+<!-- =====================================
+     SUPABASE
+====================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- =====================================
+     ADMIN JAVASCRIPT
+====================================== -->
+<script src="admin.js"></script>
+</body>
+</html>
 
-2. Your Supabase table must match this
+Very important
 
-In Supabase → Table Editor, create an orders table with these columns:
+Now your files should work like this:
 
-Column	Type
-id	bigint / identity
-customer_name	text
-phone	text
-quantity	numeric
-address	text
-price_per_kg	numeric
-total_amount	numeric
-product_name	text
-status	text
-created_at	timestamp
+CUSTOMER
+index.html
+     ↓
+script.js
+     ↓
+Supabase
+     ↓
+orders table
+     ↓
+admin.js
+     ↓
+admin.html
 
-For created_at, let Supabase give it a default of:
+So both pages must use the exact same Supabase URL and anon/publishable key.
 
-now()
+Your admin dashboard also needs an admin.js that matches these IDs:
 
-3. Important: RLS is probably causing your error
+loginForm
+username
+password
+loginError
+loginSection
+dashboardSection
+logoutBtn
+totalOrders
+pendingOrders
+completedOrders
+clearOrdersBtn
+ordersContainer
+databaseMessage
 
-If your website says “Please try again later”, the most likely issue is that Supabase Row Level Security is blocking the anonymous customer from inserting an order.
-
-For a public customer order form, you need an INSERT policy on the orders table.
-
-In Supabase, go to:
-
-Database → Tables → orders → RLS / Policies → New Policy
-
-Create a policy allowing INSERT for anon.
-
-The policy should allow customers to insert orders, while your admin side should have its own authentication/security rules.
-
-4. I also need to correct your admin dashboard
-
-Your current index.html tells me exactly what the customer side needs, but I don’t yet have your current admin.html/admin JavaScript in this message.
-
-The admin dashboard must query the same orders table:
-
-Customer
-   ↓
-Mana Ruchi website
-   ↓
-Supabase "orders"
-   ↓
-Admin dashboard
-
-So the customer and admin will finally see the same orders.
-
-One thing I need from you now: open your Supabase project and send me a screenshot of Project Settings → API. I need the Project URL and anon/publishable key shown there. Don’t send any service_role/secret key.
-
-Then I can give you the final admin.html + admin.js code matching this exact order table.
+I can give you that complete admin.js next. Don’t use the Firebase code from my earlier message—your website is using Supabase, so we should keep the whole project on Supabase.

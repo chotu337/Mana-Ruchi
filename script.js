@@ -33,39 +33,19 @@ const db = window.supabase.createClient(
 // =========================================
 // GET HTML ELEMENTS
 // =========================================
-
-const orderForm =
-    document.getElementById("orderForm");
-
-const customerName =
-    document.getElementById("customerName");
-
-const customerPhone =
-    document.getElementById("customerPhone");
-
-const quantityInput =
-    document.getElementById("quantity");
-
-const address =
-    document.getElementById("address");
-
-const decreaseQuantity =
-    document.getElementById("decreaseQuantity");
-
-const increaseQuantity =
-    document.getElementById("increaseQuantity");
-
-const summaryQuantity =
-    document.getElementById("summaryQuantity");
-
-const totalPrice =
-    document.getElementById("totalPrice");
-
-const orderMessage =
-    document.getElementById("orderMessage");
-
-const placeOrderButton =
-    document.getElementById("placeOrderButton");
+const { error } = await db
+    .from("orders")
+    .insert([
+        {
+            customer_name: name,
+            customer_phone: phone,
+            quantity: quantity,
+            address: customerAddress,
+            price_per_kg: PRICE_PER_KG,
+            total_amount: totalAmount,
+            status: "Pending"
+        }
+    ]);
 
 
 // =========================================

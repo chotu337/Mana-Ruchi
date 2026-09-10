@@ -69,7 +69,7 @@ const placeOrderButton =
 
 
 // =========================================
-// QUANTITY
+// GET QUANTITY
 // =========================================
 
 function getQuantity() {
@@ -93,13 +93,12 @@ function getQuantity() {
 
 
 // =========================================
-// UPDATE SUMMARY
+// UPDATE ORDER SUMMARY
 // =========================================
 
 function updateOrderSummary() {
 
-    const quantity =
-        getQuantity();
+    const quantity = getQuantity();
 
     const total =
         quantity * PRICE_PER_KG;
@@ -134,11 +133,8 @@ if (decreaseQuantity) {
             let quantity =
                 getQuantity();
 
-            if (
-                quantity >
-                MINIMUM_QUANTITY
-            ) {
-                quantity -= 1;
+            if (quantity > MINIMUM_QUANTITY) {
+                quantity--;
             }
 
             quantityInput.value =
@@ -163,7 +159,7 @@ if (increaseQuantity) {
             let quantity =
                 getQuantity();
 
-            quantity += 1;
+            quantity++;
 
             quantityInput.value =
                 quantity;
@@ -175,7 +171,7 @@ if (increaseQuantity) {
 
 
 // =========================================
-// MANUAL QUANTITY
+// MANUAL QUANTITY INPUT
 // =========================================
 
 if (quantityInput) {
@@ -193,10 +189,7 @@ if (quantityInput) {
 // SHOW MESSAGE
 // =========================================
 
-function showMessage(
-    message,
-    type
-) {
+function showMessage(message, type) {
 
     if (!orderMessage) {
         return;
@@ -239,21 +232,18 @@ function showMessage(
 
 function createOrderID() {
 
-    const now =
-        new Date();
+    const now = new Date();
 
     const year =
         now.getFullYear();
 
     const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
+        String(now.getMonth() + 1)
+            .padStart(2, "0");
 
     const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
+        String(now.getDate())
+            .padStart(2, "0");
 
     const random =
         Math.floor(
@@ -290,7 +280,7 @@ if (orderForm) {
 
 
             // =================================
-            // GET FORM VALUES
+            // GET VALUES
             // =================================
 
             const name =
@@ -351,15 +341,10 @@ if (orderForm) {
 
 
             const cleanPhone =
-                phone.replace(
-                    /\D/g,
-                    ""
-                );
+                phone.replace(/\D/g, "");
 
 
-            if (
-                cleanPhone.length < 10
-            ) {
+            if (cleanPhone.length < 10) {
 
                 showMessage(
                     "Please enter a valid phone number.",
@@ -378,10 +363,7 @@ if (orderForm) {
             // VALIDATE QUANTITY
             // =================================
 
-            if (
-                quantity <
-                MINIMUM_QUANTITY
-            ) {
+            if (quantity < MINIMUM_QUANTITY) {
 
                 showMessage(
                     "Minimum order quantity is 10 kg.",
@@ -420,8 +402,7 @@ if (orderForm) {
             // =================================
 
             const totalAmount =
-                quantity *
-                PRICE_PER_KG;
+                quantity * PRICE_PER_KG;
 
 
             // =================================
@@ -445,7 +426,6 @@ if (orderForm) {
                     "Placing Order...";
             }
 
-
             showMessage(
                 "Please wait... placing your order.",
                 "success"
@@ -460,51 +440,44 @@ if (orderForm) {
 
 
                 // =================================
-                // INSERT INTO SUPABASE
+                // SUPABASE INSERT
                 //
-                // Matches YOUR SQL table exactly:
-                //
-                // customer_name
-                // customer_phone
-                // quantity
-                // address
-                // price_per_kg
-                // total_amount
-                // status
+                // IMPORTANT:
+                // These names exactly match
+                // your Supabase table.
                 // =================================
 
-                const {
-                    error
-                } = await db
-                    .from("orders")
-                    .insert([
-                        {
-                            customer_name:
-                                name,
+                const { error } =
+                    await db
+                        .from("orders")
+                        .insert([
+                            {
+                                customer_name:
+                                    name,
 
-                            customer_phone:
-                                phone,
+                                customer_phone:
+                                    phone,
 
-                            quantity:
-                                quantity,
+                                quantity:
+                                    quantity,
 
-                            address:
-                                customerAddress,
+                                address:
+                                    customerAddress,
 
-                            price_per_kg:
-                                PRICE_PER_KG,
+                                price_per_kg:
+                                    PRICE_PER_KG,
 
-                            total_amount:
-                                totalAmount,
+                                total_amount:
+                                    totalAmount,
 
-                            status:
-                                "Pending"
-                        }
-                    ]);
+                                status:
+                                    "Pending"
+                            }
+                        ]);
 
 
                 // =================================
-                // CHECK SUPABASE ERROR
+                // CHECK DATABASE ERROR
                 // =================================
 
                 if (error) {
@@ -515,7 +488,7 @@ if (orderForm) {
                     );
 
                     showMessage(
-                        "Order could not be saved: " +
+                        "Order could not be placed. " +
                         error.message,
                         "error"
                     );
@@ -525,26 +498,25 @@ if (orderForm) {
 
 
                 // =================================
-                // ORDER SAVED
+                // SUCCESS
                 // =================================
 
                 console.log(
-                    "Order successfully saved."
+                    "Order successfully saved!"
+                );
+
+                console.log(
+                    "Order Reference:",
+                    orderID
                 );
 
 
-                // =================================
-                // SUCCESS MESSAGE
-                // =================================
-
                 showMessage(
-                    "✅ Your Order is Confirmed! " +
-                    "Order Reference: " +
+                    "✅ Order Confirmed! " +
+                    "Order ID: " +
                     orderID +
                     " | Total: ₹" +
-                    totalAmount.toLocaleString(
-                        "en-IN"
-                    ),
+                    totalAmount.toLocaleString("en-IN"),
                     "success"
                 );
 
@@ -554,42 +526,23 @@ if (orderForm) {
                 // =================================
 
                 const whatsappText =
-                    "🌶️ *MANA RUCHI - NEW ORDER*\n\n" +
+                    `🌶️ *MANA RUCHI - NEW ORDER*
 
-                    "📋 *Order Reference:* " +
-                    orderID +
-                    "\n\n" +
+📋 *Order ID:* ${orderID}
 
-                    "👤 *Customer:* " +
-                    name +
-                    "\n\n" +
+👤 *Customer:* ${name}
 
-                    "📞 *Phone:* " +
-                    phone +
-                    "\n\n" +
+📞 *Phone:* ${phone}
 
-                    "🌶️ *Product:* " +
-                    "Homemade Chilli Powder" +
-                    "\n\n" +
+🌶️ *Product:* Homemade Chilli Powder
 
-                    "⚖️ *Quantity:* " +
-                    quantity +
-                    " kg" +
-                    "\n\n" +
+⚖️ *Quantity:* ${quantity} kg
 
-                    "💰 *Price:* ₹" +
-                    PRICE_PER_KG +
-                    "/kg" +
-                    "\n\n" +
+💰 *Price:* ₹${PRICE_PER_KG}/kg
 
-                    "💵 *Total:* ₹" +
-                    totalAmount.toLocaleString(
-                        "en-IN"
-                    ) +
-                    "\n\n" +
+💵 *Total:* ₹${totalAmount.toLocaleString("en-IN")}
 
-                    "📍 *Delivery Address:* " +
-                    customerAddress;
+📍 *Delivery Address:* ${customerAddress}`;
 
 
                 const whatsappURL =
@@ -627,7 +580,6 @@ if (orderForm) {
                 }
 
                 if (quantityInput) {
-
                     quantityInput.value =
                         MINIMUM_QUANTITY;
                 }
@@ -649,10 +601,6 @@ if (orderForm) {
 
             } finally {
 
-                // =================================
-                // ENABLE BUTTON
-                // =================================
-
                 if (placeOrderButton) {
 
                     placeOrderButton.disabled =
@@ -668,7 +616,8 @@ if (orderForm) {
 } else {
 
     console.error(
-        "orderForm was not found. Check index.html."
+        "orderForm was not found. " +
+        "Check index.html."
     );
 }
 
@@ -729,13 +678,9 @@ if (shareWhatsApp) {
 
             const shareText =
                 encodeURIComponent(
-
                     "🌶️ Check out Mana Ruchi Homemade Chilli Powder!\n\n" +
-
                     "Quality homemade chilli powder at ₹400/kg.\n" +
-
                     "Minimum order: 10 kg.\n\n" +
-
                     window.location.href
                 );
 
@@ -762,7 +707,7 @@ console.log(
 );
 
 console.log(
-    "Supabase connected."
+    "Supabase order system ready."
 );
 
 console.log(

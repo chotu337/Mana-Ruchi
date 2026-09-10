@@ -40,13 +40,32 @@ const { data, error } = await db
             customer_phone: phone,
             quantity: quantity,
             address: customerAddress,
-            price_per_kg: PRICE_PER_KG,
-            total_amount: totalAmount,
-            status: "New"
+            price_per_kg: 400,
+            total_amount: quantity * 400,
+            status: "Pending"
         }
     ])
     .select()
     .single();
+
+if (error) {
+    console.error("Supabase Error:", error);
+    showMessage(
+        "Order failed: " + error.message,
+        "error"
+    );
+    return;
+}
+
+console.log("Order saved:", data);
+
+showMessage(
+    "✅ Your Order is Confirmed! Order ID: " +
+    data.id +
+    " | Total: ₹" +
+    data.total_amount,
+    "success"
+);
 
 // =========================================
 // MESSAGE

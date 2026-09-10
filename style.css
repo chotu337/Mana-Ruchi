@@ -1210,4 +1210,48 @@ footer {
         font-size: 21px;
     }
 }
+/* =====================================================
+   ORDER SUCCESS MESSAGE
+===================================================== */
+
+.order-success-box {
+    background: #eaf8ee;
+    border: 2px solid #28a745;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    text-align: center;
+    color: #155724;
+}
+
+.order-success-box .success-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.order-success-box h2 {
+    color: #16803c;
+    margin: 5px 0 15px;
+}
+
+.order-success-box p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.order-success-box .success-note {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.order-error-box {
+    background: #fff0f0;
+    border: 2px solid #dc3545;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    color: #842029;
+    font-weight: 600;
+}
 }

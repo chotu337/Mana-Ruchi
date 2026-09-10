@@ -93,7 +93,7 @@ function getQuantity() {
 
 
 // =========================================
-// UPDATE ORDER SUMMARY
+// UPDATE SUMMARY
 // =========================================
 
 function updateOrderSummary() {
@@ -105,18 +105,15 @@ function updateOrderSummary() {
         quantity * PRICE_PER_KG;
 
     if (quantityInput) {
-        quantityInput.value =
-            quantity;
+        quantityInput.value = quantity;
     }
 
     if (summaryQuantity) {
-
         summaryQuantity.textContent =
             quantity + " kg";
     }
 
     if (totalPrice) {
-
         totalPrice.textContent =
             "₹" +
             total.toLocaleString("en-IN");
@@ -141,15 +138,11 @@ if (decreaseQuantity) {
                 quantity >
                 MINIMUM_QUANTITY
             ) {
-
                 quantity -= 1;
             }
 
-            if (quantityInput) {
-
-                quantityInput.value =
-                    quantity;
-            }
+            quantityInput.value =
+                quantity;
 
             updateOrderSummary();
         }
@@ -172,11 +165,8 @@ if (increaseQuantity) {
 
             quantity += 1;
 
-            if (quantityInput) {
-
-                quantityInput.value =
-                    quantity;
-            }
+            quantityInput.value =
+                quantity;
 
             updateOrderSummary();
         }
@@ -185,7 +175,7 @@ if (increaseQuantity) {
 
 
 // =========================================
-// MANUAL QUANTITY INPUT
+// MANUAL QUANTITY
 // =========================================
 
 if (quantityInput) {
@@ -193,7 +183,6 @@ if (quantityInput) {
     quantityInput.addEventListener(
         "input",
         function () {
-
             updateOrderSummary();
         }
     );
@@ -245,7 +234,7 @@ function showMessage(
 
 
 // =========================================
-// CREATE CUSTOMER ORDER REFERENCE
+// CREATE ORDER REFERENCE
 // =========================================
 
 function createOrderID() {
@@ -253,13 +242,15 @@ function createOrderID() {
     const now =
         new Date();
 
-    const date =
-        now.getFullYear().toString() +
+    const year =
+        now.getFullYear();
 
+    const month =
         String(
             now.getMonth() + 1
-        ).padStart(2, "0") +
+        ).padStart(2, "0");
 
+    const day =
         String(
             now.getDate()
         ).padStart(2, "0");
@@ -272,7 +263,9 @@ function createOrderID() {
 
     return (
         "MR-" +
-        date +
+        year +
+        month +
+        day +
         "-" +
         random
     );
@@ -297,7 +290,7 @@ if (orderForm) {
 
 
             // =================================
-            // GET VALUES
+            // GET FORM VALUES
             // =================================
 
             const name =
@@ -320,7 +313,7 @@ if (orderForm) {
 
 
             // =================================
-            // VALIDATION - NAME
+            // VALIDATE NAME
             // =================================
 
             if (!name) {
@@ -339,7 +332,7 @@ if (orderForm) {
 
 
             // =================================
-            // VALIDATION - PHONE
+            // VALIDATE PHONE
             // =================================
 
             if (!phone) {
@@ -382,7 +375,7 @@ if (orderForm) {
 
 
             // =================================
-            // VALIDATION - QUANTITY
+            // VALIDATE QUANTITY
             // =================================
 
             if (
@@ -404,7 +397,7 @@ if (orderForm) {
 
 
             // =================================
-            // VALIDATION - ADDRESS
+            // VALIDATE ADDRESS
             // =================================
 
             if (!customerAddress) {
@@ -432,7 +425,7 @@ if (orderForm) {
 
 
             // =================================
-            // CREATE CUSTOMER ORDER REFERENCE
+            // CREATE ORDER REFERENCE
             // =================================
 
             const orderID =
@@ -467,23 +460,29 @@ if (orderForm) {
 
 
                 // =================================
-                // INSERT ORDER
-                // IMPORTANT:
-                // NO order_id COLUMN HERE
+                // INSERT INTO SUPABASE
+                //
+                // Matches YOUR SQL table exactly:
+                //
+                // customer_name
+                // customer_phone
+                // quantity
+                // address
+                // price_per_kg
+                // total_amount
+                // status
                 // =================================
 
                 const {
-                    data,
                     error
                 } = await db
                     .from("orders")
                     .insert([
                         {
-
                             customer_name:
                                 name,
 
-                            phone:
+                            customer_phone:
                                 phone,
 
                             quantity:
@@ -498,30 +497,26 @@ if (orderForm) {
                             total_amount:
                                 totalAmount,
 
-                            product_name:
-                                "Mana Ruchi Homemade Chilli Powder",
-
                             status:
-                                "New"
+                                "Pending"
                         }
-                    ])
-                    .select("id")
-                    .single();
+                    ]);
 
 
                 // =================================
-                // SUPABASE ERROR
+                // CHECK SUPABASE ERROR
                 // =================================
 
                 if (error) {
 
                     console.error(
-                        "Supabase Error:",
+                        "SUPABASE ERROR:",
                         error
                     );
 
                     showMessage(
-                        "Order could not be placed. Please check your database table.",
+                        "Order could not be saved: " +
+                        error.message,
                         "error"
                     );
 
@@ -530,27 +525,11 @@ if (orderForm) {
 
 
                 // =================================
-                // SUCCESSFULLY SAVED
+                // ORDER SAVED
                 // =================================
 
                 console.log(
-                    "Order successfully saved:",
-                    data
-                );
-
-
-                // =================================
-                // SUPABASE DATABASE ID
-                // =================================
-
-                const databaseID =
-                    data && data.id
-                        ? data.id
-                        : null;
-
-                console.log(
-                    "Database Order ID:",
-                    databaseID
+                    "Order successfully saved."
                 );
 
 
@@ -590,7 +569,7 @@ if (orderForm) {
                     "\n\n" +
 
                     "🌶️ *Product:* " +
-                    "Mana Ruchi Homemade Chilli Powder" +
+                    "Homemade Chilli Powder" +
                     "\n\n" +
 
                     "⚖️ *Quantity:* " +
@@ -659,7 +638,7 @@ if (orderForm) {
             } catch (error) {
 
                 console.error(
-                    "Unexpected error:",
+                    "UNEXPECTED ERROR:",
                     error
                 );
 
@@ -771,7 +750,7 @@ if (shareWhatsApp) {
 
 
 // =========================================
-// DEBUG / TEST MESSAGE
+// DEBUG
 // =========================================
 
 console.log(
@@ -783,8 +762,7 @@ console.log(
 );
 
 console.log(
-    "Supabase URL:",
-    SUPABASE_URL
+    "Supabase connected."
 );
 
 console.log(

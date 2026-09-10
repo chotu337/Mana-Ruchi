@@ -37,7 +37,6 @@ const { data, error } = await db
     .from("orders")
     .insert([
         {
-            order_id: orderID,
             customer_name: name,
             customer_phone: phone,
             quantity: quantity,
@@ -48,7 +47,30 @@ const { data, error } = await db
             status: "New"
         }
     ])
-    .select();
+    .select()
+    .single();
+
+if (error) {
+    console.error("Supabase Error:", error);
+
+    showMessage(
+        "Order could not be placed. Please check your database table.",
+        "error"
+    );
+
+    return;
+}
+
+// Supabase automatically gives the order ID
+const orderID = data.id;
+
+showMessage(
+    "✅ Your Order is Confirmed! Order ID: " +
+    orderID +
+    " | Total: ₹" +
+    totalAmount.toLocaleString("en-IN"),
+    "success"
+);
 
 
 // =========================================

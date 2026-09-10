@@ -2,547 +2,401 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
-
+    <meta name="description"
+          content="Mana Ruchi Homemade Chilli Powder - Fresh homemade chilli powder delivered to your doorstep.">
     <title>Mana Ruchi | Homemade Chilli Powder</title>
-
-    <!-- Supabase -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-        defer>
-    </script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #fff8f0;
-            color: #333;
-        }
-
-        header {
-            background: #2e7d32;
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-        header p {
-            margin: 8px 0 0;
-            font-size: 16px;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 30px auto;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2e7d32;
-            margin-top: 0;
-        }
-
-        .info {
-            background: #fff3e0;
-            border-left: 5px solid #f57c00;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-        }
-
-        .info p {
-            margin: 7px 0;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 18px;
-            margin-bottom: 7px;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 16px;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #2e7d32;
-        }
-
-        .quantity-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .quantity-row button {
-            width: 45px;
-            height: 45px;
-            border: none;
-            border-radius: 7px;
-            background: #2e7d32;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .quantity-row button:hover {
-            background: #1b5e20;
-        }
-
-        .quantity-row input {
-            text-align: center;
-            width: 100px;
-        }
-
-        .summary {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f1f8e9;
-            border-radius: 10px;
-        }
-
-        .summary p {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            font-size: 17px;
-        }
-
-        .summary .total {
-            font-size: 22px;
-            font-weight: bold;
-            color: #c62828;
-        }
-
-        #placeOrderButton {
-            width: 100%;
-            margin-top: 25px;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            background: #c62828;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        #placeOrderButton:hover {
-            background: #8e0000;
-        }
-
-        #placeOrderButton:disabled {
-            background: #999;
-            cursor: not-allowed;
-        }
-
-        #orderMessage {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .share-section {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .share-button {
-            border: none;
-            background: #25d366;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 7px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .share-button:hover {
-            background: #128c7e;
-        }
-
-        .about {
-            margin-top: 30px;
-        }
-
-        .about h2 {
-            margin-bottom: 8px;
-        }
-
-        footer {
-            background: #1b5e20;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-            margin-top: 40px;
-        }
-
-        footer p {
-            margin: 7px 0;
-        }
-
-        .whatsapp-link {
-            color: white;
-            text-decoration: none;
-        }
-
-        #floatingWhatsApp {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: none;
-            background: #25d366;
-            color: white;
-            font-size: 27px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-        }
-
-        @media (max-width: 600px) {
-
-            header h1 {
-                font-size: 26px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .container {
-                width: 94%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-
-    <!-- ============================= -->
-    <!-- HEADER -->
-    <!-- ============================= -->
-
-    <header>
-        <h1>🌶️ Mana Ruchi</h1>
-        <p>Homemade Chilli Powder</p>
-    </header>
-
-
-    <!-- ============================= -->
-    <!-- MAIN -->
-    <!-- ============================= -->
-
-    <main class="container">
-
-        <div class="card">
-
-            <h2>Place Your Order</h2>
-
-            <div class="info">
-
-                <p>
-                    <strong>Home Product Order Delivery About Contact</strong>
-                </p>
-
-                <p>
-                    We accept orders with a minimum quantity of
-                    <strong>10 kg</strong>.
-                </p>
-
-                <p>
-                    After placing your order, we will contact you
-                    regarding delivery.
-                </p>
-
+<!-- =========================================
+     HEADER
+========================================= -->
+<header class="header">
+    <div class="container nav-container">
+        <a href="#home" class="logo">
+            🌶️ Mana Ruchi
+        </a>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#product">Product</a>
+            <a href="#order">Order</a>
+            <a href="#delivery">Delivery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+<!-- =========================================
+     HOME
+========================================= -->
+<section id="home" class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <p class="small-title">
+                🌶️ HOMEMADE & FRESH
+            </p>
+            <h1>
+                Taste the Authentic
+                <span>Mana Ruchi</span>
+            </h1>
+            <p>
+                Homemade chilli powder prepared with care
+                and packed fresh for your family.
+            </p>
+            <a href="#order" class="primary-button">
+                Order Now
+            </a>
+        </div>
+    </div>
+</section>
+<!-- =========================================
+     PRODUCT
+========================================= -->
+<section id="product" class="section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="small-title">
+                OUR PRODUCT
+            </p>
+            <h2>
+                Homemade Chilli Powder
+            </h2>
+            <p>
+                Fresh, homemade and full of authentic flavour.
+            </p>
+        </div>
+        <div class="product-card">
+            <div class="product-image">
+                <!-- Replace this image path if your image
+                     has a different filename -->
+                <img
+                    src="./chilli-powder.jpg"
+                    alt="Mana Ruchi Homemade Chilli Powder"
+                    onerror="this.style.display='none';"
+                >
+                <div class="image-placeholder">
+                    🌶️
+                </div>
             </div>
-
-
-            <!-- ============================= -->
-            <!-- ORDER FORM -->
-            <!-- ============================= -->
-
+            <div class="product-info">
+                <h3>
+                    Mana Ruchi Homemade Chilli Powder
+                </h3>
+                <p class="price">
+                    ₹400 <span>/ kg</span>
+                </p>
+                <p>
+                    Minimum order:
+                    <strong>10 kg</strong>
+                </p>
+                <a href="#order" class="primary-button">
+                    Place Order
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =========================================
+     ORDER
+========================================= -->
+<section id="order" class="section order-section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="small-title">
+                PLACE YOUR ORDER
+            </p>
+            <h2>
+                Order Mana Ruchi
+            </h2>
+            <p>
+                Minimum order quantity is 10 kg.
+            </p>
+        </div>
+        <div class="order-card">
             <form id="orderForm">
-
-                <!-- Full Name -->
-
-                <label for="customerName">
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    id="customerName"
-                    name="customerName"
-                    placeholder="Enter your full name"
-                    required
-                >
-
-
-                <!-- Mobile Number -->
-
-                <label for="customerPhone">
-                    Mobile Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="customerPhone"
-                    name="customerPhone"
-                    placeholder="Enter your mobile number"
-                    required
-                >
-
-
-                <!-- Quantity -->
-
-                <label for="quantity">
-                    Quantity
-                </label>
-
-                <div class="quantity-row">
-
-                    <button
-                        type="button"
-                        id="decreaseQuantity">
-                        −
-                    </button>
-
+                <!-- CUSTOMER NAME -->
+                <div class="form-group">
+                    <label for="customerName">
+                        Full Name
+                    </label>
                     <input
-                        type="number"
-                        id="quantity"
-                        name="quantity"
-                        value="10"
-                        min="10"
-                        step="1"
+                        type="text"
+                        id="customerName"
+                        name="customerName"
+                        placeholder="Enter your name"
                         required
                     >
-
-                    <button
-                        type="button"
-                        id="increaseQuantity">
-                        +
-                    </button>
-
-                    <span>kg</span>
-
                 </div>
-
-
-                <!-- Delivery Address -->
-
-                <label for="address">
-                    Delivery Address
-                </label>
-
-                <textarea
-                    id="address"
-                    name="address"
-                    placeholder="Enter your complete delivery address"
-                    required
-                ></textarea>
-
-
-                <!-- ============================= -->
+                <!-- PHONE -->
+                <div class="form-group">
+                    <label for="customerPhone">
+                        Mobile Number
+                    </label>
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        name="customerPhone"
+                        placeholder="10-digit mobile number"
+                        inputmode="numeric"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+                <!-- QUANTITY -->
+                <div class="form-group">
+                    <label for="quantity">
+                        Quantity (kg)
+                    </label>
+                    <div class="quantity-control">
+                        <button
+                            type="button"
+                            id="decreaseQuantity"
+                            aria-label="Decrease quantity"
+                        >
+                            −
+                        </button>
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            value="10"
+                            min="10"
+                            step="1"
+                            required
+                        >
+                        <button
+                            type="button"
+                            id="increaseQuantity"
+                            aria-label="Increase quantity"
+                        >
+                            +
+                        </button>
+                    </div>
+                    <small>
+                        Minimum order: 10 kg
+                    </small>
+                </div>
+                <!-- ADDRESS -->
+                <div class="form-group">
+                    <label for="address">
+                        Delivery Address
+                    </label>
+                    <textarea
+                        id="address"
+                        name="address"
+                        rows="4"
+                        placeholder="Enter complete delivery address"
+                        required
+                    ></textarea>
+                </div>
                 <!-- ORDER SUMMARY -->
-                <!-- ============================= -->
-
-                <div class="summary">
-
-                    <p>
-                        <span>Quantity:</span>
-
+                <div class="order-summary">
+                    <h3>
+                        Order Summary
+                    </h3>
+                    <div class="summary-row">
+                        <span>
+                            Quantity
+                        </span>
                         <strong id="summaryQuantity">
                             10 kg
                         </strong>
-                    </p>
-
-                    <p>
-                        <span>Price:</span>
-
+                    </div>
+                    <div class="summary-row">
+                        <span>
+                            Price
+                        </span>
                         <strong>
                             ₹400 / kg
                         </strong>
-                    </p>
-
-                    <p class="total">
-
-                        <span>Total:</span>
-
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>
+                            Total
+                        </span>
                         <strong id="totalPrice">
                             ₹4,000
                         </strong>
-
-                    </p>
-
+                    </div>
                 </div>
-
-
-                <!-- ============================= -->
                 <!-- MESSAGE -->
-                <!-- ============================= -->
-
-                <div id="orderMessage"></div>
-
-
-                <!-- ============================= -->
+                <div
+                    id="orderMessage"
+                    class="order-message"
+                    aria-live="polite"
+                ></div>
                 <!-- PLACE ORDER -->
-                <!-- ============================= -->
-
                 <button
                     type="submit"
-                    id="placeOrderButton">
-
+                    id="placeOrderButton"
+                    class="place-order-button"
+                >
                     Place Order
-
                 </button>
-
             </form>
-
-
-            <!-- ============================= -->
-            <!-- SHARE -->
-            <!-- ============================= -->
-
-            <div class="share-section">
-
-                <h2>Share Mana Ruchi</h2>
-
-                <p>
-                    Share our homemade chilli powder
-                    with your friends and family.
-                </p>
-
-                <button
-                    type="button"
-                    id="shareWhatsApp"
-                    class="share-button">
-
-                    📱 Share on WhatsApp
-
-                </button>
-
-            </div>
-
-
-            <!-- ============================= -->
-            <!-- ABOUT -->
-            <!-- ============================= -->
-
-            <div class="about">
-
-                <h2>About Mana Ruchi</h2>
-
-                <p>
-                    Mana Ruchi provides homemade chilli powder
-                    prepared with care for authentic flavour
-                    and quality.
-                </p>
-
-            </div>
-
         </div>
-
-    </main>
-
-
-    <!-- ============================= -->
-    <!-- FOOTER -->
-    <!-- ============================= -->
-
-    <footer>
-
-        <h2>Contact Us</h2>
-
-        <p>
-            📞
+    </div>
+</section>
+<!-- =========================================
+     DELIVERY
+========================================= -->
+<section id="delivery" class="section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="small-title">
+                DELIVERY
+            </p>
+            <h2>
+                Freshness Delivered
+            </h2>
+        </div>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="icon">
+                    📦
+                </div>
+                <h3>
+                    Carefully Packed
+                </h3>
+                <p>
+                    Your chilli powder is packed carefully
+                    to maintain freshness.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="icon">
+                    🚚
+                </div>
+                <h3>
+                    Home Delivery
+                </h3>
+                <p>
+                    We arrange delivery to your provided
+                    address.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="icon">
+                    🌶️
+                </div>
+                <h3>
+                    Homemade Quality
+                </h3>
+                <p>
+                    Made with care for an authentic
+                    homemade taste.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =========================================
+     ABOUT
+========================================= -->
+<section id="about" class="section about-section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="small-title">
+                ABOUT US
+            </p>
+            <h2>
+                About Mana Ruchi
+            </h2>
+        </div>
+        <div class="about-content">
+            <p>
+                Mana Ruchi is a homemade chilli powder
+                brand focused on delivering authentic taste
+                and fresh quality to customers.
+            </p>
+            <p>
+                Every order is handled with care so that
+                customers can enjoy the traditional flavour
+                of homemade chilli powder.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- =========================================
+     CONTACT
+========================================= -->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="small-title">
+                CONTACT
+            </p>
+            <h2>
+                Get In Touch
+            </h2>
+        </div>
+        <div class="contact-card">
+            <p>
+                Have a question about your order?
+            </p>
             <a
-                class="whatsapp-link"
                 href="https://wa.me/918367450301"
-                target="_blank">
-
-                +91 83674 50301
-
+                target="_blank"
+                rel="noopener"
+                class="whatsapp-button"
+            >
+                💬 Contact Us on WhatsApp
             </a>
-        </p>
-
-        <p>
-            💬 WhatsApp Us
-        </p>
-
-        <p>
-            © 2026 Mana Ruchi
-        </p>
-
-    </footer>
-
-
-    <!-- ============================= -->
-    <!-- FLOATING WHATSAPP -->
-    <!-- ============================= -->
-
+        </div>
+    </div>
+</section>
+<!-- =========================================
+     WHATSAPP SHARE
+========================================= -->
+<div class="share-container">
     <button
-        id="floatingWhatsApp"
-        title="Contact us on WhatsApp">
-
-        💬
-
+        type="button"
+        id="shareWhatsApp"
+        class="share-whatsapp"
+    >
+        📲 Share on WhatsApp
     </button>
-
-
-    <!-- ========================================= -->
-    <!-- SUPABASE + SCRIPT.JS -->
-    <!-- ========================================= -->
-
-    <script>
-
-        window.addEventListener("load", function () {
-
-            const script = document.createElement("script");
-
-            script.src = "script.js?v=2";
-
-            document.body.appendChild(script);
-
-        });
-
-    </script>
+</div>
+<!-- =========================================
+     FLOATING WHATSAPP
+========================================= -->
+<a
+    href="https://wa.me/918367450301"
+    target="_blank"
+    rel="noopener"
+    id="floatingWhatsApp"
+    class="floating-whatsapp"
+    aria-label="Contact Mana Ruchi on WhatsApp"
+>
+    💬
+</a>
+<!-- =========================================
+     FOOTER
+========================================= -->
+<footer class="footer">
+    <div class="container">
+        <h3>
+            🌶️ Mana Ruchi
+        </h3>
+        <p>
+            Homemade Chilli Powder
+        </p>
+        <p>
+            ₹400 / kg | Minimum Order: 10 kg
+        </p>
+        <p class="copyright">
+            © 2026 Mana Ruchi. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+<!-- =========================================
+     IMPORTANT SCRIPTS
+========================================= -->
+<!-- Supabase MUST load first -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Your JavaScript MUST load after Supabase -->
 <script src="./script.js"></script>
 </body>
 </html>

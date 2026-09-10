@@ -1,32 +1,76 @@
 /* =====================================================
-   MANA RUCHI - CUSTOMER ORDER SYSTEM
+   MANA RUCHI - ORDER SYSTEM
 ===================================================== */
 
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+console.log("Mana Ruchi script loaded");
+
+
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+    "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+
+const SUPABASE_ANON_KEY =
+    "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
 
 const PRICE_PER_KG = 400;
+
 const MINIMUM_QUANTITY = 10;
+
 const OWNER_WHATSAPP = "918367450301";
 
-/* =====================================================
-   SUPABASE
-===================================================== */
-
-const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
 
 /* =====================================================
-   ELEMENTS
+   CHECK SUPABASE
 ===================================================== */
 
-const orderForm = document.getElementById("orderForm");
-const customerName = document.getElementById("customerName");
-const customerPhone = document.getElementById("customerPhone");
-const quantity = document.getElementById("quantity");
-const address = document.getElementById("address");
+if (
+    typeof window.supabase === "undefined"
+) {
+
+    console.error(
+        "Supabase library was not loaded."
+    );
+
+}
+
+
+/* =====================================================
+   CREATE SUPABASE CLIENT
+===================================================== */
+
+const db =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   GET ELEMENTS
+===================================================== */
+
+const orderForm =
+    document.getElementById("orderForm");
+
+const customerName =
+    document.getElementById("customerName");
+
+const customerPhone =
+    document.getElementById("customerPhone");
+
+const quantity =
+    document.getElementById("quantity");
+
+const address =
+    document.getElementById("address");
 
 const decreaseQuantity =
     document.getElementById("decreaseQuantity");
@@ -46,101 +90,231 @@ const orderMessage =
 const placeOrderButton =
     document.getElementById("placeOrderButton");
 
+
 /* =====================================================
-   INITIALIZE
+   CHECK HTML ELEMENTS
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
-    updateSummary();
-});
+console.log("Order form:", orderForm);
+
+console.log(
+    "Place order button:",
+    placeOrderButton
+);
+
 
 /* =====================================================
-   QUANTITY
+   UPDATE SUMMARY
 ===================================================== */
 
 function updateSummary() {
 
-    let qty = parseInt(quantity?.value);
+    let qty =
+        parseInt(quantity.value);
 
-    if (isNaN(qty) || qty < MINIMUM_QUANTITY) {
+    if (
+        isNaN(qty) ||
+        qty < MINIMUM_QUANTITY
+    ) {
+
         qty = MINIMUM_QUANTITY;
 
-        if (quantity) {
-            quantity.value = qty;
-        }
+        quantity.value = qty;
     }
 
-    const total = qty * PRICE_PER_KG;
+    const total =
+        qty * PRICE_PER_KG;
 
-    if (summaryQuantity) {
-        summaryQuantity.textContent = qty + " kg";
-    }
+    summaryQuantity.textContent =
+        qty + " kg";
 
-    if (totalPrice) {
-        totalPrice.textContent =
-            "₹" + total.toLocaleString("en-IN");
-    }
+    totalPrice.textContent =
+        "₹" +
+        total.toLocaleString("en-IN");
 }
 
+
 /* =====================================================
-   DECREASE
+   DECREASE QUANTITY
 ===================================================== */
 
-if (decreaseQuantity) {
+decreaseQuantity.addEventListener(
+    "click",
+    function () {
 
-    decreaseQuantity.addEventListener("click", function () {
+        let qty =
+            parseInt(quantity.value);
 
-        let qty = parseInt(quantity.value) || MINIMUM_QUANTITY;
+        if (
+            isNaN(qty) ||
+            qty <= MINIMUM_QUANTITY
+        ) {
 
-        if (qty > MINIMUM_QUANTITY) {
+            qty = MINIMUM_QUANTITY;
+
+        } else {
+
             qty--;
-            quantity.value = qty;
         }
+
+        quantity.value = qty;
 
         updateSummary();
-    });
-}
+
+    }
+);
+
 
 /* =====================================================
-   INCREASE
+   INCREASE QUANTITY
 ===================================================== */
 
-if (increaseQuantity) {
+increaseQuantity.addEventListener(
+    "click",
+    function () {
 
-    increaseQuantity.addEventListener("click", function () {
-
-        let qty = parseInt(quantity.value) || MINIMUM_QUANTITY;
+        let qty =
+            parseInt(quantity.value) ||
+            MINIMUM_QUANTITY;
 
         qty++;
 
         quantity.value = qty;
 
         updateSummary();
+
+    }
+);
+
+
+/* =====================================================
+   QUANTITY INPUT
+===================================================== */
+
+quantity.addEventListener(
+    "input",
+    updateSummary
+);
+
+
+/* =====================================================
+   INITIAL SUMMARY
+===================================================== */
+
+updateSummary();
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(message) {
+
+    orderMessage.style.display =
+        "block";
+
+    orderMessage.innerHTML = `
+        <div class="order-error-box">
+
+            ❌ ${message}
+
+        </div>
+    `;
+
+    orderMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
     });
 }
 
+
 /* =====================================================
-   MANUAL QUANTITY CHANGE
+   SHOW SUCCESS
 ===================================================== */
 
-if (quantity) {
+function showSuccess(
+    name,
+    orderNumber,
+    qty,
+    total
+) {
 
-    quantity.addEventListener("input", function () {
-        updateSummary();
+    orderMessage.style.display =
+        "block";
+
+    orderMessage.innerHTML = `
+
+        <div class="order-success-box">
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+            <h2>
+                Your Order is Confirmed!
+            </h2>
+
+            <p>
+                Thank you,
+                <strong>
+                    ${escapeHTML(name)}
+                </strong>
+            </p>
+
+            <p>
+                <strong>
+                    Order Number:
+                </strong>
+                ${orderNumber}
+            </p>
+
+            <p>
+                <strong>
+                    Quantity:
+                </strong>
+                ${qty} kg
+            </p>
+
+            <p>
+                <strong>
+                    Total Amount:
+                </strong>
+                ₹${total.toLocaleString("en-IN")}
+            </p>
+
+            <p>
+                We will contact you regarding
+                your delivery.
+            </p>
+
+        </div>
+    `;
+
+    orderMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
     });
 }
 
+
 /* =====================================================
-   ORDER FORM
+   PLACE ORDER
 ===================================================== */
 
-if (orderForm) {
-
-    orderForm.addEventListener("submit", async function (event) {
+orderForm.addEventListener(
+    "submit",
+    async function (event) {
 
         event.preventDefault();
 
-        clearMessage();
+        console.log(
+            "Place Order button clicked"
+        );
+
+
+        /* =============================================
+           GET VALUES
+        ============================================= */
 
         const name =
             customerName.value.trim();
@@ -154,174 +328,174 @@ if (orderForm) {
         const customerAddress =
             address.value.trim();
 
-        /* =================================================
+
+        /* =============================================
            VALIDATION
-        ================================================= */
+        ============================================= */
 
         if (!name) {
-            showError("Please enter your name.");
+
+            showError(
+                "Please enter your name."
+            );
+
             return;
         }
 
-        if (!/^[0-9]{10}$/.test(phone)) {
+
+        if (
+            !/^[0-9]{10}$/.test(phone)
+        ) {
+
             showError(
                 "Please enter a valid 10-digit mobile number."
             );
+
             return;
         }
+
 
         if (
             isNaN(qty) ||
             qty < MINIMUM_QUANTITY
         ) {
+
             showError(
-                "Minimum order quantity is " +
-                MINIMUM_QUANTITY +
-                " kg."
+                "Minimum order quantity is 10 kg."
             );
+
             return;
         }
 
+
         if (!customerAddress) {
+
             showError(
                 "Please enter your delivery address."
             );
+
             return;
         }
 
-        /* =================================================
+
+        /* =============================================
            TOTAL
-        ================================================= */
+        ============================================= */
 
         const total =
             qty * PRICE_PER_KG;
 
-        /* =================================================
+
+        /* =============================================
            ORDER NUMBER
-        ================================================= */
+        ============================================= */
 
         const orderNumber =
             "MR-" +
-            Date.now().toString().slice(-8);
+            Date.now()
+                .toString()
+                .slice(-8);
 
-        /* =================================================
-           BUTTON
-        ================================================= */
 
-        const originalText =
-            placeOrderButton.innerHTML;
+        /* =============================================
+           BUTTON LOADING
+        ============================================= */
 
-        placeOrderButton.disabled = true;
+        placeOrderButton.disabled =
+            true;
 
         placeOrderButton.innerHTML =
             "⏳ Placing Order...";
 
+
         try {
 
-            console.log("Sending order to Supabase...");
+            console.log(
+                "Attempting Supabase insert..."
+            );
 
-            /* =================================================
-               INSERT ORDER
-            ================================================= */
 
-            const { error } =
+            /* =========================================
+               INSERT
+            ========================================= */
+
+            const result =
                 await db
                     .from("orders")
                     .insert([
                         {
-                            order_id: orderNumber,
-                            customer_name: name,
-                            phone: phone,
-                            quantity: qty,
-                            address: customerAddress,
-                            price_per_kg: PRICE_PER_KG,
-                            total_amount: total,
+                            order_id:
+                                orderNumber,
+
+                            customer_name:
+                                name,
+
+                            phone:
+                                phone,
+
+                            quantity:
+                                qty,
+
+                            address:
+                                customerAddress,
+
+                            price_per_kg:
+                                PRICE_PER_KG,
+
+                            total_amount:
+                                total,
+
                             product_name:
                                 "Mana Ruchi Homemade Chilli Powder",
-                            status: "New"
+
+                            status:
+                                "New"
                         }
                     ]);
 
-            /* =================================================
-               ERROR
-            ================================================= */
 
-            if (error) {
+            console.log(
+                "Supabase result:",
+                result
+            );
+
+
+            /* =========================================
+               DATABASE ERROR
+            ========================================= */
+
+            if (result.error) {
 
                 console.error(
-                    "SUPABASE ERROR:",
-                    error
+                    "DATABASE ERROR:",
+                    result.error
                 );
 
                 showError(
-                    "Order could not be placed. Please try again."
+                    "Order could not be saved. Please check your Supabase settings."
                 );
 
                 return;
             }
 
-            /* =================================================
-               SUCCESS
-            ================================================= */
 
-            console.log(
-                "ORDER SUCCESS:",
-                orderNumber
+            /* =========================================
+               SUCCESS
+            ========================================= */
+
+            showSuccess(
+                name,
+                orderNumber,
+                qty,
+                total
             );
 
-            orderMessage.style.display = "block";
 
-            orderMessage.innerHTML = `
-                <div class="order-success-box">
-
-                    <div class="success-icon">
-                        ✅
-                    </div>
-
-                    <h2>
-                        Your Order is Confirmed!
-                    </h2>
-
-                    <p>
-                        Thank you, <strong>${escapeHTML(name)}</strong>.
-                    </p>
-
-                    <p>
-                        <strong>Order Number:</strong>
-                        ${orderNumber}
-                    </p>
-
-                    <p>
-                        <strong>Quantity:</strong>
-                        ${qty} kg
-                    </p>
-
-                    <p>
-                        <strong>Total Amount:</strong>
-                        ₹${total.toLocaleString("en-IN")}
-                    </p>
-
-                    <p class="success-note">
-                        We will contact you regarding your delivery.
-                    </p>
-
-                </div>
-            `;
-
-            /* =================================================
-               SCROLL TO SUCCESS MESSAGE
-            ================================================= */
-
-            orderMessage.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-            /* =================================================
+            /* =========================================
                WHATSAPP
-            ================================================= */
+            ========================================= */
 
-            const whatsappText =
+            const whatsappMessage =
                 `🌶️ NEW MANA RUCHI ORDER\n\n` +
                 `Order No: ${orderNumber}\n` +
                 `Customer: ${name}\n` +
@@ -330,29 +504,32 @@ if (orderForm) {
                 `Total: ₹${total}\n` +
                 `Address: ${customerAddress}`;
 
+
             const whatsappURL =
                 "https://wa.me/" +
                 OWNER_WHATSAPP +
                 "?text=" +
-                encodeURIComponent(whatsappText);
-
-            /*
-             * Small delay so the confirmation message
-             * appears before WhatsApp opens.
-             */
-
-            setTimeout(function () {
-
-                window.open(
-                    whatsappURL,
-                    "_blank"
+                encodeURIComponent(
+                    whatsappMessage
                 );
 
-            }, 1000);
 
-            /* =================================================
+            setTimeout(
+                function () {
+
+                    window.open(
+                        whatsappURL,
+                        "_blank"
+                    );
+
+                },
+                1000
+            );
+
+
+            /* =========================================
                RESET FORM
-            ================================================= */
+            ========================================= */
 
             orderForm.reset();
 
@@ -360,6 +537,7 @@ if (orderForm) {
                 MINIMUM_QUANTITY;
 
             updateSummary();
+
 
         } catch (error) {
 
@@ -372,60 +550,45 @@ if (orderForm) {
                 "Something went wrong. Please try again."
             );
 
+
         } finally {
 
-            placeOrderButton.disabled = false;
+            placeOrderButton.disabled =
+                false;
 
             placeOrderButton.innerHTML =
-                originalText;
+                "🛒 Place Order";
         }
-    });
-}
+
+    }
+);
+
 
 /* =====================================================
-   SUCCESS / ERROR STYLING
-===================================================== */
-
-function clearMessage() {
-
-    if (!orderMessage) return;
-
-    orderMessage.style.display = "none";
-    orderMessage.innerHTML = "";
-}
-
-/* =====================================================
-   ERROR
-===================================================== */
-
-function showError(message) {
-
-    if (!orderMessage) return;
-
-    orderMessage.style.display = "block";
-
-    orderMessage.innerHTML = `
-        <div class="order-error-box">
-            ❌ ${message}
-        </div>
-    `;
-
-    orderMessage.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-}
-
-/* =====================================================
-   HTML ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }

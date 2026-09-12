@@ -9,7 +9,7 @@ const SUPABASE_URL =
     "https://iwkrwidehhklaapbfful.supabase.co";
 const SUPABASE_ANON_KEY =
     "sb_publishable_lI-jEvVEXPHxXRFxIy3vlA_ZF84WGO0";
-const PRICE_PER_KG = 400;
+const PRICE_PER_KG = 350;
 const MINIMUM_QUANTITY = 10;
 const OWNER_WHATSAPP = "918367450301";
 /* =========================================

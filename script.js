@@ -621,13 +621,7 @@ ${address}
 
 Status: New`;
 
-                    const whatsappURL =
-                        "https://wa.me/918367450301" +
-                        OWNER_WHATSAPP +
-                        "?text=" +
-                        encodeURIComponent(
-                            whatsappMessage
-                        );
+                    
 
                     /* =====================================
                        OPEN WHATSAPP

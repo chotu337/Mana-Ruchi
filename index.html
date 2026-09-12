@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
@@ -27,10 +24,6 @@
     >
 
     <style>
-
-        /* =========================================================
-           GLOBAL
-        ========================================================= */
 
         * {
             margin: 0;
@@ -73,9 +66,7 @@
             margin: auto;
         }
 
-        /* =========================================================
-           HEADER
-        ========================================================= */
+        /* ================= HEADER ================= */
 
         header {
             position: sticky;
@@ -131,9 +122,7 @@
             border-radius: 999px;
         }
 
-        /* =========================================================
-           HERO
-        ========================================================= */
+        /* ================= HERO ================= */
 
         .hero {
             padding: 90px 0 85px;
@@ -251,9 +240,7 @@
             filter: drop-shadow(0 20px 15px rgba(0,0,0,0.2));
         }
 
-        /* =========================================================
-           SECTIONS
-        ========================================================= */
+        /* ================= SECTIONS ================= */
 
         section {
             padding: 90px 0;
@@ -276,9 +263,7 @@
             margin-bottom: 40px;
         }
 
-        /* =========================================================
-           PRODUCT
-        ========================================================= */
+        /* ================= PRODUCT ================= */
 
         .product-grid {
             display: grid;
@@ -356,9 +341,7 @@
             font-weight: 700;
         }
 
-        /* =========================================================
-           ORDER
-        ========================================================= */
+        /* ================= ORDER ================= */
 
         .order-section {
             background: #7b1113;
@@ -450,6 +433,7 @@
             font-size: 25px;
             font-weight: 700;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .quantity-control button:hover {
@@ -535,7 +519,7 @@
             margin-top: 15px;
         }
 
-        /* Place order */
+        /* Place Order */
 
         #placeOrderButton {
             width: 100%;
@@ -582,9 +566,7 @@
             color: #9b1717;
         }
 
-        /* =========================================================
-           DELIVERY
-        ========================================================= */
+        /* ================= DELIVERY ================= */
 
         .delivery-grid {
             display: grid;
@@ -614,9 +596,7 @@
             color: #70554c;
         }
 
-        /* =========================================================
-           ABOUT
-        ========================================================= */
+        /* ================= ABOUT ================= */
 
         .about-box {
             background: #fffaf4;
@@ -632,9 +612,7 @@
             margin-bottom: 15px;
         }
 
-        /* =========================================================
-           CONTACT
-        ========================================================= */
+        /* ================= CONTACT ================= */
 
         .contact-box {
             background: linear-gradient(135deg, #7b1113, #5e0d0f);
@@ -667,9 +645,7 @@
             font-weight: 700;
         }
 
-        /* =========================================================
-           FOOTER
-        ========================================================= */
+        /* ================= FOOTER ================= */
 
         footer {
             background: #4c0b0d;
@@ -679,9 +655,7 @@
             font-size: 14px;
         }
 
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
+        /* ================= RESPONSIVE ================= */
 
         @media (max-width: 850px) {
 
@@ -760,6 +734,11 @@
             .contact-box h2 {
                 font-size: 40px;
             }
+
+            .summary-row {
+                font-size: 14px;
+            }
+
         }
 
     </style>
@@ -767,9 +746,7 @@
 
 <body>
 
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
+    <!-- ================= HEADER ================= -->
 
     <header>
 
@@ -818,11 +795,11 @@
     </header>
 
 
-    <!-- =========================================================
-         HOME
-    ========================================================= -->
+    <!-- ================= MAIN ================= -->
 
     <main>
+
+        <!-- ================= HOME ================= -->
 
         <section id="home" class="hero">
 
@@ -880,9 +857,7 @@
         </section>
 
 
-        <!-- =====================================================
-             PRODUCT
-        ===================================================== -->
+        <!-- ================= PRODUCT ================= -->
 
         <section id="product">
 
@@ -899,8 +874,6 @@
 
                 <div class="product-grid">
 
-                    <!-- Product Card -->
-
                     <div class="card">
 
                         <div class="product-photo">
@@ -909,7 +882,6 @@
                                 src="./old1.jpeg"
                                 alt="Mana Masala Homemade Chilli Powder"
                                 loading="lazy"
-                                onerror="this.style.display='none';"
                             >
 
                         </div>
@@ -950,8 +922,6 @@
 
                     </div>
 
-
-                    <!-- Why Mana Masala -->
 
                     <div class="card">
 
@@ -997,9 +967,7 @@
         </section>
 
 
-        <!-- =====================================================
-             ORDER
-        ===================================================== -->
+        <!-- ================= ORDER ================= -->
 
         <section id="order" class="order-section">
 
@@ -1020,9 +988,6 @@
 
                         <div class="form-grid">
 
-
-                            <!-- Name -->
-
                             <div class="form-group">
 
                                 <label for="customerName">
@@ -1039,8 +1004,6 @@
 
                             </div>
 
-
-                            <!-- Phone -->
 
                             <div class="form-group">
 
@@ -1060,8 +1023,6 @@
 
                             </div>
 
-
-                            <!-- Quantity -->
 
                             <div class="form-group">
 
@@ -1105,8 +1066,6 @@
                             </div>
 
 
-                            <!-- Address -->
-
                             <div class="form-group full">
 
                                 <label for="address">
@@ -1124,7 +1083,7 @@
                         </div>
 
 
-                        <!-- Order Summary -->
+                        <!-- ORDER SUMMARY -->
 
                         <div class="order-summary">
 
@@ -1177,9 +1136,7 @@
                                 </span>
 
                                 <strong>
-                                    ₹<span id="totalPrice">
-                                        3500
-                                    </span>
+                                    ₹<span id="totalPrice">3500</span>
                                 </strong>
 
                             </div>
@@ -1187,7 +1144,7 @@
                         </div>
 
 
-                        <!-- Payment -->
+                        <!-- PAYMENT -->
 
                         <div class="payment-box">
 
@@ -1224,7 +1181,7 @@
                         </div>
 
 
-                        <!-- Place Order -->
+                        <!-- PLACE ORDER -->
 
                         <button
                             type="submit"
@@ -1233,8 +1190,6 @@
                             I Have Made the Payment – Confirm & Place Order
                         </button>
 
-
-                        <!-- Message -->
 
                         <div id="orderMessage"></div>
 
@@ -1247,9 +1202,7 @@
         </section>
 
 
-        <!-- =====================================================
-             DELIVERY
-        ===================================================== -->
+        <!-- ================= DELIVERY ================= -->
 
         <section id="delivery">
 
@@ -1326,9 +1279,7 @@
         </section>
 
 
-        <!-- =====================================================
-             ABOUT
-        ===================================================== -->
+        <!-- ================= ABOUT ================= -->
 
         <section id="about">
 
@@ -1370,9 +1321,7 @@
         </section>
 
 
-        <!-- =====================================================
-             CONTACT
-        ===================================================== -->
+        <!-- ================= CONTACT ================= -->
 
         <section id="contact">
 
@@ -1406,9 +1355,7 @@
     </main>
 
 
-    <!-- =========================================================
-         FOOTER
-    ========================================================= -->
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
@@ -1422,15 +1369,13 @@
     </footer>
 
 
-    <!-- =========================================================
-         SUPABASE
-    ========================================================= -->
+    <!-- ================= SUPABASE ================= -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
     <!-- =========================================================
-         COMPLETE ORDER SYSTEM
+         MANA MASALA ORDER SYSTEM
     ========================================================= -->
 
     <script>
@@ -1439,7 +1384,7 @@
 
 
         /* =====================================================
-           CONFIGURATION
+           CONFIG
         ===================================================== */
 
         const SUPABASE_URL =
@@ -1461,6 +1406,11 @@
             10;
 
 
+        console.log(
+            "🌶️ Mana Masala order system starting..."
+        );
+
+
         /* =====================================================
            SUPABASE CLIENT
         ===================================================== */
@@ -1471,9 +1421,13 @@
                 SUPABASE_PUBLISHABLE_KEY
             );
 
+        console.log(
+            "✅ Supabase client created"
+        );
+
 
         /* =====================================================
-           GET ELEMENTS
+           ELEMENTS
         ===================================================== */
 
         const orderForm =
@@ -1513,20 +1467,26 @@
             document.getElementById("orderMessage");
 
 
+        console.log(
+            "✅ All order elements found"
+        );
+
+
         /* =====================================================
-           SHOW MESSAGE
+           MESSAGE
         ===================================================== */
 
         function showMessage(message, type) {
 
-            orderMessage.textContent = message;
+            orderMessage.textContent =
+                message;
 
-            orderMessage.className = type;
+            orderMessage.className =
+                type;
 
-            orderMessage.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+            orderMessage.style.display =
+                "block";
+
         }
 
 
@@ -1537,12 +1497,16 @@
         function updateTotal() {
 
             let quantity =
-                parseInt(quantityInput.value, 10);
+                parseInt(
+                    quantityInput.value,
+                    10
+                );
 
             if (
-                isNaN(quantity) ||
+                Number.isNaN(quantity) ||
                 quantity < MINIMUM_QUANTITY
             ) {
+
                 quantity =
                     MINIMUM_QUANTITY;
 
@@ -1561,6 +1525,13 @@
 
             paymentAmount.textContent =
                 total.toLocaleString("en-IN");
+
+            console.log(
+                "Quantity:",
+                quantity,
+                "Total:",
+                total
+            );
         }
 
 
@@ -1583,7 +1554,7 @@
                     );
 
                 if (
-                    isNaN(quantity) ||
+                    Number.isNaN(quantity) ||
                     quantity <= MINIMUM_QUANTITY
                 ) {
 
@@ -1592,7 +1563,8 @@
 
                 } else {
 
-                    quantity--;
+                    quantity =
+                        quantity - 1;
 
                 }
 
@@ -1623,12 +1595,14 @@
                         10
                     );
 
-                if (isNaN(quantity)) {
+                if (Number.isNaN(quantity)) {
+
                     quantity =
                         MINIMUM_QUANTITY;
                 }
 
-                quantity++;
+                quantity =
+                    quantity + 1;
 
                 quantityInput.value =
                     quantity;
@@ -1640,14 +1614,7 @@
 
 
         /* =====================================================
-           INITIAL TOTAL
-        ===================================================== */
-
-        updateTotal();
-
-
-        /* =====================================================
-           PHONE INPUT
+           PHONE VALIDATION
         ===================================================== */
 
         customerPhone.addEventListener(
@@ -1664,7 +1631,14 @@
 
 
         /* =====================================================
-           ORDER SUBMIT
+           INITIAL TOTAL
+        ===================================================== */
+
+        updateTotal();
+
+
+        /* =====================================================
+           PLACE ORDER
         ===================================================== */
 
         orderForm.addEventListener(
@@ -1679,7 +1653,7 @@
 
 
                 /* ---------------------------------------------
-                   READ VALUES
+                   GET VALUES
                 --------------------------------------------- */
 
                 const name =
@@ -1696,6 +1670,18 @@
 
                 const deliveryAddress =
                     address.value.trim();
+
+
+                console.log(
+                    "📦 Order Data:",
+                    {
+                        name,
+                        phone,
+                        quantity,
+                        address:
+                            deliveryAddress
+                    }
+                );
 
 
                 /* ---------------------------------------------
@@ -1715,7 +1701,9 @@
                 }
 
 
-                if (!/^[0-9]{10}$/.test(phone)) {
+                if (
+                    !/^[0-9]{10}$/.test(phone)
+                ) {
 
                     showMessage(
                         "Please enter a valid 10-digit mobile number.",
@@ -1729,7 +1717,7 @@
 
 
                 if (
-                    isNaN(quantity) ||
+                    Number.isNaN(quantity) ||
                     quantity < MINIMUM_QUANTITY
                 ) {
 
@@ -1756,7 +1744,7 @@
 
 
                 /* ---------------------------------------------
-                   CALCULATE TOTAL
+                   TOTAL
                 --------------------------------------------- */
 
                 const totalAmount =
@@ -1764,7 +1752,7 @@
 
 
                 /* ---------------------------------------------
-                   ORDER OBJECT
+                   ORDER DATA
                 --------------------------------------------- */
 
                 const orderData = {
@@ -1800,8 +1788,6 @@
                 placeOrderButton.textContent =
                     "Placing Your Order...";
 
-                orderMessage.className = "";
-
                 orderMessage.style.display =
                     "none";
 
@@ -1813,18 +1799,24 @@
                     );
 
 
-                    /* -----------------------------------------
-                       SAVE ORDER
-                    ----------------------------------------- */
+                    /* =========================================
+                       IMPORTANT:
+                       INSERT ONLY.
+
+                       DO NOT USE .select()
+                       DO NOT USE .single()
+
+                       Customer has INSERT permission,
+                       but does not need SELECT permission.
+                    ========================================= */
 
                     const {
-                        data,
                         error
                     } = await db
                         .from("orders")
-                        .insert([orderData])
-                        .select()
-                        .single();
+                        .insert([
+                            orderData
+                        ]);
 
 
                     if (error) {
@@ -1839,14 +1831,13 @@
 
 
                     console.log(
-                        "✅ ORDER SAVED:",
-                        data
+                        "✅ ORDER SAVED"
                     );
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        OWNER NOTIFICATION
-                    ----------------------------------------- */
+                    ========================================= */
 
                     console.log(
                         "📲 Sending owner notification..."
@@ -1860,21 +1851,22 @@
                                 notificationData,
                             error:
                                 notificationError
-                        } = await db.functions.invoke(
-                            EDGE_FUNCTION_NAME,
-                            {
-                                body: {
-                                    order:
-                                        orderData
+                        } =
+                            await db.functions.invoke(
+                                EDGE_FUNCTION_NAME,
+                                {
+                                    body: {
+                                        order:
+                                            orderData
+                                    }
                                 }
-                            }
-                        );
+                            );
 
 
                         if (notificationError) {
 
                             console.error(
-                                "⚠️ Notification error:",
+                                "⚠️ OWNER NOTIFICATION ERROR:",
                                 notificationError
                             );
 
@@ -1887,12 +1879,9 @@
 
                         }
 
-                    } catch (notificationError) {
-
-                        /*
-                         Notification failure should NOT
-                         cancel an already saved order.
-                        */
+                    } catch (
+                        notificationError
+                    ) {
 
                         console.error(
                             "⚠️ Notification failed:",
@@ -1902,40 +1891,44 @@
                     }
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        WHATSAPP MESSAGE
-                       ----------------------------------------- */
+                    ========================================= */
 
-                    const whatsappMessage =
-                        `New Mana Masala Order%0A%0A` +
-                        `Name: ${encodeURIComponent(name)}%0A` +
-                        `Phone: ${encodeURIComponent(phone)}%0A` +
-                        `Quantity: ${quantity} kg%0A` +
-                        `Total: ₹${totalAmount}%0A` +
-                        `Address: ${encodeURIComponent(deliveryAddress)}`;
+                    const whatsappText =
+                        `New Mana Masala Order\n\n` +
+                        `Name: ${name}\n` +
+                        `Phone: ${phone}\n` +
+                        `Quantity: ${quantity} kg\n` +
+                        `Total: ₹${totalAmount}\n` +
+                        `Address: ${deliveryAddress}`;
 
-                    /*
-                       WhatsApp URL is prepared here for future use.
-                       It is intentionally NOT opened automatically.
-                    */
 
                     const whatsappUrl =
-                        `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+                        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                            whatsappText
+                        )}`;
+
+
+                    /*
+                       WhatsApp redirect intentionally disabled.
+
+                       Customer remains on website.
+                    */
 
                     console.log(
-                        "📲 WhatsApp message prepared:",
+                        "💬 WhatsApp redirect disabled"
+                    );
+
+                    console.log(
+                        "WhatsApp URL prepared:",
                         whatsappUrl
                     );
 
 
-                    /* -----------------------------------------
+                    /* =========================================
                        SUCCESS
-                    ----------------------------------------- */
-
-                    console.log(
-                        "🎉 ORDER PROCESS COMPLETED"
-                    );
-
+                    ========================================= */
 
                     showMessage(
                         "🎉 Your order has been confirmed successfully! We will contact you shortly.",
@@ -1943,9 +1936,14 @@
                     );
 
 
-                    /* -----------------------------------------
-                       RESET FORM
-                    ----------------------------------------- */
+                    console.log(
+                        "🎉 ORDER PROCESS COMPLETED"
+                    );
+
+
+                    /* =========================================
+                       RESET
+                    ========================================= */
 
                     orderForm.reset();
 
@@ -1963,27 +1961,26 @@
                     );
 
 
-                    let message =
-                        "Order could not be completed. Please try again later.";
-
-
-                    if (
-                        error &&
-                        error.message
-                    ) {
+                    if (error) {
 
                         console.error(
                             "Error message:",
                             error.message
                         );
 
+                        console.error(
+                            "Error code:",
+                            error.code
+                        );
+
                     }
 
 
                     showMessage(
-                        message,
+                        "Order could not be completed. Please try again later.",
                         "error"
                     );
+
 
                 } finally {
 
@@ -2000,23 +1997,47 @@
 
 
         /* =====================================================
-           DEBUG MESSAGE
+           READY
         ===================================================== */
 
         console.log(
-            "🔥 Mana Masala order system loaded successfully."
+            "======================================"
         );
 
         console.log(
-            "💰 Price:",
-            PRICE_PER_KG,
-            "per kg"
+            "🌶️ Mana Masala Order System Ready"
         );
 
         console.log(
-            "📦 Minimum quantity:",
-            MINIMUM_QUANTITY,
-            "kg"
+            "📦 Supabase orders: ENABLED"
+        );
+
+        console.log(
+            "📲 Owner notifications: ENABLED"
+        );
+
+        console.log(
+            "💬 Automatic WhatsApp redirect: DISABLED"
+        );
+
+        console.log(
+            "🖼️ Product image: old1.jpeg"
+        );
+
+        console.log(
+            "💳 Payment QR: payment-qr.jpeg"
+        );
+
+        console.log(
+            "💰 Price: ₹350/kg"
+        );
+
+        console.log(
+            "📦 Minimum order: 10 kg"
+        );
+
+        console.log(
+            "======================================"
         );
 
     </script>

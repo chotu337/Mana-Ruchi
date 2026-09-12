@@ -536,72 +536,56 @@ async function startOrderSystem() {
                     console.log(
                         "✅ ORDER SAVED"
                     );
-
-                    /* =====================================
-                       OWNER NOTIFICATION
-                    ===================================== */
-
-                    try {
-
-                        console.log(
-                            "Sending owner notification..."
-                        );
-
-                        const notification =
-                            await db.functions.invoke(
-                                EDGE_FUNCTION_NAME,
-                                {
-                                    body: {
-                                        customer_name:
-                                            name,
-
-                                        customer_phone:
-                                            phone,
-
-                                        quantity_kg:
-                                            quantity,
-
-                                        address:
-                                            address,
-
-                                        total_amount:
-                                            totalAmount
-                                    }
-                                }
-                            );
-
-                        if (
-                            notification.error
-                        ) {
-
-                            console.warn(
-                                "Notification warning:",
-                                notification.error
-                            );
-
-                        } else {
-
-                            console.log(
-                                "✅ Owner notification sent"
-                            );
-                        }
-
-                    } catch (
-                        notificationError
-                    ) {
-
-                        console.warn(
-                            "Notification failed:",
-                            notificationError
-                        );
-
-                        /*
-                         Order is already saved.
-                         Notification failure must not
-                         make the customer lose the order.
-                        */
+/* =====================================
+   OWNER NOTIFICATION
+===================================== */
+try {
+    console.log(
+        "Sending owner notification..."
+    );
+    const notification =
+        await db.functions.invoke(
+            EDGE_FUNCTION_NAME,
+            {
+                body: {
+                    order: {
+                        customer_name:
+                            name,
+                        customer_phone:
+                            phone,
+                        quantity_kg:
+                            quantity,
+                        address:
+                            address,
+                        total_amount:
+                            totalAmount,
+                        status:
+                            "New"
                     }
-
+                }
+            }
+        );
+    if (notification.error) {
+        console.warn(
+            "Notification warning:",
+            notification.error
+        );
+    } else {
+        console.log(
+            "✅ Owner notification sent"
+        );
+    }
+} catch (notificationError) {
+    console.warn(
+        "Notification failed:",
+        notificationError
+    );
+    /*
+       The order has already been saved.
+       Therefore notification failure does NOT
+       make the order fail.
+    */
+}
                     /* =====================================
                        SUCCESS MESSAGE
                     ===================================== */

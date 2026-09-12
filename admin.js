@@ -1,297 +1,534 @@
-/* =========================================
-   MANA RUCHI - ADMIN DASHBOARD
-========================================= */
-/* =========================================
-   ADMIN LOGIN DETAILS
-========================================= */
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "ManaRuchi@2026";
-/* =========================================
-   GET HTML ELEMENTS
-========================================= */
-const loginSection = document.getElementById("loginSection");
-const dashboardSection = document.getElementById("dashboardSection");
-const loginForm = document.getElementById("loginForm");
-const loginError = document.getElementById("loginError");
-const logoutBtn = document.getElementById("logoutBtn");
-const clearOrdersBtn = document.getElementById("clearOrdersBtn");
-/* =========================================
-   CHECK LOGIN
-========================================= */
-function checkLogin() {
-    const loggedIn = sessionStorage.getItem("manaRuchiAdmin");
-    if (loggedIn === "true") {
+/* =========================================================
+   MANA MASALA - ADMIN DASHBOARD
+   Supabase Authentication + Orders
+   ORDERS TABLE:
+   id
+   customer_name
+   customer_phone
+   quantity_kg
+   address
+   total_amount
+   status
+   created_at
+========================================================= */
+/* =========================================================
+   SUPABASE CONFIG
+========================================================= */
+const SUPABASE_URL =
+    "https://hcczhnmdipqrnbxviuln.supabase.co";
+const SUPABASE_KEY =
+    "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
+const loginForm =
+    document.getElementById("loginForm");
+const usernameInput =
+    document.getElementById("username");
+const passwordInput =
+    document.getElementById("password");
+const loginError =
+    document.getElementById("loginError");
+const loginSection =
+    document.getElementById("loginSection");
+const dashboardSection =
+    document.getElementById("dashboardSection");
+const logoutBtn =
+    document.getElementById("logoutBtn");
+const totalOrders =
+    document.getElementById("totalOrders");
+const pendingOrders =
+    document.getElementById("pendingOrders");
+const completedOrders =
+    document.getElementById("completedOrders");
+const clearOrdersBtn =
+    document.getElementById("clearOrdersBtn");
+const ordersContainer =
+    document.getElementById("ordersContainer");
+const databaseMessage =
+    document.getElementById("databaseMessage");
+/* =========================================================
+   SHOW LOGIN
+========================================================= */
+function showLogin() {
+    if (loginSection) {
+        loginSection.style.display =
+            "block";
+    }
+    if (dashboardSection) {
+        dashboardSection.style.display =
+            "none";
+    }
+}
+/* =========================================================
+   SHOW DASHBOARD
+========================================================= */
+function showDashboard() {
+    if (loginSection) {
+        loginSection.style.display =
+            "none";
+    }
+    if (dashboardSection) {
+        dashboardSection.style.display =
+            "block";
+    }
+}
+/* =========================================================
+   CHECK AUTH SESSION
+========================================================= */
+async function checkAuth() {
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getSession();
+    if (error) {
+        console.error(
+            "Session error:",
+            error
+        );
+        showLogin();
+        return;
+    }
+    if (data.session) {
         showDashboard();
+        await loadOrders();
     } else {
         showLogin();
     }
 }
-/* =========================================
-   SHOW LOGIN
-========================================= */
-function showLogin() {
-    if (loginSection) {
-        loginSection.classList.remove("hidden");
-    }
-    if (dashboardSection) {
-        dashboardSection.classList.add("hidden");
-    }
-}
-/* =========================================
-   SHOW DASHBOARD
-========================================= */
-function showDashboard() {
-    if (loginSection) {
-        loginSection.classList.add("hidden");
-    }
-    if (dashboardSection) {
-        dashboardSection.classList.remove("hidden");
-    }
-    loadOrders();
-}
-/* =========================================
+/* =========================================================
    ADMIN LOGIN
-========================================= */
+========================================================= */
 if (loginForm) {
-    loginForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        const usernameInput =
-            document.getElementById("username");
-        const passwordInput =
-            document.getElementById("password");
-        const username =
-            usernameInput.value.trim();
-        const password =
-            passwordInput.value;
-        /* Check credentials */
-        if (
-            username === ADMIN_USERNAME &&
-            password === ADMIN_PASSWORD
-        ) {
-            /* Save login */
-            sessionStorage.setItem(
-                "manaRuchiAdmin",
-                "true"
-            );
-            /* Remove error */
-            if (loginError) {
-                loginError.textContent = "";
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+            event.preventDefault();
+            const email =
+                usernameInput?.value.trim();
+            const password =
+                passwordInput?.value;
+            if (!email || !password) {
+                if (loginError) {
+                    loginError.textContent =
+                        "Please enter email and password.";
+                    loginError.style.display =
+                        "block";
+                }
+                return;
             }
-            /* Clear form */
-            loginForm.reset();
-            /* Open dashboard */
-            showDashboard();
-        } else {
             if (loginError) {
                 loginError.textContent =
-                    "❌ Incorrect username or password.";
+                    "Signing in...";
+                loginError.style.display =
+                    "block";
+            }
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.signInWithPassword(
+                    {
+                        email: email,
+                        password: password
+                    }
+                );
+            if (error) {
+                console.error(
+                    "Login error:",
+                    error
+                );
+                if (loginError) {
+                    loginError.textContent =
+                        "Incorrect login credentials.";
+                    loginError.style.display =
+                        "block";
+                }
+                return;
+            }
+            if (data.session) {
+                if (loginError) {
+                    loginError.style.display =
+                        "none";
+                }
+                showDashboard();
+                await loadOrders();
             }
         }
-    });
+    );
 }
-/* =========================================
-   LOGOUT
-========================================= */
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", function() {
-        sessionStorage.removeItem(
-            "manaRuchiAdmin"
-        );
-        showLogin();
-    });
-}
-/* =========================================
+/* =========================================================
    LOAD ORDERS
-========================================= */
-function loadOrders() {
-    let orders = [];
-    try {
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "manaRuchiOrders"
-                )
-            ) || [];
-    } catch (error) {
-        orders = [];
+========================================================= */
+async function loadOrders() {
+    if (ordersContainer) {
+        ordersContainer.innerHTML =
+            `<div class="loading">
+                Loading orders...
+             </div>`;
     }
-    updateStatistics(orders);
-    displayOrders(orders);
+    const {
+        data: orders,
+        error
+    } =
+        await supabaseClient
+            .from("orders")
+            .select(
+                "id, customer_name, customer_phone, quantity_kg, address, total_amount, status, created_at"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+    if (error) {
+        console.error(
+            "Load orders error:",
+            error
+        );
+        if (databaseMessage) {
+            databaseMessage.textContent =
+                "Unable to load orders: " +
+                error.message;
+            databaseMessage.style.display =
+                "block";
+        }
+        if (ordersContainer) {
+            ordersContainer.innerHTML =
+                `<div class="error">
+                    Unable to load orders.
+                 </div>`;
+        }
+        return;
+    }
+    if (databaseMessage) {
+        databaseMessage.style.display =
+            "none";
+    }
+    updateStatistics(
+        orders || []
+    );
+    displayOrders(
+        orders || []
+    );
 }
-/* =========================================
+/* =========================================================
    UPDATE STATISTICS
-========================================= */
+========================================================= */
 function updateStatistics(orders) {
     const total =
         orders.length;
     const pending =
-        orders.filter(function(order) {
-            return order.status !== "Completed";
-        }).length;
+        orders.filter(order =>
+            String(order.status)
+                .toLowerCase() ===
+            "pending"
+        ).length;
     const completed =
-        orders.filter(function(order) {
-            return order.status === "Completed";
-        }).length;
-    const totalOrders =
-        document.getElementById(
-            "totalOrders"
-        );
-    const pendingOrders =
-        document.getElementById(
-            "pendingOrders"
-        );
-    const completedOrders =
-        document.getElementById(
-            "completedOrders"
-        );
+        orders.filter(order =>
+            String(order.status)
+                .toLowerCase() ===
+            "completed"
+        ).length;
     if (totalOrders) {
-        totalOrders.textContent = total;
+        totalOrders.textContent =
+            total;
     }
     if (pendingOrders) {
-        pendingOrders.textContent = pending;
+        pendingOrders.textContent =
+            pending;
     }
     if (completedOrders) {
-        completedOrders.textContent = completed;
+        completedOrders.textContent =
+            completed;
     }
 }
-/* =========================================
+/* =========================================================
    DISPLAY ORDERS
-========================================= */
+========================================================= */
 function displayOrders(orders) {
-    const container =
-        document.getElementById(
-            "ordersContainer"
-        );
-    if (!container) {
-        return;
-    }
-    /* No orders */
-    if (orders.length === 0) {
-        container.innerHTML = `
+    if (!ordersContainer) return;
+    if (!orders.length) {
+        ordersContainer.innerHTML = `
             <div class="no-orders">
-                <p>📭 No orders available.</p>
+                <h3>No Orders Yet</h3>
+                <p>Customer orders will appear here.</p>
             </div>
         `;
         return;
     }
-    container.innerHTML = "";
-    /* Display orders */
-    orders.forEach(function(order, index) {
-        const card =
-            document.createElement("div");
-        card.className =
-            "order-card";
-        const status =
-            order.status || "Pending";
-        card.innerHTML = `
-            <h3>
-                📦 Order #${index + 1}
-            </h3>
-            <div class="order-info">
-                <strong>Customer:</strong>
-                ${escapeHTML(order.name || "N/A")}
-                <br>
-                <strong>Phone:</strong>
-                ${escapeHTML(order.phone || "N/A")}
-                <br>
-                <strong>Address:</strong>
-                ${escapeHTML(order.address || "N/A")}
-                <br>
-                <strong>Product:</strong>
-                ${escapeHTML(
-                    order.product || "Chilli Powder"
-                )}
-                <br>
-                <strong>Quantity:</strong>
-                ${escapeHTML(
-                    order.quantity || "N/A"
-                )}
-                <br>
-                <strong>Date:</strong>
-                ${escapeHTML(
-                    order.date || "N/A"
-                )}
-            </div>
-            <span class="order-status">
-                ${escapeHTML(status)}
-            </span>
-            ${
-                status !== "Completed"
-                ?
-                `
-                <br>
-                <button
-                    class="complete-btn"
-                    onclick="completeOrder(${index})">
-                    ✅ Mark Completed
-                </button>
-                `
-                :
-                ""
-            }
-        `;
-        container.appendChild(card);
-    });
+    ordersContainer.innerHTML =
+        orders.map(order => {
+            const status =
+                String(
+                    order.status || "Pending"
+                );
+            const statusClass =
+                status
+                    .toLowerCase()
+                    .replace(/\s+/g, "-");
+            const date =
+                formatDate(
+                    order.created_at
+                );
+            const quantity =
+                Number(
+                    order.quantity_kg || 0
+                );
+            const total =
+                Number(
+                    order.total_amount || 0
+                );
+            return `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <h3>
+                                Order #${escapeHTML(
+                                    String(order.id)
+                                )}
+                            </h3>
+                            <span class="order-date">
+                                ${escapeHTML(date)}
+                            </span>
+                        </div>
+                        <span class="status ${statusClass}">
+                            ${escapeHTML(status)}
+                        </span>
+                    </div>
+                    <div class="order-details">
+                        <div class="detail">
+                            <strong>
+                                Customer
+                            </strong>
+                            <span>
+                                ${escapeHTML(
+                                    order.customer_name || "-"
+                                )}
+                            </span>
+                        </div>
+                        <div class="detail">
+                            <strong>
+                                Phone
+                            </strong>
+                            <span>
+                                ${escapeHTML(
+                                    order.customer_phone || "-"
+                                )}
+                            </span>
+                        </div>
+                        <div class="detail">
+                            <strong>
+                                Quantity
+                            </strong>
+                            <span>
+                                ${quantity} kg
+                            </span>
+                        </div>
+                        <div class="detail">
+                            <strong>
+                                Total
+                            </strong>
+                            <span>
+                                ₹${total.toLocaleString("en-IN")}
+                            </span>
+                        </div>
+                        <div class="detail full-width">
+                            <strong>
+                                Address
+                            </strong>
+                            <span>
+                                ${escapeHTML(
+                                    order.address || "-"
+                                )}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        ${
+                            status.toLowerCase() !==
+                            "completed"
+                            ?
+                            `<button
+                                class="complete-btn"
+                                onclick="markOrderCompleted('${escapeAttribute(String(order.id))}')"
+                            >
+                                ✓ Mark Completed
+                            </button>`
+                            :
+                            `<span class="completed-label">
+                                ✓ Order Completed
+                            </span>`
+                        }
+                    </div>
+                </div>
+            `;
+        }).join("");
 }
-/* =========================================
+/* =========================================================
    MARK ORDER COMPLETED
-========================================= */
-function completeOrder(index) {
-    let orders = [];
-    try {
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "manaRuchiOrders"
-                )
-            ) || [];
-    } catch (error) {
-        orders = [];
-    }
-    if (!orders[index]) {
+========================================================= */
+async function markOrderCompleted(orderId) {
+    const confirmed =
+        confirm(
+            "Mark this order as completed?"
+        );
+    if (!confirmed) return;
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("orders")
+            .update({
+                status: "Completed"
+            })
+            .eq(
+                "id",
+                orderId
+            );
+    if (error) {
+        console.error(
+            "Update order error:",
+            error
+        );
+        alert(
+            "Could not update order: " +
+            error.message
+        );
         return;
     }
-    orders[index].status =
-        "Completed";
-    localStorage.setItem(
-        "manaRuchiOrders",
-        JSON.stringify(orders)
-    );
-    loadOrders();
+    await loadOrders();
 }
-/* =========================================
+/* =========================================================
    CLEAR ALL ORDERS
-========================================= */
+========================================================= */
 if (clearOrdersBtn) {
     clearOrdersBtn.addEventListener(
         "click",
-        function() {
-            const confirmation =
+        async function () {
+            const confirmed =
                 confirm(
-                    "Are you sure you want to delete all orders?"
+                    "Are you sure you want to delete ALL orders?\n\nThis cannot be undone."
                 );
-            if (!confirmation) {
-                return;
+            if (!confirmed) return;
+            clearOrdersBtn.disabled =
+                true;
+            clearOrdersBtn.textContent =
+                "Clearing...";
+            try {
+                /*
+                 * Delete all rows.
+                 * The id IS NOT NULL condition
+                 * prevents accidental malformed
+                 * delete calls.
+                 */
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("orders")
+                        .delete()
+                        .not(
+                            "id",
+                            "is",
+                            null
+                        );
+                if (error) {
+                    throw error;
+                }
+                await loadOrders();
+                alert(
+                    "All orders have been cleared."
+                );
+            } catch (error) {
+                console.error(
+                    "Clear orders error:",
+                    error
+                );
+                alert(
+                    "Could not clear orders: " +
+                    error.message
+                );
+            } finally {
+                clearOrdersBtn.disabled =
+                    false;
+                clearOrdersBtn.textContent =
+                    "Clear Orders";
             }
-            localStorage.removeItem(
-                "manaRuchiOrders"
-            );
-            loadOrders();
         }
     );
 }
-/* =========================================
-   ESCAPE HTML
-========================================= */
+/* =========================================================
+   LOGOUT
+========================================================= */
+if (logoutBtn) {
+    logoutBtn.addEventListener(
+        "click",
+        async function () {
+            await supabaseClient.auth.signOut();
+            showLogin();
+        }
+    );
+}
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+setInterval(
+    async () => {
+        const {
+            data
+        } =
+            await supabaseClient.auth.getSession();
+        if (data.session) {
+            await loadOrders();
+        }
+    },
+    30000
+);
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+function formatDate(dateString) {
+    if (!dateString) {
+        return "-";
+    }
+    const date =
+        new Date(dateString);
+    if (isNaN(date.getTime())) {
+        return "-";
+    }
+    return date.toLocaleString(
+        "en-IN",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
+}
+/* =========================================================
+   HTML ESCAPING
+========================================================= */
 function escapeHTML(value) {
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
-/* =========================================
-   START DASHBOARD
-========================================= */
-checkLogin();
+function escapeAttribute(value) {
+    return String(value)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+}
+/* =========================================================
+   START
+========================================================= */
+checkAuth();

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -15,44 +13,29 @@
         content="Mana Masala - Homemade Chilli Powder. Pure, fresh and traditionally prepared."
     >
 
-    <meta
-        name="theme-color"
-        content="#7b1113"
-    >
+    <meta name="theme-color" content="#7b1113">
 
     <title>Mana Masala | Homemade Chilli Powder</title>
 
-    <!-- GOOGLE FONTS -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <!-- FAVICON -->
-    <link
-        rel="icon"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%237b1113'/%3E%3Ctext x='50' y='67' text-anchor='middle' font-size='58'%3E🌶️%3C/text%3E%3C/svg%3E"
-    >
-
-
     <style>
 
-        /* =====================================================
-           RESET
-        ===================================================== */
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         html {
@@ -62,7 +45,7 @@
         body {
             font-family: "DM Sans", sans-serif;
             background: #f8f1e7;
-            color: #241713;
+            color: #2d1b16;
             line-height: 1.6;
         }
 
@@ -77,15 +60,22 @@
             font-family: inherit;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
+        button {
+            cursor: pointer;
         }
 
+        img {
+            max-width: 100%;
+        }
 
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
         header {
             position: sticky;
@@ -96,54 +86,41 @@
             border-bottom: 1px solid rgba(123, 17, 19, 0.12);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 18px 25px;
+        .nav {
+            min-height: 76px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 25px;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #7b1113;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: #7b1113;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            box-shadow: 0 8px 20px rgba(123, 17, 19, 0.18);
-        }
-
-        .logo-text {
             font-family: "Cormorant Garamond", serif;
-            font-size: 29px;
+            font-size: 32px;
             font-weight: 700;
+            color: #7b1113;
+            white-space: nowrap;
         }
 
-        nav {
+        .logo span {
+            color: #9b681f;
+        }
+
+        .nav-links {
             display: flex;
-            gap: 25px;
             align-items: center;
+            gap: 24px;
+            list-style: none;
         }
 
-        nav a {
+        .nav-links a {
             font-size: 14px;
             font-weight: 600;
-            color: #3c2922;
+            color: #44251e;
             transition: 0.25s;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: #7b1113;
         }
 
@@ -151,209 +128,171 @@
             background: #7b1113;
             color: white !important;
             padding: 11px 18px;
-            border-radius: 30px;
+            border-radius: 999px;
         }
 
-
-        /* =====================================================
+        /* =========================================================
            HERO
-        ===================================================== */
+        ========================================================= */
 
         .hero {
-            min-height: 88vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(
-                    circle at 85% 20%,
-                    rgba(176, 119, 37, 0.13),
-                    transparent 28%
-                ),
-                linear-gradient(
-                    135deg,
-                    #f9f2e9,
-                    #f1e2d1
-                );
+            padding: 90px 0 85px;
         }
 
-        .hero::before {
-            content: "🌶️";
-            position: absolute;
-            right: 7%;
-            top: 15%;
-            font-size: 170px;
-            opacity: 0.08;
-            transform: rotate(-15deg);
-        }
-
-        .hero-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 80px 25px;
+        .hero-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 50px;
             align-items: center;
+            gap: 60px;
         }
 
-        .eyebrow {
+        .hero-label {
+            display: inline-block;
             color: #9b681f;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
         .hero h1 {
             font-family: "Cormorant Garamond", serif;
-            font-size: clamp(55px, 8vw, 94px);
-            line-height: 0.92;
+            font-size: clamp(58px, 8vw, 100px);
+            line-height: 0.9;
             color: #7b1113;
             margin-bottom: 25px;
         }
 
         .hero h1 span {
-            color: #241713;
+            color: #9b681f;
         }
 
-        .hero-description {
-            max-width: 590px;
-            color: #66544a;
+        .hero p {
+            max-width: 570px;
             font-size: 17px;
-            margin-bottom: 32px;
+            color: #62463d;
+            margin-bottom: 30px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 14px;
             flex-wrap: wrap;
+            gap: 14px;
         }
 
-        .primary-button {
-            background: #7b1113;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 40px;
-            font-weight: 700;
+        .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 12px 25px rgba(123, 17, 19, 0.18);
+            justify-content: center;
+            min-height: 50px;
+            padding: 13px 24px;
+            border-radius: 999px;
+            border: none;
+            font-weight: 700;
             transition: 0.25s;
         }
 
-        .primary-button:hover {
-            transform: translateY(-2px);
+        .btn-primary {
+            background: #7b1113;
+            color: white;
         }
 
-        .secondary-button {
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #641012;
+        }
+
+        .btn-outline {
             border: 1px solid #7b1113;
             color: #7b1113;
-            padding: 14px 25px;
-            border-radius: 40px;
-            font-weight: 700;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #7b1113;
+            color: white;
         }
 
         .hero-card {
-            background: rgba(255, 255, 255, 0.58);
-            border: 1px solid rgba(123, 17, 19, 0.12);
-            border-radius: 30px;
-            padding: 45px;
-            box-shadow: 0 25px 70px rgba(73, 41, 24, 0.10);
-            text-align: center;
+            min-height: 390px;
+            border-radius: 35px;
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(255,255,255,0.9),
+                    rgba(255,255,255,0.15)
+                ),
+                linear-gradient(
+                    145deg,
+                    #8c1718,
+                    #5c0d0f
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(78, 17, 15, 0.22);
         }
 
-        .hero-card-chilli {
-            font-size: 130px;
-            margin-bottom: 15px;
-            filter: drop-shadow(
-                0 18px 20px rgba(123, 17, 19, 0.16)
-            );
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .hero-card h3 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 34px;
-            color: #7b1113;
+        .hero-chilli {
+            font-size: 150px;
+            position: relative;
+            filter: drop-shadow(0 20px 15px rgba(0,0,0,0.2));
         }
 
-        .hero-card p {
-            color: #6c584d;
-            margin-top: 8px;
-        }
-
-
-        /* =====================================================
-           GENERAL
-        ===================================================== */
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
 
         section {
-            padding: 90px 25px;
+            padding: 90px 0;
         }
 
-        .section-container {
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-heading small {
+        .section-label {
             color: #9b681f;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 13px;
             font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
-        .section-heading h2 {
+        .section-title {
             font-family: "Cormorant Garamond", serif;
-            font-size: 54px;
+            font-size: clamp(42px, 6vw, 64px);
+            line-height: 1;
             color: #7b1113;
-            margin-top: 8px;
+            margin-bottom: 40px;
         }
 
-        .section-heading p {
-            max-width: 650px;
-            margin: 12px auto 0;
-            color: #6c584d;
-        }
-
-
-        /* =====================================================
+        /* =========================================================
            PRODUCT
-        ===================================================== */
-
-        .product-section {
-            background: #fffaf4;
-        }
+        ========================================================= */
 
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 35px;
-            align-items: stretch;
+            gap: 28px;
         }
 
-        .product-card {
-            background: #f8f1e7;
+        .card {
+            background: #fffaf4;
+            border: 1px solid rgba(123, 17, 19, 0.1);
             border-radius: 28px;
-            padding: 45px;
-            border: 1px solid rgba(123, 17, 19, 0.10);
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(65, 31, 23, 0.06);
         }
-
-        /*
-           PRODUCT PHOTO
-           old1.jpeg must be in the same folder
-           as index.html
-        */
 
         .product-photo {
             width: 100%;
@@ -374,94 +313,74 @@
             display: block;
         }
 
-        .product-icon {
-            width: 85px;
-            height: 85px;
-            border-radius: 25px;
-            background: #7b1113;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-            margin-bottom: 25px;
-        }
-
-        .product-card h3 {
+        .product-name {
             font-family: "Cormorant Garamond", serif;
-            font-size: 39px;
+            font-size: 36px;
             color: #7b1113;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .product-card p {
-            color: #6c584d;
+        .product-description {
+            color: #70554c;
+            margin-bottom: 20px;
         }
 
         .price {
-            font-size: 35px;
+            font-size: 28px;
             font-weight: 700;
             color: #7b1113;
-            margin-top: 25px;
+            margin-bottom: 20px;
         }
 
-        .price span {
-            font-size: 15px;
-            color: #6c584d;
+        .price small {
+            font-size: 14px;
             font-weight: 500;
+            color: #765b50;
         }
 
-        .features {
+        .feature-list {
+            list-style: none;
             display: grid;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .feature {
-            display: flex;
             gap: 12px;
-            align-items: center;
         }
 
-        .feature-icon {
+        .feature-list li {
+            display: flex;
+            gap: 10px;
+            color: #533b33;
+        }
+
+        .feature-list li::before {
+            content: "✓";
             color: #9b681f;
-            font-weight: 900;
+            font-weight: 700;
         }
 
-
-        /* =====================================================
+        /* =========================================================
            ORDER
-        ===================================================== */
+        ========================================================= */
 
         .order-section {
-            background:
-                linear-gradient(
-                    135deg,
-                    #7b1113,
-                    #571012
-                );
+            background: #7b1113;
             color: white;
         }
 
-        .order-section .section-heading small {
-            color: #e8bd69;
+        .order-section .section-label {
+            color: #e0b66f;
         }
 
-        .order-section .section-heading h2 {
+        .order-section .section-title {
             color: white;
-        }
-
-        .order-section .section-heading p {
-            color: rgba(255,255,255,0.78);
         }
 
         .order-box {
+            background: #fffaf4;
+            color: #2d1b16;
+            border-radius: 30px;
+            padding: 35px;
             max-width: 850px;
             margin: auto;
-            background: #fffaf4;
-            color: #241713;
-            border-radius: 30px;
-            padding: 45px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.18);
         }
 
         .form-grid {
@@ -483,27 +402,25 @@
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 8px;
-            color: #3d2a22;
+            color: #4b3027;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
-            border: 1px solid #d8c7b7;
+            border: 1px solid #dccfc3;
             background: white;
-            color: #241713;
+            border-radius: 13px;
+            padding: 14px 15px;
+            font-size: 15px;
             outline: none;
-            transition: 0.2s;
+            color: #2d1b16;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: #7b1113;
-            box-shadow:
-                0 0 0 3px
-                rgba(123, 17, 19, 0.08);
+            box-shadow: 0 0 0 3px rgba(123, 17, 19, 0.08);
         }
 
         .form-group textarea {
@@ -511,35 +428,56 @@
             resize: vertical;
         }
 
+        /* Quantity */
+
         .quantity-control {
             display: flex;
             align-items: center;
-            gap: 10px;
+            width: 100%;
+            max-width: 240px;
+            border: 1px solid #dccfc3;
+            border-radius: 14px;
+            overflow: hidden;
+            background: white;
         }
 
         .quantity-control button {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            width: 55px;
+            height: 52px;
             border: none;
-            background: #7b1113;
-            color: white;
-            font-size: 24px;
+            background: #f3e8dc;
+            color: #7b1113;
+            font-size: 25px;
+            font-weight: 700;
             cursor: pointer;
         }
 
-        .quantity-control input {
-            text-align: center;
-            font-weight: 700;
-            font-size: 17px;
+        .quantity-control button:hover {
+            background: #ead9ca;
         }
 
+        .quantity-control input {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            background: white;
+        }
+
+        .quantity-control input:focus {
+            box-shadow: none;
+        }
+
+        /* Summary */
+
         .order-summary {
-            margin-top: 10px;
-            padding: 25px;
-            border-radius: 18px;
-            background: #f4e8da;
-            border: 1px solid #e2d1bf;
+            background: #f8f1e7;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px 0 25px;
         }
 
         .summary-row {
@@ -550,111 +488,103 @@
         }
 
         .summary-row.total {
-            border-top: 1px solid #d5c0aa;
-            margin-top: 10px;
+            border-top: 1px solid #d9cbbf;
+            margin-top: 8px;
             padding-top: 15px;
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 22px;
+            font-weight: 700;
             color: #7b1113;
         }
 
-
-        /* =====================================================
-           PAYMENT QR
-        ===================================================== */
+        /* Payment */
 
         .payment-box {
-            margin-top: 25px;
-            padding: 25px;
-            border: 1px dashed #b99878;
-            border-radius: 18px;
             text-align: center;
-            background: #fff;
+            background: #fff4e7;
+            border: 1px dashed #c89b55;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 25px;
         }
 
         .payment-box h3 {
             color: #7b1113;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         .payment-box p {
-            color: #6c584d;
-            font-size: 14px;
-            margin-bottom: 18px;
+            color: #765b50;
+            margin-bottom: 15px;
         }
 
         .payment-qr {
-            width: 220px;
-            height: 220px;
+            width: 210px;
+            height: 210px;
             object-fit: contain;
-            margin: auto;
-            border-radius: 12px;
-            border: 1px solid #e0d0c0;
             background: white;
+            border-radius: 15px;
+            padding: 8px;
+            margin: auto;
+            display: block;
         }
 
-        .payment-note {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #7b1113;
+        .payment-amount {
+            font-size: 24px;
             font-weight: 700;
+            color: #7b1113;
+            margin-top: 15px;
         }
 
-
-        /* =====================================================
-           PLACE ORDER BUTTON
-        ===================================================== */
+        /* Place order */
 
         #placeOrderButton {
             width: 100%;
-            margin-top: 25px;
-            padding: 18px 22px;
+            min-height: 58px;
             border: none;
             border-radius: 15px;
             background: #7b1113;
             color: white;
-            font-size: 16px;
-            font-weight: 800;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow:
-                0 12px 25px
-                rgba(123, 17, 19, 0.22);
             transition: 0.25s;
         }
 
         #placeOrderButton:hover {
-            transform: translateY(-2px);
-            background: #681012;
+            background: #641012;
+            transform: translateY(-1px);
         }
 
         #placeOrderButton:disabled {
-            opacity: 0.7;
-            cursor: wait;
+            opacity: 0.65;
+            cursor: not-allowed;
             transform: none;
         }
 
         #orderMessage {
             display: none;
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 14px;
-            background: #f2eee8;
-            font-weight: 700;
-            white-space: pre-line;
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
         }
 
+        #orderMessage.success {
+            display: block;
+            background: #e7f5e9;
+            color: #176b2c;
+        }
 
-        /* =====================================================
+        #orderMessage.error {
+            display: block;
+            background: #fde8e8;
+            color: #9b1717;
+        }
+
+        /* =========================================================
            DELIVERY
-        ===================================================== */
-
-        .delivery-section {
-            background: #f8f1e7;
-        }
+        ========================================================= */
 
         .delivery-grid {
             display: grid;
@@ -664,15 +594,15 @@
 
         .delivery-card {
             background: #fffaf4;
-            border-radius: 22px;
+            border-radius: 25px;
             padding: 30px;
             text-align: center;
             border: 1px solid rgba(123,17,19,0.08);
         }
 
-        .delivery-card .icon {
-            font-size: 40px;
-            margin-bottom: 12px;
+        .delivery-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
         }
 
         .delivery-card h3 {
@@ -681,115 +611,99 @@
         }
 
         .delivery-card p {
-            color: #6c584d;
-            font-size: 14px;
+            color: #70554c;
         }
 
-
-        /* =====================================================
+        /* =========================================================
            ABOUT
-        ===================================================== */
-
-        .about-section {
-            background: #fffaf4;
-        }
+        ========================================================= */
 
         .about-box {
+            background: #fffaf4;
+            border-radius: 30px;
+            padding: 40px;
             max-width: 850px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .about-box h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 55px;
-            color: #7b1113;
-            margin-bottom: 20px;
+            border: 1px solid rgba(123,17,19,0.08);
         }
 
         .about-box p {
-            color: #6c584d;
+            color: #62463d;
             font-size: 17px;
             margin-bottom: 15px;
         }
 
-
-        /* =====================================================
+        /* =========================================================
            CONTACT
-        ===================================================== */
-
-        .contact-section {
-            background: #f8f1e7;
-        }
+        ========================================================= */
 
         .contact-box {
-            max-width: 700px;
-            margin: auto;
-            text-align: center;
-            background: #7b1113;
+            background: linear-gradient(135deg, #7b1113, #5e0d0f);
             color: white;
             border-radius: 30px;
-            padding: 50px 30px;
+            padding: 45px;
+            text-align: center;
         }
 
         .contact-box h2 {
             font-family: "Cormorant Garamond", serif;
-            font-size: 48px;
-            margin-bottom: 12px;
+            font-size: 50px;
+            margin-bottom: 10px;
         }
 
         .contact-box p {
-            color: rgba(255,255,255,0.78);
             margin-bottom: 25px;
+            opacity: 0.9;
         }
 
         .whatsapp-button {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
             background: white;
             color: #7b1113;
             padding: 14px 25px;
-            border-radius: 40px;
-            font-weight: 800;
+            border-radius: 999px;
+            font-weight: 700;
         }
 
-
-        /* =====================================================
+        /* =========================================================
            FOOTER
-        ===================================================== */
+        ========================================================= */
 
         footer {
-            background: #3c0b0c;
+            background: #4c0b0d;
             color: rgba(255,255,255,0.75);
+            padding: 30px 0;
             text-align: center;
-            padding: 28px 20px;
-            font-size: 13px;
+            font-size: 14px;
         }
 
-        footer strong {
-            color: white;
-        }
-
-
-        /* =====================================================
+        /* =========================================================
            RESPONSIVE
-        ===================================================== */
+        ========================================================= */
 
         @media (max-width: 850px) {
 
-            nav {
+            .nav {
+                min-height: 68px;
+            }
+
+            .nav-links {
                 display: none;
             }
 
-            .hero-container {
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero-grid {
                 grid-template-columns: 1fr;
-                padding-top: 60px;
+                gap: 40px;
             }
 
             .hero-card {
-                max-width: 500px;
-                margin: auto;
+                min-height: 300px;
             }
 
             .product-grid {
@@ -809,173 +723,141 @@
             }
         }
 
-
         @media (max-width: 550px) {
 
             section {
-                padding: 65px 18px;
-            }
-
-            .nav-container {
-                padding: 14px 18px;
-            }
-
-            .hero {
-                min-height: auto;
-            }
-
-            .hero-container {
-                padding: 65px 18px;
+                padding: 65px 0;
             }
 
             .hero h1 {
-                font-size: 62px;
+                font-size: 65px;
             }
 
             .hero-card {
-                padding: 30px 20px;
+                min-height: 250px;
             }
 
-            .hero-card-chilli {
+            .hero-chilli {
                 font-size: 100px;
             }
 
-            .section-heading h2 {
-                font-size: 43px;
-            }
-
-            .product-card {
-                padding: 30px 25px;
+            .card,
+            .order-box,
+            .about-box,
+            .contact-box {
+                padding: 23px;
             }
 
             .product-photo {
                 height: 260px;
             }
 
-            .order-box {
-                padding: 25px 18px;
+            .payment-qr {
+                width: 180px;
+                height: 180px;
             }
 
-            .about-box h2 {
-                font-size: 43px;
+            .contact-box h2 {
+                font-size: 40px;
             }
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-
-    <!-- =====================================================
-         NAVIGATION
-    ===================================================== -->
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
 
     <header>
 
-        <div class="nav-container">
+        <div class="container nav">
 
-            <a
-                href="#home"
-                class="logo"
-            >
-
-                <div class="logo-icon">
-                    🌶️
-                </div>
-
-                <div class="logo-text">
-                    Mana Masala
-                </div>
-
+            <a href="#home" class="logo">
+                Mana <span>Masala</span>
             </a>
 
+            <ul class="nav-links">
 
-            <nav>
+                <li>
+                    <a href="#home">Home</a>
+                </li>
 
-                <a href="#home">
-                    Home
-                </a>
+                <li>
+                    <a href="#product">Product</a>
+                </li>
 
-                <a href="#product">
-                    Product
-                </a>
+                <li>
+                    <a href="#order">Order</a>
+                </li>
 
-                <a href="#order">
-                    Order
-                </a>
+                <li>
+                    <a href="#delivery">Delivery</a>
+                </li>
 
-                <a href="#delivery">
-                    Delivery
-                </a>
+                <li>
+                    <a href="#about">About</a>
+                </li>
 
-                <a href="#about">
-                    About
-                </a>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
 
-                <a href="#contact">
-                    Contact
-                </a>
+                <li>
+                    <a href="#order" class="nav-order">
+                        Order Now
+                    </a>
+                </li>
 
-                <a
-                    href="#order"
-                    class="nav-order"
-                >
-                    Order Now
-                </a>
-
-            </nav>
+            </ul>
 
         </div>
 
     </header>
 
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          HOME
-    ===================================================== -->
+    ========================================================= -->
 
     <main>
 
-        <section
-            id="home"
-            class="hero"
-        >
+        <section id="home" class="hero">
 
-            <div class="hero-container">
+            <div class="container hero-grid">
 
                 <div>
 
-                    <div class="eyebrow">
-                        Homemade • Pure • Traditional
-                    </div>
+                    <span class="hero-label">
+                        Homemade • Fresh • Traditional
+                    </span>
 
                     <h1>
                         The Taste<br>
-                        <span>of Home.</span>
+                        of <span>Home.</span>
                     </h1>
 
-                    <p class="hero-description">
+                    <p>
                         Authentic homemade chilli powder,
-                        traditionally prepared for rich colour,
-                        bold flavour and unforgettable taste.
+                        carefully prepared with traditional care
+                        to bring rich colour, aroma and flavour
+                        to every meal.
                     </p>
 
                     <div class="hero-buttons">
 
                         <a
                             href="#order"
-                            class="primary-button"
+                            class="btn btn-primary"
                         >
-                            🌶️ Order Now →
+                            Order Now
                         </a>
 
                         <a
                             href="#product"
-                            class="secondary-button"
+                            class="btn btn-outline"
                         >
                             Discover More
                         </a>
@@ -987,17 +869,9 @@
 
                 <div class="hero-card">
 
-                    <div class="hero-card-chilli">
+                    <div class="hero-chilli">
                         🌶️
                     </div>
-
-                    <h3>
-                        Mana Masala
-                    </h3>
-
-                    <p>
-                        Homemade Chilli Powder
-                    </p>
 
                 </div>
 
@@ -1006,43 +880,28 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =====================================================
              PRODUCT
-        ================================================== -->
+        ===================================================== -->
 
-        <section
-            id="product"
-            class="product-section"
-        >
+        <section id="product">
 
-            <div class="section-container">
+            <div class="container">
 
-                <div class="section-heading">
-
-                    <small>
-                        Our Product
-                    </small>
-
-                    <h2>
-                        Simple. Pure. Delicious.
-                    </h2>
-
-                    <p>
-                        Made with carefully selected chillies
-                        and prepared with the traditional
-                        homemade touch.
-                    </p>
-
+                <div class="section-label">
+                    Our Product
                 </div>
+
+                <h2 class="section-title">
+                    Simple. Pure. Delicious.
+                </h2>
 
 
                 <div class="product-grid">
 
+                    <!-- Product Card -->
 
-                    <!-- PRODUCT WITH PHOTO -->
-
-                    <div class="product-card">
+                    <div class="card">
 
                         <div class="product-photo">
 
@@ -1050,141 +909,84 @@
                                 src="./old1.jpeg"
                                 alt="Mana Masala Homemade Chilli Powder"
                                 loading="lazy"
+                                onerror="this.style.display='none';"
                             >
 
                         </div>
 
-
-                        <h3>
+                        <h3 class="product-name">
                             Homemade Chilli Powder
                         </h3>
 
-                        <p>
-                            Freshly prepared chilli powder
-                            with authentic colour, aroma
-                            and traditional flavour.
+                        <p class="product-description">
+                            Made with carefully selected chillies
+                            and prepared with traditional care for
+                            authentic homemade flavour.
                         </p>
 
-
                         <div class="price">
-                            ₹350
-                            <span>
-                                / kg
-                            </span>
+                            ₹350 <small>/ kg</small>
                         </div>
 
+                        <ul class="feature-list">
 
-                        <div class="features">
+                            <li>
+                                Homemade preparation
+                            </li>
 
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ✓
-                                </span>
+                            <li>
+                                Rich colour and aroma
+                            </li>
 
-                                <span>
-                                    Homemade preparation
-                                </span>
-                            </div>
+                            <li>
+                                Freshly packed
+                            </li>
 
+                            <li>
+                                Minimum order: 10 kg
+                            </li>
 
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Rich natural colour
-                                </span>
-                            </div>
-
-
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Authentic taste
-                                </span>
-                            </div>
-
-
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Freshly packed
-                                </span>
-                            </div>
-
-                        </div>
+                        </ul>
 
                     </div>
 
 
-                    <!-- WHY MANA MASALA -->
+                    <!-- Why Mana Masala -->
 
-                    <div class="product-card">
+                    <div class="card">
 
-                        <h3>
+                        <h3 class="product-name">
                             Why Mana Masala?
                         </h3>
 
-                        <p>
-                            We believe good food begins with
-                            good ingredients and careful
-                            preparation.
+                        <p class="product-description">
+                            We believe great food starts with
+                            quality ingredients and genuine care.
                         </p>
 
+                        <ul class="feature-list">
 
-                        <div class="features">
+                            <li>
+                                Traditional homemade taste
+                            </li>
 
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    🌶️
-                                </span>
+                            <li>
+                                Carefully prepared
+                            </li>
 
-                                <span>
-                                    Carefully selected chillies
-                                </span>
-                            </div>
+                            <li>
+                                Fresh product
+                            </li>
 
+                            <li>
+                                Secure packaging
+                            </li>
 
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    🏡
-                                </span>
+                            <li>
+                                Direct customer ordering
+                            </li>
 
-                                <span>
-                                    Homemade quality
-                                </span>
-                            </div>
-
-
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ❤️
-                                </span>
-
-                                <span>
-                                    Made with care
-                                </span>
-                            </div>
-
-
-                            <div class="feature">
-                                <span class="feature-icon">
-                                    ⭐
-                                </span>
-
-                                <span>
-                                    Traditional flavour
-                                </span>
-                            </div>
-
-                        </div>
+                        </ul>
 
                     </div>
 
@@ -1195,58 +997,41 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =====================================================
              ORDER
-        ================================================== -->
+        ===================================================== -->
 
-        <section
-            id="order"
-            class="order-section"
-        >
+        <section id="order" class="order-section">
 
-            <div class="section-container">
+            <div class="container">
 
-                <div class="section-heading">
-
-                    <small>
-                        Place Your Order
-                    </small>
-
-                    <h2>
-                        Bring Home the Taste
-                    </h2>
-
-                    <p>
-                        Complete your order details,
-                        make the payment and confirm your order.
-                    </p>
-
+                <div class="section-label">
+                    Place Your Order
                 </div>
+
+                <h2 class="section-title">
+                    Order Mana Masala
+                </h2>
 
 
                 <div class="order-box">
 
-                    <form
-                        id="orderForm"
-                        novalidate
-                    >
+                    <form id="orderForm">
 
                         <div class="form-grid">
 
 
-                            <!-- NAME -->
+                            <!-- Name -->
 
                             <div class="form-group">
 
                                 <label for="customerName">
-                                    Full Name
+                                    Customer Name
                                 </label>
 
                                 <input
                                     type="text"
                                     id="customerName"
-                                    name="customerName"
                                     placeholder="Enter your name"
                                     autocomplete="name"
                                     required
@@ -1255,7 +1040,7 @@
                             </div>
 
 
-                            <!-- PHONE -->
+                            <!-- Phone -->
 
                             <div class="form-group">
 
@@ -1266,7 +1051,6 @@
                                 <input
                                     type="tel"
                                     id="customerPhone"
-                                    name="customerPhone"
                                     placeholder="10-digit mobile number"
                                     inputmode="numeric"
                                     maxlength="10"
@@ -1277,11 +1061,11 @@
                             </div>
 
 
-                            <!-- QUANTITY -->
+                            <!-- Quantity -->
 
                             <div class="form-group">
 
-                                <label for="quantity">
+                                <label>
                                     Quantity
                                 </label>
 
@@ -1295,17 +1079,14 @@
                                         −
                                     </button>
 
-
                                     <input
                                         type="number"
                                         id="quantity"
-                                        name="quantity"
                                         value="10"
                                         min="10"
                                         step="1"
-                                        required
+                                        readonly
                                     >
-
 
                                     <button
                                         type="button"
@@ -1317,10 +1098,14 @@
 
                                 </div>
 
+                                <small>
+                                    Minimum order: 10 kg
+                                </small>
+
                             </div>
 
 
-                            <!-- ADDRESS -->
+                            <!-- Address -->
 
                             <div class="form-group full">
 
@@ -1330,9 +1115,7 @@
 
                                 <textarea
                                     id="address"
-                                    name="address"
                                     placeholder="Enter complete delivery address"
-                                    autocomplete="street-address"
                                     required
                                 ></textarea>
 
@@ -1341,8 +1124,7 @@
                         </div>
 
 
-
-                        <!-- ORDER SUMMARY -->
+                        <!-- Order Summary -->
 
                         <div class="order-summary">
 
@@ -1365,8 +1147,11 @@
                                     Quantity
                                 </span>
 
-                                <strong id="summaryQuantity">
-                                    10 kg
+                                <strong>
+                                    <span id="summaryQuantity">
+                                        10
+                                    </span>
+                                    kg
                                 </strong>
 
                             </div>
@@ -1388,11 +1173,13 @@
                             <div class="summary-row total">
 
                                 <span>
-                                    Total Amount
+                                    Total
                                 </span>
 
-                                <strong id="totalPrice">
-                                    ₹3,500
+                                <strong>
+                                    ₹<span id="totalPrice">
+                                        3500
+                                    </span>
                                 </strong>
 
                             </div>
@@ -1400,8 +1187,7 @@
                         </div>
 
 
-
-                        <!-- PAYMENT QR -->
+                        <!-- Payment -->
 
                         <div class="payment-box">
 
@@ -1410,62 +1196,47 @@
                             </h3>
 
                             <p>
-                                Scan the QR code below and
-                                pay the displayed order amount.
+                                Scan the QR code below to make
+                                the payment.
                             </p>
-
 
                             <img
                                 src="./payment-qr.jpeg"
                                 alt="Mana Masala Payment QR Code"
                                 class="payment-qr"
-                                id="paymentQR"
+                                loading="lazy"
                             >
 
+                            <div class="payment-amount">
 
-                            <div class="payment-note">
-
-                                Amount to Pay:
-                                <span id="paymentAmount">
-                                    ₹3,500
+                                Pay:
+                                ₹<span id="paymentAmount">
+                                    3500
                                 </span>
 
                             </div>
 
+                            <p style="margin-top:10px;margin-bottom:0;">
+                                After payment, click the button below
+                                to confirm your order.
+                            </p>
+
                         </div>
 
 
-
-                        <!-- PLACE ORDER BUTTON -->
+                        <!-- Place Order -->
 
                         <button
-                            type="button"
+                            type="submit"
                             id="placeOrderButton"
                         >
-
-                            <span>
-                                ✓
-                            </span>
-
-                            <span>
-                                I Have Made the Payment –
-                                Confirm &amp; Place Order
-                            </span>
-
-                            <span>
-                                →
-                            </span>
-
+                            I Have Made the Payment – Confirm & Place Order
                         </button>
 
 
-                        <!-- ORDER MESSAGE -->
+                        <!-- Message -->
 
-                        <div
-                            id="orderMessage"
-                            role="status"
-                            aria-live="polite"
-                        ></div>
+                        <div id="orderMessage"></div>
 
                     </form>
 
@@ -1476,41 +1247,28 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =====================================================
              DELIVERY
-        ================================================== -->
+        ===================================================== -->
 
-        <section
-            id="delivery"
-            class="delivery-section"
-        >
+        <section id="delivery">
 
-            <div class="section-container">
+            <div class="container">
 
-                <div class="section-heading">
-
-                    <small>
-                        Delivery
-                    </small>
-
-                    <h2>
-                        From Our Home to Yours
-                    </h2>
-
-                    <p>
-                        We carefully prepare and pack
-                        every order before delivery.
-                    </p>
-
+                <div class="section-label">
+                    Delivery
                 </div>
+
+                <h2 class="section-title">
+                    From Us to Your Home.
+                </h2>
 
 
                 <div class="delivery-grid">
 
                     <div class="delivery-card">
 
-                        <div class="icon">
+                        <div class="delivery-icon">
                             📦
                         </div>
 
@@ -1519,8 +1277,8 @@
                         </h3>
 
                         <p>
-                            Your order is packed carefully
-                            to maintain freshness.
+                            Carefully packed to maintain
+                            freshness and quality.
                         </p>
 
                     </div>
@@ -1528,7 +1286,7 @@
 
                     <div class="delivery-card">
 
-                        <div class="icon">
+                        <div class="delivery-icon">
                             🚚
                         </div>
 
@@ -1537,8 +1295,8 @@
                         </h3>
 
                         <p>
-                            We arrange delivery to your
-                            provided address.
+                            Your order is prepared for
+                            convenient delivery.
                         </p>
 
                     </div>
@@ -1546,7 +1304,7 @@
 
                     <div class="delivery-card">
 
-                        <div class="icon">
+                        <div class="delivery-icon">
                             ❤️
                         </div>
 
@@ -1556,7 +1314,7 @@
 
                         <p>
                             Every order is prepared with
-                            care and attention.
+                            genuine care.
                         </p>
 
                     </div>
@@ -1568,34 +1326,41 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =====================================================
              ABOUT
-        ================================================== -->
+        ===================================================== -->
 
-        <section
-            id="about"
-            class="about-section"
-        >
+        <section id="about">
 
-            <div class="section-container">
+            <div class="container">
+
+                <div class="section-label">
+                    About Us
+                </div>
+
+                <h2 class="section-title">
+                    The Taste of Tradition.
+                </h2>
+
 
                 <div class="about-box">
 
-                    <h2>
-                        Our Story
-                    </h2>
-
                     <p>
-                        Mana Masala was created with a simple
-                        idea — bring the authentic taste of
-                        homemade chilli powder to every kitchen.
+                        Mana Masala brings the authentic taste
+                        of homemade chilli powder directly to
+                        your kitchen.
                     </p>
 
                     <p>
-                        We focus on traditional preparation,
-                        quality ingredients and a taste that
-                        feels like home.
+                        Our chilli powder is prepared with care,
+                        focusing on freshness, aroma, colour
+                        and traditional flavour.
+                    </p>
+
+                    <p>
+                        From our preparation to your kitchen,
+                        our goal is simple — delicious food
+                        made with genuine homemade taste.
                     </p>
 
                 </div>
@@ -1605,35 +1370,29 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =====================================================
              CONTACT
-        ================================================== -->
+        ===================================================== -->
 
-        <section
-            id="contact"
-            class="contact-section"
-        >
+        <section id="contact">
 
-            <div class="section-container">
+            <div class="container">
 
                 <div class="contact-box">
 
                     <h2>
-                        Talk to Us
+                        Have a Question?
                     </h2>
 
                     <p>
-                        Have a question about your order?
-                        Contact Mana Masala directly.
+                        Contact Mana Masala directly on WhatsApp.
                     </p>
 
-
                     <a
-                        href="https://wa.me/918367450301"
                         class="whatsapp-button"
+                        href="https://wa.me/918367450301"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                     >
                         💬 WhatsApp Us
                     </a>
@@ -1647,210 +1406,175 @@
     </main>
 
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          FOOTER
-    ===================================================== -->
+    ========================================================= -->
 
     <footer>
 
-        <p>
-            © 2026
-            <strong>
-                Mana Masala
-            </strong>
-            · Homemade Chilli Powder
-        </p>
+        <div class="container">
+
+            © 2026 Mana Masala.
+            Homemade Chilli Powder.
+
+        </div>
 
     </footer>
 
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          SUPABASE
-    ===================================================== -->
+    ========================================================= -->
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          COMPLETE ORDER SYSTEM
-    ===================================================== -->
+    ========================================================= -->
 
     <script>
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
+        "use strict";
 
-            console.log(
-                "🌶️ Mana Masala Order System Starting..."
+
+        /* =====================================================
+           CONFIGURATION
+        ===================================================== */
+
+        const SUPABASE_URL =
+            "https://hcczhnmdipqrnbxviuln.supabase.co";
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+
+        const EDGE_FUNCTION_NAME =
+            "new-order-notification";
+
+        const WHATSAPP_NUMBER =
+            "918367450301";
+
+        const PRICE_PER_KG =
+            350;
+
+        const MINIMUM_QUANTITY =
+            10;
+
+
+        /* =====================================================
+           SUPABASE CLIENT
+        ===================================================== */
+
+        const db =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
             );
 
 
-            /* =================================================
-               CONFIGURATION
-            ================================================= */
+        /* =====================================================
+           GET ELEMENTS
+        ===================================================== */
 
-            const SUPABASE_URL =
-                "https://hcczhnmdipqrnbxviuln.supabase.co";
+        const orderForm =
+            document.getElementById("orderForm");
 
-            const SUPABASE_PUBLISHABLE_KEY =
-                "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+        const customerName =
+            document.getElementById("customerName");
 
-            const EDGE_FUNCTION_NAME =
-                "new-order-notification";
+        const customerPhone =
+            document.getElementById("customerPhone");
 
-            const WHATSAPP_NUMBER =
-                "918367450301";
+        const quantityInput =
+            document.getElementById("quantity");
 
-            const PRICE_PER_KG =
-                350;
+        const decreaseQuantity =
+            document.getElementById("decreaseQuantity");
 
-            const MINIMUM_QUANTITY =
-                10;
+        const increaseQuantity =
+            document.getElementById("increaseQuantity");
+
+        const address =
+            document.getElementById("address");
+
+        const summaryQuantity =
+            document.getElementById("summaryQuantity");
+
+        const totalPrice =
+            document.getElementById("totalPrice");
+
+        const paymentAmount =
+            document.getElementById("paymentAmount");
+
+        const placeOrderButton =
+            document.getElementById("placeOrderButton");
+
+        const orderMessage =
+            document.getElementById("orderMessage");
 
 
-            /* =================================================
-               SUPABASE CHECK
-            ================================================= */
+        /* =====================================================
+           SHOW MESSAGE
+        ===================================================== */
+
+        function showMessage(message, type) {
+
+            orderMessage.textContent = message;
+
+            orderMessage.className = type;
+
+            orderMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+
+
+        /* =====================================================
+           UPDATE TOTAL
+        ===================================================== */
+
+        function updateTotal() {
+
+            let quantity =
+                parseInt(quantityInput.value, 10);
 
             if (
-                typeof supabase ===
-                "undefined"
+                isNaN(quantity) ||
+                quantity < MINIMUM_QUANTITY
             ) {
+                quantity =
+                    MINIMUM_QUANTITY;
 
-                console.error(
-                    "❌ Supabase library was not loaded."
-                );
-
-                return;
+                quantityInput.value =
+                    MINIMUM_QUANTITY;
             }
 
+            const total =
+                quantity * PRICE_PER_KG;
 
-            const db =
-                supabase.createClient(
-                    SUPABASE_URL,
-                    SUPABASE_PUBLISHABLE_KEY
+            summaryQuantity.textContent =
+                quantity;
+
+            totalPrice.textContent =
+                total.toLocaleString("en-IN");
+
+            paymentAmount.textContent =
+                total.toLocaleString("en-IN");
+        }
+
+
+        /* =====================================================
+           DECREASE
+        ===================================================== */
+
+        decreaseQuantity.addEventListener(
+            "click",
+            function () {
+
+                console.log(
+                    "➖ DECREASE BUTTON CLICKED"
                 );
-
-
-            console.log(
-                "✅ Supabase client created"
-            );
-
-
-            /* =================================================
-               ELEMENTS
-            ================================================= */
-
-            const orderForm =
-                document.getElementById(
-                    "orderForm"
-                );
-
-            const placeOrderButton =
-                document.getElementById(
-                    "placeOrderButton"
-                );
-
-            const customerName =
-                document.getElementById(
-                    "customerName"
-                );
-
-            const customerPhone =
-                document.getElementById(
-                    "customerPhone"
-                );
-
-            const quantityInput =
-                document.getElementById(
-                    "quantity"
-                );
-
-            const addressInput =
-                document.getElementById(
-                    "address"
-                );
-
-            const increaseQuantity =
-                document.getElementById(
-                    "increaseQuantity"
-                );
-
-            const decreaseQuantity =
-                document.getElementById(
-                    "decreaseQuantity"
-                );
-
-            const summaryQuantity =
-                document.getElementById(
-                    "summaryQuantity"
-                );
-
-            const totalPrice =
-                document.getElementById(
-                    "totalPrice"
-                );
-
-            const paymentAmount =
-                document.getElementById(
-                    "paymentAmount"
-                );
-
-            const orderMessage =
-                document.getElementById(
-                    "orderMessage"
-                );
-
-
-            /* =================================================
-               ELEMENT CHECK
-            ================================================= */
-
-            if (!orderForm) {
-                console.error(
-                    "❌ orderForm not found."
-                );
-                return;
-            }
-
-            if (!placeOrderButton) {
-                console.error(
-                    "❌ placeOrderButton not found."
-                );
-                return;
-            }
-
-            if (
-                !customerName ||
-                !customerPhone ||
-                !quantityInput ||
-                !addressInput
-            ) {
-
-                console.error(
-                    "❌ Required order fields are missing."
-                );
-
-                return;
-            }
-
-
-            console.log(
-                "✅ All order elements found"
-            );
-
-
-            /* =================================================
-               UPDATE TOTAL
-            ================================================= */
-
-            function updateOrderTotal() {
 
                 let quantity =
                     parseInt(
@@ -1858,695 +1582,444 @@
                         10
                     );
 
+                if (
+                    isNaN(quantity) ||
+                    quantity <= MINIMUM_QUANTITY
+                ) {
+
+                    quantity =
+                        MINIMUM_QUANTITY;
+
+                } else {
+
+                    quantity--;
+
+                }
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+        );
+
+
+        /* =====================================================
+           INCREASE
+        ===================================================== */
+
+        increaseQuantity.addEventListener(
+            "click",
+            function () {
+
+                console.log(
+                    "➕ INCREASE BUTTON CLICKED"
+                );
+
+                let quantity =
+                    parseInt(
+                        quantityInput.value,
+                        10
+                    );
+
+                if (isNaN(quantity)) {
+                    quantity =
+                        MINIMUM_QUANTITY;
+                }
+
+                quantity++;
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+        );
+
+
+        /* =====================================================
+           INITIAL TOTAL
+        ===================================================== */
+
+        updateTotal();
+
+
+        /* =====================================================
+           PHONE INPUT
+        ===================================================== */
+
+        customerPhone.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 10);
+
+            }
+        );
+
+
+        /* =====================================================
+           ORDER SUBMIT
+        ===================================================== */
+
+        orderForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                console.log(
+                    "🔥 PLACE ORDER BUTTON CLICKED"
+                );
+
+
+                /* ---------------------------------------------
+                   READ VALUES
+                --------------------------------------------- */
+
+                const name =
+                    customerName.value.trim();
+
+                const phone =
+                    customerPhone.value.trim();
+
+                const quantity =
+                    parseInt(
+                        quantityInput.value,
+                        10
+                    );
+
+                const deliveryAddress =
+                    address.value.trim();
+
+
+                /* ---------------------------------------------
+                   VALIDATION
+                --------------------------------------------- */
+
+                if (!name) {
+
+                    showMessage(
+                        "Please enter your name.",
+                        "error"
+                    );
+
+                    customerName.focus();
+
+                    return;
+                }
+
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+
+                    showMessage(
+                        "Please enter a valid 10-digit mobile number.",
+                        "error"
+                    );
+
+                    customerPhone.focus();
+
+                    return;
+                }
+
 
                 if (
                     isNaN(quantity) ||
                     quantity < MINIMUM_QUANTITY
                 ) {
 
-                    quantity =
-                        MINIMUM_QUANTITY;
-
-                    quantityInput.value =
-                        quantity;
-                }
-
-
-                const total =
-                    quantity *
-                    PRICE_PER_KG;
-
-
-                if (summaryQuantity) {
-
-                    summaryQuantity.textContent =
-                        quantity + " kg";
-                }
-
-
-                if (totalPrice) {
-
-                    totalPrice.textContent =
-                        "₹" +
-                        total.toLocaleString(
-                            "en-IN"
-                        );
-                }
-
-
-                if (paymentAmount) {
-
-                    paymentAmount.textContent =
-                        "₹" +
-                        total.toLocaleString(
-                            "en-IN"
-                        );
-                }
-
-
-                console.log(
-                    "Quantity:",
-                    quantity,
-                    "Total:",
-                    total
-                );
-            }
-
-
-            /* =================================================
-               PLUS BUTTON
-            ================================================= */
-
-            if (increaseQuantity) {
-
-                increaseQuantity.addEventListener(
-                    "click",
-                    function () {
-
-                        let quantity =
-                            parseInt(
-                                quantityInput.value,
-                                10
-                            ) ||
-                            MINIMUM_QUANTITY;
-
-
-                        quantity++;
-
-
-                        quantityInput.value =
-                            quantity;
-
-
-                        updateOrderTotal();
-
-                    }
-                );
-            }
-
-
-            /* =================================================
-               MINUS BUTTON
-            ================================================= */
-
-            if (decreaseQuantity) {
-
-                decreaseQuantity.addEventListener(
-                    "click",
-                    function () {
-
-                        let quantity =
-                            parseInt(
-                                quantityInput.value,
-                                10
-                            ) ||
-                            MINIMUM_QUANTITY;
-
-
-                        if (
-                            quantity >
-                            MINIMUM_QUANTITY
-                        ) {
-
-                            quantity--;
-                        }
-
-
-                        quantityInput.value =
-                            quantity;
-
-
-                        updateOrderTotal();
-
-                    }
-                );
-            }
-
-
-            /* =================================================
-               MANUAL QUANTITY
-            ================================================= */
-
-            quantityInput.addEventListener(
-                "input",
-                updateOrderTotal
-            );
-
-
-            quantityInput.addEventListener(
-                "change",
-                function () {
-
-                    let quantity =
-                        parseInt(
-                            quantityInput.value,
-                            10
-                        );
-
-
-                    if (
-                        isNaN(quantity) ||
-                        quantity <
-                        MINIMUM_QUANTITY
-                    ) {
-
-                        quantity =
-                            MINIMUM_QUANTITY;
-                    }
-
-
-                    quantityInput.value =
-                        quantity;
-
-
-                    updateOrderTotal();
-
-                }
-            );
-
-
-            /* =================================================
-               MESSAGE
-            ================================================= */
-
-            function showMessage(
-                message,
-                type
-            ) {
-
-                if (!orderMessage) {
-
-                    alert(message);
+                    showMessage(
+                        "Minimum order is 10 kg.",
+                        "error"
+                    );
 
                     return;
                 }
 
 
-                orderMessage.textContent =
-                    message;
+                if (!deliveryAddress) {
 
+                    showMessage(
+                        "Please enter your delivery address.",
+                        "error"
+                    );
 
-                orderMessage.style.display =
-                    "block";
+                    address.focus();
 
-
-                if (
-                    type === "success"
-                ) {
-
-                    orderMessage.style.color =
-                        "#16803c";
-
-                } else {
-
-                    orderMessage.style.color =
-                        "#b42318";
+                    return;
                 }
 
 
-                orderMessage.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+                /* ---------------------------------------------
+                   CALCULATE TOTAL
+                --------------------------------------------- */
 
-            }
+                const totalAmount =
+                    quantity * PRICE_PER_KG;
 
 
-            /* =================================================
-               PLACE ORDER
-            ================================================= */
+                /* ---------------------------------------------
+                   ORDER OBJECT
+                --------------------------------------------- */
 
-            placeOrderButton.addEventListener(
-                "click",
-                async function (event) {
+                const orderData = {
 
-                    event.preventDefault();
-                    event.stopPropagation();
+                    customer_name:
+                        name,
 
+                    customer_phone:
+                        phone,
+
+                    quantity_kg:
+                        quantity,
+
+                    address:
+                        deliveryAddress,
+
+                    total_amount:
+                        totalAmount,
+
+                    status:
+                        "New"
+
+                };
+
+
+                /* ---------------------------------------------
+                   DISABLE BUTTON
+                --------------------------------------------- */
+
+                placeOrderButton.disabled =
+                    true;
+
+                placeOrderButton.textContent =
+                    "Placing Your Order...";
+
+                orderMessage.className = "";
+
+                orderMessage.style.display =
+                    "none";
+
+
+                try {
 
                     console.log(
-                        "🔥 PLACE ORDER BUTTON CLICKED"
+                        "📤 Sending order to Supabase..."
                     );
 
 
-                    /* =========================================
-                       GET VALUES
-                    ========================================= */
+                    /* -----------------------------------------
+                       SAVE ORDER
+                    ----------------------------------------- */
 
-                    const name =
-                        customerName.value.trim();
-
-
-                    const phone =
-                        customerPhone.value.trim();
-
-
-                    const address =
-                        addressInput.value.trim();
+                    const {
+                        data,
+                        error
+                    } = await db
+                        .from("orders")
+                        .insert([orderData])
+                        .select()
+                        .single();
 
 
-                    let quantity =
-                        parseInt(
-                            quantityInput.value,
-                            10
+                    if (error) {
+
+                        console.error(
+                            "❌ SUPABASE ORDER ERROR:",
+                            error
                         );
 
-
-                    /* =========================================
-                       NAME VALIDATION
-                    ========================================= */
-
-                    if (!name) {
-
-                        showMessage(
-                            "Please enter your name.",
-                            "error"
-                        );
-
-                        customerName.focus();
-
-                        return;
+                        throw error;
                     }
-
-
-                    /* =========================================
-                       PHONE VALIDATION
-                    ========================================= */
-
-                    const cleanPhone =
-                        phone.replace(
-                            /\D/g,
-                            ""
-                        );
-
-
-                    if (
-                        cleanPhone.length !==
-                        10
-                    ) {
-
-                        showMessage(
-                            "Please enter a valid 10-digit mobile number.",
-                            "error"
-                        );
-
-                        customerPhone.focus();
-
-                        return;
-                    }
-
-
-                    /* =========================================
-                       QUANTITY VALIDATION
-                    ========================================= */
-
-                    if (
-                        isNaN(quantity) ||
-                        quantity <
-                        MINIMUM_QUANTITY
-                    ) {
-
-                        showMessage(
-                            "Minimum order quantity is 10 kg.",
-                            "error"
-                        );
-
-                        quantityInput.focus();
-
-                        return;
-                    }
-
-
-                    /* =========================================
-                       ADDRESS VALIDATION
-                    ========================================= */
-
-                    if (!address) {
-
-                        showMessage(
-                            "Please enter your delivery address.",
-                            "error"
-                        );
-
-                        addressInput.focus();
-
-                        return;
-                    }
-
-
-                    /* =========================================
-                       TOTAL
-                    ========================================= */
-
-                    const totalAmount =
-                        quantity *
-                        PRICE_PER_KG;
-
-
-                    /* =========================================
-                       BUTTON LOADING
-                    ========================================= */
-
-                    const originalButtonHTML =
-                        placeOrderButton.innerHTML;
-
-
-                    placeOrderButton.disabled =
-                        true;
-
-
-                    placeOrderButton.innerHTML =
-                        `
-                        <span>⏳</span>
-                        <span>Processing Order...</span>
-                        `;
-
-
-                    /* =========================================
-                       ORDER DATA
-                    ========================================= */
-
-                    const orderData = {
-
-                        customer_name:
-                            name,
-
-                        customer_phone:
-                            cleanPhone,
-
-                        quantity_kg:
-                            quantity,
-
-                        address:
-                            address,
-
-                        total_amount:
-                            totalAmount,
-
-                        status:
-                            "New"
-                    };
 
 
                     console.log(
-                        "📦 Order Data:",
-                        orderData
+                        "✅ ORDER SAVED:",
+                        data
+                    );
+
+
+                    /* -----------------------------------------
+                       OWNER NOTIFICATION
+                    ----------------------------------------- */
+
+                    console.log(
+                        "📲 Sending owner notification..."
                     );
 
 
                     try {
 
-                        /* =====================================
-                           SAVE ORDER
-                        ===================================== */
-
-                        console.log(
-                            "📤 Sending order to Supabase..."
-                        );
-
-
                         const {
-                            data,
-                            error
-                        } = await db
-                            .from("orders")
-                            .insert([
-                                orderData
-                            ])
-                            .select()
-                            .single();
-
-
-                        if (error) {
-
-                            console.error(
-                                "❌ Supabase order error:",
-                                error
-                            );
-
-                            throw new Error(
-                                error.message
-                            );
-                        }
-
-
-                        console.log(
-                            "✅ ORDER SAVED:",
-                            data
-                        );
-
-
-                        /* =====================================
-                           OWNER NOTIFICATION
-                        ===================================== */
-
-                        console.log(
-                            "📲 Sending owner notification..."
-                        );
-
-
-                        try {
-
-                            const {
-                                data:
-                                    notificationData,
-                                error:
-                                    notificationError
-                            } =
-                                await db.functions.invoke(
-                                    EDGE_FUNCTION_NAME,
-                                    {
-                                        body: {
-                                            order: {
-                                                customer_name:
-                                                    name,
-
-                                                customer_phone:
-                                                    cleanPhone,
-
-                                                quantity_kg:
-                                                    quantity,
-
-                                                address:
-                                                    address,
-
-                                                total_amount:
-                                                    totalAmount,
-
-                                                status:
-                                                    "New"
-                                            }
-                                        }
-                                    }
-                                );
-
-
-                            if (
+                            data:
+                                notificationData,
+                            error:
                                 notificationError
-                            ) {
-
-                                console.error(
-                                    "⚠️ Notification error:",
-                                    notificationError
-                                );
-
-                            } else {
-
-                                console.log(
-                                    "✅ Owner notification sent:",
-                                    notificationData
-                                );
+                        } = await db.functions.invoke(
+                            EDGE_FUNCTION_NAME,
+                            {
+                                body: {
+                                    order:
+                                        orderData
+                                }
                             }
+                        );
 
 
-                        } catch (
-                            notificationException
-                        ) {
+                        if (notificationError) {
 
                             console.error(
-                                "⚠️ Notification exception:",
-                                notificationException
+                                "⚠️ Notification error:",
+                                notificationError
+                            );
+
+                        } else {
+
+                            console.log(
+                                "✅ OWNER NOTIFICATION SENT:",
+                                notificationData
                             );
 
                         }
 
+                    } catch (notificationError) {
 
-                        /* =====================================
-                           WHATSAPP MESSAGE
-                           NO AUTOMATIC REDIRECT
-                        ===================================== */
-
-                        const whatsappMessage =
-`🌶️ MANA MASALA — NEW ORDER
-
-Customer: ${name}
-Phone: ${cleanPhone}
-Quantity: ${quantity} kg
-Total: ₹${totalAmount.toLocaleString("en-IN")}
-
-Delivery Address:
-${address}
-
-Order Status: New`;
-
-
-                        const whatsappURL =
-                            "https://wa.me/" +
-                            WHATSAPP_NUMBER +
-                            "?text=" +
-                            encodeURIComponent(
-                                whatsappMessage
-                            );
-
-
-                        console.log(
-                            "📱 WhatsApp message prepared."
-                        );
-
-                        console.log(
-                            "WhatsApp URL:",
-                            whatsappURL
-                        );
-
-
-                        /* =====================================
-                           SUCCESS MESSAGE
-                        ===================================== */
-
-                        showMessage(
-                            `✅ Order placed successfully!
-
-Thank you, ${name}.
-
-Your order for ${quantity} kg of Mana Masala has been received.
-
-Total Amount: ₹${totalAmount.toLocaleString("en-IN")}
-
-Our team will contact you shortly.`,
-                            "success"
-                        );
-
-
-                        /* =====================================
-                           RESET
-                        ===================================== */
-
-                        orderForm.reset();
-
-
-                        quantityInput.value =
-                            MINIMUM_QUANTITY;
-
-
-                        updateOrderTotal();
-
-
-                        /* =====================================
-                           RESTORE BUTTON
-                        ===================================== */
-
-                        placeOrderButton.disabled =
-                            false;
-
-
-                        placeOrderButton.innerHTML =
-                            originalButtonHTML;
-
-
-                        console.log(
-                            "🎉 ORDER PROCESS COMPLETED"
-                        );
-
-
-                    } catch (error) {
+                        /*
+                         Notification failure should NOT
+                         cancel an already saved order.
+                        */
 
                         console.error(
-                            "❌ ORDER FAILED:",
-                            error
+                            "⚠️ Notification failed:",
+                            notificationError
                         );
-
-
-                        showMessage(
-                            "❌ Order could not be completed. Please try again later.",
-                            "error"
-                        );
-
-
-                        placeOrderButton.disabled =
-                            false;
-
-
-                        placeOrderButton.innerHTML =
-                            originalButtonHTML;
 
                     }
 
-                }
-            );
 
+                    /* -----------------------------------------
+                       WHATSAPP MESSAGE
+                       ----------------------------------------- */
 
-            /* =================================================
-               BLOCK NORMAL FORM SUBMIT
-            ================================================= */
+                    const whatsappMessage =
+                        `New Mana Masala Order%0A%0A` +
+                        `Name: ${encodeURIComponent(name)}%0A` +
+                        `Phone: ${encodeURIComponent(phone)}%0A` +
+                        `Quantity: ${quantity} kg%0A` +
+                        `Total: ₹${totalAmount}%0A` +
+                        `Address: ${encodeURIComponent(deliveryAddress)}`;
 
-            orderForm.addEventListener(
-                "submit",
-                function (event) {
+                    /*
+                       WhatsApp URL is prepared here for future use.
+                       It is intentionally NOT opened automatically.
+                    */
 
-                    event.preventDefault();
+                    const whatsappUrl =
+                        `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
                     console.log(
-                        "ℹ️ Normal form submission blocked."
+                        "📲 WhatsApp message prepared:",
+                        whatsappUrl
                     );
 
+
+                    /* -----------------------------------------
+                       SUCCESS
+                    ----------------------------------------- */
+
+                    console.log(
+                        "🎉 ORDER PROCESS COMPLETED"
+                    );
+
+
+                    showMessage(
+                        "🎉 Your order has been confirmed successfully! We will contact you shortly.",
+                        "success"
+                    );
+
+
+                    /* -----------------------------------------
+                       RESET FORM
+                    ----------------------------------------- */
+
+                    orderForm.reset();
+
+                    quantityInput.value =
+                        MINIMUM_QUANTITY;
+
+                    updateTotal();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "❌ ORDER FAILED:",
+                        error
+                    );
+
+
+                    let message =
+                        "Order could not be completed. Please try again later.";
+
+
+                    if (
+                        error &&
+                        error.message
+                    ) {
+
+                        console.error(
+                            "Error message:",
+                            error.message
+                        );
+
+                    }
+
+
+                    showMessage(
+                        message,
+                        "error"
+                    );
+
+                } finally {
+
+                    placeOrderButton.disabled =
+                        false;
+
+                    placeOrderButton.textContent =
+                        "I Have Made the Payment – Confirm & Place Order";
+
                 }
-            );
+
+            }
+        );
 
 
-            /* =================================================
-               INITIAL TOTAL
-            ================================================= */
+        /* =====================================================
+           DEBUG MESSAGE
+        ===================================================== */
 
-            updateOrderTotal();
+        console.log(
+            "🔥 Mana Masala order system loaded successfully."
+        );
 
+        console.log(
+            "💰 Price:",
+            PRICE_PER_KG,
+            "per kg"
+        );
 
-            /* =================================================
-               READY
-            ================================================= */
-
-            console.log(
-                "======================================"
-            );
-
-            console.log(
-                "🌶️ Mana Masala Order System Ready"
-            );
-
-            console.log(
-                "📦 Supabase orders: ENABLED"
-            );
-
-            console.log(
-                "📲 Owner notifications: ENABLED"
-            );
-
-            console.log(
-                "💬 Automatic WhatsApp redirect: DISABLED"
-            );
-
-            console.log(
-                "🖼️ Product image: old1.jpeg"
-            );
-
-            console.log(
-                "======================================"
-            );
-
-        }
-    );
+        console.log(
+            "📦 Minimum quantity:",
+            MINIMUM_QUANTITY,
+            "kg"
+        );
 
     </script>
 
 </body>
-
 </html>

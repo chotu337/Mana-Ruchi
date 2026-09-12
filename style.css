@@ -1537,4 +1537,16 @@ button {
     .modal-card {
         padding: 30px 22px;
     }
+/* =========================================================
+   LOADER SAFETY FIX
+   ========================================================= */
+
+#pageLoader {
+    transition: opacity 0.4s ease;
+}
+
+#pageLoader.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
 }

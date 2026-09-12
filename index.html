@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mana Ruchi | Homemade Chilli Powder</title>
+    <title>Mana Masala | Homemade Chilli Powder</title>
+    <meta
+        name="description"
+        content="Mana Masala - Homemade Chilli Powder. Fresh, authentic and carefully prepared."
+    >
     <link rel="stylesheet" href="./style.css">
     <style>
         * {
             box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
         }
         body {
             margin: 0;
@@ -36,16 +43,21 @@
             font-weight: bold;
             text-decoration: none;
             color: white;
+            white-space: nowrap;
         }
         nav {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         nav a {
             color: white;
             text-decoration: none;
             font-size: 14px;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         section {
             padding: 60px 20px;
@@ -106,6 +118,8 @@
             max-width: 100%;
             width: 350px;
             border-radius: 12px;
+            display: block;
+            margin: auto;
         }
         .price {
             font-size: 30px;
@@ -149,6 +163,9 @@
             background: #8b0000;
             color: white;
             cursor: pointer;
+        }
+        .quantity button:hover {
+            opacity: 0.9;
         }
         .quantity input {
             text-align: center;
@@ -251,6 +268,26 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
             z-index: 2000;
         }
+        .payment-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff8ef;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #f0d8c0;
+        }
+        .payment-box img {
+            width: 220px;
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+        }
+        .payment-amount {
+            font-size: 22px;
+            font-weight: bold;
+            color: #b30000;
+        }
         @media (max-width: 700px) {
             .nav {
                 flex-direction: column;
@@ -271,10 +308,13 @@
     </style>
 </head>
 <body>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 <header>
     <div class="nav">
         <a href="#home" class="logo">
-            🌶️ Mana Ruchi
+            🌶️ Mana Masala
         </a>
         <nav>
             <a href="#home">Home</a>
@@ -286,14 +326,16 @@
         </nav>
     </div>
 </header>
-<!-- HOME -->
+<!-- =====================================================
+     HOME
+===================================================== -->
 <section id="home" class="hero">
     <div class="container">
         <h1>
             Homemade <span>Chilli Powder</span>
         </h1>
         <p>
-            🌶️ Fresh homemade chilli powder from Mana Ruchi.
+            🌶️ Fresh homemade chilli powder from Mana Masala.
         </p>
         <p>
             ₹350 per kg | Minimum order: 10 kg
@@ -303,7 +345,9 @@
         </a>
     </div>
 </section>
-<!-- PRODUCT -->
+<!-- =====================================================
+     PRODUCT
+===================================================== -->
 <section id="product">
     <div class="container">
         <div class="section-title">
@@ -314,18 +358,19 @@
         </div>
         <div class="product-card">
             <img
-                src="old1.jpeg"
-                alt="Mana Ruchi Homemade Chilli Powder"
+                src="./old1.jpeg"
+                alt="Mana Masala Homemade Chilli Powder"
                 onerror="this.style.display='none';"
             >
             <h2>
-                Mana Ruchi Homemade Chilli Powder
+                Mana Masala Homemade Chilli Powder
             </h2>
             <p class="price">
                 ₹350 / kg
             </p>
             <p>
-                Minimum order: <strong>10 kg</strong>
+                Minimum order:
+                <strong>10 kg</strong>
             </p>
             <a href="#order" class="button">
                 Place Order
@@ -333,7 +378,9 @@
         </div>
     </div>
 </section>
-<!-- ORDER -->
+<!-- =====================================================
+     ORDER
+===================================================== -->
 <section id="order">
     <div class="container">
         <div class="section-title">
@@ -352,6 +399,7 @@
                         type="text"
                         id="customerName"
                         placeholder="Enter your full name"
+                        autocomplete="name"
                         required
                     >
                 </div>
@@ -365,6 +413,7 @@
                         placeholder="Enter 10-digit mobile number"
                         maxlength="10"
                         inputmode="numeric"
+                        autocomplete="tel"
                         required
                     >
                 </div>
@@ -376,6 +425,7 @@
                         <button
                             type="button"
                             id="decreaseQuantity"
+                            aria-label="Decrease quantity"
                         >
                             −
                         </button>
@@ -390,6 +440,7 @@
                         <button
                             type="button"
                             id="increaseQuantity"
+                            aria-label="Increase quantity"
                         >
                             +
                         </button>
@@ -403,45 +454,88 @@
                         id="address"
                         rows="4"
                         placeholder="Enter complete delivery address"
+                        autocomplete="street-address"
                         required
                     ></textarea>
                 </div>
+                <!-- ORDER SUMMARY -->
                 <div class="summary">
-                    <h3>Order Summary</h3>
+                    <h3>
+                        Order Summary
+                    </h3>
                     <div class="summary-row">
-                        <span>Quantity</span>
+                        <span>
+                            Quantity
+                        </span>
                         <strong id="summaryQuantity">
                             10 kg
                         </strong>
                     </div>
                     <div class="summary-row">
-                        <span>Price</span>
+                        <span>
+                            Price
+                        </span>
                         <strong>
                             ₹350 / kg
                         </strong>
                     </div>
                     <div class="summary-row total">
-                        <span>Total</span>
+                        <span>
+                            Total
+                        </span>
                         <strong id="totalPrice">
                             ₹3,500
                         </strong>
                     </div>
                 </div>
+                <!-- PAYMENT QR -->
+                <div class="payment-box">
+                    <h3>
+                        💳 Payment
+                    </h3>
+                    <p>
+                        Scan the QR code to make the payment.
+                    </p>
+                    <img
+                        src="./payment-qr.jpeg"
+                        alt="Mana Masala Payment QR"
+                        onerror="this.style.display='none';"
+                    >
+                    <p>
+                        Payment Amount:
+                    </p>
+                    <div class="payment-amount">
+                        ₹<span id="paymentAmount">3,500</span>
+                    </div>
+                    <p>
+                        After making payment, click
+                        <strong>Place Order</strong>.
+                    </p>
+                </div>
+                <!-- ORDER MESSAGE -->
                 <div
                     id="orderMessage"
                     aria-live="polite"
                 ></div>
+                <!-- IMPORTANT:
+                     type="button" prevents normal form submission.
+                     JavaScript handles the order.
+                -->
                 <button
-                    type="submit"
+                    type="button"
                     id="placeOrderButton"
                 >
-                    Place Order
+                    <span>✓</span>
+                    <span>Confirm & Place Order</span>
+                    <span>→</span>
                 </button>
             </form>
         </div>
     </div>
 </section>
-<!-- DELIVERY -->
+<!-- =====================================================
+     DELIVERY
+===================================================== -->
 <section id="delivery">
     <div class="container">
         <div class="section-title">
@@ -449,19 +543,25 @@
         </div>
         <div class="info-grid">
             <div class="info-card">
-                <h3>📦 Safe Packing</h3>
+                <h3>
+                    📦 Safe Packing
+                </h3>
                 <p>
                     Orders are carefully packed.
                 </p>
             </div>
             <div class="info-card">
-                <h3>🚚 Delivery</h3>
+                <h3>
+                    🚚 Delivery
+                </h3>
                 <p>
                     Delivery is arranged to your address.
                 </p>
             </div>
             <div class="info-card">
-                <h3>🌶️ Homemade</h3>
+                <h3>
+                    🌶️ Homemade
+                </h3>
                 <p>
                     Authentic homemade chilli powder.
                 </p>
@@ -469,25 +569,33 @@
         </div>
     </div>
 </section>
-<!-- ABOUT -->
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 <section id="about">
     <div class="container">
         <div class="section-title">
-            <h2>About Mana Ruchi</h2>
+            <h2>
+                About Mana Masala
+            </h2>
         </div>
         <div class="product-card">
             <p>
-                Mana Ruchi brings homemade chilli powder
+                Mana Masala brings homemade chilli powder
                 with authentic taste and careful preparation.
             </p>
         </div>
     </div>
 </section>
-<!-- CONTACT -->
+<!-- =====================================================
+     CONTACT
+===================================================== -->
 <section id="contact">
     <div class="container contact">
         <div class="section-title">
-            <h2>Contact Us</h2>
+            <h2>
+                Contact Us
+            </h2>
             <p>
                 Have questions about your order?
             </p>
@@ -502,7 +610,9 @@
         </a>
     </div>
 </section>
-<!-- SHARE -->
+<!-- =====================================================
+     SHARE
+===================================================== -->
 <div class="share">
     <button
         type="button"
@@ -512,7 +622,12 @@
         📲 Share on WhatsApp
     </button>
 </div>
-<!-- FLOATING WHATSAPP -->
+<!-- =====================================================
+     FLOATING WHATSAPP
+     
+     This button ONLY opens WhatsApp when the customer
+     explicitly taps it.
+===================================================== -->
 <a
     id="floatingWhatsApp"
     href="https://wa.me/918367450301"
@@ -522,9 +637,13 @@
 >
     💬
 </a>
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 <footer>
-    <h3>🌶️ Mana Ruchi</h3>
+    <h3>
+        🌶️ Mana Masala
+    </h3>
     <p>
         Homemade Chilli Powder
     </p>
@@ -532,13 +651,17 @@
         ₹350/kg | Minimum Order 10 kg
     </p>
     <p>
-        © 2026 Mana Ruchi
+        📞 8367450301
+    </p>
+    <p>
+        ©️ 2026 Mana Masala
     </p>
 </footer>
-<!-- =========================================
+<!-- =====================================================
      SUPABASE
-========================================= -->
+===================================================== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./script.js"></script>
+<!-- Cache-busting version -->
+<script src="./script.js?v=20260912"></script>
 </body>
 </html>

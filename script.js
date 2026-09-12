@@ -1,307 +1,229 @@
 /* =========================================================
    MANA MASALA
-   QUANTITY + AUTOMATIC PRICE CALCULATION
+   QUANTITY + AUTOMATIC AMOUNT CALCULATION
+
+   PRICE: ₹350 / KG
+   MINIMUM ORDER: 10 KG
 ========================================================= */
 
+document.addEventListener("DOMContentLoaded", function () {
 
-/* ================= SETTINGS ================= */
+    const PRICE_PER_KG = 350;
+    const MIN_QUANTITY = 10;
 
-const PRICE_PER_KG = 350;
-const MIN_QUANTITY = 10;
+    const quantityInput = document.getElementById("quantity");
+    const plusBtn = document.getElementById("plusBtn");
+    const minusBtn = document.getElementById("minusBtn");
+    const totalAmount = document.getElementById("totalAmount");
+    const orderForm = document.getElementById("orderForm");
 
+    /* -----------------------------------------
+       Check required elements
+    ----------------------------------------- */
 
-/* ================= GET ELEMENTS ================= */
+    if (!quantityInput) {
+        console.error("Quantity input not found.");
+        return;
+    }
 
-const quantityInput =
-    document.getElementById("quantity");
+    if (!plusBtn) {
+        console.error("Plus button not found.");
+        return;
+    }
 
-const plusBtn =
-    document.getElementById("plusBtn");
+    if (!minusBtn) {
+        console.error("Minus button not found.");
+        return;
+    }
 
-const minusBtn =
-    document.getElementById("minusBtn");
-
-const totalAmount =
-    document.getElementById("totalAmount");
-
-const orderForm =
-    document.getElementById("orderForm");
-
-
-/* ================= CHECK ELEMENTS ================= */
-
-if (
-    !quantityInput ||
-    !plusBtn ||
-    !minusBtn ||
-    !totalAmount
-) {
-
-    console.error(
-        "Mana Masala: Quantity elements were not found."
-    );
-
-}
-
-
-/* ================= FORMAT PRICE ================= */
-
-function formatPrice(amount) {
-
-    return "₹" + amount.toLocaleString("en-IN");
-
-}
-
-
-/* ================= UPDATE TOTAL ================= */
-
-function updateTotal() {
-
-    let quantity =
-        parseInt(quantityInput.value, 10);
-
-
-    /* If invalid */
-
-    if (
-        isNaN(quantity) ||
-        quantity < MIN_QUANTITY
-    ) {
-
-        quantity = MIN_QUANTITY;
-
+    if (!totalAmount) {
+        console.error("Total amount element not found.");
+        return;
     }
 
 
-    /* Make sure quantity is a whole number */
+    /* -----------------------------------------
+       Format Indian Rupees
+    ----------------------------------------- */
 
-    quantity = Math.floor(quantity);
-
-
-    /* Update input */
-
-    quantityInput.value = quantity;
-
-
-    /* Calculate */
-
-    const total =
-        quantity * PRICE_PER_KG;
+    function formatPrice(amount) {
+        return "₹" + Number(amount).toLocaleString("en-IN");
+    }
 
 
-    /* Display */
+    /* -----------------------------------------
+       Get valid quantity
+    ----------------------------------------- */
 
-    totalAmount.textContent =
-        formatPrice(total);
+    function getQuantity() {
 
-
-    /* Console for testing */
-
-    console.log(
-        "Quantity:",
-        quantity,
-        "kg"
-    );
-
-    console.log(
-        "Price:",
-        PRICE_PER_KG,
-        "per kg"
-    );
-
-    console.log(
-        "Total:",
-        total
-    );
-
-}
-
-
-/* ================= PLUS BUTTON ================= */
-
-plusBtn.addEventListener(
-    "click",
-    function () {
-
-        let quantity =
-            parseInt(quantityInput.value, 10);
-
+        let quantity = parseInt(
+            quantityInput.value,
+            10
+        );
 
         if (
             isNaN(quantity) ||
             quantity < MIN_QUANTITY
         ) {
-
             quantity = MIN_QUANTITY;
-
         }
 
+        quantity = Math.floor(quantity);
 
-        quantity++;
-
-
-        quantityInput.value =
-            quantity;
-
-
-        updateTotal();
-
+        return quantity;
     }
-);
 
 
-/* ================= MINUS BUTTON ================= */
+    /* -----------------------------------------
+       Update quantity + amount
+    ----------------------------------------- */
 
-minusBtn.addEventListener(
-    "click",
-    function () {
+    function updateTotal() {
 
-        let quantity =
-            parseInt(quantityInput.value, 10);
+        const quantity = getQuantity();
 
+        const total =
+            quantity * PRICE_PER_KG;
 
-        if (
-            isNaN(quantity) ||
-            quantity <= MIN_QUANTITY
-        ) {
+        quantityInput.value = quantity;
 
-            quantity = MIN_QUANTITY;
+        totalAmount.textContent =
+            formatPrice(total);
 
-        }
-        else {
-
-            quantity--;
-
-        }
-
-
-        quantityInput.value =
-            quantity;
-
-
-        updateTotal();
-
+        console.log(
+            "Mana Masala:",
+            quantity + " kg",
+            "=",
+            formatPrice(total)
+        );
     }
-);
 
 
-/* ================= MANUAL INPUT ================= */
+    /* -----------------------------------------
+       PLUS BUTTON
+    ----------------------------------------- */
 
-quantityInput.addEventListener(
-    "input",
-    function () {
-
-        updateTotal();
-
-    }
-);
-
-
-quantityInput.addEventListener(
-    "change",
-    function () {
-
-        updateTotal();
-
-    }
-);
-
-
-/* ================= ORDER FORM ================= */
-
-if (orderForm) {
-
-    orderForm.addEventListener(
-        "submit",
+    plusBtn.addEventListener(
+        "click",
         function (event) {
 
             event.preventDefault();
 
+            let quantity = getQuantity();
 
-            const name =
-                document.getElementById(
-                    "customerName"
-                ).value.trim();
+            quantity = quantity + 1;
 
+            quantityInput.value = quantity;
 
-            const phone =
-                document.getElementById(
-                    "phone"
-                ).value.trim();
+            updateTotal();
+        }
+    );
 
 
-            const address =
-                document.getElementById(
-                    "address"
-                ).value.trim();
+    /* -----------------------------------------
+       MINUS BUTTON
+    ----------------------------------------- */
 
+    minusBtn.addEventListener(
+        "click",
+        function (event) {
 
-            let quantity =
-                parseInt(
-                    quantityInput.value,
-                    10
-                );
+            event.preventDefault();
 
+            let quantity = getQuantity();
 
-            if (
-                !name ||
-                !phone ||
-                !address
-            ) {
-
-                alert(
-                    "Please fill in all details."
-                );
-
-                return;
-
+            if (quantity > MIN_QUANTITY) {
+                quantity = quantity - 1;
             }
 
+            quantityInput.value = quantity;
 
-            if (
-                isNaN(quantity) ||
-                quantity < MIN_QUANTITY
-            ) {
+            updateTotal();
+        }
+    );
 
-                alert(
-                    "Minimum order quantity is 10 kg."
-                );
 
-                quantityInput.value =
-                    MIN_QUANTITY;
+    /* -----------------------------------------
+       MANUAL QUANTITY CHANGE
+    ----------------------------------------- */
 
-                updateTotal();
+    quantityInput.addEventListener(
+        "input",
+        function () {
 
+            let value = quantityInput.value;
+
+            /*
+             * Don't immediately overwrite an empty
+             * input while the customer is typing.
+             */
+
+            if (value === "") {
+                totalAmount.textContent = "₹0";
                 return;
-
             }
 
+            let quantity = parseInt(value, 10);
+
+            if (isNaN(quantity)) {
+                quantity = MIN_QUANTITY;
+            }
+
+            if (quantity < MIN_QUANTITY) {
+                quantity = MIN_QUANTITY;
+            }
+
+            quantity = Math.floor(quantity);
+
+            quantityInput.value = quantity;
 
             const total =
                 quantity * PRICE_PER_KG;
 
-
-            /*
-                For now this confirms the
-                calculation.
-
-                Your Supabase order submission
-                can be connected here.
-            */
-
-            alert(
-                "Order details ready!\n\n" +
-                "Name: " + name + "\n" +
-                "Quantity: " + quantity + " kg\n" +
-                "Total: " + formatPrice(total)
-            );
-
+            totalAmount.textContent =
+                formatPrice(total);
         }
     );
 
-}
+
+    /* -----------------------------------------
+       MANUAL CHANGE / BLUR
+    ----------------------------------------- */
+
+    quantityInput.addEventListener(
+        "change",
+        function () {
+
+            updateTotal();
+        }
+    );
 
 
-/* ================= INITIAL CALCULATION ================= */
+    quantityInput.addEventListener(
+        "blur",
+        function () {
 
-updateTotal();
+            updateTotal();
+        }
+    );
+
+
+    /* -----------------------------------------
+       INITIAL CALCULATION
+    ----------------------------------------- */
+
+    updateTotal();
+
+
+    /* -----------------------------------------
+       IMPORTANT
+
+       Do NOT put a new order-submit handler
+       here if your existing Supabase /
+       Edge Function order code already has one.
+
+       Otherwise two submit handlers can conflict.
+    ----------------------------------------- */
+
+});

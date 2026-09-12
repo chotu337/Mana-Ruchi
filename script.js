@@ -1,94 +1,177 @@
 /* =========================================================
-   MANA MASALA
-   CUSTOMER ORDER SYSTEM
-   Supabase + Email Notification
+   🌶️ MANA MASALA
+   COMPLETE CUSTOMER WEBSITE SCRIPT
+   Supabase Order System
+   Owner Email Notification
+   WhatsApp
    ========================================================= */
 "use strict";
 /* =========================================================
-   1. SUPABASE CONFIGURATION
+   1. CONFIGURATION
    ========================================================= */
 const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
 const SUPABASE_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
-/* Product settings */
 const PRODUCT_PRICE = 350;
 const MINIMUM_ORDER_KG = 10;
-/* Owner WhatsApp */
-const OWNER_WHATSAPP = "918367450301";
-/* Supabase library check */
-if (typeof supabase === "undefined") {
-    console.error(
-        "Supabase library was not loaded. Check the Supabase CDN script in index.html."
-    );
-    alert(
-        "Website connection error. Please refresh the page."
-    );
-    throw new Error("Supabase library not loaded.");
+const OWNER_WHATSAPP =
+    "918367450301";
+let supabaseClient = null;
+/* =========================================================
+   2. INITIALIZE SUPABASE
+   ========================================================= */
+function initializeSupabase() {
+    try {
+        if (
+            typeof window.supabase !== "undefined" &&
+            typeof window.supabase.createClient === "function"
+        ) {
+            supabaseClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_KEY
+                );
+            console.log(
+                "✅ Supabase connected successfully."
+            );
+            return true;
+        }
+        console.warn(
+            "⚠️ Supabase library was not loaded."
+        );
+        return false;
+    } catch (error) {
+        console.error(
+            "❌ Supabase initialization error:",
+            error
+        );
+        return false;
+    }
 }
-/* Create Supabase client */
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
 /* =========================================================
-   2. PAGE ELEMENTS
+   3. HIDE PAGE LOADER
    ========================================================= */
-const orderForm =
-    document.getElementById("orderForm");
-const customerNameInput =
-    document.getElementById("customerName");
-const phoneInput =
-    document.getElementById("phone");
-const addressInput =
-    document.getElementById("address");
-const quantityInput =
-    document.getElementById("quantity");
-const submitOrderButton =
-    document.getElementById("submitOrder");
-const successModal =
-    document.getElementById("successModal");
-const orderIdElement =
-    document.getElementById("orderId");
-const modalClose =
-    document.getElementById("modalClose");
-const continueButton =
-    document.getElementById("continueBtn");
-/* =========================================================
-   3. PAGE LOADER
-   ========================================================= */
-window.addEventListener("load", function () {
+function hidePageLoader() {
     const loader =
         document.getElementById("pageLoader");
-    if (loader) {
-        setTimeout(function () {
-            loader.classList.add("hidden");
-        }, 500);
+    if (!loader) {
+        return;
     }
-});
+    loader.classList.add("hidden");
+    loader.style.opacity = "0";
+    loader.style.pointerEvents = "none";
+    setTimeout(function () {
+        loader.style.display = "none";
+    }, 500);
+}
+/*
+ * Safety backup:
+ * Never allow the loader to remain forever.
+ */
+window.addEventListener(
+    "load",
+    function () {
+        setTimeout(
+            hidePageLoader,
+            300
+        );
+    }
+);
 /* =========================================================
-   4. MOBILE MENU
+   4. START WEBSITE
    ========================================================= */
-const menuButton =
-    document.getElementById("menuBtn");
-const navigation =
-    document.getElementById("navMenu");
-if (menuButton && navigation) {
-    menuButton.addEventListener("click", function () {
-        navigation.classList.toggle("active");
-    });
-    navigation
-        .querySelectorAll("a")
-        .forEach(function (link) {
-            link.addEventListener("click", function () {
-                navigation.classList.remove("active");
-            });
-        });
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        console.log(
+            "🌶️ Mana Masala website loaded."
+        );
+        /*
+         * Supabase is optional during page loading.
+         * The homepage must open even if Supabase
+         * has a temporary problem.
+         */
+        initializeSupabase();
+        hidePageLoader();
+        initializeWebsite();
+    }
+);
+/* =========================================================
+   5. INITIALIZE WEBSITE
+   ========================================================= */
+function initializeWebsite() {
+    setupMobileMenu();
+    setupQuantityCalculator();
+    setupOrderForm();
+    setupSuccessModal();
+    setupWhatsAppButtons();
+    setupImageZoom();
+    setupFAQ();
+    setupSmoothScrolling();
+    setupScrollReveal();
+    console.log(
+        "✅ Mana Masala website features initialized."
+    );
 }
 /* =========================================================
-   5. QUANTITY / PRICE CALCULATION
+   6. MOBILE MENU
    ========================================================= */
-function updatePrice() {
+function setupMobileMenu() {
+    const menuButton =
+        document.getElementById("menuBtn");
+    const navigation =
+        document.getElementById("navMenu");
+    if (!menuButton || !navigation) {
+        return;
+    }
+    menuButton.addEventListener(
+        "click",
+        function () {
+            navigation.classList.toggle(
+                "active"
+            );
+        }
+    );
+    navigation
+        .querySelectorAll("a")
+        .forEach(
+            function (link) {
+                link.addEventListener(
+                    "click",
+                    function () {
+                        navigation.classList.remove(
+                            "active"
+                        );
+                    }
+                );
+            }
+        );
+}
+/* =========================================================
+   7. QUANTITY / PRICE CALCULATOR
+   ========================================================= */
+function setupQuantityCalculator() {
+    const quantityInput =
+        document.getElementById("quantity");
+    if (!quantityInput) {
+        return;
+    }
+    quantityInput.addEventListener(
+        "input",
+        updateTotalPrice
+    );
+    quantityInput.addEventListener(
+        "change",
+        updateTotalPrice
+    );
+    updateTotalPrice();
+}
+function updateTotalPrice() {
+    const quantityInput =
+        document.getElementById("quantity");
+    const totalElement =
+        document.getElementById("totalAmount");
     if (!quantityInput) {
         return;
     }
@@ -98,37 +181,36 @@ function updatePrice() {
         quantity > 0
             ? quantity * PRODUCT_PRICE
             : 0;
-    const totalElement =
-        document.getElementById("totalAmount");
     if (totalElement) {
         totalElement.textContent =
-            "₹" + total.toLocaleString("en-IN");
+            "₹" +
+            total.toLocaleString(
+                "en-IN"
+            );
     }
-}
-if (quantityInput) {
-    quantityInput.addEventListener(
-        "input",
-        updatePrice
-    );
-    quantityInput.addEventListener(
-        "change",
-        updatePrice
-    );
-    updatePrice();
 }
 /* =========================================================
-   6. PHONE NUMBER VALIDATION
+   8. PHONE VALIDATION
    ========================================================= */
 function isValidPhone(phone) {
-    /*
-       Accepts Indian 10-digit mobile numbers.
-       Spaces and +91 are handled below.
-    */
     const cleaned =
-        phone.replace(/\D/g, "");
-    if (cleaned.length === 10) {
-        return /^[6-9]\d{9}$/.test(cleaned);
+        phone.replace(
+            /\D/g,
+            ""
+        );
+    /*
+     * 10-digit Indian mobile
+     */
+    if (
+        cleaned.length === 10
+    ) {
+        return /^[6-9]\d{9}$/.test(
+            cleaned
+        );
     }
+    /*
+     * +91 / 91 format
+     */
     if (
         cleaned.length === 12 &&
         cleaned.startsWith("91")
@@ -140,11 +222,13 @@ function isValidPhone(phone) {
     return false;
 }
 /* =========================================================
-   7. GENERATE CUSTOMER DISPLAY ORDER ID
+   9. GENERATE CUSTOMER ORDER ID
    ========================================================= */
 function generateDisplayOrderId() {
-    const timestamp =
-        Date.now().toString();
+    const time =
+        Date.now()
+            .toString()
+            .slice(-8);
     const random =
         Math.floor(
             100 +
@@ -152,60 +236,374 @@ function generateDisplayOrderId() {
         );
     return (
         "MM" +
-        timestamp.slice(-7) +
+        time +
         random
     );
 }
 /* =========================================================
-   8. SHOW SUCCESS MODAL
+   10. ORDER FORM
    ========================================================= */
-function showSuccessModal(displayOrderId) {
-    if (orderIdElement) {
-        orderIdElement.textContent =
-            displayOrderId;
+function setupOrderForm() {
+    const orderForm =
+        document.getElementById(
+            "orderForm"
+        );
+    if (!orderForm) {
+        return;
     }
-    if (successModal) {
-        successModal.classList.add("show");
-        successModal.style.display = "flex";
-    }
+    orderForm.addEventListener(
+        "submit",
+        handleOrderSubmit
+    );
 }
 /* =========================================================
-   9. CLOSE SUCCESS MODAL
+   11. SUBMIT ORDER
    ========================================================= */
-function closeSuccessModal() {
-    if (successModal) {
-        successModal.classList.remove("show");
-        successModal.style.display = "none";
+async function handleOrderSubmit(event) {
+    event.preventDefault();
+    /* -----------------------------------------
+       Get form fields
+       ----------------------------------------- */
+    const customerNameInput =
+        document.getElementById(
+            "customerName"
+        );
+    const phoneInput =
+        document.getElementById(
+            "phone"
+        );
+    const addressInput =
+        document.getElementById(
+            "address"
+        );
+    const quantityInput =
+        document.getElementById(
+            "quantity"
+        );
+    const submitButton =
+        document.getElementById(
+            "submitOrder"
+        );
+    const customerName =
+        customerNameInput
+            ? customerNameInput.value.trim()
+            : "";
+    const phone =
+        phoneInput
+            ? phoneInput.value.trim()
+            : "";
+    const address =
+        addressInput
+            ? addressInput.value.trim()
+            : "";
+    const quantity =
+        quantityInput
+            ? Number(quantityInput.value)
+            : 0;
+    /* -----------------------------------------
+       Validate name
+       ----------------------------------------- */
+    if (!customerName) {
+        alert(
+            "Please enter your name."
+        );
+        customerNameInput?.focus();
+        return;
     }
-}
-if (modalClose) {
-    modalClose.addEventListener(
-        "click",
-        closeSuccessModal
+    if (
+        customerName.length < 2
+    ) {
+        alert(
+            "Please enter a valid name."
+        );
+        customerNameInput?.focus();
+        return;
+    }
+    /* -----------------------------------------
+       Validate phone
+       ----------------------------------------- */
+    if (!phone) {
+        alert(
+            "Please enter your mobile number."
+        );
+        phoneInput?.focus();
+        return;
+    }
+    if (!isValidPhone(phone)) {
+        alert(
+            "Please enter a valid Indian mobile number."
+        );
+        phoneInput?.focus();
+        return;
+    }
+    /* -----------------------------------------
+       Validate quantity
+       ----------------------------------------- */
+    if (
+        !Number.isFinite(quantity) ||
+        quantity < MINIMUM_ORDER_KG
+    ) {
+        alert(
+            "Minimum order is " +
+            MINIMUM_ORDER_KG +
+            " kg."
+        );
+        quantityInput?.focus();
+        return;
+    }
+    /* -----------------------------------------
+       Validate address
+       ----------------------------------------- */
+    if (!address) {
+        alert(
+            "Please enter your delivery address."
+        );
+        addressInput?.focus();
+        return;
+    }
+    if (
+        address.length < 10
+    ) {
+        alert(
+            "Please enter a complete delivery address."
+        );
+        addressInput?.focus();
+        return;
+    }
+    /* -----------------------------------------
+       Calculate amount
+       ----------------------------------------- */
+    const totalAmount =
+        quantity *
+        PRODUCT_PRICE;
+    /* -----------------------------------------
+       Generate display order ID
+       ----------------------------------------- */
+    const displayOrderId =
+        generateDisplayOrderId();
+    /* -----------------------------------------
+       Disable button
+       ----------------------------------------- */
+    const originalButtonText =
+        submitButton
+            ? submitButton.innerHTML
+            : "Place Order";
+    if (submitButton) {
+        submitButton.disabled =
+            true;
+        submitButton.innerHTML =
+            "Placing Order...";
+    }
+    /* =====================================================
+       IMPORTANT DATABASE STRUCTURE
+       orders table:
+       id
+       customer_name
+       customer_phone
+       quantity_kg
+       address
+       total_amount
+       status
+       created_at
+       We intentionally DO NOT send:
+       product
+       order_id
+       notes
+       ===================================================== */
+    const orderData = {
+        customer_name:
+            customerName,
+        customer_phone:
+            phone,
+        quantity_kg:
+            quantity,
+        address:
+            address,
+        total_amount:
+            totalAmount,
+        status:
+            "Pending"
+    };
+    console.log(
+        "📦 Order being submitted:",
+        orderData
     );
-}
-if (continueButton) {
-    continueButton.addEventListener(
-        "click",
-        closeSuccessModal
+    /* =====================================================
+       CHECK SUPABASE
+       ===================================================== */
+    if (!supabaseClient) {
+        console.error(
+            "❌ Supabase client is not available."
+        );
+        if (submitButton) {
+            submitButton.disabled =
+                false;
+            submitButton.innerHTML =
+                originalButtonText;
+        }
+        alert(
+            "The order system is temporarily unavailable. Please refresh the page and try again."
+        );
+        return;
+    }
+    /* =====================================================
+       INSERT ORDER
+       IMPORTANT:
+       No .select() is used because public users
+       may have INSERT permission without SELECT.
+       ===================================================== */
+    let insertResult;
+    try {
+        insertResult =
+            await supabaseClient
+                .from("orders")
+                .insert([
+                    orderData
+                ]);
+    } catch (error) {
+        console.error(
+            "❌ Supabase request failed:",
+            error
+        );
+        if (submitButton) {
+            submitButton.disabled =
+                false;
+            submitButton.innerHTML =
+                originalButtonText;
+        }
+        alert(
+            "Order could not be completed. Please try again later."
+        );
+        return;
+    }
+    /* =====================================================
+       CHECK DATABASE ERROR
+       ===================================================== */
+    if (
+        insertResult &&
+        insertResult.error
+    ) {
+        console.error(
+            "❌ Supabase database error:",
+            insertResult.error
+        );
+        if (submitButton) {
+            submitButton.disabled =
+                false;
+            submitButton.innerHTML =
+                originalButtonText;
+        }
+        alert(
+            "Order could not be completed.\n\nPlease try again later."
+        );
+        return;
+    }
+    /* =====================================================
+       ORDER SUCCESSFULLY SAVED
+       ===================================================== */
+    console.log(
+        "✅ Order saved successfully."
     );
-}
-/* Close modal by clicking outside */
-if (successModal) {
-    successModal.addEventListener(
-        "click",
-        function (event) {
-            if (event.target === successModal) {
-                closeSuccessModal();
+    /* =====================================================
+       NOTIFICATION DATA
+       ===================================================== */
+    const notificationData = {
+        display_order_id:
+            displayOrderId,
+        customer_name:
+            customerName,
+        customer_phone:
+            phone,
+        quantity_kg:
+            quantity,
+        address:
+            address,
+        total_amount:
+            totalAmount,
+        status:
+            "Pending"
+    };
+    /* =====================================================
+       SEND OWNER EMAIL
+       Notification failure must NOT cancel
+       an already saved order.
+       ===================================================== */
+    sendOrderNotification(
+        notificationData
+    )
+    .then(
+        function (success) {
+            if (success) {
+                console.log(
+                    "📧 Owner notification sent."
+                );
+            } else {
+                console.warn(
+                    "⚠️ Order saved, but notification failed."
+                );
             }
+        }
+    )
+    .catch(
+        function (error) {
+            console.error(
+                "Notification error:",
+                error
+            );
+        }
+    );
+    /* =====================================================
+       RESET FORM
+       ===================================================== */
+    const orderForm =
+        document.getElementById(
+            "orderForm"
+        );
+    if (orderForm) {
+        orderForm.reset();
+    }
+    updateTotalPrice();
+    /* =====================================================
+       RESTORE BUTTON
+       ===================================================== */
+    if (submitButton) {
+        submitButton.disabled =
+            false;
+        submitButton.innerHTML =
+            originalButtonText;
+    }
+    /* =====================================================
+       SHOW SUCCESS MESSAGE
+       ===================================================== */
+    showSuccessModal(
+        displayOrderId
+    );
+    console.log(
+        "🌶️ Mana Masala order:",
+        {
+            orderId:
+                displayOrderId,
+            customer:
+                customerName,
+            phone:
+                phone,
+            quantity:
+                quantity,
+            amount:
+                totalAmount
         }
     );
 }
 /* =========================================================
-   10. SEND ORDER EMAIL NOTIFICATION
+   12. SEND OWNER EMAIL NOTIFICATION
    ========================================================= */
-async function sendOrderNotification(orderData) {
+async function sendOrderNotification(
+    orderData
+) {
     try {
+        console.log(
+            "📧 Sending owner notification..."
+        );
         const response =
             await fetch(
                 SUPABASE_URL +
@@ -216,410 +614,304 @@ async function sendOrderNotification(orderData) {
                         "Content-Type":
                             "application/json"
                     },
-                    body: JSON.stringify({
-                        order: orderData
-                    })
+                    body:
+                        JSON.stringify({
+                            order:
+                                orderData
+                        })
                 }
             );
         if (!response.ok) {
             const errorText =
                 await response.text();
             console.error(
-                "Notification error:",
+                "Notification server error:",
                 errorText
             );
             return false;
         }
         const result =
-            await response.json().catch(
-                function () {
-                    return {};
-                }
-            );
+            await response
+                .json()
+                .catch(
+                    function () {
+                        return {};
+                    }
+                );
         console.log(
-            "Order notification result:",
+            "📧 Notification response:",
             result
         );
         return true;
     } catch (error) {
         console.error(
-            "Notification request failed:",
+            "❌ Notification request failed:",
             error
         );
         return false;
     }
 }
 /* =========================================================
-   11. SUBMIT ORDER
+   13. SUCCESS MODAL
    ========================================================= */
-if (orderForm) {
-    orderForm.addEventListener(
-        "submit",
-        async function (event) {
-            event.preventDefault();
-            /* -----------------------------------------
-               Get values
-               ----------------------------------------- */
-            const customerName =
-                customerNameInput
-                    ? customerNameInput.value.trim()
-                    : "";
-            const phone =
-                phoneInput
-                    ? phoneInput.value.trim()
-                    : "";
-            const address =
-                addressInput
-                    ? addressInput.value.trim()
-                    : "";
-            const quantity =
-                quantityInput
-                    ? Number(quantityInput.value)
-                    : 0;
-            /* -----------------------------------------
-               Validate customer name
-               ----------------------------------------- */
-            if (!customerName) {
-                alert(
-                    "Please enter your name."
-                );
-                if (customerNameInput) {
-                    customerNameInput.focus();
+function setupSuccessModal() {
+    const modal =
+        document.getElementById(
+            "successModal"
+        );
+    const closeButton =
+        document.getElementById(
+            "modalClose"
+        );
+    const continueButton =
+        document.getElementById(
+            "continueBtn"
+        );
+    if (closeButton) {
+        closeButton.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+    }
+    if (continueButton) {
+        continueButton.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+    }
+    if (modal) {
+        modal.addEventListener(
+            "click",
+            function (event) {
+                if (
+                    event.target === modal
+                ) {
+                    closeSuccessModal();
                 }
-                return;
             }
-            if (customerName.length < 2) {
-                alert(
-                    "Please enter a valid name."
-                );
-                if (customerNameInput) {
-                    customerNameInput.focus();
-                }
-                return;
-            }
-            /* -----------------------------------------
-               Validate phone
-               ----------------------------------------- */
-            if (!phone) {
-                alert(
-                    "Please enter your mobile number."
-                );
-                if (phoneInput) {
-                    phoneInput.focus();
-                }
-                return;
-            }
-            if (!isValidPhone(phone)) {
-                alert(
-                    "Please enter a valid Indian mobile number."
-                );
-                if (phoneInput) {
-                    phoneInput.focus();
-                }
-                return;
-            }
-            /* -----------------------------------------
-               Validate quantity
-               ----------------------------------------- */
-            if (
-                !Number.isFinite(quantity) ||
-                quantity < MINIMUM_ORDER_KG
-            ) {
-                alert(
-                    "Minimum order is " +
-                    MINIMUM_ORDER_KG +
-                    " kg."
-                );
-                if (quantityInput) {
-                    quantityInput.focus();
-                }
-                return;
-            }
-            /* -----------------------------------------
-               Validate address
-               ----------------------------------------- */
-            if (!address) {
-                alert(
-                    "Please enter your delivery address."
-                );
-                if (addressInput) {
-                    addressInput.focus();
-                }
-                return;
-            }
-            if (address.length < 10) {
-                alert(
-                    "Please enter a complete delivery address."
-                );
-                if (addressInput) {
-                    addressInput.focus();
-                }
-                return;
-            }
-            /* -----------------------------------------
-               Calculate total
-               ----------------------------------------- */
-            const totalAmount =
-                quantity * PRODUCT_PRICE;
-            /* -----------------------------------------
-               Customer display order ID
-               ----------------------------------------- */
-            const displayOrderId =
-                generateDisplayOrderId();
-            /* -----------------------------------------
-               Disable submit button
-               ----------------------------------------- */
-            const originalButtonText =
-                submitOrderButton
-                    ? submitOrderButton.innerHTML
-                    : "Place Order";
-            if (submitOrderButton) {
-                submitOrderButton.disabled = true;
-                submitOrderButton.innerHTML =
-                    "Placing Order...";
-            }
-            /* -----------------------------------------
-               EXACT DATABASE COLUMNS
-               orders table:
-               id
-               customer_name
-               customer_phone
-               quantity_kg
-               address
-               total_amount
-               status
-               created_at
-               Do NOT send:
-               product
-               order_id
-               notes
-               ----------------------------------------- */
-            const orderData = {
-                customer_name:
-                    customerName,
-                customer_phone:
-                    phone,
-                quantity_kg:
-                    quantity,
-                address:
-                    address,
-                total_amount:
-                    totalAmount,
-                status:
-                    "Pending"
-            };
-            console.log(
-                "Submitting order:",
-                orderData
-            );
-            /* -----------------------------------------
-               INSERT INTO SUPABASE
-               
-               IMPORTANT:
-               Do NOT use .select() here because
-               public customers may have INSERT
-               permission but not SELECT permission.
-               ----------------------------------------- */
-            const {
-                error
-            } =
-                await supabaseClient
-                    .from("orders")
-                    .insert([
-                        orderData
-                    ]);
-            /* -----------------------------------------
-               Handle database error
-               ----------------------------------------- */
-            if (error) {
-                console.error(
-                    "Supabase order error:",
-                    error
-                );
-                if (submitOrderButton) {
-                    submitOrderButton.disabled =
-                        false;
-                    submitOrderButton.innerHTML =
-                        originalButtonText;
-                }
-                alert(
-                    "Order could not be completed.\n\n" +
-                    "Please try again later."
-                );
-                return;
-            }
-            /* -----------------------------------------
-               Order saved successfully
-               ----------------------------------------- */
-            console.log(
-                "Order successfully saved."
-            );
-            /* -----------------------------------------
-               Prepare notification data
-               ----------------------------------------- */
-            const notificationData = {
-                display_order_id:
-                    displayOrderId,
-                customer_name:
-                    customerName,
-                customer_phone:
-                    phone,
-                quantity_kg:
-                    quantity,
-                address:
-                    address,
-                total_amount:
-                    totalAmount,
-                status:
-                    "Pending"
-            };
-            /* -----------------------------------------
-               Send owner email notification
-               If notification fails, the order
-               remains safely stored in Supabase.
-               ----------------------------------------- */
-            sendOrderNotification(
-                notificationData
-            ).then(
-                function (success) {
-                    if (success) {
-                        console.log(
-                            "Owner notification sent."
-                        );
-                    } else {
-                        console.warn(
-                            "Order saved, but owner notification failed."
-                        );
-                    }
-                }
-            );
-            /* -----------------------------------------
-               Reset form
-               ----------------------------------------- */
-            orderForm.reset();
-            updatePrice();
-            /* -----------------------------------------
-               Restore button
-               ----------------------------------------- */
-            if (submitOrderButton) {
-                submitOrderButton.disabled =
-                    false;
-                submitOrderButton.innerHTML =
-                    originalButtonText;
-            }
-            /* -----------------------------------------
-               Show customer confirmation
-               ----------------------------------------- */
-            showSuccessModal(
-                displayOrderId
-            );
-            /* -----------------------------------------
-               Log order information
-               ----------------------------------------- */
-            console.log(
-                "Customer order:",
-                {
-                    orderId:
-                        displayOrderId,
-                    customer:
-                        customerName,
-                    phone:
-                        phone,
-                    quantity:
-                        quantity,
-                    total:
-                        totalAmount
-                }
-            );
-        }
-    );
+        );
+    }
 }
 /* =========================================================
-   12. WHATSAPP HELPER
+   14. SHOW SUCCESS MODAL
+   ========================================================= */
+function showSuccessModal(
+    displayOrderId
+) {
+    const modal =
+        document.getElementById(
+            "successModal"
+        );
+    const orderId =
+        document.getElementById(
+            "orderId"
+        );
+    if (orderId) {
+        orderId.textContent =
+            displayOrderId;
+    }
+    if (modal) {
+        modal.style.display =
+            "flex";
+        modal.classList.add(
+            "show"
+        );
+        document.body.style.overflow =
+            "hidden";
+    }
+}
+/* =========================================================
+   15. CLOSE SUCCESS MODAL
+   ========================================================= */
+function closeSuccessModal() {
+    const modal =
+        document.getElementById(
+            "successModal"
+        );
+    if (modal) {
+        modal.classList.remove(
+            "show"
+        );
+        modal.style.display =
+            "none";
+    }
+    document.body.style.overflow =
+        "";
+}
+/* =========================================================
+   16. WHATSAPP
    ========================================================= */
 function openWhatsApp() {
     const message =
-        "Hello Mana Masala! I would like to order homemade chilli powder.";
-    const url =
+        "Hello Mana Masala! 🌶️\n\n" +
+        "I would like to order your homemade chilli powder.";
+    const whatsappURL =
         "https://wa.me/" +
         OWNER_WHATSAPP +
         "?text=" +
-        encodeURIComponent(message);
+        encodeURIComponent(
+            message
+        );
     window.open(
-        url,
-        "_blank"
+        whatsappURL,
+        "_blank",
+        "noopener,noreferrer"
     );
 }
 /* =========================================================
-   13. FLOATING WHATSAPP BUTTON
+   17. WHATSAPP BUTTONS
    ========================================================= */
-const whatsappButtons =
-    document.querySelectorAll(
-        ".whatsapp-btn, .whatsapp-button, [data-whatsapp]"
-    );
-whatsappButtons.forEach(
-    function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
-                openWhatsApp();
-            }
+function setupWhatsAppButtons() {
+    const buttons =
+        document.querySelectorAll(
+            ".whatsapp-btn, " +
+            ".whatsapp-button, " +
+            "[data-whatsapp]"
         );
-    }
-);
-/* =========================================================
-   14. IMAGE ZOOM
-   ========================================================= */
-const productImage =
-    document.querySelector(
-        ".product-image img, .hero-product-image img, #productImage"
-    );
-if (productImage) {
-    productImage.addEventListener(
-        "click",
-        function () {
-            productImage.classList.toggle(
-                "zoomed"
+    buttons.forEach(
+        function (button) {
+            button.addEventListener(
+                "click",
+                function (event) {
+                    event.preventDefault();
+                    openWhatsApp();
+                }
             );
         }
     );
 }
 /* =========================================================
-   15. FAQ ACCORDION
+   18. IMAGE ZOOM
    ========================================================= */
-const faqItems =
-    document.querySelectorAll(
-        ".faq-question, .faq-header"
-    );
-faqItems.forEach(
-    function (question) {
-        question.addEventListener(
-            "click",
-            function () {
-                const parent =
-                    question.parentElement;
-                if (!parent) {
-                    return;
+function setupImageZoom() {
+    const images =
+        document.querySelectorAll(
+            ".product-image img, " +
+            ".hero-product-image img, " +
+            "#productImage"
+        );
+    images.forEach(
+        function (image) {
+            image.style.cursor =
+                "zoom-in";
+            image.addEventListener(
+                "click",
+                function () {
+                    image.classList.toggle(
+                        "zoomed"
+                    );
+                    if (
+                        image.classList.contains(
+                            "zoomed"
+                        )
+                    ) {
+                        image.style.transform =
+                            "scale(1.08)";
+                    } else {
+                        image.style.transform =
+                            "";
+                    }
                 }
-                parent.classList.toggle(
-                    "active"
+            );
+        }
+    );
+}
+/* =========================================================
+   19. FAQ
+   ========================================================= */
+function setupFAQ() {
+    const questions =
+        document.querySelectorAll(
+            ".faq-question, " +
+            ".faq-header"
+        );
+    questions.forEach(
+        function (question) {
+            question.addEventListener(
+                "click",
+                function () {
+                    const parent =
+                        question.parentElement;
+                    if (!parent) {
+                        return;
+                    }
+                    parent.classList.toggle(
+                        "active"
+                    );
+                }
+            );
+        }
+    );
+}
+/* =========================================================
+   20. SMOOTH SCROLLING
+   ========================================================= */
+function setupSmoothScrolling() {
+    const links =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+    links.forEach(
+        function (link) {
+            link.addEventListener(
+                "click",
+                function (event) {
+                    const targetId =
+                        link.getAttribute(
+                            "href"
+                        );
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+                    if (!target) {
+                        return;
+                    }
+                    event.preventDefault();
+                    target.scrollIntoView({
+                        behavior:
+                            "smooth",
+                        block:
+                            "start"
+                    });
+                }
+            );
+        }
+    );
+}
+/* =========================================================
+   21. SCROLL REVEAL
+   ========================================================= */
+function setupScrollReveal() {
+    const elements =
+        document.querySelectorAll(
+            ".reveal, " +
+            ".fade-in, " +
+            ".animate-on-scroll"
+        );
+    if (
+        elements.length === 0
+    ) {
+        return;
+    }
+    if (
+        !("IntersectionObserver" in window)
+    ) {
+        elements.forEach(
+            function (element) {
+                element.classList.add(
+                    "visible"
                 );
             }
         );
+        return;
     }
-);
-/* =========================================================
-   16. SCROLL REVEAL
-   ========================================================= */
-const revealElements =
-    document.querySelectorAll(
-        ".reveal, .fade-in, .animate-on-scroll"
-    );
-if (
-    revealElements.length > 0 &&
-    "IntersectionObserver" in window
-) {
     const observer =
         new IntersectionObserver(
             function (entries) {
@@ -642,67 +934,59 @@ if (
                 threshold: 0.12
             }
         );
-    revealElements.forEach(
+    elements.forEach(
         function (element) {
             observer.observe(
                 element
             );
         }
     );
-} else {
-    revealElements.forEach(
-        function (element) {
-            element.classList.add(
-                "visible"
-            );
-        }
-    );
 }
 /* =========================================================
-   17. SMOOTH SCROLL
+   22. PREVENT ENTER KEY ISSUES
    ========================================================= */
-document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
-    .forEach(
-        function (link) {
-            link.addEventListener(
-                "click",
-                function (event) {
-                    const targetId =
-                        link.getAttribute("href");
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-                    if (target) {
-                        event.preventDefault();
-                        target.scrollIntoView({
-                            behavior:
-                                "smooth",
-                            block:
-                                "start"
-                        });
-                    }
-                }
-            );
+document.addEventListener(
+    "keydown",
+    function (event) {
+        if (
+            event.key === "Escape"
+        ) {
+            closeSuccessModal();
         }
-    );
+    }
+);
 /* =========================================================
-   18. CONSOLE INFORMATION
+   23. ERROR HANDLING
+   ========================================================= */
+window.addEventListener(
+    "error",
+    function (event) {
+        console.error(
+            "Website JavaScript error:",
+            event.error ||
+            event.message
+        );
+        /*
+         * Never allow a JavaScript error
+         * to keep the page loader visible.
+         */
+        hidePageLoader();
+    }
+);
+/* =========================================================
+   24. FINAL STARTUP MESSAGE
    ========================================================= */
 console.log(
-    "Mana Masala website script loaded successfully."
+    "================================================="
 );
 console.log(
-    "Product price: ₹" +
+    "🌶️ MANA MASALA"
+);
+console.log(
+    "Authentic Homemade Chilli Powder"
+);
+console.log(
+    "Price: ₹" +
     PRODUCT_PRICE +
     "/kg"
 );
@@ -710,4 +994,11 @@ console.log(
     "Minimum order: " +
     MINIMUM_ORDER_KG +
     " kg"
+);
+console.log(
+    "Owner WhatsApp: +" +
+    OWNER_WHATSAPP
+);
+console.log(
+    "================================================="
 );

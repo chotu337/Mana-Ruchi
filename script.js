@@ -1,18 +1,20 @@
 /* =========================================================
    MANA MASALA - COMPLETE ORDER SYSTEM
-   Price: ₹350/kg
-   Minimum Order: 10 kg
-   Features:
-   ✅ Supabase order saving
-   ✅ Owner email notification
-   ✅ Quantity calculation
-   ✅ Payment amount update
-   ✅ Order confirmation
-   ❌ NO automatic WhatsApp redirect
+   Product:
+   Homemade Chilli Powder
+   Price:
+   ₹350/kg
+   Minimum Order:
+   10 kg
+   IMPORTANT:
+   - Saves order to Supabase
+   - Sends owner notification
+   - Does NOT automatically open WhatsApp
+   - Customer remains on the website
 ========================================================= */
-console.log("🌶️ Mana Masala script.js started");
+console.log("🌶️ Mana Masala script.js loaded");
 /* =========================================================
-   SUPABASE SETTINGS
+   SUPABASE CONFIGURATION
 ========================================================= */
 const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
@@ -20,16 +22,19 @@ const SUPABASE_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 const EDGE_FUNCTION_NAME =
     "new-order-notification";
+/* =========================================================
+   BUSINESS SETTINGS
+========================================================= */
 const PRICE_PER_KG = 350;
 const MINIMUM_ORDER = 10;
-const OWNER_WHATSAPP =
-    "918367450301";
+const OWNER_WHATSAPP = "918367450301";
 /* =========================================================
    LOAD SUPABASE
 ========================================================= */
 function loadSupabase() {
     return new Promise((resolve, reject) => {
         if (window.supabase) {
+            console.log("✅ Supabase already loaded");
             resolve();
             return;
         }
@@ -54,41 +59,35 @@ function loadSupabase() {
     });
 }
 /* =========================================================
-   START ORDER SYSTEM
+   MAIN ORDER SYSTEM
 ========================================================= */
 async function startOrderSystem() {
     try {
         await loadSupabase();
-        /* =================================================
+        /* -------------------------------------------------
            CREATE SUPABASE CLIENT
-        ================================================= */
+        ------------------------------------------------- */
         const db =
             window.supabase.createClient(
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
         console.log(
-            "✅ Supabase client initialized"
+            "✅ Supabase client created"
         );
-        /* =================================================
+        /* -------------------------------------------------
            GET HTML ELEMENTS
-        ================================================= */
+        ------------------------------------------------- */
+        const orderForm =
+            document.getElementById("orderForm");
         const customerName =
-            document.getElementById(
-                "customerName"
-            );
+            document.getElementById("customerName");
         const customerPhone =
-            document.getElementById(
-                "customerPhone"
-            );
+            document.getElementById("customerPhone");
         const addressInput =
-            document.getElementById(
-                "address"
-            );
+            document.getElementById("address");
         const quantityInput =
-            document.getElementById(
-                "quantity"
-            );
+            document.getElementById("quantity");
         const decreaseQuantity =
             document.getElementById(
                 "decreaseQuantity"
@@ -109,10 +108,6 @@ async function startOrderSystem() {
             document.getElementById(
                 "paymentAmount"
             );
-        const paymentAmountInstruction =
-            document.getElementById(
-                "paymentAmountInstruction"
-            );
         const placeOrderButton =
             document.getElementById(
                 "placeOrderButton"
@@ -121,37 +116,45 @@ async function startOrderSystem() {
             document.getElementById(
                 "orderMessage"
             );
-        /* =================================================
+        const shareWhatsApp =
+            document.getElementById(
+                "shareWhatsApp"
+            );
+        /* -------------------------------------------------
            CHECK REQUIRED ELEMENTS
-        ================================================= */
+        ------------------------------------------------- */
+        if (!orderForm) {
+            throw new Error(
+                "orderForm not found."
+            );
+        }
         if (!customerName) {
-            console.error(
-                "❌ customerName element not found."
+            throw new Error(
+                "customerName not found."
             );
         }
         if (!customerPhone) {
-            console.error(
-                "❌ customerPhone element not found."
+            throw new Error(
+                "customerPhone not found."
             );
         }
         if (!addressInput) {
-            console.error(
-                "❌ address element not found."
+            throw new Error(
+                "address not found."
             );
         }
         if (!quantityInput) {
-            console.error(
-                "❌ quantity element not found."
+            throw new Error(
+                "quantity not found."
             );
         }
         if (!placeOrderButton) {
-            console.error(
-                "❌ Place Order button not found."
+            throw new Error(
+                "placeOrderButton not found."
             );
-            return;
         }
         /* =================================================
-           SHOW MESSAGE
+           MESSAGE FUNCTION
         ================================================= */
         function showMessage(
             message,
@@ -164,18 +167,18 @@ async function startOrderSystem() {
             orderMessage.textContent =
                 message;
             orderMessage.className =
-                "order-message " +
-                type;
+                "order-message " + type;
             orderMessage.style.display =
                 "block";
+            orderMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
         }
         /* =================================================
            UPDATE TOTAL
         ================================================= */
         function updateTotal() {
-            if (!quantityInput) {
-                return;
-            }
             let quantity =
                 Number(
                     quantityInput.value
@@ -194,37 +197,19 @@ async function startOrderSystem() {
             const total =
                 quantity *
                 PRICE_PER_KG;
-            /* ---------------------------------------------
-               SUMMARY QUANTITY
-            --------------------------------------------- */
             if (summaryQuantity) {
                 summaryQuantity.textContent =
-                    quantity;
+                    quantity + " kg";
             }
-            /* ---------------------------------------------
-               TOTAL PRICE
-               HTML already contains ₹
-               Therefore JS adds numbers only.
-            --------------------------------------------- */
             if (totalPrice) {
                 totalPrice.textContent =
+                    "₹" +
                     total.toLocaleString(
                         "en-IN"
                     );
             }
-            /* ---------------------------------------------
-               PAYMENT AMOUNT
-            --------------------------------------------- */
             if (paymentAmount) {
                 paymentAmount.textContent =
-                    total.toLocaleString(
-                        "en-IN"
-                    );
-            }
-            if (
-                paymentAmountInstruction
-            ) {
-                paymentAmountInstruction.textContent =
                     total.toLocaleString(
                         "en-IN"
                     );
@@ -237,7 +222,7 @@ async function startOrderSystem() {
             );
         }
         /* =================================================
-           DECREASE QUANTITY
+           QUANTITY - DECREASE
         ================================================= */
         if (decreaseQuantity) {
             decreaseQuantity.addEventListener(
@@ -255,20 +240,22 @@ async function startOrderSystem() {
                         quantity =
                             MINIMUM_ORDER;
                     }
+                    quantity =
+                        Math.floor(quantity);
                     if (
                         quantity >
                         MINIMUM_ORDER
                     ) {
                         quantity--;
-                        quantityInput.value =
-                            quantity;
                     }
+                    quantityInput.value =
+                        quantity;
                     updateTotal();
                 }
             );
         }
         /* =================================================
-           INCREASE QUANTITY
+           QUANTITY - INCREASE
         ================================================= */
         if (increaseQuantity) {
             increaseQuantity.addEventListener(
@@ -286,6 +273,8 @@ async function startOrderSystem() {
                         quantity =
                             MINIMUM_ORDER;
                     }
+                    quantity =
+                        Math.floor(quantity);
                     quantity++;
                     quantityInput.value =
                         quantity;
@@ -294,26 +283,51 @@ async function startOrderSystem() {
             );
         }
         /* =================================================
-           MANUAL QUANTITY
+           MANUAL QUANTITY CHANGE
         ================================================= */
-        if (quantityInput) {
-            quantityInput.addEventListener(
-                "input",
-                updateTotal
-            );
-        }
+        quantityInput.addEventListener(
+            "input",
+            function () {
+                updateTotal();
+            }
+        );
+        quantityInput.addEventListener(
+            "change",
+            function () {
+                updateTotal();
+            }
+        );
+        /* =================================================
+           MOBILE NUMBER - ONLY NUMBERS
+        ================================================= */
+        customerPhone.addEventListener(
+            "input",
+            function () {
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 10);
+            }
+        );
         /* =================================================
            PLACE ORDER
+           
+           IMPORTANT:
+           We listen to FORM SUBMIT.
+           This is more reliable than only
+           listening for button clicks.
         ================================================= */
-        placeOrderButton.addEventListener(
-            "click",
-            async function () {
+        orderForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+                event.stopPropagation();
                 console.log(
-                    "🛒 PLACE ORDER CLICKED"
+                    "🌶️ Place Order clicked"
                 );
-                /* =========================================
-                   GET CUSTOMER VALUES
-                ========================================= */
+                /* -----------------------------------------
+                   READ VALUES
+                ----------------------------------------- */
                 const name =
                     customerName.value.trim();
                 const phone =
@@ -324,24 +338,22 @@ async function startOrderSystem() {
                     Number(
                         quantityInput.value
                     );
-                /* =========================================
+                /* -----------------------------------------
                    VALIDATION
-                ========================================= */
+                ----------------------------------------- */
                 if (!name) {
                     showMessage(
-                        "Please enter your full name.",
+                        "❌ Please enter your name.",
                         "error"
                     );
                     customerName.focus();
                     return;
                 }
                 if (
-                    !/^[0-9]{10}$/.test(
-                        phone
-                    )
+                    !/^\d{10}$/.test(phone)
                 ) {
                     showMessage(
-                        "Please enter a valid 10-digit mobile number.",
+                        "❌ Please enter a valid 10-digit mobile number.",
                         "error"
                     );
                     customerPhone.focus();
@@ -354,37 +366,34 @@ async function startOrderSystem() {
                     quantity < MINIMUM_ORDER
                 ) {
                     showMessage(
-                        "Minimum order is 10 kg.",
+                        "❌ Minimum order is 10 kg.",
                         "error"
                     );
                     quantityInput.value =
                         MINIMUM_ORDER;
                     updateTotal();
+                    quantityInput.focus();
                     return;
                 }
                 quantity =
                     Math.floor(quantity);
                 if (!address) {
                     showMessage(
-                        "Please enter your complete delivery address.",
+                        "❌ Please enter your delivery address.",
                         "error"
                     );
                     addressInput.focus();
                     return;
                 }
-                /* =========================================
+                /* -----------------------------------------
                    CALCULATE TOTAL
-                ========================================= */
+                ----------------------------------------- */
                 const totalAmount =
                     quantity *
                     PRICE_PER_KG;
-                console.log(
-                    "Order total:",
-                    totalAmount
-                );
-                /* =========================================
+                /* -----------------------------------------
                    DISABLE BUTTON
-                ========================================= */
+                ----------------------------------------- */
                 placeOrderButton.disabled =
                     true;
                 placeOrderButton.innerHTML =
@@ -398,49 +407,50 @@ async function startOrderSystem() {
                        SAVE ORDER TO SUPABASE
                     ===================================== */
                     console.log(
-                        "Connecting to Supabase..."
+                        "📦 Saving order..."
                     );
-                    const { error } =
-                        await db
-                            .from("orders")
-                            .insert({
-                                customer_name:
-                                    name,
-                                customer_phone:
-                                    phone,
-                                quantity_kg:
-                                    quantity,
-                                address:
-                                    address,
-                                total_amount:
-                                    totalAmount,
-                                status:
-                                    "New"
-                            });
-                    /* =====================================
-                       DATABASE ERROR
-                    ===================================== */
-                    if (error) {
+                    const {
+                        error: orderError
+                    } = await db
+                        .from("orders")
+                        .insert({
+                            customer_name:
+                                name,
+                            customer_phone:
+                                phone,
+                            quantity_kg:
+                                quantity,
+                            address:
+                                address,
+                            total_amount:
+                                totalAmount,
+                            status:
+                                "New"
+                        });
+                    /* -------------------------------------
+                       ORDER ERROR
+                    ------------------------------------- */
+                    if (orderError) {
                         console.error(
-                            "❌ SUPABASE ERROR:",
-                            error
+                            "❌ Supabase order error:",
+                            orderError
                         );
                         showMessage(
-                            "❌ Order failed: " +
-                            error.message,
+                            "❌ Order could not be completed: " +
+                            orderError.message,
                             "error"
                         );
                         return;
                     }
                     console.log(
-                        "✅ ORDER SAVED"
+                        "✅ Order saved successfully"
                     );
                     /* =====================================
                        OWNER NOTIFICATION
                     ===================================== */
                     try {
                         console.log(
-                            "📧 Sending owner notification..."
+                            "📲 Sending owner notification..."
                         );
                         const notification =
                             await db.functions.invoke(
@@ -483,6 +493,11 @@ async function startOrderSystem() {
                             "⚠️ Notification failed:",
                             notificationError
                         );
+                        /*
+                         IMPORTANT:
+                         Notification failure should NOT
+                         make the already-saved order fail.
+                        */
                     }
                     /* =====================================
                        SUCCESS MESSAGE
@@ -492,15 +507,15 @@ async function startOrderSystem() {
                         "Total Amount: ₹" +
                         totalAmount.toLocaleString(
                             "en-IN"
-                        ),
+                        ) +
+                        ". Thank you for ordering from Mana Masala.",
                         "success"
                     );
                     /* =====================================
-                       CREATE WHATSAPP MESSAGE
+                       PREPARE WHATSAPP MESSAGE
                        
                        IMPORTANT:
-                       This message is created only.
-                       WhatsApp will NOT open automatically.
+                       It is NOT opened automatically.
                     ===================================== */
                     const whatsappMessage =
 `🌶️ MANA MASALA ORDER
@@ -515,15 +530,20 @@ Status: New`;
                     console.log(
                         "WhatsApp message prepared."
                     );
-                    /* =====================================
-                       DO NOT OPEN WHATSAPP
-                       
-                       There is intentionally NO:
-                       window.open()
-                       location.href
-                       window.location
-                       WhatsApp redirect
-                    ===================================== */
+                    /*
+                     * VERY IMPORTANT
+                     *
+                     * There is intentionally NO:
+                     *
+                     * window.open()
+                     * location.href =
+                     * window.location =
+                     *
+                     * here.
+                     *
+                     * Therefore the customer stays
+                     * on the website.
+                     */
                     /* =====================================
                        RESET FORM
                     ===================================== */
@@ -536,9 +556,6 @@ Status: New`;
                     quantityInput.value =
                         MINIMUM_ORDER;
                     updateTotal();
-                    console.log(
-                        "✅ Customer remains on Mana Masala website."
-                    );
                 } catch (error) {
                     console.error(
                         "❌ ORDER ERROR:",
@@ -553,19 +570,54 @@ Status: New`;
                         "error"
                     );
                 } finally {
-                    /* =====================================
-                       RESTORE BUTTON
-                    ===================================== */
+                    /* -------------------------------------
+                       RE-ENABLE BUTTON
+                    ------------------------------------- */
                     placeOrderButton.disabled =
                         false;
                     placeOrderButton.innerHTML =
                         `<span>✓</span>
-                         <span>I Have Made the Payment –
-                         Confirm & Place Order</span>
+                         <span>Confirm & Place Order</span>
                          <span>→</span>`;
                 }
             }
         );
+        /* =================================================
+           SHARE WEBSITE ON WHATSAPP
+           
+           This works ONLY when the user explicitly
+           clicks the Share button.
+        ================================================= */
+        if (shareWhatsApp) {
+            shareWhatsApp.addEventListener(
+                "click",
+                function () {
+                    const websiteURL =
+                        window.location.href;
+                    const shareMessage =
+                        "🌶️ Mana Masala - Homemade Chilli Powder\n\n" +
+                        "Fresh homemade chilli powder.\n" +
+                        "₹350/kg\n" +
+                        "Minimum order: 10 kg\n\n" +
+                        "Order here:\n" +
+                        websiteURL;
+                    const shareURL =
+                        "https://wa.me/?text=" +
+                        encodeURIComponent(
+                            shareMessage
+                        );
+                    /*
+                     * WhatsApp opens ONLY because
+                     * the customer explicitly clicked
+                     * Share on WhatsApp.
+                     */
+                    window.open(
+                        shareURL,
+                        "_blank"
+                    );
+                }
+            );
+        }
         /* =================================================
            INITIAL TOTAL
         ================================================= */
@@ -573,14 +625,14 @@ Status: New`;
         console.log(
             "🌶️ Mana Masala Order System Ready"
         );
-        /* =================================================
-           IMPORTANT SAFETY CHECK
-           
-           This script contains no automatic WhatsApp
-           redirect after placing an order.
-        ================================================= */
         console.log(
             "💬 Automatic WhatsApp redirect: DISABLED"
+        );
+        console.log(
+            "📦 Supabase orders: ENABLED"
+        );
+        console.log(
+            "📲 Owner notifications: ENABLED"
         );
     } catch (error) {
         console.error(
@@ -593,7 +645,7 @@ Status: New`;
     }
 }
 /* =========================================================
-   START
+   START APPLICATION
 ========================================================= */
 if (
     document.readyState ===

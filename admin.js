@@ -1,59 +1,84 @@
 /* =========================================================
    MANA MASALA - ADMIN DASHBOARD
-   Supabase Authentication + Orders
-   ORDERS TABLE:
-   id
-   customer_name
-   customer_phone
-   quantity_kg
-   address
-   total_amount
-   status
-   created_at
-========================================================= */
-/* =========================================================
-   SUPABASE CONFIG
+   SUPABASE AUTH + ORDERS
 ========================================================= */
 const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
 const SUPABASE_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+/* =========================================================
+   SUPABASE
+========================================================= */
+if (!window.supabase) {
+    console.error(
+        "Supabase library is not loaded."
+    );
+    throw new Error(
+        "Supabase library not loaded."
+    );
+}
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
 /* =========================================================
-   DOM ELEMENTS
+   ELEMENTS
 ========================================================= */
 const loginForm =
-    document.getElementById("loginForm");
+    document.getElementById(
+        "loginForm"
+    );
 const usernameInput =
-    document.getElementById("username");
+    document.getElementById(
+        "username"
+    );
 const passwordInput =
-    document.getElementById("password");
+    document.getElementById(
+        "password"
+    );
 const loginError =
-    document.getElementById("loginError");
+    document.getElementById(
+        "loginError"
+    );
 const loginSection =
-    document.getElementById("loginSection");
+    document.getElementById(
+        "loginSection"
+    );
 const dashboardSection =
-    document.getElementById("dashboardSection");
+    document.getElementById(
+        "dashboardSection"
+    );
 const logoutBtn =
-    document.getElementById("logoutBtn");
+    document.getElementById(
+        "logoutBtn"
+    );
 const totalOrders =
-    document.getElementById("totalOrders");
+    document.getElementById(
+        "totalOrders"
+    );
 const pendingOrders =
-    document.getElementById("pendingOrders");
+    document.getElementById(
+        "pendingOrders"
+    );
 const completedOrders =
-    document.getElementById("completedOrders");
+    document.getElementById(
+        "completedOrders"
+    );
 const clearOrdersBtn =
-    document.getElementById("clearOrdersBtn");
+    document.getElementById(
+        "clearOrdersBtn"
+    );
 const ordersContainer =
-    document.getElementById("ordersContainer");
+    document.getElementById(
+        "ordersContainer"
+    );
 const databaseMessage =
-    document.getElementById("databaseMessage");
+    document.getElementById(
+        "databaseMessage"
+    );
 /* =========================================================
-   SHOW LOGIN
+   LOGIN / DASHBOARD
 ========================================================= */
 function showLogin() {
     if (loginSection) {
@@ -65,9 +90,6 @@ function showLogin() {
             "none";
     }
 }
-/* =========================================================
-   SHOW DASHBOARD
-========================================================= */
 function showDashboard() {
     if (loginSection) {
         loginSection.style.display =
@@ -79,17 +101,19 @@ function showDashboard() {
     }
 }
 /* =========================================================
-   CHECK AUTH SESSION
+   AUTH CHECK
 ========================================================= */
 async function checkAuth() {
     const {
         data,
         error
     } =
-        await supabaseClient.auth.getSession();
+        await supabaseClient
+            .auth
+            .getSession();
     if (error) {
         console.error(
-            "Session error:",
+            "Auth error:",
             error
         );
         showLogin();
@@ -103,21 +127,27 @@ async function checkAuth() {
     }
 }
 /* =========================================================
-   ADMIN LOGIN
+   LOGIN
 ========================================================= */
 if (loginForm) {
     loginForm.addEventListener(
         "submit",
-        async function (event) {
+        async event => {
             event.preventDefault();
             const email =
-                usernameInput?.value.trim();
+                usernameInput
+                    ?.value
+                    .trim();
             const password =
-                passwordInput?.value;
-            if (!email || !password) {
+                passwordInput
+                    ?.value;
+            if (
+                !email ||
+                !password
+            ) {
                 if (loginError) {
                     loginError.textContent =
-                        "Please enter email and password.";
+                        "Enter your email and password.";
                     loginError.style.display =
                         "block";
                 }
@@ -133,12 +163,14 @@ if (loginForm) {
                 data,
                 error
             } =
-                await supabaseClient.auth.signInWithPassword(
-                    {
-                        email: email,
-                        password: password
-                    }
-                );
+                await supabaseClient
+                    .auth
+                    .signInWithPassword(
+                        {
+                            email,
+                            password
+                        }
+                    );
             if (error) {
                 console.error(
                     "Login error:",
@@ -168,10 +200,11 @@ if (loginForm) {
 ========================================================= */
 async function loadOrders() {
     if (ordersContainer) {
-        ordersContainer.innerHTML =
-            `<div class="loading">
+        ordersContainer.innerHTML = `
+            <div class="loading">
                 Loading orders...
-             </div>`;
+            </div>
+        `;
     }
     const {
         data: orders,
@@ -180,7 +213,7 @@ async function loadOrders() {
         await supabaseClient
             .from("orders")
             .select(
-                "id, customer_name, customer_phone, quantity_kg, address, total_amount, status, created_at"
+                "id,customer_name,customer_phone,quantity_kg,address,total_amount,status,created_at"
             )
             .order(
                 "created_at",
@@ -190,21 +223,26 @@ async function loadOrders() {
             );
     if (error) {
         console.error(
-            "Load orders error:",
+            "Orders loading error:",
             error
         );
         if (databaseMessage) {
             databaseMessage.textContent =
-                "Unable to load orders: " +
+                "Database error: " +
                 error.message;
             databaseMessage.style.display =
                 "block";
         }
         if (ordersContainer) {
-            ordersContainer.innerHTML =
-                `<div class="error">
+            ordersContainer.innerHTML = `
+                <div class="error">
                     Unable to load orders.
-                 </div>`;
+                    <br><br>
+                    ${escapeHTML(
+                        error.message
+                    )}
+                </div>
+            `;
         }
         return;
     }
@@ -220,22 +258,28 @@ async function loadOrders() {
     );
 }
 /* =========================================================
-   UPDATE STATISTICS
+   STATISTICS
 ========================================================= */
-function updateStatistics(orders) {
+function updateStatistics(
+    orders
+) {
     const total =
         orders.length;
     const pending =
-        orders.filter(order =>
-            String(order.status)
-                .toLowerCase() ===
-            "pending"
+        orders.filter(
+            order =>
+                String(
+                    order.status || ""
+                ).toLowerCase() ===
+                "pending"
         ).length;
     const completed =
-        orders.filter(order =>
-            String(order.status)
-                .toLowerCase() ===
-            "completed"
+        orders.filter(
+            order =>
+                String(
+                    order.status || ""
+                ).toLowerCase() ===
+                "completed"
         ).length;
     if (totalOrders) {
         totalOrders.textContent =
@@ -253,13 +297,17 @@ function updateStatistics(orders) {
 /* =========================================================
    DISPLAY ORDERS
 ========================================================= */
-function displayOrders(orders) {
-    if (!ordersContainer) return;
+function displayOrders(
+    orders
+) {
+    if (!ordersContainer) {
+        return;
+    }
     if (!orders.length) {
         ordersContainer.innerHTML = `
             <div class="no-orders">
                 <h3>No Orders Yet</h3>
-                <p>Customer orders will appear here.</p>
+                <p>New customer orders will appear here.</p>
             </div>
         `;
         return;
@@ -268,23 +316,29 @@ function displayOrders(orders) {
         orders.map(order => {
             const status =
                 String(
-                    order.status || "Pending"
+                    order.status ||
+                    "Pending"
                 );
             const statusClass =
                 status
                     .toLowerCase()
-                    .replace(/\s+/g, "-");
-            const date =
-                formatDate(
-                    order.created_at
-                );
+                    .replace(
+                        /\s+/g,
+                        "-"
+                    );
             const quantity =
                 Number(
-                    order.quantity_kg || 0
+                    order.quantity_kg ||
+                    0
                 );
             const total =
                 Number(
-                    order.total_amount || 0
+                    order.total_amount ||
+                    0
+                );
+            const date =
+                formatDate(
+                    order.created_at
                 );
             return `
                 <div class="order-card">
@@ -299,7 +353,9 @@ function displayOrders(orders) {
                                 ${escapeHTML(date)}
                             </span>
                         </div>
-                        <span class="status ${statusClass}">
+                        <span class="status ${escapeHTML(
+                            statusClass
+                        )}">
                             ${escapeHTML(status)}
                         </span>
                     </div>
@@ -310,7 +366,8 @@ function displayOrders(orders) {
                             </strong>
                             <span>
                                 ${escapeHTML(
-                                    order.customer_name || "-"
+                                    order.customer_name ||
+                                    "-"
                                 )}
                             </span>
                         </div>
@@ -320,7 +377,8 @@ function displayOrders(orders) {
                             </strong>
                             <span>
                                 ${escapeHTML(
-                                    order.customer_phone || "-"
+                                    order.customer_phone ||
+                                    "-"
                                 )}
                             </span>
                         </div>
@@ -337,7 +395,9 @@ function displayOrders(orders) {
                                 Total
                             </strong>
                             <span>
-                                ₹${total.toLocaleString("en-IN")}
+                                ₹${total.toLocaleString(
+                                    "en-IN"
+                                )}
                             </span>
                         </div>
                         <div class="detail full-width">
@@ -346,7 +406,8 @@ function displayOrders(orders) {
                             </strong>
                             <span>
                                 ${escapeHTML(
-                                    order.address || "-"
+                                    order.address ||
+                                    "-"
                                 )}
                             </span>
                         </div>
@@ -356,16 +417,22 @@ function displayOrders(orders) {
                             status.toLowerCase() !==
                             "completed"
                             ?
-                            `<button
+                            `
+                            <button
                                 class="complete-btn"
-                                onclick="markOrderCompleted('${escapeAttribute(String(order.id))}')"
+                                onclick="markOrderCompleted('${escapeAttribute(
+                                    String(order.id)
+                                )}')"
                             >
                                 ✓ Mark Completed
-                            </button>`
+                            </button>
+                            `
                             :
-                            `<span class="completed-label">
+                            `
+                            <span class="completed-label">
                                 ✓ Order Completed
-                            </span>`
+                            </span>
+                            `
                         }
                     </div>
                 </div>
@@ -373,21 +440,26 @@ function displayOrders(orders) {
         }).join("");
 }
 /* =========================================================
-   MARK ORDER COMPLETED
+   MARK COMPLETED
 ========================================================= */
-async function markOrderCompleted(orderId) {
+async function markOrderCompleted(
+    orderId
+) {
     const confirmed =
         confirm(
             "Mark this order as completed?"
         );
-    if (!confirmed) return;
+    if (!confirmed) {
+        return;
+    }
     const {
         error
     } =
         await supabaseClient
             .from("orders")
             .update({
-                status: "Completed"
+                status:
+                    "Completed"
             })
             .eq(
                 "id",
@@ -395,11 +467,11 @@ async function markOrderCompleted(orderId) {
             );
     if (error) {
         console.error(
-            "Update order error:",
+            "Update error:",
             error
         );
         alert(
-            "Could not update order: " +
+            "Could not update order:\n" +
             error.message
         );
         return;
@@ -407,28 +479,24 @@ async function markOrderCompleted(orderId) {
     await loadOrders();
 }
 /* =========================================================
-   CLEAR ALL ORDERS
+   CLEAR ORDERS
 ========================================================= */
 if (clearOrdersBtn) {
     clearOrdersBtn.addEventListener(
         "click",
-        async function () {
+        async () => {
             const confirmed =
                 confirm(
-                    "Are you sure you want to delete ALL orders?\n\nThis cannot be undone."
+                    "Delete ALL orders?\n\nThis cannot be undone."
                 );
-            if (!confirmed) return;
+            if (!confirmed) {
+                return;
+            }
             clearOrdersBtn.disabled =
                 true;
             clearOrdersBtn.textContent =
                 "Clearing...";
             try {
-                /*
-                 * Delete all rows.
-                 * The id IS NOT NULL condition
-                 * prevents accidental malformed
-                 * delete calls.
-                 */
                 const {
                     error
                 } =
@@ -445,7 +513,7 @@ if (clearOrdersBtn) {
                 }
                 await loadOrders();
                 alert(
-                    "All orders have been cleared."
+                    "All orders cleared."
                 );
             } catch (error) {
                 console.error(
@@ -453,7 +521,7 @@ if (clearOrdersBtn) {
                     error
                 );
                 alert(
-                    "Could not clear orders: " +
+                    "Could not clear orders:\n" +
                     error.message
                 );
             } finally {
@@ -471,8 +539,10 @@ if (clearOrdersBtn) {
 if (logoutBtn) {
     logoutBtn.addEventListener(
         "click",
-        async function () {
-            await supabaseClient.auth.signOut();
+        async () => {
+            await supabaseClient
+                .auth
+                .signOut();
             showLogin();
         }
     );
@@ -485,7 +555,9 @@ setInterval(
         const {
             data
         } =
-            await supabaseClient.auth.getSession();
+            await supabaseClient
+                .auth
+                .getSession();
         if (data.session) {
             await loadOrders();
         }
@@ -493,40 +565,75 @@ setInterval(
     30000
 );
 /* =========================================================
-   FORMAT DATE
+   DATE
 ========================================================= */
-function formatDate(dateString) {
+function formatDate(
+    dateString
+) {
     if (!dateString) {
         return "-";
     }
     const date =
         new Date(dateString);
-    if (isNaN(date.getTime())) {
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
         return "-";
     }
     return date.toLocaleString(
         "en-IN",
         {
-            dateStyle: "medium",
-            timeStyle: "short"
+            dateStyle:
+                "medium",
+            timeStyle:
+                "short"
         }
     );
 }
 /* =========================================================
-   HTML ESCAPING
+   SECURITY HELPERS
 ========================================================= */
-function escapeHTML(value) {
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function escapeHTML(
+    value
+) {
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
-function escapeAttribute(value) {
+function escapeAttribute(
+    value
+) {
     return String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
 }
 /* =========================================================
    START

@@ -11,7 +11,7 @@ console.log("🌶️ Mana Masala script.js started");
 ========================================================= */
 
 const SUPABASE_URL =
-    "https://hcczhnmdipqrnbxviul.supabase.co";
+    "https://hcczhnmdipqrnbxviuln.supabase.co";
 
 const SUPABASE_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";

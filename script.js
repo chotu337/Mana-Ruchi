@@ -33,7 +33,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
 
         if (!window.supabase) {
-            console.error("❌ Supabase library not found");
+
+            console.error(
+                "❌ Supabase library not found"
+            );
 
             showOrderMessage(
                 "Order system is unavailable. Please refresh the page and try again.",
@@ -48,7 +51,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             SUPABASE_KEY
         );
 
-        console.log("✅ Supabase client created");
+        console.log(
+            "✅ Supabase client created"
+        );
 
     } catch (error) {
 
@@ -131,56 +136,80 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     /* =====================================================
-       HELPER - ORDER MESSAGE
+       MESSAGE
        ===================================================== */
 
-    function showOrderMessage(message, type = "info") {
+    function showOrderMessage(
+        message,
+        type = "info"
+    ) {
 
         if (!orderMessage) {
+
             console.log(message);
+
             return;
         }
 
-        orderMessage.textContent = message;
+        orderMessage.textContent =
+            message;
 
-        orderMessage.style.display = "block";
+        orderMessage.style.display =
+            "block";
 
         if (type === "error") {
-            orderMessage.style.color = "#b91c1c";
+
+            orderMessage.style.color =
+                "#b91c1c";
+
         } else if (type === "success") {
-            orderMessage.style.color = "#15803d";
+
+            orderMessage.style.color =
+                "#15803d";
+
         } else {
-            orderMessage.style.color = "";
+
+            orderMessage.style.color =
+                "";
         }
     }
 
     /* =====================================================
-       HELPER - MONEY
+       CURRENCY
        ===================================================== */
 
     function formatCurrency(amount) {
 
-        return "₹" + Number(amount).toLocaleString("en-IN");
+        return "₹" +
+            Number(amount).toLocaleString(
+                "en-IN"
+            );
     }
 
     /* =====================================================
-       QUANTITY
+       GET QUANTITY
        ===================================================== */
 
     function getQuantity() {
 
         if (!quantityInput) {
+
             return MIN_QUANTITY;
         }
 
         let quantity =
-            parseInt(quantityInput.value, 10);
+            parseInt(
+                quantityInput.value,
+                10
+            );
 
         if (
             isNaN(quantity) ||
             quantity < MIN_QUANTITY
         ) {
-            quantity = MIN_QUANTITY;
+
+            quantity =
+                MIN_QUANTITY;
         }
 
         return quantity;
@@ -192,26 +221,33 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function updateTotal() {
 
-        const quantity = getQuantity();
+        const quantity =
+            getQuantity();
 
         const total =
-            quantity * PRICE_PER_KG;
+            quantity *
+            PRICE_PER_KG;
 
         if (quantityInput) {
-            quantityInput.value = quantity;
+
+            quantityInput.value =
+                quantity;
         }
 
         if (totalAmount) {
+
             totalAmount.textContent =
                 formatCurrency(total);
         }
 
         if (totalPrice) {
+
             totalPrice.textContent =
                 formatCurrency(total);
         }
 
         if (paymentAmount) {
+
             paymentAmount.textContent =
                 formatCurrency(total);
         }
@@ -231,7 +267,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       PLUS BUTTON
+       INCREASE QUANTITY
        ===================================================== */
 
     if (increaseBtn) {
@@ -254,7 +290,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       MINUS BUTTON
+       DECREASE QUANTITY
        ===================================================== */
 
     if (decreaseBtn) {
@@ -268,16 +304,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const quantity =
                     getQuantity();
 
-                if (quantity > MIN_QUANTITY) {
-
-                    quantityInput.value =
-                        quantity - 1;
-
-                } else {
-
-                    quantityInput.value =
-                        MIN_QUANTITY;
-                }
+                quantityInput.value =
+                    Math.max(
+                        MIN_QUANTITY,
+                        quantity - 1
+                    );
 
                 updateTotal();
             }
@@ -285,7 +316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       MANUAL QUANTITY CHANGE
+       MANUAL QUANTITY
        ===================================================== */
 
     if (quantityInput) {
@@ -304,7 +335,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateTotal();
 
     /* =====================================================
-       PHONE CLEANING
+       PHONE
        ===================================================== */
 
     function cleanPhoneNumber(phone) {
@@ -314,20 +345,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             .slice(-10);
     }
 
-    /* =====================================================
-       PHONE VALIDATION
-       ===================================================== */
-
     function isValidPhone(phone) {
 
-        return /^[6-9]\d{9}$/.test(phone);
+        return /^[6-9]\d{9}$/.test(
+            phone
+        );
     }
 
     /* =====================================================
-       ORDER ID
+       LOCAL ORDER REFERENCE
        ===================================================== */
 
-    function createOrderId() {
+    function createOrderReference() {
 
         const now =
             new Date();
@@ -337,19 +366,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const random =
             Math.floor(
-                1000 + Math.random() * 9000
+                1000 +
+                Math.random() *
+                9000
             );
 
         return `MM-${timestamp}-${random}`;
     }
 
     /* =====================================================
-       SAVE ORDER
+       PLACE ORDER
        ===================================================== */
 
     async function placeOrder(event) {
 
         if (event) {
+
             event.preventDefault();
         }
 
@@ -357,9 +389,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             "🔥 PLACE ORDER BUTTON CLICKED"
         );
 
-        /* ---------------------------------------------
-           CHECK SUPABASE
-           --------------------------------------------- */
+        /* -------------------------------------------------
+           SUPABASE CHECK
+           ------------------------------------------------- */
 
         if (!db) {
 
@@ -375,9 +407,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        /* ---------------------------------------------
-           READ CUSTOMER DETAILS
-           --------------------------------------------- */
+        /* -------------------------------------------------
+           CUSTOMER DATA
+           ------------------------------------------------- */
 
         const name =
             customerName
@@ -400,7 +432,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 : "";
 
         const cleanPhone =
-            cleanPhoneNumber(rawPhone);
+            cleanPhoneNumber(
+                rawPhone
+            );
 
         const {
             quantity,
@@ -427,9 +461,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             total
         );
 
-        /* ---------------------------------------------
+        /* -------------------------------------------------
            VALIDATION
-           --------------------------------------------- */
+           ------------------------------------------------- */
 
         if (!name) {
 
@@ -439,6 +473,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
             if (customerName) {
+
                 customerName.focus();
             }
 
@@ -453,6 +488,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
             if (customerPhone) {
+
                 customerPhone.focus();
             }
 
@@ -467,6 +503,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
             if (address) {
+
                 address.focus();
             }
 
@@ -483,18 +520,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        /* ---------------------------------------------
+        /* -------------------------------------------------
            DISABLE BUTTON
-           --------------------------------------------- */
+           ------------------------------------------------- */
 
         const originalButtonText =
             orderButton
                 ? orderButton.innerHTML
-                : "";
+                : "🛒 Place Order";
 
         if (orderButton) {
 
-            orderButton.disabled = true;
+            orderButton.disabled =
+                true;
 
             orderButton.innerHTML =
                 "⏳ Placing Order...";
@@ -505,28 +543,39 @@ document.addEventListener("DOMContentLoaded", async () => {
             "info"
         );
 
-        /* ---------------------------------------------
-           CREATE ORDER OBJECT
-           --------------------------------------------- */
+        /* =================================================
+           IMPORTANT
+           The database DOES NOT have order_id.
+           Therefore order_id is NOT inserted into orders.
+           ================================================= */
 
-        const orderId =
-            createOrderId();
+        const orderReference =
+            createOrderReference();
+
+        /* =================================================
+           DATABASE ORDER OBJECT
+           ONLY EXISTING COLUMNS
+           ================================================= */
 
         const order = {
 
-            order_id: orderId,
+            customer_name:
+                name,
 
-            customer_name: name,
+            customer_phone:
+                cleanPhone,
 
-            customer_phone: cleanPhone,
+            quantity_kg:
+                quantity,
 
-            quantity_kg: quantity,
+            address:
+                customerAddress,
 
-            address: customerAddress,
+            total_amount:
+                total,
 
-            total_amount: total,
-
-            status: "New"
+            status:
+                "New"
         };
 
         console.log(
@@ -535,7 +584,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         /* =================================================
-           INSERT ORDER INTO SUPABASE
+           INSERT ORDER
            ================================================= */
 
         try {
@@ -546,8 +595,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             /*
              * IMPORTANT:
-             * No .select() here.
-             * We only insert the order.
+             *
+             * No .select()
+             *
+             * No order_id
+             *
+             * Only columns that exist in
+             * your orders table.
              */
 
             const {
@@ -586,11 +640,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (orderButton) {
 
-                orderButton.disabled = false;
+                orderButton.disabled =
+                    false;
 
                 orderButton.innerHTML =
-                    originalButtonText ||
-                    "🛒 Place Order";
+                    originalButtonText;
             }
 
             return;
@@ -606,19 +660,35 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "📲 Sending owner notification..."
             );
 
+            /*
+             * order_id is NOT sent to the database.
+             *
+             * It is only used as a reference
+             * for the notification/customer.
+             */
+
+            const notificationOrder = {
+
+                ...order,
+
+                order_reference:
+                    orderReference,
+
+                notes:
+                    customerNotes
+            };
+
             const {
-                data: notificationData,
-                error: notificationError
+                data:
+                    notificationData,
+                error:
+                    notificationError
             } = await db.functions.invoke(
                 "new-order-notification",
                 {
                     body: {
-                        order: {
-                            ...order,
-
-                            notes:
-                                customerNotes
-                        }
+                        order:
+                            notificationOrder
                     }
                 }
             );
@@ -641,7 +711,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (notificationError) {
 
             /*
-             * IMPORTANT:
              * Notification failure must NOT
              * make the order fail.
              */
@@ -661,13 +730,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         showOrderMessage(
-            `Order placed successfully! Order ID: ${orderId}`,
+            `Order placed successfully! Reference: ${orderReference}`,
             "success"
         );
 
-        /* ---------------------------------------------
+        /* =================================================
            SUCCESS MODAL
-           --------------------------------------------- */
+           ================================================= */
 
         const successModal =
             document.getElementById(
@@ -682,7 +751,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (modalOrderId) {
 
             modalOrderId.textContent =
-                orderId;
+                orderReference;
         }
 
         if (successModal) {
@@ -695,13 +764,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "flex";
         }
 
-        /* ---------------------------------------------
-           WHATSAPP MESSAGE
-           --------------------------------------------- */
+        /* =================================================
+           WHATSAPP
+           ================================================= */
 
         const whatsappMessage =
-            `🌶️ *Mana Masala Order*%0A%0A` +
-            `Order ID: ${orderId}%0A` +
+            `🌶️ Mana Masala Order%0A%0A` +
+            `Reference: ${orderReference}%0A` +
             `Name: ${encodeURIComponent(name)}%0A` +
             `Phone: ${cleanPhone}%0A` +
             `Quantity: ${quantity} KG%0A` +
@@ -715,14 +784,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             "📲 WhatsApp notification URL ready"
         );
 
-        /*
-         * We intentionally do not automatically
-         * redirect the customer to WhatsApp.
-         */
+        const whatsappButton =
+            document.getElementById(
+                "whatsappOrderButton"
+            );
 
-        /* ---------------------------------------------
+        if (whatsappButton) {
+
+            whatsappButton.href =
+                whatsappUrl;
+
+            whatsappButton.style.display =
+                "inline-flex";
+        }
+
+        /* =================================================
            RESET FORM
-           --------------------------------------------- */
+           ================================================= */
 
         if (orderForm) {
 
@@ -737,35 +815,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         updateTotal();
 
-        /* ---------------------------------------------
-           ENABLE BUTTON
-           --------------------------------------------- */
+        /* =================================================
+           RESTORE BUTTON
+           ================================================= */
 
         if (orderButton) {
 
-            orderButton.disabled = false;
+            orderButton.disabled =
+                false;
 
             orderButton.innerHTML =
-                originalButtonText ||
-                "🛒 Place Order";
-        }
-
-        /* ---------------------------------------------
-           OPTIONAL WHATSAPP BUTTON
-           --------------------------------------------- */
-
-        const whatsappButton =
-            document.getElementById(
-                "whatsappOrderButton"
-            );
-
-        if (whatsappButton) {
-
-            whatsappButton.href =
-                whatsappUrl;
-
-            whatsappButton.style.display =
-                "inline-flex";
+                originalButtonText;
         }
     }
 
@@ -786,7 +846,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       BUTTON CLICK FALLBACK
+       BUTTON
        ===================================================== */
 
     if (orderButton) {
@@ -796,14 +856,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         /*
-         * Only attach click handler if the button
-         * is NOT a submit button.
+         * Your current button is type="submit",
+         * so the form submit handler handles it.
          *
-         * This prevents duplicate orders.
+         * We don't attach another click handler.
          */
 
         if (
-            orderButton.type !== "submit"
+            orderButton.type !==
+            "submit"
         ) {
 
             orderButton.addEventListener(
@@ -839,6 +900,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function closeSuccessModal() {
 
         if (!successModal) {
+
             return;
         }
 
@@ -880,7 +942,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             "navLinks"
         );
 
-    if (menuToggle && navLinks) {
+    if (
+        menuToggle &&
+        navLinks
+    ) {
 
         menuToggle.addEventListener(
             "click",
@@ -933,6 +998,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
         if (!question) {
+
             return;
         }
 
@@ -948,7 +1014,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     /* =====================================================
-       IMAGE ZOOM
+       PRODUCT IMAGE
        ===================================================== */
 
     const productImage =
@@ -1007,7 +1073,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 },
                 {
-                    threshold: 0.12
+                    threshold:
+                        0.12
                 }
             );
 
@@ -1054,7 +1121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       HEADER SCROLL EFFECT
+       HEADER SCROLL
        ===================================================== */
 
     const siteHeader =

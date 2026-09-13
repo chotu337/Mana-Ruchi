@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -16,1055 +17,41 @@
 
     <meta
         name="theme-color"
-        content="#160404"
+        content="#120000"
     >
 
     <title>Mana Masala | Homemade Chilli Powder</title>
 
-    <!-- FAVICON -->
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
     <link
         rel="icon"
         type="image/png"
         href="favicon.png"
     >
 
-    <!-- GOOGLE FONT -->
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <style>
 
-        /* =====================================================
-           MANA MASALA
-           DARK RED / BLACK GLASSMORPHISM DESIGN
-        ===================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-
-            background-image:
-                linear-gradient(
-                    rgba(5, 1, 1, 0.48),
-                    rgba(10, 1, 1, 0.78)
-                ),
-                url("background.jpeg");
-
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-
-            background-color: #160404;
-        }
-
-        /* Dark atmospheric overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(180, 20, 20, 0.20),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 80% 70%,
-                    rgba(90, 0, 0, 0.24),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    rgba(0, 0, 0, 0.12),
-                    rgba(80, 0, 0, 0.12)
-                );
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        textarea {
-            font-family: inherit;
-        }
-
-
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
-
-        nav {
-            position: sticky;
-            top: 14px;
-            z-index: 1000;
-
-            width: calc(100% - 30px);
-            max-width: 1200px;
-
-            margin: 14px auto 0;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 15px 24px;
-
-            background: rgba(15, 3, 3, 0.55);
-
-            border: 1px solid rgba(255, 255, 255, 0.14);
-
-            border-radius: 20px;
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            box-shadow:
-                0 10px 35px rgba(0, 0, 0, 0.35),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            font-size: 21px;
-            font-weight: 800;
-
-            color: #ffffff;
-
-            letter-spacing: 0.3px;
-        }
-
-        .logo span {
-            font-size: 25px;
-            filter: drop-shadow(0 0 8px rgba(255, 40, 20, 0.55));
-        }
-
-        nav ul {
-            list-style: none;
-
-            display: flex;
-            align-items: center;
-
-            gap: 8px;
-        }
-
-        nav ul li a {
-            display: block;
-
-            padding: 9px 14px;
-
-            border-radius: 12px;
-
-            color: rgba(255, 255, 255, 0.82);
-
-            font-size: 14px;
-            font-weight: 600;
-
-            transition:
-                background 0.25s ease,
-                color 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        nav ul li a:hover {
-            color: #ffffff;
-
-            background: rgba(180, 20, 20, 0.35);
-
-            transform: translateY(-1px);
-        }
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-            min-height: calc(100vh - 90px);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 80px 20px;
-        }
-
-        .hero-content {
-            width: min(900px, 100%);
-
-            padding: 55px 40px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(40, 5, 5, 0.56),
-                    rgba(5, 2, 2, 0.48)
-                );
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-
-            border-radius: 30px;
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.48),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content::before {
-            content: "";
-
-            position: absolute;
-
-            width: 260px;
-            height: 260px;
-
-            top: -130px;
-            right: -100px;
-
-            background: rgba(170, 15, 15, 0.20);
-
-            filter: blur(40px);
-
-            border-radius: 50%;
-        }
-
-        .hero-content::after {
-            content: "";
-
-            position: absolute;
-
-            width: 220px;
-            height: 220px;
-
-            bottom: -130px;
-            left: -80px;
-
-            background: rgba(100, 0, 0, 0.20);
-
-            filter: blur(40px);
-
-            border-radius: 50%;
-        }
-
-        .hero-badge {
-            display: inline-block;
-
-            padding: 9px 17px;
-
-            margin-bottom: 20px;
-
-            border-radius: 50px;
-
-            background: rgba(170, 15, 15, 0.24);
-
-            border: 1px solid rgba(255, 90, 90, 0.28);
-
-            color: #ffd8d8;
-
-            font-size: 13px;
-            font-weight: 600;
-
-            backdrop-filter: blur(10px);
-        }
-
-        .hero h1 {
-            position: relative;
-            z-index: 2;
-
-            font-size: clamp(48px, 8vw, 86px);
-
-            line-height: 1.05;
-
-            font-weight: 800;
-
-            letter-spacing: -2px;
-
-            color: #ffffff;
-
-            text-shadow:
-                0 5px 25px rgba(0, 0, 0, 0.5),
-                0 0 35px rgba(160, 10, 10, 0.28);
-        }
-
-        .hero p {
-            position: relative;
-            z-index: 2;
-
-            max-width: 700px;
-
-            margin: 22px auto 0;
-
-            color: rgba(255, 255, 255, 0.80);
-
-            font-size: 17px;
-
-            line-height: 1.8;
-        }
-
-        .hero-price {
-            position: relative;
-            z-index: 2;
-
-            margin-top: 25px;
-
-            font-size: 30px;
-
-            font-weight: 800;
-
-            color: #ffffff;
-        }
-
-        .hero-price span {
-            font-size: 14px;
-
-            font-weight: 500;
-
-            color: rgba(255, 255, 255, 0.72);
-        }
-
-        .hero-buttons {
-            position: relative;
-            z-index: 2;
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 13px;
-
-            margin-top: 32px;
-        }
-
-
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
-
-        .btn {
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            min-height: 52px;
-
-            padding: 13px 25px;
-
-            border-radius: 14px;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background 0.25s ease;
-        }
-
-        .btn-primary {
-            background:
-                linear-gradient(
-                    135deg,
-                    #b81717,
-                    #720707
-                );
-
-            color: #ffffff;
-
-            border: 1px solid rgba(255, 120, 120, 0.28);
-
-            box-shadow:
-                0 10px 30px rgba(100, 0, 0, 0.45);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 15px 35px rgba(130, 0, 0, 0.55);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-
-            color: #ffffff;
-
-            border: 1px solid rgba(255, 255, 255, 0.17);
-
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-
-            background: rgba(255, 255, 255, 0.13);
-        }
-
-
-        /* =====================================================
-           SECTIONS
-        ===================================================== */
-
-        .section {
-            width: min(1100px, calc(100% - 30px));
-
-            margin: 35px auto;
-
-            padding: 70px 25px;
-
-            border-radius: 30px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(25, 3, 3, 0.58),
-                    rgba(8, 2, 2, 0.48)
-                );
-
-            border: 1px solid rgba(255, 255, 255, 0.12);
-
-            backdrop-filter: blur(17px);
-            -webkit-backdrop-filter: blur(17px);
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.34),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        }
-
-        .section-title {
-            text-align: center;
-
-            margin-bottom: 38px;
-        }
-
-        .section-title h2 {
-            font-size: clamp(30px, 5vw, 46px);
-
-            font-weight: 800;
-
-            color: #ffffff;
-
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: rgba(255, 255, 255, 0.68);
-
-            font-size: 15px;
-        }
-
-
-        /* =====================================================
-           PRODUCT CARD
-        ===================================================== */
-
-        .product-card {
-            width: min(850px, 100%);
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns: minmax(260px, 1fr) minmax(250px, 1fr);
-
-            align-items: center;
-
-            gap: 35px;
-
-            padding: 25px;
-
-            border-radius: 24px;
-
-            background:
-                rgba(255, 255, 255, 0.065);
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.30);
-        }
-
-        .product-image {
-            width: 100%;
-
-            max-height: 390px;
-
-            object-fit: contain;
-
-            display: block;
-
-            border-radius: 20px;
-
-            filter:
-                drop-shadow(0 20px 25px rgba(0, 0, 0, 0.40));
-
-            transition:
-                transform 0.35s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.025);
-        }
-
-        .product-info {
-            padding: 10px;
-        }
-
-        .product-info h3 {
-            font-size: 28px;
-
-            line-height: 1.3;
-
-            color: #ffffff;
-
-            margin-bottom: 14px;
-        }
-
-        .product-info p {
-            color: rgba(255, 255, 255, 0.70);
-
-            line-height: 1.8;
-
-            font-size: 15px;
-        }
-
-
-        /* =====================================================
-           ORDER CARD
-        ===================================================== */
-
-        .order-card {
-            width: min(680px, 100%);
-
-            margin: auto;
-
-            padding: 30px;
-
-            border-radius: 24px;
-
-            background:
-                rgba(12, 2, 2, 0.62);
-
-            border: 1px solid rgba(255, 255, 255, 0.14);
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            box-shadow:
-                0 20px 55px rgba(0, 0, 0, 0.42),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-
-            margin-bottom: 8px;
-
-            color: rgba(255, 255, 255, 0.88);
-
-            font-size: 14px;
-
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-
-            padding: 14px 15px;
-
-            border-radius: 13px;
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-
-            outline: none;
-
-            background:
-                rgba(0, 0, 0, 0.28);
-
-            color: #ffffff;
-
-            font-size: 14px;
-
-            transition:
-                border 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-
-            min-height: 110px;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.43);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: rgba(220, 50, 50, 0.70);
-
-            background:
-                rgba(20, 2, 2, 0.48);
-
-            box-shadow:
-                0 0 0 3px rgba(170, 20, 20, 0.13);
-        }
-
-
-        /* =====================================================
-           QUANTITY
-        ===================================================== */
-
-        .quantity-box {
-            display: flex;
-
-            align-items: center;
-
-            width: 100%;
-
-            overflow: hidden;
-
-            border-radius: 13px;
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-
-            background:
-                rgba(0, 0, 0, 0.28);
-        }
-
-        .quantity-btn {
-            width: 55px;
-            height: 50px;
-
-            border: 0;
-
-            background:
-                rgba(130, 10, 10, 0.45);
-
-            color: #ffffff;
-
-            font-size: 25px;
-
-            cursor: pointer;
-
-            transition:
-                background 0.2s ease;
-        }
-
-        .quantity-btn:hover {
-            background:
-                rgba(180, 15, 15, 0.65);
-        }
-
-        .quantity-input {
-            flex: 1;
-
-            min-width: 0;
-
-            height: 50px;
-
-            border: 0 !important;
-
-            border-radius: 0 !important;
-
-            text-align: center;
-
-            background: transparent !important;
-
-            box-shadow: none !important;
-
-            font-size: 17px !important;
-
-            font-weight: 700;
-        }
-
-        .quantity-help {
-            margin-top: 7px;
-
-            color: rgba(255, 255, 255, 0.50);
-
-            font-size: 12px;
-        }
-
-
-        /* =====================================================
-           TOTAL
-        ===================================================== */
-
-        .total-box {
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-
-            margin: 25px 0;
-
-            padding: 18px 20px;
-
-            border-radius: 15px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(120, 5, 5, 0.34),
-                    rgba(30, 2, 2, 0.40)
-                );
-
-            border: 1px solid rgba(255, 100, 100, 0.16);
-        }
-
-        .total-label {
-            color: rgba(255, 255, 255, 0.72);
-
-            font-size: 14px;
-
-            font-weight: 600;
-        }
-
-        #totalAmount {
-            color: #ffffff;
-
-            font-size: 25px;
-
-            font-weight: 800;
-        }
-
-
-        /* =====================================================
-           ORDER BUTTON
-        ===================================================== */
-
-        .order-submit {
-            width: 100%;
-
-            min-height: 56px;
-
-            border: 0;
-
-            border-radius: 15px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #c21b1b,
-                    #720505
-                );
-
-            color: #ffffff;
-
-            font-size: 16px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 12px 30px rgba(100, 0, 0, 0.42);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                opacity 0.25s ease;
-        }
-
-        .order-submit:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 16px 35px rgba(130, 0, 0, 0.55);
-        }
-
-        .order-submit:active {
-            transform: translateY(0);
-        }
-
-        .order-submit:disabled {
-            opacity: 0.65;
-
-            cursor: not-allowed;
-
-            transform: none;
-        }
-
-
-        /* =====================================================
-           ABOUT
-        ===================================================== */
-
-        #about > div:last-child {
-            max-width: 750px;
-
-            margin: auto;
-
-            text-align: center;
-
-            line-height: 1.9;
-
-            color: rgba(255, 255, 255, 0.70) !important;
-
-            font-size: 15px;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-            width: min(1100px, calc(100% - 30px));
-
-            margin: 35px auto 20px;
-
-            padding: 25px;
-
-            text-align: center;
-
-            border-radius: 20px;
-
-            background:
-                rgba(5, 1, 1, 0.62);
-
-            border: 1px solid rgba(255, 255, 255, 0.10);
-
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-
-            color: rgba(255, 255, 255, 0.55);
-
-            font-size: 13px;
-        }
-
-
-        /* =====================================================
-           SCROLLBAR
-        ===================================================== */
-
-        ::-webkit-scrollbar {
-            width: 9px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #090202;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #701010;
-
-            border-radius: 20px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a51515;
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 760px) {
-
-            body {
-                background-attachment: scroll;
-            }
-
-            nav {
-                width: calc(100% - 20px);
-
-                padding: 12px 15px;
-
-                border-radius: 16px;
-
-                flex-direction: column;
-
-                gap: 10px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            nav ul {
-                width: 100%;
-
-                justify-content: center;
-
-                flex-wrap: wrap;
-
-                gap: 2px;
-            }
-
-            nav ul li a {
-                padding: 7px 9px;
-
-                font-size: 12px;
-            }
-
-            .hero {
-                min-height: auto;
-
-                padding: 55px 15px;
-            }
-
-            .hero-content {
-                padding: 40px 20px;
-
-                border-radius: 23px;
-            }
-
-            .hero h1 {
-                font-size: clamp(42px, 14vw, 65px);
-
-                letter-spacing: -1.5px;
-            }
-
-            .hero p {
-                font-size: 14px;
-
-                line-height: 1.7;
-            }
-
-            .hero-price {
-                font-size: 25px;
-            }
-
-            .hero-price span {
-                display: block;
-
-                margin-top: 6px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .section {
-                width: calc(100% - 20px);
-
-                padding: 45px 15px;
-
-                border-radius: 23px;
-            }
-
-            .section-title {
-                margin-bottom: 28px;
-            }
-
-            .product-card {
-                grid-template-columns: 1fr;
-
-                gap: 20px;
-
-                padding: 18px;
-            }
-
-            .product-image {
-                max-height: 320px;
-            }
-
-            .product-info {
-                text-align: center;
-            }
-
-            .product-info h3 {
-                font-size: 23px;
-            }
-
-            .order-card {
-                padding: 20px;
-
-                border-radius: 20px;
-            }
-
-            footer {
-                width: calc(100% - 20px);
-            }
-        }
-
-
-        /* =====================================================
-           VERY SMALL PHONES
-        ===================================================== */
-
-        @media (max-width: 400px) {
-
-            nav ul li a {
-                padding: 6px 7px;
-
-                font-size: 11px;
-            }
-
-            .hero-content {
-                padding: 35px 16px;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .section {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            .order-card {
-                padding: 16px;
-            }
-        }
-
-    </style>
+    <!-- =====================================================
+         MAIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=200"
+    >
 
 </head>
 
@@ -1080,8 +67,9 @@
 
         <div class="logo">
             <span>🌶️</span>
-            Mana Masala
+            <span>Mana Masala</span>
         </div>
+
 
         <ul>
 
@@ -1109,13 +97,20 @@
                 </a>
             </li>
 
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
         </ul>
 
     </nav>
 
 
+
     <!-- =====================================================
-         HERO
+         HERO SECTION
     ====================================================== -->
 
     <section
@@ -1125,27 +120,36 @@
 
         <div class="hero-content">
 
+
             <div class="hero-badge">
                 🌶️ Authentic Homemade Taste
             </div>
 
+
             <h1>
                 Mana Masala
             </h1>
+
 
             <p>
                 Premium homemade chilli powder made with care,
                 freshness and authentic Indian flavour.
             </p>
 
+
             <div class="hero-price">
+
                 ₹350 / kg
+
                 <span>
                     • Minimum order 10 kg
                 </span>
+
             </div>
 
+
             <div class="hero-buttons">
+
 
                 <a
                     href="#order"
@@ -1154,6 +158,7 @@
                     🛒 Order Now
                 </a>
 
+
                 <a
                     href="#product"
                     class="btn btn-secondary"
@@ -1161,21 +166,25 @@
                     Explore Product
                 </a>
 
+
             </div>
+
 
         </div>
 
     </section>
 
 
+
     <!-- =====================================================
-         PRODUCT
+         PRODUCT SECTION
     ====================================================== -->
 
     <section
         class="section"
         id="product"
     >
+
 
         <div class="section-title">
 
@@ -1190,14 +199,20 @@
         </div>
 
 
+
         <div class="product-card">
 
-            <img
-                src="masala.png"
-                alt="Mana Masala Homemade Chilli Powder"
-                class="product-image"
-                onerror="this.style.display='none';"
-            >
+
+            <div>
+
+                <img
+                    src="masala.png"
+                    alt="Mana Masala Homemade Chilli Powder"
+                    class="product-image"
+                >
+
+            </div>
+
 
 
             <div class="product-info">
@@ -1206,27 +221,54 @@
                     Homemade Chilli Powder 🌶️
                 </h3>
 
+
                 <p>
                     Fresh, aromatic and carefully prepared
                     homemade chilli powder made for authentic
                     flavour and everyday cooking.
                 </p>
 
+
+                <div
+                    style="
+                        margin-top:20px;
+                        font-size:24px;
+                        font-weight:800;
+                        color:#ffffff;
+                    "
+                >
+                    ₹350 / kg
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:7px;
+                        color:rgba(255,255,255,0.60);
+                        font-size:13px;
+                    "
+                >
+                    Minimum order: 10 kg
+                </div>
+
             </div>
+
 
         </div>
 
     </section>
 
 
+
     <!-- =====================================================
-         ORDER
+         ORDER SECTION
     ====================================================== -->
 
     <section
         class="section"
         id="order"
     >
+
 
         <div class="section-title">
 
@@ -1241,18 +283,21 @@
         </div>
 
 
+
         <div class="order-card">
+
 
             <form id="orderForm">
 
 
-                <!-- NAME -->
+                <!-- FULL NAME -->
 
                 <div class="form-group">
 
                     <label for="customerName">
                         Full Name
                     </label>
+
 
                     <input
                         type="text"
@@ -1266,6 +311,7 @@
                 </div>
 
 
+
                 <!-- PHONE -->
 
                 <div class="form-group">
@@ -1274,16 +320,19 @@
                         Mobile Number
                     </label>
 
+
                     <input
                         type="tel"
                         id="phone"
                         name="phone"
                         placeholder="Enter mobile number"
                         autocomplete="tel"
+                        inputmode="numeric"
                         required
                     >
 
                 </div>
+
 
 
                 <!-- ADDRESS -->
@@ -1293,6 +342,7 @@
                     <label for="address">
                         Delivery Address
                     </label>
+
 
                     <textarea
                         id="address"
@@ -1306,6 +356,7 @@
                 </div>
 
 
+
                 <!-- QUANTITY -->
 
                 <div class="form-group quantity-wrapper">
@@ -1314,7 +365,9 @@
                         Quantity (kg)
                     </label>
 
+
                     <div class="quantity-box">
+
 
                         <button
                             type="button"
@@ -1324,6 +377,7 @@
                         >
                             −
                         </button>
+
 
 
                         <input
@@ -1338,6 +392,7 @@
                         >
 
 
+
                         <button
                             type="button"
                             class="quantity-btn"
@@ -1347,13 +402,16 @@
                             +
                         </button>
 
+
                     </div>
+
 
                     <div class="quantity-help">
                         Minimum order: 10 kg
                     </div>
 
                 </div>
+
 
 
                 <!-- TOTAL -->
@@ -1364,6 +422,7 @@
                         Total Amount
                     </span>
 
+
                     <strong id="totalAmount">
                         ₹3,500
                     </strong>
@@ -1371,7 +430,8 @@
                 </div>
 
 
-                <!-- SUBMIT -->
+
+                <!-- ORDER BUTTON -->
 
                 <button
                     type="submit"
@@ -1381,21 +441,25 @@
                     🛒 Place Order
                 </button>
 
+
             </form>
+
 
         </div>
 
     </section>
 
 
+
     <!-- =====================================================
-         ABOUT
+         ABOUT SECTION
     ====================================================== -->
 
     <section
         class="section"
         id="about"
     >
+
 
         <div class="section-title">
 
@@ -1410,12 +474,15 @@
         </div>
 
 
+
         <div
             style="
                 max-width:750px;
                 margin:auto;
                 text-align:center;
-                line-height:1.8;
+                line-height:1.9;
+                color:rgba(255,255,255,0.70);
+                font-size:15px;
             "
         >
 
@@ -1423,9 +490,169 @@
             prepared with care and a focus on quality,
             freshness and authentic taste.
 
+            <br><br>
+
+            Our goal is to bring the traditional taste of
+            homemade chilli powder directly to your kitchen.
+
         </div>
 
+
     </section>
+
+
+
+    <!-- =====================================================
+         CONTACT SECTION
+    ====================================================== -->
+
+    <section
+        class="section contact-section"
+        id="contact"
+    >
+
+
+        <div class="section-title">
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p>
+                Have a question or want to place an order?
+            </p>
+
+        </div>
+
+
+
+        <div class="contact-grid">
+
+
+            <!-- WHATSAPP -->
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    💬
+                </div>
+
+
+                <h3>
+                    WhatsApp
+                </h3>
+
+
+                <p>
+                    Contact Mana Masala directly on WhatsApp.
+                </p>
+
+
+                <a
+                    href="https://wa.me/918367450301"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-button"
+                >
+                    💬 Chat on WhatsApp
+                </a>
+
+            </div>
+
+
+
+            <!-- BUSINESS -->
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    🌶️
+                </div>
+
+
+                <h3>
+                    Mana Masala
+                </h3>
+
+
+                <p>
+                    Homemade chilli powder prepared with
+                    quality, freshness and authentic taste.
+                </p>
+
+
+                <div
+                    style="
+                        color:#ffffff;
+                        font-weight:700;
+                        font-size:14px;
+                    "
+                >
+                    Authentic Homemade Taste
+                </div>
+
+            </div>
+
+
+
+            <!-- ORDER -->
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    📦
+                </div>
+
+
+                <h3>
+                    Minimum Order
+                </h3>
+
+
+                <p>
+                    Minimum order quantity:
+                </p>
+
+
+                <div
+                    style="
+                        color:#ffffff;
+                        font-size:22px;
+                        font-weight:800;
+                    "
+                >
+                    10 KG
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WHATSAPP FLOATING BUTTON
+    ====================================================== -->
+
+    <a
+        href="https://wa.me/918367450301"
+        class="whatsapp-bubble"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Mana Masala on WhatsApp"
+        title="Chat with Mana Masala"
+    >
+
+        <span>
+            💬
+        </span>
+
+    </a>
+
 
 
     <!-- =====================================================
@@ -1440,6 +667,7 @@
     </footer>
 
 
+
     <!-- =====================================================
          SUPABASE
     ====================================================== -->
@@ -1449,13 +677,14 @@
     ></script>
 
 
+
     <!-- =====================================================
-         EXISTING SCRIPT
+         EXISTING SCRIPT.JS
     ====================================================== -->
 
     <script
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js?v=103"></script>
+        src="script.js?v=103"
+    ></script>
 
 
 </body>

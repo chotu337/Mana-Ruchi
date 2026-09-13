@@ -1045,3 +1045,184 @@ footer {
         padding: 16px;
     }
 }
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+.contact-grid {
+    max-width: 950px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.contact-card {
+    padding: 28px 20px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.065);
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30);
+
+    transition: 0.25s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+
+    background: rgba(120, 10, 10, 0.22);
+
+    border-color: rgba(255, 100, 100, 0.25);
+}
+
+.contact-icon {
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+.contact-card h3 {
+    color: #ffffff;
+
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 18px;
+}
+
+.contact-card strong {
+    color: #ffffff;
+}
+
+.contact-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 17px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b81717,
+            #700505
+        );
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.25s ease;
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(120, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   WHATSAPP FLOATING BUBBLE
+========================================================= */
+
+.whatsapp-bubble {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #25d366,
+            #128c7e
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.40);
+
+    border: 2px solid rgba(255, 255, 255, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.whatsapp-bubble span {
+    font-size: 30px;
+}
+
+.whatsapp-bubble:hover {
+    transform: scale(1.10);
+
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, 0.50);
+}
+
+
+/* =========================================================
+   MOBILE CONTACT
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsapp-bubble {
+        width: 56px;
+        height: 56px;
+
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .whatsapp-bubble span {
+        font-size: 27px;
+    }
+}

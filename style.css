@@ -2648,3 +2648,256 @@ footer {
     }
 
 }
+```css
+/* =========================================================
+   PROFESSIONAL PAYMENT QR
+========================================================= */
+
+.payment-section {
+    padding: 90px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.payment-card {
+    width: min(480px, 100%);
+    margin: 35px auto 0;
+    padding: 30px;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(65, 0, 0, 0.75),
+            rgba(8, 3, 3, 0.94)
+        );
+
+    border: 1px solid rgba(255, 80, 50, 0.25);
+    border-radius: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.65),
+        0 0 50px rgba(120, 0, 0, 0.18);
+
+    backdrop-filter: blur(18px);
+}
+
+/* Header */
+
+.payment-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.payment-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d0000,
+            #ff4b2b
+        );
+
+    font-size: 24px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(180, 0, 0, 0.35);
+}
+
+.payment-card-header h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.payment-card-header p {
+    margin: 4px 0 0;
+    opacity: 0.65;
+    font-size: 13px;
+}
+
+/* QR */
+
+.qr-container {
+    position: relative;
+
+    width: 280px;
+    max-width: 100%;
+
+    margin: 0 auto 25px;
+    padding: 15px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.payment-qr {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 12px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.qr-glow {
+    position: absolute;
+
+    inset: -20px;
+
+    background: rgba(255, 40, 20, 0.12);
+
+    filter: blur(35px);
+
+    z-index: 0;
+}
+
+/* Price information */
+
+.payment-price,
+.payment-minimum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 16px;
+    margin-top: 10px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.payment-price span,
+.payment-minimum span {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.payment-price strong {
+    color: #ff7659;
+    font-size: 18px;
+}
+
+.payment-minimum strong {
+    font-size: 16px;
+}
+
+/* Instructions */
+
+.payment-instructions {
+    margin-top: 22px;
+    text-align: left;
+}
+
+.payment-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+.payment-step span {
+    min-width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(150, 0, 0, 0.35);
+    border: 1px solid rgba(255, 80, 50, 0.25);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.payment-step p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.78;
+}
+
+/* Confirmation */
+
+.payment-confirm {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin-top: 25px;
+    padding: 15px;
+
+    text-align: left;
+
+    border-radius: 16px;
+
+    background: rgba(120, 0, 0, 0.16);
+    border: 1px solid rgba(255, 80, 50, 0.18);
+
+    cursor: pointer;
+}
+
+.payment-confirm input {
+    width: 18px;
+    height: 18px;
+
+    margin-top: 2px;
+
+    accent-color: #d92816;
+}
+
+.payment-confirm span {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .payment-section {
+        padding: 65px 15px;
+    }
+
+    .payment-card {
+        padding: 22px 18px;
+        border-radius: 24px;
+    }
+
+    .qr-container {
+        width: 250px;
+        padding: 12px;
+        border-radius: 20px;
+    }
+
+    .payment-card-header h3 {
+        font-size: 18px;
+    }
+}
+```

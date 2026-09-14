@@ -2552,3 +2552,99 @@ footer {
     margin-bottom: 0 !important;
     font-size: 14px;
 }
+/* =====================================================
+   PROFESSIONAL FLOATING CONTACT BUTTONS
+===================================================== */
+
+.floating-contact {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Common button */
+
+.floating-btn {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+/* Call */
+
+.call-float {
+    background: linear-gradient(145deg, #ff4b2b, #b30000);
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.4),
+        0 0 20px rgba(255,70,30,.3);
+}
+
+.call-float:hover {
+    transform: scale(1.1);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.5),
+        0 0 30px rgba(255,70,30,.5);
+}
+
+/* WhatsApp */
+
+.whatsapp-float {
+    position: static;
+
+    background: #25D366;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.4),
+        0 0 20px rgba(37,211,102,.3);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.5),
+        0 0 30px rgba(37,211,102,.5);
+}
+
+.floating-icon {
+    width: 27px;
+    height: 27px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .floating-contact {
+        right: 15px;
+        bottom: 15px;
+        gap: 10px;
+    }
+
+    .floating-btn {
+        width: 54px;
+        height: 54px;
+    }
+
+    .floating-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+}

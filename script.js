@@ -1,13 +1,14 @@
 /* =========================================================
    🌶️ MANA MASALA - COMPLETE ORDER SYSTEM
    Supabase + Order Saving + Owner Notification
-   Version: 104
+   Call + WhatsApp
+   Version: 105
 ========================================================= */
 
-console.log("🌶️ Mana Masala script.js loaded - v104");
+console.log("🌶️ Mana Masala script.js loaded - v105");
 
 /* =========================================================
-   SUPABASE CONFIGURATION
+   SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
@@ -22,22 +23,28 @@ const SUPABASE_KEY =
 
 const PRICE_PER_KG = 350;
 const MIN_QUANTITY = 10;
-const OWNER_WHATSAPP = "918367450301";
+
+const OWNER_PHONE = "918367450301";
+const OWNER_DISPLAY_PHONE = "+91 83674 50301";
 
 /* =========================================================
-   MAIN
+   DOM READY
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     console.log("✅ DOM ready");
 
-    /* -----------------------------------------------------
-       CHECK SUPABASE
-    ----------------------------------------------------- */
+    /* -------------------------------------------------------
+       SUPABASE CHECK
+    ------------------------------------------------------- */
 
     if (!window.supabase) {
-        console.error("❌ Supabase library not loaded");
+
+        console.error(
+            "❌ Supabase library was not loaded."
+        );
+
         return;
     }
 
@@ -50,12 +57,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             SUPABASE_KEY
         );
 
-        console.log("✅ Supabase client created");
+        console.log(
+            "✅ Supabase client initialized"
+        );
 
     } catch (error) {
 
         console.error(
-            "❌ Supabase initialization failed:",
+            "❌ Supabase initialization error:",
             error
         );
 
@@ -63,23 +72,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       GET HTML ELEMENTS
+       ELEMENTS
     ===================================================== */
 
     const orderForm =
         document.getElementById("orderForm");
 
-    const customerNameInput =
+    const customerName =
         document.getElementById("customerName");
 
-    const phoneInput =
+    const phone =
         document.getElementById("customerPhone") ||
         document.getElementById("phone");
 
-    const addressInput =
+    const address =
         document.getElementById("address");
 
-    const quantityInput =
+    const quantity =
         document.getElementById("quantity");
 
     const minusBtn =
@@ -98,40 +107,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("paymentConfirmed");
 
     /* =====================================================
-       CHECK REQUIRED ELEMENTS
-    ===================================================== */
-
-    if (!orderForm) {
-        console.error("❌ orderForm not found");
-        return;
-    }
-
-    if (!customerNameInput) {
-        console.error("❌ customerName not found");
-    }
-
-    if (!phoneInput) {
-        console.error("❌ phone input not found");
-    }
-
-    if (!addressInput) {
-        console.error("❌ address input not found");
-    }
-
-    if (!quantityInput) {
-        console.error("❌ quantity input not found");
-    }
-
-    console.log("✅ Order form elements detected");
-
-    /* =====================================================
        QUANTITY
     ===================================================== */
 
     function getQuantity() {
 
         let value =
-            parseInt(quantityInput?.value, 10);
+            parseInt(quantity?.value, 10);
 
         if (
             Number.isNaN(value) ||
@@ -144,100 +126,90 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       UPDATE TOTAL
+       TOTAL
     ===================================================== */
 
     function updateTotal() {
 
-        if (!quantityInput || !totalAmount) {
+        if (!quantity || !totalAmount) {
             return;
         }
 
-        const quantity = getQuantity();
+        const qty =
+            getQuantity();
 
-        quantityInput.value = quantity;
+        quantity.value =
+            qty;
 
         const total =
-            quantity * PRICE_PER_KG;
+            qty * PRICE_PER_KG;
 
         totalAmount.textContent =
             `₹${total.toLocaleString("en-IN")}`;
-
-        console.log(
-            `💰 ${quantity} KG = ₹${total}`
-        );
     }
 
     /* =====================================================
-       PLUS BUTTON
+       PLUS
     ===================================================== */
 
     if (plusBtn) {
 
-        plusBtn.addEventListener("click", (event) => {
+        plusBtn.addEventListener(
+            "click",
+            (event) => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const currentQuantity =
-                getQuantity();
+                quantity.value =
+                    getQuantity() + 1;
 
-            quantityInput.value =
-                currentQuantity + 1;
-
-            updateTotal();
-        });
+                updateTotal();
+            }
+        );
     }
 
     /* =====================================================
-       MINUS BUTTON
+       MINUS
     ===================================================== */
 
     if (minusBtn) {
 
-        minusBtn.addEventListener("click", (event) => {
+        minusBtn.addEventListener(
+            "click",
+            (event) => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const currentQuantity =
-                getQuantity();
+                const current =
+                    getQuantity();
 
-            if (currentQuantity > MIN_QUANTITY) {
-
-                quantityInput.value =
-                    currentQuantity - 1;
-
-                updateTotal();
-
-            } else {
-
-                quantityInput.value =
-                    MIN_QUANTITY;
+                quantity.value =
+                    Math.max(
+                        MIN_QUANTITY,
+                        current - 1
+                    );
 
                 updateTotal();
             }
-        });
+        );
     }
 
     /* =====================================================
-       MANUAL QUANTITY CHANGE
+       MANUAL QUANTITY
     ===================================================== */
 
-    if (quantityInput) {
+    if (quantity) {
 
-        quantityInput.addEventListener(
+        quantity.addEventListener(
             "input",
             updateTotal
         );
 
-        quantityInput.addEventListener(
+        quantity.addEventListener(
             "change",
             updateTotal
         );
     }
-
-    /* =====================================================
-       INITIAL TOTAL
-    ===================================================== */
 
     updateTotal();
 
@@ -247,26 +219,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function createOrderReference() {
 
-        const now = new Date();
+        const now =
+            new Date();
 
         const date =
             now.getFullYear().toString() +
-            String(now.getMonth() + 1).padStart(2, "0") +
-            String(now.getDate()).padStart(2, "0");
+            String(
+                now.getMonth() + 1
+            ).padStart(2, "0") +
+            String(
+                now.getDate()
+            ).padStart(2, "0");
 
         const random =
             Math.floor(
-                1000 + Math.random() * 9000
+                1000 +
+                Math.random() * 9000
             );
 
         return `MM-${date}-${random}`;
     }
 
     /* =====================================================
-       CLEAN PHONE NUMBER
+       PHONE CLEANER
     ===================================================== */
 
-    function cleanPhoneNumber(value) {
+    function cleanPhone(value) {
 
         return String(value || "")
             .replace(/\D/g, "")
@@ -279,78 +257,91 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function showSuccessModal(
         orderReference,
-        quantity,
+        qty,
         total
     ) {
 
-        const successModal =
-            document.getElementById("successModal");
+        const modal =
+            document.getElementById(
+                "successModal"
+            );
 
         const orderId =
-            document.getElementById("orderId");
+            document.getElementById(
+                "orderId"
+            );
 
         const successQuantity =
-            document.getElementById("successQuantity");
+            document.getElementById(
+                "successQuantity"
+            );
 
         const successTotal =
-            document.getElementById("successTotal");
+            document.getElementById(
+                "successTotal"
+            );
 
         if (orderId) {
+
             orderId.textContent =
                 orderReference;
         }
 
         if (successQuantity) {
+
             successQuantity.textContent =
-                `${quantity} KG`;
+                `${qty} KG`;
         }
 
         if (successTotal) {
+
             successTotal.textContent =
                 `₹${total.toLocaleString("en-IN")}`;
         }
 
-        if (successModal) {
+        if (modal) {
 
-            successModal.classList.add("active");
+            modal.style.display =
+                "flex";
 
-            successModal.style.display = "flex";
+            modal.classList.add(
+                "active"
+            );
 
             document.body.classList.add(
                 "modal-open"
             );
 
-            console.log(
-                "✅ Success modal opened"
-            );
         } else {
 
-            console.warn(
-                "⚠️ successModal not found"
-            );
-
             alert(
-                `Order placed successfully!\n\nOrder ID: ${orderReference}\nQuantity: ${quantity} KG\nTotal: ₹${total.toLocaleString("en-IN")}`
+                `Order placed successfully!\n\n` +
+                `Order ID: ${orderReference}\n` +
+                `Quantity: ${qty} KG\n` +
+                `Total: ₹${total.toLocaleString("en-IN")}`
             );
         }
     }
 
     /* =====================================================
-       CLOSE SUCCESS MODAL
+       CLOSE MODAL
     ===================================================== */
 
     function closeSuccessModal() {
 
-        const successModal =
-            document.getElementById("successModal");
-
-        if (successModal) {
-
-            successModal.classList.remove(
-                "active"
+        const modal =
+            document.getElementById(
+                "successModal"
             );
 
-            successModal.style.display = "none";
+        if (modal) {
+
+            modal.style.display =
+                "none";
+
+            modal.classList.remove(
+                "active"
+            );
         }
 
         document.body.classList.remove(
@@ -358,41 +349,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
     }
 
-    const successCloseBtn =
-        document.getElementById("successCloseBtn");
+    [
+        "successCloseBtn",
+        "modalClose",
+        "continueBtn"
+    ].forEach((id) => {
 
-    const modalClose =
-        document.getElementById("modalClose");
+        const button =
+            document.getElementById(id);
 
-    const continueBtn =
-        document.getElementById("continueBtn");
+        if (button) {
 
-    if (successCloseBtn) {
-
-        successCloseBtn.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
-
-    if (modalClose) {
-
-        modalClose.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
-
-    if (continueBtn) {
-
-        continueBtn.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
+            button.addEventListener(
+                "click",
+                closeSuccessModal
+            );
+        }
+    });
 
     /* =====================================================
-       WHATSAPP BUTTON
+       SUCCESS WHATSAPP BUTTON
     ===================================================== */
 
     const whatsappOrderButton =
@@ -406,48 +382,33 @@ document.addEventListener("DOMContentLoaded", async () => {
             "click",
             () => {
 
-                const orderIdElement =
+                const orderId =
                     document.getElementById(
                         "orderId"
-                    );
+                    )?.textContent || "";
 
-                const quantityElement =
+                const qty =
                     document.getElementById(
                         "successQuantity"
-                    );
-
-                const totalElement =
-                    document.getElementById(
-                        "successTotal"
-                    );
-
-                const orderId =
-                    orderIdElement
-                        ? orderIdElement.textContent
-                        : "";
-
-                const quantity =
-                    quantityElement
-                        ? quantityElement.textContent
-                        : "";
+                    )?.textContent || "";
 
                 const total =
-                    totalElement
-                        ? totalElement.textContent
-                        : "";
+                    document.getElementById(
+                        "successTotal"
+                    )?.textContent || "";
 
                 const message =
-                    `Hello Mana Masala 🌶️%0A%0A` +
-                    `I have placed an order.%0A` +
-                    `Order ID: ${encodeURIComponent(orderId)}%0A` +
-                    `Quantity: ${encodeURIComponent(quantity)}%0A` +
-                    `Total: ${encodeURIComponent(total)}`;
+                    `Hello Mana Masala 🌶️\n\n` +
+                    `I have placed an order.\n` +
+                    `Order ID: ${orderId}\n` +
+                    `Quantity: ${qty}\n` +
+                    `Total: ${total}`;
 
-                const whatsappURL =
-                    `https://wa.me/${OWNER_WHATSAPP}?text=${message}`;
+                const url =
+                    `https://wa.me/${OWNER_PHONE}?text=${encodeURIComponent(message)}`;
 
                 window.open(
-                    whatsappURL,
+                    url,
                     "_blank"
                 );
             }
@@ -455,8 +416,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       FORM SUBMISSION
+       ORDER SUBMIT
     ===================================================== */
+
+    if (!orderForm) {
+
+        console.error(
+            "❌ orderForm not found"
+        );
+
+        return;
+    }
 
     orderForm.addEventListener(
         "submit",
@@ -468,97 +438,82 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "📦 Order submission started"
             );
 
-            /* -------------------------------------------------
-               PREVENT DOUBLE SUBMISSION
-            ------------------------------------------------- */
+            /* ------------------------------------------------
+               READ FORM
+            ------------------------------------------------ */
 
-            if (
-                orderSubmit &&
-                orderSubmit.disabled
-            ) {
-
-                console.log(
-                    "⚠️ Submission already running"
-                );
-
-                return;
-            }
-
-            /* -------------------------------------------------
-               READ VALUES
-            ------------------------------------------------- */
-
-            const customerName =
-                customerNameInput
-                    ? customerNameInput.value.trim()
+            const name =
+                customerName
+                    ? customerName.value.trim()
                     : "";
 
             const rawPhone =
-                phoneInput
-                    ? phoneInput.value.trim()
+                phone
+                    ? phone.value.trim()
                     : "";
 
-            const customerPhone =
-                cleanPhoneNumber(rawPhone);
+            const cleanPhone =
+                cleanPhoneNumber(
+                    rawPhone
+                );
 
-            const customerAddress =
-                addressInput
-                    ? addressInput.value.trim()
+            const deliveryAddress =
+                address
+                    ? address.value.trim()
                     : "";
 
-            const quantity =
+            const qty =
                 getQuantity();
 
             const total =
-                quantity * PRICE_PER_KG;
+                qty * PRICE_PER_KG;
 
-            /* -------------------------------------------------
+            /* ------------------------------------------------
                VALIDATION
-            ------------------------------------------------- */
+            ------------------------------------------------ */
 
-            if (!customerName) {
+            if (!name) {
 
                 alert(
                     "Please enter your name."
                 );
 
-                customerNameInput?.focus();
+                customerName?.focus();
 
                 return;
             }
 
             if (
-                !customerPhone ||
-                customerPhone.length !== 10
+                cleanPhone.length !== 10
             ) {
 
                 alert(
                     "Please enter a valid 10-digit mobile number."
                 );
 
-                phoneInput?.focus();
+                phone?.focus();
 
                 return;
             }
 
-            if (!customerAddress) {
+            if (!deliveryAddress) {
 
                 alert(
                     "Please enter your delivery address."
                 );
 
-                addressInput?.focus();
+                address?.focus();
 
                 return;
             }
 
-            if (quantity < MIN_QUANTITY) {
+            if (qty < MIN_QUANTITY) {
 
                 alert(
                     `Minimum order quantity is ${MIN_QUANTITY} KG.`
                 );
 
-                quantityInput.value =
+                quantity.value =
                     MIN_QUANTITY;
 
                 updateTotal();
@@ -566,10 +521,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
             }
 
-            /* -------------------------------------------------
-               OPTIONAL PAYMENT CONFIRMATION
-               Only checks this if the checkbox exists.
-            ------------------------------------------------- */
+            /* ------------------------------------------------
+               PAYMENT CHECKBOX
+               Only required if it exists in HTML.
+            ------------------------------------------------ */
 
             if (
                 paymentConfirmed &&
@@ -585,30 +540,30 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
             }
 
-            /* -------------------------------------------------
-               CREATE ORDER REFERENCE
-            ------------------------------------------------- */
+            /* ------------------------------------------------
+               ORDER REFERENCE
+            ------------------------------------------------ */
 
             const orderReference =
                 createOrderReference();
 
-            /* -------------------------------------------------
-               CREATE ORDER OBJECT
-            ------------------------------------------------- */
+            /* ------------------------------------------------
+               SUPABASE OBJECT
+            ------------------------------------------------ */
 
             const order = {
 
                 customer_name:
-                    customerName,
+                    name,
 
                 customer_phone:
-                    customerPhone,
+                    cleanPhone,
 
                 quantity_kg:
-                    quantity,
+                    qty,
 
                 address:
-                    customerAddress,
+                    deliveryAddress,
 
                 total_amount:
                     total,
@@ -618,17 +573,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             };
 
             console.log(
-                "📦 Order object:",
+                "📦 Order:",
                 order
             );
 
-            /* -------------------------------------------------
+            /* ------------------------------------------------
                DISABLE BUTTON
-            ------------------------------------------------- */
+            ------------------------------------------------ */
 
             if (orderSubmit) {
 
-                orderSubmit.disabled = true;
+                orderSubmit.disabled =
+                    true;
 
                 orderSubmit.dataset.originalText =
                     orderSubmit.textContent;
@@ -640,17 +596,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             try {
 
                 /* =================================================
+                   INSERT ONLY
+                   
                    IMPORTANT:
-                   DO NOT USE .select().single()
-
-                   Customer only needs INSERT permission.
-                   Using .select() can require SELECT permission
-                   and cause the order to appear failed even when
-                   the database insert itself is allowed.
+                   Do NOT use .select().single()
                 ================================================= */
 
                 console.log(
-                    "📤 Saving order to Supabase..."
+                    "📤 Inserting order..."
                 );
 
                 const {
@@ -662,8 +615,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (error) {
 
                     console.error(
-                        "❌ Supabase order error:",
-                        error
+                        "❌ SUPABASE INSERT ERROR"
                     );
 
                     console.error(
@@ -690,30 +642,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 console.log(
-                    "✅ Order saved successfully"
+                    "✅ ORDER SAVED"
                 );
 
                 /* =================================================
                    OWNER NOTIFICATION
                 ================================================= */
 
-                const notificationOrder = {
-
-                    ...order,
-
-                    order_reference:
-                        orderReference
-                };
-
-                console.log(
-                    "📧 Sending owner notification..."
-                );
-
                 try {
 
+                    const notificationOrder = {
+
+                        ...order,
+
+                        order_reference:
+                            orderReference
+                    };
+
+                    console.log(
+                        "📧 Calling notification function..."
+                    );
+
                     const {
-                        data:
-                            notificationData,
+                        data,
                         error:
                             notificationError
                     } =
@@ -730,15 +681,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (notificationError) {
 
                         console.warn(
-                            "⚠️ Notification failed, but order was saved:",
+                            "⚠️ Notification error:",
                             notificationError
                         );
 
                     } else {
 
                         console.log(
-                            "✅ Owner notification processed:",
-                            notificationData
+                            "✅ Notification response:",
+                            data
                         );
                     }
 
@@ -747,76 +698,80 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ) {
 
                     console.warn(
-                        "⚠️ Notification error, but order was saved:",
+                        "⚠️ Notification failed, order was saved:",
                         notificationError
                     );
                 }
 
-                /* =================================================
-                   RESET FORM
-                ================================================= */
+                /* ------------------------------------------------
+                   RESET
+                ------------------------------------------------ */
 
                 orderForm.reset();
 
-                if (quantityInput) {
+                if (quantity) {
 
-                    quantityInput.value =
+                    quantity.value =
                         MIN_QUANTITY;
                 }
 
                 updateTotal();
 
-                /* =================================================
-                   SHOW SUCCESS
-                ================================================= */
+                /* ------------------------------------------------
+                   SUCCESS
+                ------------------------------------------------ */
 
                 showSuccessModal(
                     orderReference,
-                    quantity,
+                    qty,
                     total
-                );
-
-                console.log(
-                    "🎉 Order completed successfully:",
-                    orderReference
                 );
 
             } catch (error) {
 
                 console.error(
-                    "❌ ORDER FAILED",
-                    error
+                    "❌ ORDER FAILED"
                 );
 
                 console.error(
-                    "Error code:",
+                    "Code:",
                     error?.code
                 );
 
                 console.error(
-                    "Error message:",
+                    "Message:",
                     error?.message
                 );
 
                 console.error(
-                    "Error details:",
+                    "Details:",
                     error?.details
                 );
 
                 console.error(
-                    "Error hint:",
+                    "Hint:",
                     error?.hint
                 );
 
+                /* -----------------------------------------------
+                   SHOW EXACT ERROR FOR DEBUGGING
+                ----------------------------------------------- */
+
                 alert(
-                    "Order could not be completed. Please try again later."
+                    "Order could not be completed.\n\n" +
+                    "Error: " +
+                    (
+                        error?.message ||
+                        "Unknown error"
+                    ) +
+                    "\n\nCode: " +
+                    (
+                        error?.code ||
+                        "N/A"
+                    )
                 );
 
             } finally {
-
-                /* -------------------------------------------------
-                   RE-ENABLE BUTTON
-                ------------------------------------------------- */
 
                 if (orderSubmit) {
 
@@ -832,54 +787,111 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     /* =====================================================
-       SMOOTH SCROLL FOR ORDER BUTTONS
+       FLOATING WHATSAPP
     ===================================================== */
 
-    const orderButtons =
-        document.querySelectorAll(
-            'a[href="#order"], [data-order-link]'
+    const whatsappBubble =
+        document.getElementById(
+            "whatsappBubble"
         );
 
-    orderButtons.forEach(
-        (button) => {
+    if (whatsappBubble) {
+
+        whatsappBubble.addEventListener(
+            "click",
+            () => {
+
+                const message =
+                    "Hello Mana Masala 🌶️ I would like to know more about the homemade chilli powder.";
+
+                const url =
+                    `https://wa.me/${OWNER_PHONE}?text=${encodeURIComponent(message)}`;
+
+                window.open(
+                    url,
+                    "_blank"
+                );
+            }
+        );
+    }
+
+    /* =====================================================
+       CALL BUTTON
+    ===================================================== */
+
+    const callButton =
+        document.getElementById(
+            "callButton"
+        );
+
+    if (callButton) {
+
+        callButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    `tel:+${OWNER_PHONE}`;
+            }
+        );
+    }
+
+    /* =====================================================
+       ORDER NOW SCROLL
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href="#order"], [data-order-link]'
+        )
+        .forEach((button) => {
 
             button.addEventListener(
                 "click",
                 (event) => {
 
-                    const target =
+                    const orderSection =
                         document.getElementById(
                             "order"
                         );
 
-                    if (target) {
+                    if (orderSection) {
 
                         event.preventDefault();
 
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
+                        orderSection.scrollIntoView({
+                            behavior: "smooth"
                         });
                     }
                 }
             );
-        }
-    );
-
-    /* =====================================================
-       FINAL STATUS
-    ===================================================== */
+        });
 
     console.log(
         "✅ Mana Masala order system ready"
     );
 
     console.log(
-        `🌶️ Price: ₹${PRICE_PER_KG}/KG`
+        `🌶️ ₹${PRICE_PER_KG}/KG`
     );
 
     console.log(
-        `📦 Minimum order: ${MIN_QUANTITY} KG`
+        `📦 Minimum ${MIN_QUANTITY} KG`
     );
 
+    console.log(
+        `📞 ${OWNER_DISPLAY_PHONE}`
+    );
 });
+
+
+/* =========================================================
+   HELPER
+========================================================= */
+
+function cleanPhoneNumber(value) {
+
+    return String(value || "")
+        .replace(/\D/g, "")
+        .slice(-10);
+}

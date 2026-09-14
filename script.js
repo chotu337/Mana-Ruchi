@@ -1,38 +1,45 @@
+```javascript
 /* =========================================================
    🌶️ MANA MASALA - COMPLETE ORDER SYSTEM
    Supabase + Order Saving + Owner Notification
-   ========================================================= */
+   Professional Order Confirmation
+========================================================= */
 
 console.log("🌶️ Mana Masala script.js loaded");
+
 
 document.addEventListener("DOMContentLoaded", async () => {
 
     console.log("✅ DOM ready");
 
+
     /* =====================================================
        CONFIGURATION
-       ===================================================== */
+    ===================================================== */
 
-    const SUPABASE_URL =
-        "https://hcczhnmdipqrnbxviuln.supabase.co";
+  const SUPABASE_URL =
+    "https://hcczhnmdipqrnbxviuln.supabase.co";
 
-    const SUPABASE_KEY =
-        "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+const SUPABASE_KEY =
+    "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
-    const PRICE_PER_KG = 350;
-    const MIN_QUANTITY = 10;
-
-    const OWNER_WHATSAPP = "918367450301";
+const PRICE_PER_KG = 350;
+const MIN_QUANTITY = 10;
+const OWNER_WHATSAPP = "918367450301";
 
     let db = null;
 
+
     /* =====================================================
        SUPABASE INITIALIZATION
-       ===================================================== */
+    ===================================================== */
 
     try {
 
-        if (!window.supabase) {
+        if (
+            !window.supabase ||
+            typeof window.supabase.createClient !== "function"
+        ) {
 
             console.error(
                 "❌ Supabase library not found"
@@ -46,10 +53,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+
         db = window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
+
 
         console.log(
             "✅ Supabase client created"
@@ -70,9 +79,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+
     /* =====================================================
        ELEMENTS
-       ===================================================== */
+    ===================================================== */
 
     const quantityInput =
         document.getElementById("quantity");
@@ -86,39 +96,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     const paymentAmount =
         document.getElementById("paymentAmount");
 
+
     const decreaseBtn =
         document.getElementById("decreaseQuantity") ||
         document.getElementById("decreaseBtn") ||
         document.getElementById("minusBtn");
+
 
     const increaseBtn =
         document.getElementById("increaseQuantity") ||
         document.getElementById("increaseBtn") ||
         document.getElementById("plusBtn");
 
+
     const orderForm =
         document.getElementById("orderForm");
+
 
     const orderButton =
         document.getElementById("orderSubmit") ||
         document.getElementById("submitOrder") ||
         document.getElementById("placeOrderButton");
 
+
     const customerName =
         document.getElementById("customerName");
+
 
     const customerPhone =
         document.getElementById("customerPhone") ||
         document.getElementById("phone");
 
+
     const address =
         document.getElementById("address");
+
 
     const notes =
         document.getElementById("notes");
 
+
     const orderMessage =
         document.getElementById("orderMessage");
+
+
+    const paymentConfirmed =
+        document.getElementById("paymentConfirmed");
+
 
     console.log(
         "Quantity element:",
@@ -135,9 +159,48 @@ document.addEventListener("DOMContentLoaded", async () => {
         orderForm
     );
 
+
+    /* =====================================================
+       SUCCESS MODAL ELEMENTS
+    ===================================================== */
+
+    const successModal =
+        document.getElementById("successModal");
+
+
+    const modalOrderId =
+        document.getElementById("orderId");
+
+
+    const modalQuantity =
+        document.getElementById("successQuantity");
+
+
+    const modalTotal =
+        document.getElementById("successTotal");
+
+
+    const continueBtn =
+        document.getElementById("continueBtn");
+
+
+    const successCloseBtn =
+        document.getElementById("successCloseBtn");
+
+
+    const modalClose =
+        document.getElementById("modalClose");
+
+
+    const whatsappOrderButton =
+        document.getElementById(
+            "whatsappOrderButton"
+        );
+
+
     /* =====================================================
        MESSAGE
-       ===================================================== */
+    ===================================================== */
 
     function showOrderMessage(
         message,
@@ -151,21 +214,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+
         orderMessage.textContent =
             message;
 
+
         orderMessage.style.display =
-            "block";
+            message ? "block" : "none";
+
 
         if (type === "error") {
 
             orderMessage.style.color =
-                "#b91c1c";
+                "#ff6b5f";
 
         } else if (type === "success") {
 
             orderMessage.style.color =
-                "#15803d";
+                "#72e68a";
 
         } else {
 
@@ -174,9 +240,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+
     /* =====================================================
        CURRENCY
-       ===================================================== */
+    ===================================================== */
 
     function formatCurrency(amount) {
 
@@ -186,9 +253,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
     }
 
+
     /* =====================================================
        GET QUANTITY
-       ===================================================== */
+    ===================================================== */
 
     function getQuantity() {
 
@@ -197,14 +265,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             return MIN_QUANTITY;
         }
 
+
         let quantity =
             parseInt(
                 quantityInput.value,
                 10
             );
 
+
         if (
-            isNaN(quantity) ||
+            Number.isNaN(quantity) ||
             quantity < MIN_QUANTITY
         ) {
 
@@ -212,21 +282,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                 MIN_QUANTITY;
         }
 
+
         return quantity;
     }
 
+
     /* =====================================================
        UPDATE TOTAL
-       ===================================================== */
+    ===================================================== */
 
     function updateTotal() {
 
         const quantity =
             getQuantity();
 
+
         const total =
             quantity *
             PRICE_PER_KG;
+
 
         if (quantityInput) {
 
@@ -234,11 +308,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 quantity;
         }
 
+
         if (totalAmount) {
 
             totalAmount.textContent =
                 formatCurrency(total);
         }
+
 
         if (totalPrice) {
 
@@ -246,19 +322,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                 formatCurrency(total);
         }
 
+
         if (paymentAmount) {
 
             paymentAmount.textContent =
                 formatCurrency(total);
         }
 
+
         console.log(
             `📦 Quantity: ${quantity} KG`
         );
 
+
         console.log(
             `💰 Total: ${formatCurrency(total)}`
         );
+
 
         return {
             quantity,
@@ -266,58 +346,77 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 
+
     /* =====================================================
-       INCREASE QUANTITY
-       ===================================================== */
+       PLUS BUTTON
+    ===================================================== */
 
     if (increaseBtn) {
 
         increaseBtn.addEventListener(
             "click",
-            function (event) {
+            function(event) {
 
                 event.preventDefault();
+
 
                 const quantity =
                     getQuantity();
 
-                quantityInput.value =
-                    quantity + 1;
+
+                if (quantityInput) {
+
+                    quantityInput.value =
+                        quantity + 1;
+                }
+
 
                 updateTotal();
+
             }
         );
+
     }
 
+
     /* =====================================================
-       DECREASE QUANTITY
-       ===================================================== */
+       MINUS BUTTON
+    ===================================================== */
 
     if (decreaseBtn) {
 
         decreaseBtn.addEventListener(
             "click",
-            function (event) {
+            function(event) {
 
                 event.preventDefault();
+
 
                 const quantity =
                     getQuantity();
 
-                quantityInput.value =
-                    Math.max(
-                        MIN_QUANTITY,
-                        quantity - 1
-                    );
+
+                if (quantityInput) {
+
+                    quantityInput.value =
+                        Math.max(
+                            MIN_QUANTITY,
+                            quantity - 1
+                        );
+                }
+
 
                 updateTotal();
+
             }
         );
+
     }
+
 
     /* =====================================================
        MANUAL QUANTITY
-       ===================================================== */
+    ===================================================== */
 
     if (quantityInput) {
 
@@ -326,17 +425,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             updateTotal
         );
 
+
         quantityInput.addEventListener(
             "change",
             updateTotal
         );
+
     }
+
+
+    /* =====================================================
+       INITIAL TOTAL
+    ===================================================== */
 
     updateTotal();
 
+
     /* =====================================================
        PHONE
-       ===================================================== */
+    ===================================================== */
 
     function cleanPhoneNumber(phone) {
 
@@ -345,6 +452,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             .slice(-10);
     }
 
+
     function isValidPhone(phone) {
 
         return /^[6-9]\d{9}$/.test(
@@ -352,31 +460,259 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
     }
 
+
     /* =====================================================
-       LOCAL ORDER REFERENCE
-       ===================================================== */
+       ORDER REFERENCE
+    ===================================================== */
 
     function createOrderReference() {
 
         const now =
             new Date();
 
-        const timestamp =
+
+        const date =
             now.getTime();
+
 
         const random =
             Math.floor(
                 1000 +
-                Math.random() *
-                9000
+                Math.random() * 9000
             );
 
-        return `MM-${timestamp}-${random}`;
+
+        return `MM-${date}-${random}`;
     }
+
+
+    /* =====================================================
+       SHOW PROFESSIONAL SUCCESS MODAL
+    ===================================================== */
+
+    function showSuccessModal(
+        orderReference,
+        quantity,
+        total,
+        customerNameValue,
+        customerPhoneValue,
+        customerAddress
+    ) {
+
+        if (!successModal) {
+
+            console.warn(
+                "⚠️ successModal not found"
+            );
+
+            return;
+        }
+
+
+        /* -----------------------------------------------
+           ORDER ID
+        ----------------------------------------------- */
+
+        if (modalOrderId) {
+
+            modalOrderId.textContent =
+                orderReference;
+        }
+
+
+        /* -----------------------------------------------
+           QUANTITY
+        ----------------------------------------------- */
+
+        if (modalQuantity) {
+
+            modalQuantity.textContent =
+                `${quantity} KG`;
+        }
+
+
+        /* -----------------------------------------------
+           TOTAL
+        ----------------------------------------------- */
+
+        if (modalTotal) {
+
+            modalTotal.textContent =
+                formatCurrency(total);
+        }
+
+
+        /* -----------------------------------------------
+           WHATSAPP
+        ----------------------------------------------- */
+
+        const whatsappMessage =
+            "🌶️ Mana Masala Order\n\n" +
+            `Order ID: ${orderReference}\n` +
+            `Name: ${customerNameValue}\n` +
+            `Phone: ${customerPhoneValue}\n` +
+            `Quantity: ${quantity} KG\n` +
+            `Total: ${formatCurrency(total)}\n` +
+            `Address: ${customerAddress}`;
+
+
+        const whatsappUrl =
+            `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(
+                whatsappMessage
+            )}`;
+
+
+        if (whatsappOrderButton) {
+
+            whatsappOrderButton.href =
+                whatsappUrl;
+
+            whatsappOrderButton.style.display =
+                "flex";
+        }
+
+
+        /* -----------------------------------------------
+           SHOW MODAL
+        ----------------------------------------------- */
+
+        successModal.classList.remove(
+            "hidden"
+        );
+
+
+        successModal.classList.add(
+            "active"
+        );
+
+
+        successModal.style.display =
+            "flex";
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        console.log(
+            "✅ Professional confirmation displayed"
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE SUCCESS MODAL
+    ===================================================== */
+
+    function closeSuccessModal() {
+
+        if (!successModal) {
+
+            return;
+        }
+
+
+        successModal.classList.remove(
+            "active"
+        );
+
+
+        successModal.classList.add(
+            "hidden"
+        );
+
+
+        successModal.style.display =
+            "none";
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =====================================================
+       MODAL CLOSE BUTTONS
+    ===================================================== */
+
+    if (continueBtn) {
+
+        continueBtn.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+    }
+
+
+    if (successCloseBtn) {
+
+        successCloseBtn.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+    }
+
+
+    if (modalClose) {
+
+        modalClose.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+    }
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE CARD
+    ===================================================== */
+
+    if (successModal) {
+
+        successModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target.classList.contains(
+                        "success-overlay"
+                    )
+                ) {
+
+                    closeSuccessModal();
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ESC KEY CLOSE
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape" &&
+                successModal &&
+                successModal.classList.contains("active")
+            ) {
+
+                closeSuccessModal();
+            }
+
+        }
+    );
+
 
     /* =====================================================
        PLACE ORDER
-       ===================================================== */
+    ===================================================== */
 
     async function placeOrder(event) {
 
@@ -385,13 +721,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             event.preventDefault();
         }
 
+
         console.log(
             "🔥 PLACE ORDER BUTTON CLICKED"
         );
 
-        /* -------------------------------------------------
+
+        /* -----------------------------------------------
            SUPABASE CHECK
-           ------------------------------------------------- */
+        ----------------------------------------------- */
 
         if (!db) {
 
@@ -399,71 +737,88 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "❌ Supabase client unavailable"
             );
 
+
             showOrderMessage(
                 "Order system is unavailable. Please refresh the page and try again.",
                 "error"
             );
 
+
             return;
         }
 
-        /* -------------------------------------------------
+
+        /* -----------------------------------------------
            CUSTOMER DATA
-           ------------------------------------------------- */
+        ----------------------------------------------- */
 
         const name =
             customerName
                 ? customerName.value.trim()
                 : "";
 
+
         const rawPhone =
             customerPhone
                 ? customerPhone.value.trim()
                 : "";
+
 
         const customerAddress =
             address
                 ? address.value.trim()
                 : "";
 
+
         const customerNotes =
             notes
                 ? notes.value.trim()
                 : "";
+
 
         const cleanPhone =
             cleanPhoneNumber(
                 rawPhone
             );
 
+
         const {
             quantity,
             total
         } = updateTotal();
+
+
+        /* -----------------------------------------------
+           LOG DATA
+        ----------------------------------------------- */
 
         console.log(
             "📝 Customer:",
             name
         );
 
+
         console.log(
             "📱 Phone:",
             cleanPhone
         );
+
 
         console.log(
             "📦 Quantity:",
             quantity
         );
 
+
         console.log(
             "💰 Total:",
             total
         );
 
-        /* -------------------------------------------------
+
+        /* -----------------------------------------------
            VALIDATION
-           ------------------------------------------------- */
+        ----------------------------------------------- */
 
         if (!name) {
 
@@ -472,13 +827,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "error"
             );
 
+
             if (customerName) {
 
                 customerName.focus();
             }
 
+
             return;
         }
+
 
         if (!isValidPhone(cleanPhone)) {
 
@@ -487,13 +845,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "error"
             );
 
+
             if (customerPhone) {
 
                 customerPhone.focus();
             }
 
+
             return;
         }
+
 
         if (!customerAddress) {
 
@@ -502,13 +863,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "error"
             );
 
+
             if (address) {
 
                 address.focus();
             }
 
+
             return;
         }
+
 
         if (quantity < MIN_QUANTITY) {
 
@@ -517,45 +881,80 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "error"
             );
 
+
             return;
         }
 
-        /* -------------------------------------------------
+
+        /* -----------------------------------------------
+           PAYMENT CONFIRMATION
+        ----------------------------------------------- */
+
+        if (
+            paymentConfirmed &&
+            !paymentConfirmed.checked
+        ) {
+
+            showOrderMessage(
+                "Please confirm that you have made the payment using the QR code.",
+                "error"
+            );
+
+
+            paymentConfirmed.focus();
+
+
+            return;
+        }
+
+
+        /* -----------------------------------------------
            DISABLE BUTTON
-           ------------------------------------------------- */
+        ----------------------------------------------- */
 
         const originalButtonText =
             orderButton
                 ? orderButton.innerHTML
                 : "🛒 Place Order";
 
+
         if (orderButton) {
 
             orderButton.disabled =
                 true;
 
+
             orderButton.innerHTML =
                 "⏳ Placing Order...";
         }
+
 
         showOrderMessage(
             "Submitting your order...",
             "info"
         );
 
+
         /* =================================================
-           IMPORTANT
-           The database DOES NOT have order_id.
-           Therefore order_id is NOT inserted into orders.
-           ================================================= */
+           ORDER REFERENCE
+        ================================================= */
 
         const orderReference =
             createOrderReference();
 
+
+        console.log(
+            "🆔 Order reference:",
+            orderReference
+        );
+
+
         /* =================================================
-           DATABASE ORDER OBJECT
-           ONLY EXISTING COLUMNS
-           ================================================= */
+           DATABASE ORDER
+           
+           IMPORTANT:
+           These are ONLY your existing table columns.
+        ================================================= */
 
         const order = {
 
@@ -576,16 +975,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             status:
                 "New"
+
         };
+
 
         console.log(
             "📦 Sending order:",
             order
         );
 
+
         /* =================================================
-           INSERT ORDER
-           ================================================= */
+           INSERT INTO SUPABASE
+        ================================================= */
 
         try {
 
@@ -593,22 +995,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "📤 Inserting order into Supabase..."
             );
 
-            /*
-             * IMPORTANT:
-             *
-             * No .select()
-             *
-             * No order_id
-             *
-             * Only columns that exist in
-             * your orders table.
-             */
 
             const {
                 error: insertError
             } = await db
                 .from("orders")
                 .insert(order);
+
 
             if (insertError) {
 
@@ -617,14 +1010,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                     insertError
                 );
 
+
                 throw new Error(
                     insertError.message
                 );
             }
 
+
             console.log(
                 "✅ ORDER SAVED TO SUPABASE"
             );
+
 
         } catch (error) {
 
@@ -633,26 +1029,31 @@ document.addEventListener("DOMContentLoaded", async () => {
                 error
             );
 
+
             showOrderMessage(
                 "Order could not be completed. Please try again.",
                 "error"
             );
+
 
             if (orderButton) {
 
                 orderButton.disabled =
                     false;
 
+
                 orderButton.innerHTML =
                     originalButtonText;
             }
 
+
             return;
         }
 
+
         /* =================================================
            OWNER NOTIFICATION
-           ================================================= */
+        ================================================= */
 
         try {
 
@@ -660,12 +1061,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "📲 Sending owner notification..."
             );
 
-            /*
-             * order_id is NOT sent to the database.
-             *
-             * It is only used as a reference
-             * for the notification/customer.
-             */
 
             const notificationOrder = {
 
@@ -676,13 +1071,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 notes:
                     customerNotes
+
             };
 
+
             const {
-                data:
-                    notificationData,
-                error:
-                    notificationError
+                data: notificationData,
+                error: notificationError
             } = await db.functions.invoke(
                 "new-order-notification",
                 {
@@ -692,6 +1087,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
                 }
             );
+
 
             if (notificationError) {
 
@@ -708,11 +1104,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 );
             }
 
+
         } catch (notificationError) {
 
             /*
-             * Notification failure must NOT
-             * make the order fail.
+             * IMPORTANT:
+             * The order is already saved.
+             * Notification failure should NOT
+             * make the customer's order fail.
              */
 
             console.error(
@@ -721,91 +1120,40 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
         }
 
-        /* =================================================
-           SUCCESS
-           ================================================= */
 
-        console.log(
-            "🎉 ORDER COMPLETED"
-        );
+        /* =================================================
+           SUCCESS MESSAGE
+        ================================================= */
 
         showOrderMessage(
-            `Order placed successfully! Reference: ${orderReference}`,
+            "Order placed successfully!",
             "success"
         );
 
-        /* =================================================
-           SUCCESS MODAL
-           ================================================= */
-
-        const successModal =
-            document.getElementById(
-                "successModal"
-            );
-
-        const modalOrderId =
-            document.getElementById(
-                "orderId"
-            );
-
-        if (modalOrderId) {
-
-            modalOrderId.textContent =
-                orderReference;
-        }
-
-        if (successModal) {
-
-            successModal.classList.add(
-                "active"
-            );
-
-            successModal.style.display =
-                "flex";
-        }
 
         /* =================================================
-           WHATSAPP
-           ================================================= */
+           PROFESSIONAL SUCCESS MODAL
+        ================================================= */
 
-        const whatsappMessage =
-            `🌶️ Mana Masala Order%0A%0A` +
-            `Reference: ${orderReference}%0A` +
-            `Name: ${encodeURIComponent(name)}%0A` +
-            `Phone: ${cleanPhone}%0A` +
-            `Quantity: ${quantity} KG%0A` +
-            `Total: ₹${total}%0A` +
-            `Address: ${encodeURIComponent(customerAddress)}`;
-
-        const whatsappUrl =
-            `https://wa.me/${OWNER_WHATSAPP}?text=${whatsappMessage}`;
-
-        console.log(
-            "📲 WhatsApp notification URL ready"
+        showSuccessModal(
+            orderReference,
+            quantity,
+            total,
+            name,
+            cleanPhone,
+            customerAddress
         );
 
-        const whatsappButton =
-            document.getElementById(
-                "whatsappOrderButton"
-            );
-
-        if (whatsappButton) {
-
-            whatsappButton.href =
-                whatsappUrl;
-
-            whatsappButton.style.display =
-                "inline-flex";
-        }
 
         /* =================================================
            RESET FORM
-           ================================================= */
+        ================================================= */
 
         if (orderForm) {
 
             orderForm.reset();
         }
+
 
         if (quantityInput) {
 
@@ -813,25 +1161,35 @@ document.addEventListener("DOMContentLoaded", async () => {
                 MIN_QUANTITY;
         }
 
+
         updateTotal();
+
 
         /* =================================================
            RESTORE BUTTON
-           ================================================= */
+        ================================================= */
 
         if (orderButton) {
 
             orderButton.disabled =
                 false;
 
+
             orderButton.innerHTML =
                 originalButtonText;
         }
+
+
+        console.log(
+            "🎉 ORDER COMPLETED SUCCESSFULLY"
+        );
+
     }
+
 
     /* =====================================================
        FORM SUBMIT
-       ===================================================== */
+    ===================================================== */
 
     if (orderForm) {
 
@@ -840,14 +1198,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             placeOrder
         );
 
+
         console.log(
             "✅ Order form submit handler attached"
         );
     }
 
+
     /* =====================================================
-       BUTTON
-       ===================================================== */
+       BUTTON FALLBACK
+    ===================================================== */
 
     if (orderButton) {
 
@@ -855,11 +1215,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             "✅ Place Order button FOUND"
         );
 
+
         /*
-         * Your current button is type="submit",
-         * so the form submit handler handles it.
-         *
-         * We don't attach another click handler.
+         * If the button is type="submit",
+         * the form handles it.
          */
 
         if (
@@ -872,75 +1231,26 @@ document.addEventListener("DOMContentLoaded", async () => {
                 placeOrder
             );
 
-            console.log(
-                "✅ Place Order click handler attached"
-            );
-        }
-    }
-
-    /* =====================================================
-       SUCCESS MODAL CLOSE
-       ===================================================== */
-
-    const successModal =
-        document.getElementById(
-            "successModal"
-        );
-
-    const modalClose =
-        document.getElementById(
-            "modalClose"
-        );
-
-    const continueBtn =
-        document.getElementById(
-            "continueBtn"
-        );
-
-    function closeSuccessModal() {
-
-        if (!successModal) {
-
-            return;
         }
 
-        successModal.classList.remove(
-            "active"
-        );
-
-        successModal.style.display =
-            "none";
     }
 
-    if (modalClose) {
-
-        modalClose.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
-
-    if (continueBtn) {
-
-        continueBtn.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
 
     /* =====================================================
        MOBILE MENU
-       ===================================================== */
+    ===================================================== */
 
     const menuToggle =
         document.getElementById(
             "menuToggle"
         );
 
+
     const navLinks =
         document.getElementById(
             "navLinks"
         );
+
 
     if (
         menuToggle &&
@@ -955,11 +1265,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                     "active"
                 );
 
+
                 menuToggle.classList.toggle(
                     "active"
                 );
+
             }
         );
+
 
         navLinks
             .querySelectorAll("a")
@@ -973,22 +1286,28 @@ document.addEventListener("DOMContentLoaded", async () => {
                             "active"
                         );
 
+
                         menuToggle.classList.remove(
                             "active"
                         );
+
                     }
                 );
+
             });
+
     }
+
 
     /* =====================================================
        FAQ
-       ===================================================== */
+    ===================================================== */
 
     const faqItems =
         document.querySelectorAll(
             ".faq-item"
         );
+
 
     faqItems.forEach(item => {
 
@@ -997,10 +1316,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ".faq-question"
             );
 
+
         if (!question) {
 
             return;
         }
+
 
         question.addEventListener(
             "click",
@@ -1009,18 +1330,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 item.classList.toggle(
                     "active"
                 );
+
             }
         );
+
     });
 
+
     /* =====================================================
-       PRODUCT IMAGE
-       ===================================================== */
+       PRODUCT IMAGE ZOOM
+    ===================================================== */
 
     const productImage =
         document.getElementById(
             "productImage"
         );
+
 
     if (productImage) {
 
@@ -1031,18 +1356,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 productImage.classList.toggle(
                     "zoomed"
                 );
+
             }
         );
+
     }
+
 
     /* =====================================================
        SCROLL REVEAL
-       ===================================================== */
+    ===================================================== */
 
     const revealElements =
         document.querySelectorAll(
             ".glass-card, .section-heading, .about-content"
         );
+
 
     if (
         "IntersectionObserver"
@@ -1064,10 +1393,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                                     "visible"
                                 );
 
+
                                 observer.unobserve(
                                     entry.target
                                 );
+
                             }
+
                         }
                     );
 
@@ -1078,24 +1410,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             );
 
+
         revealElements.forEach(
             element => {
 
                 observer.observe(
                     element
                 );
+
             }
         );
+
     }
+
 
     /* =====================================================
        PAGE LOADER
-       ===================================================== */
+    ===================================================== */
 
     const pageLoader =
         document.getElementById(
             "pageLoader"
         );
+
 
     if (pageLoader) {
 
@@ -1107,6 +1444,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     "hidden"
                 );
 
+
                 setTimeout(
                     () => {
 
@@ -1116,18 +1454,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                     },
                     500
                 );
+
             }
         );
+
     }
+
 
     /* =====================================================
        HEADER SCROLL
-       ===================================================== */
+    ===================================================== */
 
     const siteHeader =
         document.querySelector(
             ".site-header"
         );
+
 
     if (siteHeader) {
 
@@ -1148,40 +1490,60 @@ document.addEventListener("DOMContentLoaded", async () => {
                     siteHeader.classList.remove(
                         "scrolled"
                     );
+
                 }
+
             }
         );
+
     }
 
+
     /* =====================================================
-       YEAR
-       ===================================================== */
+       CURRENT YEAR
+    ===================================================== */
 
     const yearElement =
         document.getElementById(
             "year"
         );
 
+
     if (yearElement) {
 
         yearElement.textContent =
             new Date().getFullYear();
+
     }
+
 
     /* =====================================================
        FINAL STATUS
-       ===================================================== */
+    ===================================================== */
 
     console.log(
         "🌶️ Mana Masala Order System Ready"
     );
 
+
     console.log(
         "📦 Supabase orders: ENABLED"
     );
+
 
     console.log(
         "📲 Owner notifications: ENABLED"
     );
 
+
+    console.log(
+        "💳 Payment confirmation: ENABLED"
+    );
+
+
+    console.log(
+        "✨ Professional order confirmation: ENABLED"
+    );
+
 });
+```

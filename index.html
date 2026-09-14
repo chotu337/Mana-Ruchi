@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,7 @@
 
     <meta
         name="description"
-        content="Mana Masala - Authentic Homemade Chilli Powder"
+        content="Mana Masala - Authentic Homemade Chilli Powder. Freshly prepared with quality and care."
     >
 
     <meta
@@ -26,6 +25,12 @@
     <!-- Favicon -->
     <link
         rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
+
+    <link
+        rel="shortcut icon"
         type="image/png"
         href="favicon.png"
     >
@@ -43,14 +48,14 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
     <!-- Main CSS -->
     <link
         rel="stylesheet"
-        href="style.css?v=301"
+        href="style.css?v=302"
     >
 
 </head>
@@ -58,33 +63,104 @@
 
 <body>
 
-<!-- =========================================================
+
+<!-- =====================================================
+     PAGE LOADER
+===================================================== -->
+
+<div
+    id="pageLoader"
+    class="page-loader"
+>
+
+    <div class="loader-content">
+
+        <div class="loader-chilli">
+            🌶️
+        </div>
+
+        <div class="loader-brand">
+            Mana Masala
+        </div>
+
+        <div class="loader-text">
+            Homemade Chilli Powder
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
-<header class="site-header">
+<header
+    id="header"
+    class="site-header"
+>
 
-    <div class="container header-inner">
+    <div class="container nav-container">
 
         <a
             href="#home"
-            class="logo"
+            class="brand"
         >
-            🌶️
-            <span>Mana Masala</span>
+
+            <div class="brand-logo">
+                🌶️
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    Mana Masala
+                </strong>
+
+                <span>
+                    Homemade Chilli Powder
+                </span>
+
+            </div>
+
         </a>
 
-        <nav class="nav">
 
-            <a href="#home">Home</a>
+        <button
+            type="button"
+            id="menuToggle"
+            class="menu-toggle"
+            aria-label="Open Menu"
+        >
+            ☰
+        </button>
 
-            <a href="#product">Product</a>
 
-            <a href="#about">About</a>
+        <nav
+            id="navLinks"
+            class="nav-links"
+        >
 
-            <a href="#order">Order</a>
+            <a href="#home">
+                Home
+            </a>
 
-            <a href="#contact">Contact</a>
+            <a href="#product">
+                Product
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#order">
+                Order
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
 
         </nav>
 
@@ -93,109 +169,186 @@
 </header>
 
 
-<main>
 
-<!-- =========================================================
+<!-- =====================================================
      HERO
-========================================================= -->
+===================================================== -->
+
+<main>
 
 <section
     id="home"
-    class="hero"
+    class="hero-section"
 >
 
-    <div class="container hero-content">
+    <div class="container hero-container">
 
-        <div class="hero-text">
 
-            <div class="hero-brand">
-                🌶️ MANA MASALA
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                🌶️ Homemade • Fresh • Authentic
             </div>
+
 
             <h1>
                 Authentic
-                <span>Homemade</span>
+                <span>
+                    Homemade
+                </span>
                 Chilli Powder
             </h1>
 
-            <p>
-                Traditional taste, rich colour and authentic
-                chilli flavour — carefully prepared for your kitchen.
+
+            <p class="hero-description">
+
+                Bring authentic homemade taste to your
+                kitchen with Mana Masala — carefully
+                prepared with quality and freshness.
+
             </p>
 
-            <div class="price-badges">
+
+            <div class="hero-price-row">
 
                 <div class="price-badge">
-                    <small>PRICE</small>
-                    <strong>₹350/kg</strong>
+
+                    <small>
+                        Only
+                    </small>
+
+                    <strong>
+                        ₹350
+                    </strong>
+
+                    <span>
+                        / KG
+                    </span>
+
                 </div>
 
+
                 <div class="minimum-badge">
-                    <small>MINIMUM ORDER</small>
-                    <strong>10 KG</strong>
+
+                    <strong>
+                        10 KG
+                    </strong>
+
+                    <span>
+                        Minimum Order
+                    </span>
+
                 </div>
 
             </div>
+
 
             <div class="hero-buttons">
 
                 <a
                     href="#order"
-                    class="primary-button"
+                    class="btn btn-primary"
                 >
-                    Order Now
+                    🌶️ Order Now
                 </a>
+
 
                 <a
                     href="#product"
-                    class="secondary-button"
+                    class="btn btn-secondary"
                 >
                     Explore Product
                 </a>
 
             </div>
 
+
+            <div class="hero-trust">
+
+                <span>
+                    ✓ Homemade
+                </span>
+
+                <span>
+                    ✓ Quality
+                </span>
+
+                <span>
+                    ✓ Fresh
+                </span>
+
+            </div>
+
         </div>
 
 
-        <div class="hero-product">
 
-            <div class="product-glow"></div>
+        <div class="hero-visual">
 
-            <img
-                src="masala.png"
-                alt="Mana Masala Homemade Chilli Powder"
-            >
+            <div class="hero-image-card">
+
+                <div class="hero-glow"></div>
+
+                <img
+                    src="masala.png"
+                    alt="Mana Masala Homemade Chilli Powder"
+                    class="hero-product-image"
+                >
+
+                <div class="hero-floating-price">
+
+                    <strong>
+                        ₹350/kg
+                    </strong>
+
+                    <span>
+                        Freshly Prepared
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- =========================================================
-     VIDEO GLIMPSE
-========================================================= -->
 
-<section class="glimpse-section">
+<!-- =====================================================
+     VIDEO GLIMPSE
+===================================================== -->
+
+<section
+    id="glimpse"
+    class="glimpse-section"
+>
 
     <div class="container">
 
         <div class="section-heading">
 
-            <span>OUR STORY</span>
+            <span>
+                🌶️ OUR STORY
+            </span>
 
-            <h2>From Chilli to Masala</h2>
+            <h2>
+                From Chilli to
+                <span>Mana Masala</span>
+            </h2>
 
             <p>
-                A glimpse of the journey behind Mana Masala.
+                Experience the journey behind our homemade
+                chilli powder.
             </p>
 
         </div>
 
 
-        <div class="video-card">
+        <div class="glimpse-video-wrapper">
 
             <video
                 class="glimpse-video"
@@ -223,9 +376,10 @@
 </section>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      PRODUCT
-========================================================= -->
+===================================================== -->
 
 <section
     id="product"
@@ -236,13 +390,19 @@
 
         <div class="section-heading">
 
-            <span>OUR PRODUCT</span>
+            <span>
+                🌶️ OUR PRODUCT
+            </span>
 
-            <h2>Mana Masala</h2>
+            <h2>
+                Pure Taste.
+                <span>Homemade Care.</span>
+            </h2>
 
             <p>
-                Homemade chilli powder made with care and
-                traditional flavour.
+                Mana Masala Homemade Chilli Powder is made
+                with attention to quality, freshness and
+                authentic flavour.
             </p>
 
         </div>
@@ -250,89 +410,127 @@
 
         <div class="product-grid">
 
+
             <div class="product-image-card">
 
-                <img
-                    src="masala.png"
-                    alt="Mana Masala Chilli Powder"
-                >
+                <div class="product-image-inner">
+
+                    <img
+                        src="masala.png"
+                        alt="Mana Masala Chilli Powder"
+                        id="productImage"
+                    >
+
+                </div>
+
+                <div class="zoom-hint">
+                    Click image to zoom
+                </div>
 
             </div>
 
 
-            <div class="product-info">
+
+            <div class="product-info-card">
 
                 <div class="product-label">
-                    🌶️ HOMEMADE CHILLI POWDER
+                    MANA MASALA
                 </div>
 
                 <h2>
-                    Bring authentic chilli flavour
-                    to your kitchen.
+                    Homemade Chilli Powder
                 </h2>
 
                 <p>
-                    Mana Masala is prepared with a focus on
-                    quality, freshness and authentic taste.
-                    Perfect for everyday cooking.
+                    A rich and flavourful chilli powder
+                    prepared for everyday cooking and
+                    authentic homemade taste.
                 </p>
 
 
-                <div class="features">
+                <div class="feature-list">
 
-                    <div class="feature-card">
+                    <div class="feature-item">
 
-                        <span>🌶️</span>
+                        <span>
+                            🌶️
+                        </span>
 
                         <div>
-                            <strong>Rich Chilli Flavour</strong>
-                            <small>Authentic taste</small>
+
+                            <strong>
+                                Authentic Taste
+                            </strong>
+
+                            <small>
+                                Rich chilli flavour for your meals.
+                            </small>
+
                         </div>
 
                     </div>
 
 
-                    <div class="feature-card">
+                    <div class="feature-item">
 
-                        <span>🏠</span>
+                        <span>
+                            🏠
+                        </span>
 
                         <div>
-                            <strong>Homemade</strong>
-                            <small>Prepared with care</small>
+
+                            <strong>
+                                Homemade
+                            </strong>
+
+                            <small>
+                                Prepared with care and attention.
+                            </small>
+
                         </div>
 
                     </div>
 
 
-                    <div class="feature-card">
+                    <div class="feature-item">
 
-                        <span>✨</span>
+                        <span>
+                            ✨
+                        </span>
 
                         <div>
-                            <strong>Quality & Freshness</strong>
-                            <small>Made for your kitchen</small>
+
+                            <strong>
+                                Quality & Freshness
+                            </strong>
+
+                            <small>
+                                Packed to preserve quality.
+                            </small>
+
                         </div>
 
                     </div>
 
+                </div>
 
-                    <div class="feature-card">
 
-                        <span>🔥</span>
+                <div class="product-price">
 
-                        <div>
-                            <strong>Traditional Taste</strong>
-                            <small>Full-bodied flavour</small>
-                        </div>
+                    <span>
+                        Price
+                    </span>
 
-                    </div>
+                    <strong>
+                        ₹350 / KG
+                    </strong>
 
                 </div>
 
 
                 <a
                     href="#order"
-                    class="primary-button"
+                    class="btn btn-primary product-order-btn"
                 >
                     Order Mana Masala
                 </a>
@@ -346,9 +544,10 @@
 </section>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      ABOUT
-========================================================= -->
+===================================================== -->
 
 <section
     id="about"
@@ -357,27 +556,73 @@
 
     <div class="container">
 
-        <div class="about-card">
+        <div class="section-heading">
 
-            <div class="about-icon">
-                🌶️
-            </div>
+            <span>
+                ❤️ ABOUT US
+            </span>
 
-            <div>
+            <h2>
+                Made With
+                <span>Care</span>
+            </h2>
 
-                <span class="section-small-title">
-                    ABOUT MANA MASALA
-                </span>
+        </div>
 
-                <h2>
-                    Traditional taste.
-                    Homemade care.
-                </h2>
+
+        <div class="about-grid">
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🌶️
+                </div>
+
+                <h3>
+                    Authentic
+                </h3>
 
                 <p>
-                    Mana Masala brings authentic homemade chilli
-                    powder directly to your kitchen. Our focus is
-                    simple — good quality, rich flavour and freshness.
+                    We focus on delivering the familiar
+                    taste and aroma of homemade chilli
+                    powder.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Homemade
+                </h3>
+
+                <p>
+                    Prepared with care and attention to
+                    quality at every stage.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    ⭐
+                </div>
+
+                <h3>
+                    Quality
+                </h3>
+
+                <p>
+                    Our focus is on freshness, flavour and
+                    a satisfying homemade experience.
                 </p>
 
             </div>
@@ -389,9 +634,10 @@
 </section>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      ORDER SECTION
-========================================================= -->
+===================================================== -->
 
 <section
     id="order"
@@ -400,11 +646,17 @@
 
     <div class="container">
 
+
         <div class="section-heading">
 
-            <span>PLACE YOUR ORDER</span>
+            <span>
+                🌶️ PLACE YOUR ORDER
+            </span>
 
-            <h2>Order Mana Masala</h2>
+            <h2>
+                Order
+                <span>Mana Masala</span>
+            </h2>
 
             <p>
                 Minimum order quantity is 10 KG.
@@ -413,22 +665,28 @@
         </div>
 
 
-        <div class="order-card">
 
-            <!-- PAYMENT -->
+        <div class="order-grid">
 
-            <div class="payment-section">
 
-                <div class="payment-title">
+            <!-- PAYMENT CARD -->
 
-                    <span>📱</span>
+            <div class="payment-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        💳
+                    </span>
 
                     <div>
 
-                        <h3>Scan & Pay</h3>
+                        <h3>
+                            Make Payment
+                        </h3>
 
                         <p>
-                            Scan the QR code to make your payment.
+                            Scan the QR code to make payment.
                         </p>
 
                     </div>
@@ -436,7 +694,7 @@
                 </div>
 
 
-                <div class="payment-qr-card">
+                <div class="qr-wrapper">
 
                     <img
                         src="payment-qr.jpeg"
@@ -447,191 +705,316 @@
                 </div>
 
 
-                <p class="payment-note">
-                    After making the payment, complete the
-                    order form below.
-                </p>
+                <div class="payment-info">
+
+                    <div class="payment-price">
+
+                        <span>
+                            Current Price
+                        </span>
+
+                        <strong>
+                            ₹350 / KG
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-minimum">
+
+                        <span>
+                            Minimum Order
+                        </span>
+
+                        <strong>
+                            10 KG
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="payment-note">
+
+                    <span>
+                        🔒
+                    </span>
+
+                    <p>
+                        After making the payment, complete
+                        the order form and confirm your payment.
+                    </p>
+
+                </div>
 
             </div>
 
 
+
             <!-- ORDER FORM -->
 
-            <form
-                id="orderForm"
-                class="order-form"
-                novalidate
-            >
+            <div class="order-form-card">
 
-                <div class="form-group">
+                <div class="card-heading">
 
-                    <label for="customerName">
-                        Full Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="customerName"
-                        name="customerName"
-                        placeholder="Enter your full name"
-                        autocomplete="name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="phone">
-                        WhatsApp / Phone Number
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter your phone number"
-                        autocomplete="tel"
-                        inputmode="tel"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="address">
-                        Delivery Address
-                    </label>
-
-                    <textarea
-                        id="address"
-                        name="address"
-                        rows="4"
-                        placeholder="Enter complete delivery address"
-                        autocomplete="street-address"
-                        required
-                    ></textarea>
-
-                </div>
-
-
-                <!-- QUANTITY -->
-
-                <div class="form-group">
-
-                    <label>
-                        Quantity
-                    </label>
-
-                    <div class="quantity-box">
-
-                        <button
-                            type="button"
-                            id="minusBtn"
-                            class="quantity-button"
-                            aria-label="Decrease quantity"
-                        >
-                            −
-                        </button>
-
-                        <input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            value="10"
-                            min="10"
-                            step="1"
-                            readonly
-                        >
-
-                        <button
-                            type="button"
-                            id="plusBtn"
-                            class="quantity-button"
-                            aria-label="Increase quantity"
-                        >
-                            +
-                        </button>
-
-                    </div>
-
-                    <small class="quantity-help">
-                        Minimum order: 10 KG
-                    </small>
-
-                </div>
-
-
-                <!-- TOTAL -->
-
-                <div class="order-total-card">
+                    <span class="card-icon">
+                        📦
+                    </span>
 
                     <div>
 
-                        <span>
-                            Total Amount
-                        </span>
+                        <h3>
+                            Delivery Details
+                        </h3>
 
-                        <small>
-                            ₹350 × quantity
+                        <p>
+                            Enter your details to place your order.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="orderForm"
+                    novalidate
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="customerName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customer_name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="customer_phone"
+                            placeholder="Enter 10-digit mobile number"
+                            maxlength="10"
+                            inputmode="numeric"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="4"
+                            placeholder="Enter your complete delivery address"
+                            autocomplete="street-address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Quantity
+                        </label>
+
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                id="minusBtn"
+                                class="quantity-btn"
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity_kg"
+                                value="10"
+                                min="10"
+                                step="1"
+                                inputmode="numeric"
+                                aria-label="Quantity in kilograms"
+                            >
+
+
+                            <span class="quantity-unit">
+                                KG
+                            </span>
+
+
+                            <button
+                                type="button"
+                                id="plusBtn"
+                                class="quantity-btn"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <small class="quantity-help">
+                            Minimum order: 10 KG
                         </small>
 
                     </div>
 
-                    <strong id="totalAmount">
-                        ₹3,500
-                    </strong>
-
-                </div>
 
 
-                <!-- PAYMENT CONFIRMATION -->
+                    <!-- TOTAL -->
 
-                <label class="payment-confirm">
+                    <div class="order-total-box">
 
-                    <input
-                        type="checkbox"
-                        id="paymentConfirmed"
+                        <div>
+
+                            <span>
+                                Total Amount
+                            </span>
+
+                            <small>
+                                ₹350 × quantity
+                            </small>
+
+                        </div>
+
+
+                        <strong id="totalAmount">
+                            ₹3,500
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-group">
+
+                        <label for="notes">
+                            Additional Notes
+                            <span>(Optional)</span>
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            rows="2"
+                            placeholder="Any additional delivery instructions..."
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT CONFIRMATION -->
+
+                    <label
+                        class="payment-confirm"
+                        for="paymentConfirmed"
                     >
 
-                    <span>
-                        I have made the payment using the QR code.
-                    </span>
+                        <input
+                            type="checkbox"
+                            id="paymentConfirmed"
+                            name="payment_confirmed"
+                        >
 
-                </label>
+                        <span class="custom-checkbox"></span>
+
+                        <span class="payment-confirm-text">
+                            I have completed the payment and
+                            want to place this order.
+                        </span>
+
+                    </label>
 
 
-                <!-- SUBMIT -->
 
-                <button
-                    type="submit"
-                    id="orderSubmit"
-                    class="order-submit"
-                >
+                    <!-- ERROR MESSAGE -->
 
-                    <span class="submit-text">
-                        Confirm & Place Order
-                    </span>
+                    <p
+                        id="orderError"
+                        class="order-error"
+                        role="alert"
+                    ></p>
 
-                    <span
-                        class="submit-loading hidden"
-                        id="submitLoading"
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        id="orderSubmit"
+                        class="btn btn-primary order-submit"
                     >
-                        Processing...
-                    </span>
 
-                </button>
+                        <span>
+                            🌶️ Confirm & Place Order
+                        </span>
+
+                        <span
+                            id="submitLoading"
+                            class="submit-loading"
+                            style="display:none;"
+                        >
+                            Processing...
+                        </span>
+
+                    </button>
 
 
-                <p
-                    id="orderError"
-                    class="order-error"
-                ></p>
+                    <p class="secure-order-note">
+                        🔒 Your order details are securely
+                        submitted to Mana Masala.
+                    </p>
 
-            </form>
+                </form>
+
+            </div>
 
         </div>
 
@@ -640,9 +1023,166 @@
 </section>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section
+    id="faq"
+    class="faq-section"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                ❓ FAQ
+            </span>
+
+            <h2>
+                Frequently Asked
+                <span>Questions</span>
+            </h2>
+
+        </div>
+
+
+        <div class="faq-list">
+
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        What is the minimum order quantity?
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        The minimum order quantity is 10 KG.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        What is the price?
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Mana Masala Homemade Chilli Powder
+                        is ₹350 per KG.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        How do I place an order?
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Scan the payment QR, complete the
+                        payment, fill in your delivery details,
+                        confirm the payment checkbox and
+                        submit the order.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        How will I know my order was received?
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        After your order is successfully saved,
+                        a confirmation screen will display your
+                        Order ID, quantity and total amount.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
      CONTACT
-========================================================= -->
+===================================================== -->
 
 <section
     id="contact"
@@ -653,40 +1193,103 @@
 
         <div class="contact-card">
 
-            <div>
 
-                <span class="section-small-title">
-                    CONTACT US
+            <div class="contact-content">
+
+                <span class="contact-label">
+                    🌶️ GET IN TOUCH
                 </span>
 
                 <h2>
-                    Need help with your order?
+                    Have Questions?
                 </h2>
 
                 <p>
-                    Contact Mana Masala directly on WhatsApp
-                    or phone.
+                    Contact Mana Masala directly for order
+                    assistance and delivery information.
                 </p>
+
+
+                <div class="contact-details">
+
+
+                    <a
+                        href="tel:+918367450301"
+                        class="contact-item"
+                    >
+
+                        <span class="contact-icon">
+                            📞
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Call Us
+                            </small>
+
+                            <strong>
+                                +91 83674 50301
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <a
+                        href="https://wa.me/918367450301"
+                        target="_blank"
+                        rel="noopener"
+                        class="contact-item"
+                    >
+
+                        <span class="contact-icon">
+                            💬
+                        </span>
+
+                        <div>
+
+                            <small>
+                                WhatsApp
+                            </small>
+
+                            <strong>
+                                +91 83674 50301
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+                </div>
 
             </div>
 
 
-            <div class="contact-buttons">
+            <div class="contact-action">
 
-                <a
-                    href="tel:+918367450301"
-                    class="contact-call"
-                >
-                    📞 Call Us
-                </a>
+                <div class="contact-chilli">
+                    🌶️
+                </div>
+
+                <h3>
+                    Mana Masala
+                </h3>
+
+                <p>
+                    Homemade Chilli Powder
+                </p>
+
 
                 <a
                     href="https://wa.me/918367450301"
                     target="_blank"
                     rel="noopener"
-                    class="contact-whatsapp"
+                    class="btn btn-primary"
                 >
-                    💬 WhatsApp
+                    💬 Chat on WhatsApp
                 </a>
 
             </div>
@@ -700,24 +1303,33 @@
 </main>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      PROFESSIONAL ORDER CONFIRMATION MODAL
-========================================================= -->
+===================================================== -->
 
 <div
     id="successModal"
     class="success-modal hidden"
+    aria-hidden="true"
 >
 
     <div class="success-overlay"></div>
 
-    <div class="success-card">
+
+    <div
+        class="success-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="successTitle"
+    >
+
 
         <button
             type="button"
             class="success-close"
             id="successCloseBtn"
-            aria-label="Close"
+            aria-label="Close confirmation"
         >
             &times;
         </button>
@@ -753,6 +1365,7 @@
         </div>
 
 
+
         <!-- BRAND -->
 
         <div class="success-brand">
@@ -760,20 +1373,24 @@
         </div>
 
 
-        <h2>
+        <h2 id="successTitle">
             Order Confirmed!
         </h2>
 
 
         <p class="success-message">
+
             Thank you for choosing Mana Masala.
             Your order has been successfully received.
+
         </p>
 
 
-        <!-- DETAILS -->
+
+        <!-- ORDER DETAILS -->
 
         <div class="success-details">
+
 
             <div class="success-detail-row">
 
@@ -786,6 +1403,7 @@
                 </strong>
 
             </div>
+
 
 
             <div class="success-detail-row">
@@ -801,6 +1419,7 @@
             </div>
 
 
+
             <div class="success-detail-row">
 
                 <span>
@@ -812,6 +1431,7 @@
                 </strong>
 
             </div>
+
 
 
             <div class="success-detail-row">
@@ -827,6 +1447,7 @@
             </div>
 
         </div>
+
 
 
         <!-- NOTICE -->
@@ -853,17 +1474,25 @@
         </div>
 
 
+
         <!-- WHATSAPP -->
 
         <a
-            href="https://wa.me/918367450301"
+            href="#"
+            id="whatsappOrderButton"
             target="_blank"
             rel="noopener"
             class="success-whatsapp"
         >
-            <span>💬</span>
+
+            <span>
+                💬
+            </span>
+
             Contact Us on WhatsApp
+
         </a>
+
 
 
         <!-- CONTINUE -->
@@ -886,11 +1515,13 @@
 </div>
 
 
-<!-- =========================================================
-     FLOATING CONTACT BUTTONS
-========================================================= -->
+
+<!-- =====================================================
+     FLOATING ACTION BUTTONS
+===================================================== -->
 
 <div class="floating-actions">
+
 
     <a
         href="tel:+918367450301"
@@ -899,6 +1530,7 @@
     >
         📞
     </a>
+
 
     <a
         href="https://wa.me/918367450301"
@@ -913,45 +1545,94 @@
 </div>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      FOOTER
-========================================================= -->
+===================================================== -->
 
-<footer class="footer">
+<footer class="site-footer">
 
-    <div class="container">
+    <div class="container footer-container">
+
 
         <div class="footer-brand">
-            🌶️ Mana Masala
+
+            <div class="brand-logo">
+                🌶️
+            </div>
+
+            <div>
+
+                <strong>
+                    Mana Masala
+                </strong>
+
+                <span>
+                    Homemade Chilli Powder
+                </span>
+
+            </div>
+
         </div>
 
-        <p>
-            Authentic Homemade Chilli Powder
-        </p>
 
-        <p class="copyright">
-            © 2026 Mana Masala. All rights reserved.
-        </p>
+        <div class="footer-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#product">
+                Product
+            </a>
+
+            <a href="#order">
+                Order
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-copy">
+
+            ©
+            <span id="year">
+                2026
+            </span>
+            Mana Masala.
+            All rights reserved.
+
+        </div>
 
     </div>
 
 </footer>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      SUPABASE
-========================================================= -->
+===================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
 
-<!-- =========================================================
-     MAIN SCRIPT
-========================================================= -->
+<!-- =====================================================
+     MAIN JAVASCRIPT
+     CACHE BUSTER: CHANGE VERSION WHEN UPDATING
+===================================================== -->
 
-<script src="script.js?v=105"></script>
+<script
+    src="script.js?v=106"
+></script>
+
 
 </body>
 
 </html>
-```

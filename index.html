@@ -22,13 +22,18 @@
 
     <title>Mana Masala | Homemade Chilli Powder</title>
 
+
+    <!-- FAVICON -->
+
     <link
         rel="icon"
         type="image/png"
         href="favicon.png"
     >
 
-    <!-- Poppins -->
+
+    <!-- GOOGLE FONT -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -45,11 +50,18 @@
         rel="stylesheet"
     >
 
-    <!-- Existing Theme -->
+
+    <!-- MAIN CSS -->
+
     <link
         rel="stylesheet"
         href="style.css?v=300"
     >
+
+
+    <!-- =====================================================
+         EXTRA STYLES
+    ====================================================== -->
 
     <style>
 
@@ -59,6 +71,7 @@
 
         .glimpse-section {
             padding: 80px 20px;
+
             background:
                 linear-gradient(
                     135deg,
@@ -66,56 +79,86 @@
                     #070000,
                     #1c0000
                 );
-            color: #fff;
+
+            color: #ffffff;
             text-align: center;
         }
 
+
         .glimpse-wrapper {
+            width: 100%;
             max-width: 1100px;
             margin: auto;
         }
+
 
         .glimpse-heading {
             margin-bottom: 35px;
         }
 
+
         .glimpse-heading h2 {
-            font-size: clamp(30px, 5vw, 48px);
             margin: 0 0 12px;
+
+            font-size: clamp(
+                30px,
+                5vw,
+                48px
+            );
+
             font-weight: 800;
         }
+
 
         .glimpse-heading p {
             max-width: 700px;
             margin: auto;
-            color: #ddd;
+
+            color: #dddddd;
+
+            line-height: 1.7;
         }
+
 
         .glimpse-video-card {
             position: relative;
+
+            width: 100%;
             max-width: 1000px;
+
             margin: auto;
+
             overflow: hidden;
-            border-radius: 24px;
+
             background: #000;
+
+            border-radius: 24px;
+
             box-shadow:
                 0 20px 60px rgba(0,0,0,.55),
                 0 0 35px rgba(120,0,0,.25);
         }
 
+
         .glimpse-video {
             display: block;
+
             width: 100%;
-            height: auto;
+
             aspect-ratio: 16 / 9;
+
             object-fit: cover;
         }
 
+
         .glimpse-caption {
             margin-top: 22px;
+
+            color: #eeeeee;
+
             font-size: 18px;
-            color: #eee;
         }
+
 
 
         /* =====================================================
@@ -123,106 +166,99 @@
         ===================================================== */
 
         .payment-section {
+
+            width: 100%;
             max-width: 500px;
-            margin: 0 auto 35px;
-            padding: 30px 20px;
+
+            margin:
+                0 auto 35px;
+
+            padding:
+                30px 20px;
+
             text-align: center;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(45,0,0,.85),
-                    rgba(8,0,0,.90)
+                    rgba(45,0,0,.90),
+                    rgba(8,0,0,.95)
                 );
 
-            border: 1px solid rgba(255,255,255,.12);
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
             border-radius: 24px;
 
             box-shadow:
-                0 20px 55px rgba(0,0,0,.45);
+                0 20px 55px
+                rgba(0,0,0,.45);
         }
+
 
         .payment-section h3 {
-            margin: 0 0 8px;
+
+            margin:
+                0 0 8px;
+
             font-size: 25px;
+
+            font-weight: 700;
         }
+
 
         .payment-section > p {
-            color: #ddd;
+
             margin-bottom: 20px;
+
+            color: #dddddd;
+
+            line-height: 1.6;
         }
 
+
         .payment-qr-card {
+
             display: inline-flex;
+
             padding: 12px;
-            background: #fff;
+
+            background: #ffffff;
+
             border-radius: 18px;
 
             box-shadow:
-                0 10px 30px rgba(0,0,0,.35);
+                0 10px 30px
+                rgba(0,0,0,.35);
         }
 
+
         .payment-qr {
+
             display: block;
+
             width: 270px;
+
             max-width: 100%;
+
             height: auto;
+
             border-radius: 8px;
         }
 
+
         .payment-note {
+
             margin-top: 18px;
+
             margin-bottom: 0 !important;
+
+            color: #cccccc !important;
+
             font-size: 14px;
-            color: #ccc !important;
         }
 
-
-        /* =====================================================
-           WHATSAPP FLOATING BUTTON
-        ===================================================== */
-
-        .whatsapp-float {
-            position: fixed;
-            right: 22px;
-            bottom: 22px;
-
-            width: 62px;
-            height: 62px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #25D366;
-            color: #fff;
-
-            border-radius: 50%;
-            text-decoration: none;
-
-            z-index: 99999;
-
-            box-shadow:
-                0 8px 25px rgba(0,0,0,.35),
-                0 0 20px rgba(37,211,102,.35);
-
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-
-            box-shadow:
-                0 12px 30px rgba(0,0,0,.45),
-                0 0 30px rgba(37,211,102,.55);
-        }
-
-        .whatsapp-icon {
-            width: 31px;
-            height: 31px;
-        }
 
 
         /* =====================================================
@@ -230,30 +266,166 @@
         ===================================================== */
 
         .payment-confirm {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
 
-            margin: 20px 0;
+            margin:
+                20px 0;
 
-            padding: 15px;
+            padding:
+                15px;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
             border-radius: 14px;
 
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.08);
+            color: #ffffff;
 
-            color: #fff;
             font-size: 14px;
 
             cursor: pointer;
         }
 
+
         .payment-confirm input {
+
             width: 19px;
             height: 19px;
+
+            flex-shrink: 0;
+
             cursor: pointer;
         }
+
+
+
+        /* =====================================================
+           FLOATING CONTACT BUTTONS
+        ===================================================== */
+
+        .floating-contact {
+
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 99999;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        .floating-btn {
+
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            text-decoration: none;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        /* CALL */
+
+        .call-float {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ff4b2b,
+                    #a80000
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.40),
+
+                0 0 20px
+                rgba(255,70,30,.30);
+        }
+
+
+        .call-float:hover {
+
+            transform:
+                scale(1.10);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.50),
+
+                0 0 30px
+                rgba(255,70,30,.50);
+        }
+
+
+
+        /* WHATSAPP */
+
+        .whatsapp-float {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #25D366,
+                    #128C7E
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.40),
+
+                0 0 20px
+                rgba(37,211,102,.30);
+        }
+
+
+        .whatsapp-float:hover {
+
+            transform:
+                scale(1.10);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.50),
+
+                0 0 30px
+                rgba(37,211,102,.50);
+        }
+
+
+        .floating-icon {
+
+            width: 28px;
+            height: 28px;
+
+            display: block;
+        }
+
 
 
         /* =====================================================
@@ -262,34 +434,71 @@
 
         @media (max-width: 600px) {
 
+
             .glimpse-section {
-                padding: 60px 15px;
+
+                padding:
+                    60px 15px;
             }
+
 
             .glimpse-video-card {
-                border-radius: 18px;
+
+                border-radius:
+                    18px;
             }
+
 
             .payment-section {
-                margin-left: 5px;
-                margin-right: 5px;
-                padding: 25px 15px;
+
+                margin-left:
+                    5px;
+
+                margin-right:
+                    5px;
+
+                padding:
+                    25px 15px;
             }
+
 
             .payment-qr {
-                width: 240px;
+
+                width:
+                    240px;
             }
 
-            .whatsapp-float {
-                width: 56px;
-                height: 56px;
-                right: 16px;
-                bottom: 16px;
+
+            .floating-contact {
+
+                right:
+                    15px;
+
+                bottom:
+                    15px;
+
+                gap:
+                    10px;
             }
 
-            .whatsapp-icon {
-                width: 28px;
-                height: 28px;
+
+            .floating-btn {
+
+                width:
+                    55px;
+
+                height:
+                    55px;
+            }
+
+
+            .floating-icon {
+
+                width:
+                    25px;
+
+                height:
+                    25px;
             }
 
         }
@@ -297,6 +506,7 @@
     </style>
 
 </head>
+
 
 
 <body>
@@ -310,13 +520,20 @@
 
         <div class="container nav-container">
 
+
             <a
                 href="#home"
                 class="logo"
             >
+
                 🌶️
-                <span>Mana Masala</span>
+
+                <span>
+                    Mana Masala
+                </span>
+
             </a>
+
 
 
             <nav class="nav">
@@ -358,10 +575,15 @@
 
 
     <!-- =====================================================
-         HERO
+         MAIN
     ===================================================== -->
 
     <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
         <section
             id="home"
@@ -373,9 +595,13 @@
 
                 <div class="hero-text">
 
+
                     <span class="hero-badge">
+
                         🌶️ Homemade • Fresh • Authentic
+
                     </span>
+
 
 
                     <h1>
@@ -391,6 +617,7 @@
                     </h1>
 
 
+
                     <p>
 
                         Experience the rich colour, aroma and
@@ -398,6 +625,7 @@
                         chilli powder from Mana Masala.
 
                     </p>
+
 
 
                     <div class="hero-price">
@@ -413,22 +641,30 @@
                     </div>
 
 
+
                     <div class="hero-buttons">
+
 
                         <a
                             href="#order"
                             class="btn btn-primary"
                         >
+
                             🌶️ Order Now
+
                         </a>
+
 
 
                         <a
                             href="#glimpse"
                             class="btn btn-secondary"
                         >
+
                             ▶ Watch Glimpse
+
                         </a>
+
 
                     </div>
 
@@ -445,6 +681,7 @@
                     >
 
                 </div>
+
 
             </div>
 
@@ -467,18 +704,26 @@
                 <div class="glimpse-heading">
 
                     <h2>
-                        🌶️ Mana Masala — Taste the Tradition
+
+                        🌶️ Mana Masala
+                        — Taste the Tradition
+
                     </h2>
 
+
                     <p>
+
                         A glimpse into the authentic taste and
                         traditional preparation behind Mana Masala.
+
                     </p>
 
                 </div>
 
 
+
                 <div class="glimpse-video-card">
+
 
                     <video
                         class="glimpse-video"
@@ -495,11 +740,14 @@
                             type="video/mp4"
                         >
 
-                        Your browser does not support HTML5 video.
+                        Your browser does not support
+                        HTML5 video.
 
                     </video>
 
+
                 </div>
+
 
 
                 <div class="glimpse-caption">
@@ -507,6 +755,7 @@
                     Pure chilli. Authentic flavour. ❤️
 
                 </div>
+
 
             </div>
 
@@ -528,18 +777,27 @@
 
                 <div class="section-heading">
 
+
                     <span>
                         Our Product
                     </span>
 
+
                     <h2>
-                        Premium Homemade Chilli Powder
+
+                        Premium Homemade
+                        Chilli Powder
+
                     </h2>
 
+
                     <p>
+
                         Made with carefully selected chillies
                         for authentic colour, aroma and flavour.
+
                     </p>
+
 
                 </div>
 
@@ -562,16 +820,23 @@
 
                     <div class="product-info">
 
+
                         <h3>
-                            Mana Masala Homemade Chilli Powder
+
+                            Mana Masala
+                            Homemade Chilli Powder
+
                         </h3>
 
 
                         <p>
+
                             A traditional homemade chilli powder
                             prepared with care for your everyday
                             cooking.
+
                         </p>
+
 
 
                         <div class="product-price">
@@ -587,35 +852,46 @@
                         </div>
 
 
+
                         <div class="product-features">
+
 
                             <div>
                                 🌶️ Authentic Taste
                             </div>
 
+
                             <div>
                                 🌱 Carefully Selected Chillies
                             </div>
+
 
                             <div>
                                 ✨ Freshly Prepared
                             </div>
 
+
                             <div>
                                 ❤️ Homemade Quality
                             </div>
 
+
                         </div>
+
 
 
                         <a
                             href="#order"
                             class="btn btn-primary"
                         >
+
                             Order Now
+
                         </a>
 
+
                     </div>
+
 
                 </div>
 
@@ -629,20 +905,25 @@
              FEATURES
         ================================================== -->
 
-        <section class="section features-section">
+        <section
+            class="section features-section"
+        >
 
             <div class="container">
 
 
                 <div class="section-heading">
 
+
                     <span>
                         Why Mana Masala?
                     </span>
 
+
                     <h2>
                         Made With Care
                     </h2>
+
 
                 </div>
 
@@ -657,13 +938,17 @@
                             🌶️
                         </div>
 
+
                         <h3>
                             Quality Chillies
                         </h3>
 
+
                         <p>
+
                             Carefully selected chillies for
                             consistent flavour and colour.
+
                         </p>
 
                     </div>
@@ -676,13 +961,17 @@
                             🏠
                         </div>
 
+
                         <h3>
                             Homemade
                         </h3>
 
+
                         <p>
+
                             Prepared with the care and
                             authenticity of homemade food.
+
                         </p>
 
                     </div>
@@ -695,13 +984,17 @@
                             ✨
                         </div>
 
+
                         <h3>
                             Fresh
                         </h3>
 
+
                         <p>
+
                             Freshly prepared chilli powder
                             for better taste and aroma.
+
                         </p>
 
                     </div>
@@ -714,16 +1007,21 @@
                             ❤️
                         </div>
 
+
                         <h3>
                             Trusted Quality
                         </h3>
 
+
                         <p>
+
                             Our goal is to deliver authentic
                             homemade flavour to every customer.
+
                         </p>
 
                     </div>
+
 
                 </div>
 
@@ -747,17 +1045,21 @@
 
                 <div class="section-heading">
 
+
                     <span>
                         Place Your Order
                     </span>
+
 
                     <h2>
                         Order Mana Masala
                     </h2>
 
+
                     <p>
                         Minimum order quantity is 10 kg.
                     </p>
+
 
                 </div>
 
@@ -765,18 +1067,26 @@
 
                 <!-- PAYMENT QR -->
 
+
                 <div class="payment-section">
+
 
                     <h3>
                         📱 Scan & Pay
                     </h3>
 
+
                     <p>
-                        Scan the QR code below to make your payment.
+
+                        Scan the QR code below to make
+                        your payment.
+
                     </p>
 
 
+
                     <div class="payment-qr-card">
+
 
                         <img
                             src="payment-qr.jpeg"
@@ -784,15 +1094,18 @@
                             class="payment-qr"
                         >
 
+
                     </div>
+
 
 
                     <p class="payment-note">
 
-                        After making the payment, complete the
-                        order form below.
+                        After making the payment, complete
+                        the order form below.
 
                     </p>
+
 
                 </div>
 
@@ -800,26 +1113,35 @@
 
                 <!-- ORDER CARD -->
 
+
                 <div class="order-card">
+
 
                     <form id="orderForm">
 
 
                         <!-- NAME -->
 
+
                         <div class="form-group">
 
+
                             <label for="customerName">
+
                                 Full Name
+
                             </label>
+
 
                             <input
                                 type="text"
                                 id="customerName"
                                 name="customerName"
                                 placeholder="Enter your name"
+                                autocomplete="name"
                                 required
                             >
+
 
                         </div>
 
@@ -827,11 +1149,16 @@
 
                         <!-- PHONE -->
 
+
                         <div class="form-group">
 
+
                             <label for="phone">
+
                                 Mobile Number
+
                             </label>
+
 
                             <input
                                 type="tel"
@@ -839,8 +1166,11 @@
                                 name="phone"
                                 placeholder="Enter your mobile number"
                                 maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
                                 required
                             >
+
 
                         </div>
 
@@ -848,19 +1178,26 @@
 
                         <!-- ADDRESS -->
 
+
                         <div class="form-group">
 
+
                             <label for="address">
+
                                 Delivery Address
+
                             </label>
+
 
                             <textarea
                                 id="address"
                                 name="address"
                                 rows="4"
                                 placeholder="Enter complete delivery address"
+                                autocomplete="street-address"
                                 required
                             ></textarea>
+
 
                         </div>
 
@@ -868,21 +1205,29 @@
 
                         <!-- QUANTITY -->
 
+
                         <div class="form-group">
 
+
                             <label for="quantity">
+
                                 Quantity (kg)
+
                             </label>
+
 
 
                             <div class="quantity-control">
 
+
                                 <button
                                     type="button"
                                     id="minusBtn"
+                                    aria-label="Decrease quantity"
                                 >
                                     −
                                 </button>
+
 
 
                                 <input
@@ -896,14 +1241,18 @@
                                 >
 
 
+
                                 <button
                                     type="button"
                                     id="plusBtn"
+                                    aria-label="Increase quantity"
                                 >
                                     +
                                 </button>
 
+
                             </div>
+
 
                         </div>
 
@@ -911,16 +1260,23 @@
 
                         <!-- PAYMENT CONFIRMATION -->
 
+
                         <label class="payment-confirm">
+
 
                             <input
                                 type="checkbox"
                                 id="paymentConfirmed"
                             >
 
+
                             <span>
-                                I have made the payment using the QR code.
+
+                                I have made the payment
+                                using the QR code.
+
                             </span>
+
 
                         </label>
 
@@ -928,7 +1284,9 @@
 
                         <!-- TOTAL -->
 
+
                         <div class="order-total">
+
 
                             <span>
                                 Total Amount
@@ -936,14 +1294,18 @@
 
 
                             <strong id="totalAmount">
+
                                 ₹3,500
+
                             </strong>
+
 
                         </div>
 
 
 
-                        <!-- ORDER MESSAGE -->
+                        <!-- MESSAGE -->
+
 
                         <div
                             id="orderMessage"
@@ -954,18 +1316,23 @@
 
                         <!-- SUBMIT -->
 
+
                         <button
                             type="submit"
                             id="orderSubmit"
                             class="btn btn-primary order-submit"
                         >
+
                             🌶️ Place Order
+
                         </button>
 
 
                     </form>
 
+
                 </div>
+
 
             </div>
 
@@ -987,18 +1354,24 @@
 
                 <div class="section-heading">
 
+
                     <span>
                         Delivery
                     </span>
+
 
                     <h2>
                         Freshness Delivered
                     </h2>
 
+
                     <p>
+
                         We carefully prepare and pack your order
                         before delivery.
+
                     </p>
+
 
                 </div>
 
@@ -1009,37 +1382,49 @@
 
                     <div class="delivery-card">
 
+
                         <div>
                             📦
                         </div>
+
 
                         <h3>
                             Safe Packing
                         </h3>
 
+
                         <p>
+
                             Your chilli powder is packed carefully
                             for safe delivery.
+
                         </p>
+
 
                     </div>
 
 
 
                     <div class="delivery-card">
+
 
                         <div>
                             🚚
                         </div>
 
+
                         <h3>
                             Delivery
                         </h3>
 
+
                         <p>
+
                             Orders are prepared and dispatched
                             according to availability.
+
                         </p>
+
 
                     </div>
 
@@ -1047,20 +1432,27 @@
 
                     <div class="delivery-card">
 
+
                         <div>
                             ❤️
                         </div>
+
 
                         <h3>
                             Customer Care
                         </h3>
 
+
                         <p>
+
                             Contact us whenever you need help
                             with your order.
+
                         </p>
 
+
                     </div>
+
 
                 </div>
 
@@ -1084,18 +1476,25 @@
 
                 <div class="about-content">
 
+
                     <div>
+
 
                         <span>
                             About Mana Masala
                         </span>
 
+
                         <h2>
+
                             Traditional Taste,
                             Homemade With Love
+
                         </h2>
 
+
                     </div>
+
 
 
                     <p>
@@ -1107,6 +1506,7 @@
                         preparation.
 
                     </p>
+
 
                 </div>
 
@@ -1130,13 +1530,16 @@
 
                 <div class="section-heading">
 
+
                     <span>
                         Contact Us
                     </span>
 
+
                     <h2>
                         We're Here to Help
                     </h2>
+
 
                 </div>
 
@@ -1144,26 +1547,62 @@
 
                 <div class="contact-card">
 
+
                     <p>
+
                         Have a question about our chilli powder
                         or your order?
+
                     </p>
 
 
-                    <a
-                        href="https://wa.me/918367450301"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn btn-primary"
+
+                    <div
+                        style="
+                            display:flex;
+                            flex-wrap:wrap;
+                            justify-content:center;
+                            gap:12px;
+                        "
                     >
-                        💬 WhatsApp Us
-                    </a>
+
+
+                        <!-- CALL -->
+
+                        <a
+                            href="tel:+918367450301"
+                            class="btn btn-primary"
+                        >
+
+                            📞 Call Us
+
+                        </a>
+
+
+
+                        <!-- WHATSAPP -->
+
+                        <a
+                            href="https://wa.me/918367450301"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-secondary"
+                        >
+
+                            💬 WhatsApp
+
+                        </a>
+
+
+                    </div>
+
 
                 </div>
 
             </div>
 
         </section>
+
 
     </main>
 
@@ -1188,32 +1627,50 @@
         "
     >
 
+
         <div
             class="success-modal-content"
             style="
                 width:100%;
                 max-width:450px;
-                background:linear-gradient(145deg,#260000,#0b0000);
+                background:
+                    linear-gradient(
+                        145deg,
+                        #260000,
+                        #0b0000
+                    );
                 color:white;
-                border:1px solid rgba(255,255,255,.12);
+                border:
+                    1px solid
+                    rgba(255,255,255,.12);
                 border-radius:24px;
                 padding:35px 25px;
                 text-align:center;
-                box-shadow:0 25px 80px rgba(0,0,0,.6);
+                box-shadow:
+                    0 25px 80px
+                    rgba(0,0,0,.6);
             "
         >
 
-            <div style="font-size:55px;">
+
+            <div
+                style="
+                    font-size:55px;
+                "
+            >
                 ✅
             </div>
+
 
             <h2>
                 Order Placed!
             </h2>
 
+
             <p>
                 Thank you for ordering from Mana Masala.
             </p>
+
 
             <p>
                 Your Order Reference:
@@ -1239,6 +1696,7 @@
                 Continue
             </button>
 
+
         </div>
 
     </div>
@@ -1246,36 +1704,135 @@
 
 
     <!-- =====================================================
-         FLOATING WHATSAPP
+         FLOATING CALL + WHATSAPP
     ===================================================== -->
 
-    <a
-        href="https://wa.me/918367450301?text=Hello%20Mana%20Masala%2C%20I%20want%20to%20know%20more%20about%20your%20homemade%20chilli%20powder."
-        class="whatsapp-float"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with Mana Masala on WhatsApp"
-    >
+    <div class="floating-contact">
 
-        <svg
-            class="whatsapp-icon"
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
+
+        <!-- CALL BUTTON -->
+
+        <a
+            href="tel:+918367450301"
+            class="floating-btn call-float"
+            aria-label="Call Mana Masala"
+            title="Call Mana Masala"
         >
 
-            <path
-                fill="#ffffff"
-                d="M19.11 17.31c-.27-.14-1.59-.78-1.84-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.79-.7-1.33-1.56-1.49-1.83-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3s.98 2.67 1.12 2.85c.14.18 1.92 2.93 4.65 4.11.65.28 1.16.45 1.56.57.65.21 1.24.18 1.71.11.52-.08 1.59-.65 1.81-1.28.22-.63.22-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"
-            />
 
-            <path
-                fill="#ffffff"
-                d="M16.01 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.26.59 4.46 1.71 6.4L3.12 28.8l6.54-1.72a12.74 12.74 0 0 0 6.35 1.68h.01c7.06 0 12.8-5.74 12.8-12.8S23.08 3.2 16.01 3.2zm0 23.35h-.01c-1.98 0-3.92-.53-5.62-1.54l-.4-.24-3.88 1.02 1.04-3.78-.26-.39a10.55 10.55 0 1 1 9.13 4.93z"
-            />
+            <svg
+                class="floating-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+            >
 
-        </svg>
+                <path
+                    d="
+                    M6.62 10.79
+                    C8.06 13.62 10.38 15.94 13.21 17.38
+                    L15.41 15.18
+                    C15.69 14.90 16.10 14.82 16.45 14.93
+                    C17.57 15.30 18.76 15.50 20 15.50
+                    C20.55 15.50 21 15.95 21 16.50
+                    V20
+                    C21 20.55 20.55 21 20 21
+                    C10.61 21 3 13.39 3 4
+                    C3 3.45 3.45 3 4 3
+                    H7.5
+                    C8.05 3 8.5 3.45 8.5 4
+                    C8.5 5.24 8.70 6.43 9.07 7.55
+                    C9.18 7.90 9.10 8.31 8.82 8.59
+                    L6.62 10.79Z
+                    "
+                    fill="white"
+                />
 
-    </a>
+            </svg>
+
+
+        </a>
+
+
+
+        <!-- WHATSAPP BUTTON -->
+
+        <a
+            href="https://wa.me/918367450301?text=Hello%20Mana%20Masala%2C%20I%20want%20to%20know%20more%20about%20your%20homemade%20chilli%20powder."
+            class="floating-btn whatsapp-float"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with Mana Masala on WhatsApp"
+            title="WhatsApp Mana Masala"
+        >
+
+
+            <svg
+                class="floating-icon"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+            >
+
+                <path
+                    fill="#ffffff"
+                    d="
+                    M19.11 17.31
+                    c-.27-.14-1.59-.78-1.84-.87
+                    -.25-.09-.43-.14-.61.14
+                    -.18.27-.70.87-.86 1.05
+                    -.16.18-.32.20-.59.07
+                    -.27-.14-1.13-.42-2.15-1.34
+                    -.79-.70-1.33-1.56-1.49-1.83
+                    -.16-.27-.02-.42.12-.56
+                    .12-.12.27-.32.41-.48
+                    .14-.16.18-.27.27-.45
+                    .09-.18.05-.34-.02-.48
+                    -.07-.14-.61-1.47-.84-2.01
+                    -.22-.53-.45-.46-.61-.47
+                    h-.52c-.18 0-.48.07-.73.34
+                    -.25.27-.96.94-.96 2.30
+                    s.98 2.67 1.12 2.85
+                    c.14.18 1.92 2.93 4.65 4.11
+                    .65.28 1.16.45 1.56.57
+                    .65.21 1.24.18 1.71.11
+                    .52-.08 1.59-.65 1.81-1.28
+                    .22-.63.22-1.17.16-1.28
+                    -.07-.11-.25-.18-.52-.32Z
+                    "
+                />
+
+
+                <path
+                    fill="#ffffff"
+                    d="
+                    M16.01 3.2
+                    c-7.06 0-12.8 5.74-12.8 12.8
+                    0 2.26.59 4.46 1.71 6.4
+                    L3.12 28.8
+                    l6.54-1.72
+                    a12.74 12.74 0 0 0 6.35 1.68
+                    h.01
+                    c7.06 0 12.8-5.74 12.8-12.8
+                    S23.08 3.2 16.01 3.2Zm0 23.35
+                    h-.01
+                    c-1.98 0-3.92-.53-5.62-1.54
+                    l-.4-.24
+                    -3.88 1.02
+                    1.04-3.78
+                    -.26-.39
+                    a10.55 10.55 0 1 1 9.13 4.93Z
+                    "
+                />
+
+            </svg>
+
+
+        </a>
+
+
+    </div>
 
 
 
@@ -1285,60 +1842,77 @@
 
     <footer class="footer">
 
+
         <div class="container">
+
 
             <div class="footer-content">
 
 
                 <div class="footer-brand">
 
+
                     <h3>
                         🌶️ Mana Masala
                     </h3>
+
 
                     <p>
                         Authentic Homemade Chilli Powder
                     </p>
 
+
                 </div>
 
 
+
                 <div class="footer-links">
+
 
                     <a href="#home">
                         Home
                     </a>
 
+
                     <a href="#glimpse">
                         Glimpse
                     </a>
+
 
                     <a href="#product">
                         Product
                     </a>
 
+
                     <a href="#order">
                         Order
                     </a>
+
 
                     <a href="#delivery">
                         Delivery
                     </a>
 
+
                     <a href="#about">
                         About
                     </a>
+
 
                     <a href="#contact">
                         Contact
                     </a>
 
+
                 </div>
+
 
             </div>
 
 
+
             <div class="footer-bottom">
+
 
                 <p>
 
@@ -1349,7 +1923,9 @@
 
                 </p>
 
+
             </div>
+
 
         </div>
 
@@ -1368,7 +1944,7 @@
 
 
     <!-- =====================================================
-         EXISTING ORDER SCRIPT
+         EXISTING SCRIPT
     ===================================================== -->
 
     <script

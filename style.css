@@ -3107,3 +3107,577 @@ textarea:focus-visible {
 
 }
 ```
+/* =========================================================
+   🌶️ MANA MASALA - PREMIUM ANIMATIONS
+   Visual effects only
+   Does NOT change order/backend functionality
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. GLOBAL SMOOTH SCROLL
+--------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ---------------------------------------------------------
+   2. PAGE FADE-IN
+--------------------------------------------------------- */
+
+body {
+    animation: pageFadeIn 1s ease-out;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   3. HEADER ANIMATION
+--------------------------------------------------------- */
+
+.site-header {
+    animation: headerDrop 0.8s ease-out;
+}
+
+@keyframes headerDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   4. LOGO HOVER
+--------------------------------------------------------- */
+
+.logo img {
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.08) rotate(-2deg);
+    filter: drop-shadow(0 0 14px rgba(255, 60, 30, 0.45));
+}
+
+
+/* ---------------------------------------------------------
+   5. NAVIGATION HOVER
+--------------------------------------------------------- */
+
+.main-nav a {
+    position: relative;
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    background: currentColor;
+}
+
+.main-nav a:hover {
+    transform: translateY(-2px);
+}
+
+.main-nav a:hover::after {
+    width: 70%;
+}
+
+
+/* ---------------------------------------------------------
+   6. HERO CONTENT
+--------------------------------------------------------- */
+
+.hero-content {
+    animation: heroContent 1s ease-out;
+}
+
+@keyframes heroContent {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   7. HERO PRODUCT
+--------------------------------------------------------- */
+
+.hero-product {
+    animation: heroProduct 1.1s ease-out;
+}
+
+@keyframes heroProduct {
+    from {
+        opacity: 0;
+        transform: translateX(35px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   8. FLOATING PRODUCT IMAGE
+--------------------------------------------------------- */
+
+.hero-product-card img {
+    animation: productFloat 4s ease-in-out infinite;
+}
+
+@keyframes productFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   9. PRICE BADGE
+--------------------------------------------------------- */
+
+.price-badge {
+    animation: pricePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pricePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   10. BUTTON ANIMATION
+--------------------------------------------------------- */
+
+.primary-button,
+.secondary-button,
+.order-submit-button,
+.contact-button,
+.whatsapp-confirm-button,
+.continue-button {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.order-submit-button:hover,
+.contact-button:hover,
+.whatsapp-confirm-button:hover,
+.continue-button:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.primary-button:active,
+.secondary-button:active,
+.order-submit-button:active,
+.contact-button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+
+/* ---------------------------------------------------------
+   11. SECTION HEADINGS
+--------------------------------------------------------- */
+
+.section-heading {
+    animation: headingReveal 0.9s ease-out both;
+}
+
+@keyframes headingReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   12. PRODUCT IMAGE HOVER
+--------------------------------------------------------- */
+
+.product-image-card {
+    overflow: hidden;
+}
+
+.product-image-card img {
+    transition:
+        transform 0.7s ease,
+        filter 0.7s ease;
+}
+
+.product-image-card:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.06);
+}
+
+
+/* ---------------------------------------------------------
+   13. PRODUCT HIGHLIGHT CARDS
+--------------------------------------------------------- */
+
+.highlight-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.highlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+}
+
+
+/* ---------------------------------------------------------
+   14. WHY CARDS
+--------------------------------------------------------- */
+
+.why-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+.why-icon {
+    transition:
+        transform 0.4s ease;
+}
+
+.why-card:hover .why-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+
+/* ---------------------------------------------------------
+   15. GLIMPSES VIDEO CARD
+--------------------------------------------------------- */
+
+.glimpses-video-card {
+    overflow: hidden;
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.glimpses-video-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.glimpses-video {
+    display: block;
+    width: 100%;
+    transition:
+        transform 0.8s ease,
+        filter 0.8s ease;
+}
+
+.glimpses-video-card:hover .glimpses-video {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+}
+
+
+/* ---------------------------------------------------------
+   16. ORDER CARD
+--------------------------------------------------------- */
+
+.order-card {
+    animation: orderCardReveal 0.9s ease-out;
+}
+
+@keyframes orderCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   17. FORM INPUT FOCUS
+--------------------------------------------------------- */
+
+.form-group input,
+.form-group textarea,
+.quantity-control input {
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.quantity-control input:focus {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 0 3px rgba(255, 60, 30, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   18. QUANTITY BUTTONS
+--------------------------------------------------------- */
+
+#minusBtn,
+#plusBtn {
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+#minusBtn:hover,
+#plusBtn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.15);
+}
+
+#minusBtn:active,
+#plusBtn:active {
+    transform: scale(0.92);
+}
+
+
+/* ---------------------------------------------------------
+   19. TOTAL AMOUNT
+--------------------------------------------------------- */
+
+#totalAmount {
+    display: inline-block;
+    transition:
+        transform 0.25s ease;
+}
+
+.total-box:hover #totalAmount {
+    transform: scale(1.06);
+}
+
+
+/* ---------------------------------------------------------
+   20. CONTACT CARD
+--------------------------------------------------------- */
+
+.contact-card {
+    transition:
+        transform 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ---------------------------------------------------------
+   21. FLOATING WHATSAPP / CALL BUTTONS
+--------------------------------------------------------- */
+
+.floating-buttons a {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.floating-buttons a:hover {
+    transform: scale(1.12) translateY(-3px);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.floating-whatsapp {
+    animation: whatsappPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes whatsappPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(37, 211, 102, 0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(37, 211, 102, 0.08);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   22. FOOTER
+--------------------------------------------------------- */
+
+.footer-links a {
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.footer-links a:hover {
+    transform: translateX(5px);
+    opacity: 0.8;
+}
+
+
+/* ---------------------------------------------------------
+   23. SUCCESS MODAL
+--------------------------------------------------------- */
+
+.success-modal-content {
+    animation: modalPop 0.45s ease-out;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   24. SUCCESS ICON
+--------------------------------------------------------- */
+
+.success-icon {
+    animation: successIcon 0.7s ease-out;
+}
+
+@keyframes successIcon {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   25. MOBILE ANIMATION ADJUSTMENTS
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .hero-content {
+        animation-name: mobileHero;
+    }
+
+    .hero-product {
+        animation-name: mobileProduct;
+    }
+
+    .hero-product-card img {
+        animation-duration: 5s;
+    }
+
+    .why-card:hover,
+    .highlight-card:hover,
+    .contact-card:hover,
+    .glimpses-video-card:hover {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   26. ACCESSIBILITY
+   Respect users who prefer reduced motion
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}

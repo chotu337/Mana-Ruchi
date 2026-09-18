@@ -15,7 +15,7 @@ const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJh";
+    "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
 
 const PRICE_PER_KG = 350;

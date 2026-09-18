@@ -2836,3 +2836,143 @@ textarea:focus-visible {
     }
 
 }
+/* =========================================================
+   🌶️ MANA MASALA GLIMPSES
+========================================================= */
+
+.glimpses-section {
+    position: relative;
+    padding: 90px 0;
+    overflow: hidden;
+}
+
+
+/* SECTION HEADING */
+
+.glimpses-section .section-heading {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 40px;
+}
+
+.glimpses-section .section-heading span {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #ff6b35;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.glimpses-section .section-heading h2 {
+    margin: 0 0 12px;
+
+    color: #ffffff;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+}
+
+.glimpses-section .section-heading p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* VIDEO GLASS CARD */
+
+.glimpses-video-card {
+    position: relative;
+
+    width: min(1000px, 100%);
+    margin: 0 auto;
+
+    padding: 8px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(130, 0, 0, 0.55),
+            rgba(10, 0, 0, 0.80)
+        );
+
+    border:
+        1px solid rgba(255, 255, 255, 0.14);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 50px rgba(150, 0, 0, 0.16);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+.glimpses-video-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 35px 90px rgba(0, 0, 0, 0.65),
+        0 0 65px rgba(180, 0, 0, 0.22);
+}
+
+
+/* VIDEO */
+
+.glimpses-video {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: 650px;
+
+    object-fit: cover;
+
+    border-radius: 21px;
+
+    background: #050000;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+    .glimpses-section {
+        padding: 65px 0;
+    }
+
+    .glimpses-section .section-heading {
+        margin-bottom: 28px;
+    }
+
+    .glimpses-section .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .glimpses-section .section-heading p {
+        font-size: 14px;
+    }
+
+    .glimpses-video-card {
+        padding: 5px;
+        border-radius: 20px;
+    }
+
+    .glimpses-video {
+        border-radius: 16px;
+    }
+
+}

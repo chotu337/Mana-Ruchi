@@ -3681,3 +3681,191 @@ body {
     }
 
 }
+/* =========================================================
+   🌶️ MANA MASALA - SCROLL REVEAL ANIMATIONS
+========================================================= */
+
+.product-section,
+.why-section,
+.glimpses-section,
+.order-section,
+.contact-section {
+    animation: sectionReveal 1s ease both;
+}
+
+@keyframes sectionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Product cards stagger */
+
+.product-highlights .highlight-card:nth-child(1) {
+    animation: cardReveal 0.7s ease 0.1s both;
+}
+
+.product-highlights .highlight-card:nth-child(2) {
+    animation: cardReveal 0.7s ease 0.2s both;
+}
+
+.product-highlights .highlight-card:nth-child(3) {
+    animation: cardReveal 0.7s ease 0.3s both;
+}
+
+.product-highlights .highlight-card:nth-child(4) {
+    animation: cardReveal 0.7s ease 0.4s both;
+}
+
+
+/* Why cards stagger */
+
+.why-grid .why-card:nth-child(1) {
+    animation: cardReveal 0.7s ease 0.1s both;
+}
+
+.why-grid .why-card:nth-child(2) {
+    animation: cardReveal 0.7s ease 0.2s both;
+}
+
+.why-grid .why-card:nth-child(3) {
+    animation: cardReveal 0.7s ease 0.3s both;
+}
+
+.why-grid .why-card:nth-child(4) {
+    animation: cardReveal 0.7s ease 0.4s both;
+}
+
+
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+   🌶️ PREMIUM GLOW
+========================================================= */
+
+.hero-section::before,
+.product-section::before,
+.glimpses-section::before {
+    animation: ambientGlow 7s ease-in-out infinite;
+}
+
+@keyframes ambientGlow {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   🌶️ GLIMPSES VIDEO GLOW
+========================================================= */
+
+.glimpses-video-card {
+    position: relative;
+}
+
+.glimpses-video-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow:
+        inset 0 0 40px rgba(255, 60, 30, 0.08);
+    animation: videoGlow 4s ease-in-out infinite;
+}
+
+@keyframes videoGlow {
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   🌶️ PRICE SHINE
+========================================================= */
+
+.price-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.price-badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    transform: skewX(-20deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+    );
+    animation: priceShine 4s ease-in-out infinite;
+}
+
+@keyframes priceShine {
+    0% {
+        left: -120%;
+    }
+
+    45%,
+    100% {
+        left: 140%;
+    }
+}
+
+
+/* =========================================================
+   🌶️ MOBILE OPTIMIZATION
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .product-section,
+    .why-section,
+    .glimpses-section,
+    .order-section,
+    .contact-section {
+        animation-duration: 0.7s;
+    }
+
+    .price-badge::after {
+        animation-duration: 5s;
+    }
+
+}

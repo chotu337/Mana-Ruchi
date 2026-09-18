@@ -3869,3 +3869,269 @@ body {
     }
 
 }
+/* =========================================================
+   🌶️ MANA MASALA - FLOATING SPICE PARTICLES
+   Visual-only animation
+========================================================= */
+
+.hero-section,
+.product-section,
+.why-section,
+.glimpses-section,
+.order-section,
+.contact-section {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Particle layer */
+
+.hero-section::after,
+.product-section::after,
+.why-section::after,
+.glimpses-section::after,
+.order-section::after,
+.contact-section::after {
+    content: "🌶️   ✦   •   🌶️   ✦   •   🌶️";
+    position: absolute;
+
+    top: 15%;
+    left: -20%;
+
+    width: 140%;
+    height: 100%;
+
+    font-size: 18px;
+    letter-spacing: 80px;
+    line-height: 100px;
+
+    opacity: 0.045;
+
+    pointer-events: none;
+
+    white-space: normal;
+
+    transform: rotate(-8deg);
+
+    animation: spiceParticles 25s linear infinite;
+}
+
+
+/* Floating movement */
+
+@keyframes spiceParticles {
+
+    0% {
+        transform:
+            translate3d(-5%, 0, 0)
+            rotate(-8deg);
+    }
+
+    25% {
+        transform:
+            translate3d(5%, -15px, 0)
+            rotate(-5deg);
+    }
+
+    50% {
+        transform:
+            translate3d(10%, 5px, 0)
+            rotate(-10deg);
+    }
+
+    75% {
+        transform:
+            translate3d(3%, -20px, 0)
+            rotate(-6deg);
+    }
+
+    100% {
+        transform:
+            translate3d(-5%, 0, 0)
+            rotate(-8deg);
+    }
+}
+
+
+/* =========================================================
+   🌶️ EXTRA AMBIENT PARTICLES
+========================================================= */
+
+.hero-section::before,
+.product-section::before,
+.glimpses-section::before {
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ✨ GLASS LIGHT SWEEP
+========================================================= */
+
+.hero-product-card,
+.product-image-card,
+.order-card,
+.contact-card,
+.glimpses-video-card {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.hero-product-card::after,
+.product-image-card::after,
+.order-card::after,
+.contact-card::after,
+.glimpses-video-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -100%;
+    left: -60%;
+
+    width: 35%;
+    height: 300%;
+
+    transform: rotate(25deg);
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.055),
+        transparent
+    );
+
+    pointer-events: none;
+
+    animation: glassSweep 7s ease-in-out infinite;
+}
+
+
+@keyframes glassSweep {
+
+    0% {
+        left: -60%;
+    }
+
+    35%,
+    100% {
+        left: 140%;
+    }
+
+}
+
+
+/* =========================================================
+   🌶️ HERO TEXT GLOW
+========================================================= */
+
+.hero-content h1 {
+    animation:
+        heroTitleGlow 4s ease-in-out infinite;
+}
+
+
+@keyframes heroTitleGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 0 rgba(255, 70, 30, 0);
+    }
+
+    50% {
+        text-shadow:
+            0 0 25px rgba(255, 70, 30, 0.22);
+    }
+
+}
+
+
+/* =========================================================
+   ✨ SECTION TAG ANIMATION
+========================================================= */
+
+.section-heading span,
+.hero-tag,
+.product-label {
+    display: inline-block;
+
+    animation:
+        tagFloat 3s ease-in-out infinite;
+}
+
+
+@keyframes tagFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+
+}
+
+
+/* =========================================================
+   📱 MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .hero-section::after,
+    .product-section::after,
+    .why-section::after,
+    .glimpses-section::after,
+    .order-section::after,
+    .contact-section::after {
+
+        font-size: 13px;
+        letter-spacing: 45px;
+        line-height: 75px;
+
+        opacity: 0.035;
+    }
+
+    .hero-product-card::after,
+    .product-image-card::after,
+    .order-card::after,
+    .contact-card::after,
+    .glimpses-video-card::after {
+
+        animation-duration: 9s;
+    }
+
+}
+
+
+/* =========================================================
+   ♿ REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-section::after,
+    .product-section::after,
+    .why-section::after,
+    .glimpses-section::after,
+    .order-section::after,
+    .contact-section::after,
+    .hero-product-card::after,
+    .product-image-card::after,
+    .order-card::after,
+    .contact-card::after,
+    .glimpses-video-card::after,
+    .hero-content h1,
+    .section-heading span,
+    .hero-tag,
+    .product-label {
+
+        animation: none !important;
+    }
+
+}

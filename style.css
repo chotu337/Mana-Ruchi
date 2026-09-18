@@ -4135,3 +4135,229 @@ body {
     }
 
 }
+/* =========================================================
+   🌶️ MANA MASALA - PREMIUM 3D PRODUCT EFFECT
+   Applies to masala.png product images
+   Visual only - no JS/backend changes
+========================================================= */
+
+
+/* 3D perspective container */
+
+.hero-product,
+.product-image-card {
+    perspective: 1200px;
+}
+
+
+/* Product card */
+
+.hero-product-card,
+.product-image-card {
+    transform-style: preserve-3d;
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.6s ease;
+}
+
+
+/* Main product image */
+
+.hero-product-card img,
+.product-image-card img {
+    position: relative;
+    z-index: 2;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.6s ease;
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   ✨ PREMIUM HOVER
+========================================================= */
+
+.hero-product-card:hover,
+.product-image-card:hover {
+    transform:
+        rotateX(5deg)
+        rotateY(-7deg)
+        translateY(-8px)
+        scale(1.015);
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, 0.42),
+        0 0 35px rgba(255, 55, 25, 0.12);
+}
+
+
+.hero-product-card:hover img,
+.product-image-card:hover img {
+    transform:
+        translateZ(35px)
+        scale(1.035);
+
+    filter:
+        brightness(1.07)
+        saturate(1.08);
+}
+
+
+/* =========================================================
+   🌟 3D LIGHT REFLECTION
+========================================================= */
+
+.hero-product-card::before,
+.product-image-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -70%;
+    left: -80%;
+
+    width: 60%;
+    height: 240%;
+
+    transform:
+        rotate(25deg)
+        translateZ(50px);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.02) 35%,
+            rgba(255, 255, 255, 0.18) 50%,
+            rgba(255, 255, 255, 0.02) 65%,
+            transparent 100%
+        );
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.4s ease,
+        left 0.9s ease;
+}
+
+
+.hero-product-card:hover::before,
+.product-image-card:hover::before {
+    left: 140%;
+    opacity: 1;
+}
+
+
+/* =========================================================
+   🌶️ PRODUCT IMAGE FLOAT
+========================================================= */
+
+.hero-product-card img {
+    animation:
+        premiumProductFloat 5s ease-in-out infinite;
+}
+
+
+@keyframes premiumProductFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotateZ(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-8px)
+            rotateZ(0.5deg);
+    }
+
+}
+
+
+/* Stop float when hovering */
+
+.hero-product-card:hover img,
+.product-image-card:hover img {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   ✨ PRODUCT GLOW
+========================================================= */
+
+.hero-product-card {
+    filter:
+        drop-shadow(
+            0 18px 30px rgba(0, 0, 0, 0.25)
+        );
+
+    transition:
+        filter 0.6s ease,
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+.hero-product-card:hover {
+    filter:
+        drop-shadow(
+            0 25px 40px rgba(0, 0, 0, 0.38)
+        )
+        drop-shadow(
+            0 0 22px rgba(255, 55, 25, 0.16)
+        );
+}
+
+
+/* =========================================================
+   📱 MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .hero-product-card:hover,
+    .product-image-card:hover {
+        transform:
+            translateY(-5px)
+            scale(1.01);
+    }
+
+    .hero-product-card:hover img,
+    .product-image-card:hover img {
+        transform:
+            translateZ(15px)
+            scale(1.02);
+    }
+
+}
+
+
+/* =========================================================
+   ♿ REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-product-card img {
+        animation: none;
+    }
+
+    .hero-product-card,
+    .product-image-card,
+    .hero-product-card img,
+    .product-image-card img {
+        transition: none;
+    }
+
+}

@@ -1,7 +1,12 @@
 /* =========================================================
    🌶️ MANA MASALA
-   GENAI PREMIUM WEBSITE
-   DARK RED / BLACK / GLASSMORPHISM
+   PREMIUM DARK RED / BLACK / GLASSMORPHISM
+   COMPLETE CLEAN STYLE.CSS
+========================================================= */
+
+
+/* =========================================================
+   ROOT
 ========================================================= */
 
 :root {
@@ -77,10 +82,41 @@ body {
     line-height: 1.6;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+section {
+    scroll-margin-top: 100px;
+}
+
+
+/* =========================================================
+   WEBSITE AMBIENT BACKGROUND
+   background.jpeg ONLY
+========================================================= */
+
 body::before {
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     z-index: -5;
@@ -105,13 +141,18 @@ body::before {
         );
 
     animation:
-        ambientMove 18s ease-in-out infinite alternate;
+        ambientMove
+        18s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 body::after {
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     z-index: -4;
@@ -128,11 +169,12 @@ body::after {
 
 
 /* =========================================================
-   AMBIENT BACKGROUND
+   AMBIENT ORBS
 ========================================================= */
 
 .ambient-background {
     position: fixed;
+
     inset: -10%;
 
     z-index: -10;
@@ -159,7 +201,11 @@ body::after {
         contrast(1.05);
 
     animation:
-        backgroundMotion 28s ease-in-out infinite alternate;
+        backgroundMotion
+        28s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 .ambient-orb {
@@ -230,6 +276,10 @@ body::after {
 }
 
 
+/* =========================================================
+   BACKGROUND ANIMATIONS
+========================================================= */
+
 @keyframes backgroundMotion {
 
     0% {
@@ -251,7 +301,6 @@ body::after {
     }
 }
 
-
 @keyframes ambientMove {
 
     0% {
@@ -270,7 +319,6 @@ body::after {
     }
 }
 
-
 @keyframes orbFloatOne {
 
     from {
@@ -286,7 +334,6 @@ body::after {
     }
 }
 
-
 @keyframes orbFloatTwo {
 
     from {
@@ -301,7 +348,6 @@ body::after {
             scale(1.12);
     }
 }
-
 
 @keyframes orbFloatThree {
 
@@ -320,35 +366,12 @@ body::after {
 
 
 /* =========================================================
-   GLOBAL
+   CONTAINERS
 ========================================================= */
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-section {
-    scroll-margin-top: 100px;
-}
 
 .section {
     position: relative;
+
     padding: 120px 0;
 }
 
@@ -356,7 +379,12 @@ section {
 .hero-container,
 .header-inner,
 .footer-inner {
-    width: min(1180px, calc(100% - 40px));
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
+
     margin: auto;
 }
 
@@ -367,6 +395,7 @@ section {
 
 .site-header {
     position: sticky;
+
     top: 0;
 
     z-index: 1000;
@@ -378,15 +407,21 @@ section {
             rgba(5, 0, 0, 0.72)
         );
 
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter:
+        blur(18px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(140%);
 
     border-bottom:
         1px solid
         rgba(255, 65, 40, 0.12);
 
     box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.3);
+        0 12px 40px
+        rgba(0, 0, 0, 0.3);
 
     animation:
         headerEnter
@@ -394,7 +429,6 @@ section {
         ease
         both;
 }
-
 
 .site-header::after {
     content: "";
@@ -423,7 +457,6 @@ section {
         infinite;
 }
 
-
 .header-inner {
     min-height: 82px;
 
@@ -437,6 +470,10 @@ section {
 }
 
 
+/* =========================================================
+   BRAND
+========================================================= */
+
 .brand {
     display: flex;
 
@@ -446,7 +483,6 @@ section {
 
     flex-shrink: 0;
 }
-
 
 .brand-logo-wrap {
     width: 48px;
@@ -470,11 +506,11 @@ section {
         rgba(255, 80, 50, 0.2);
 
     box-shadow:
-        0 0 20px rgba(160, 0, 0, 0.18);
+        0 0 20px
+        rgba(160, 0, 0, 0.18);
 
     overflow: hidden;
 }
-
 
 .brand-logo {
     width: 42px;
@@ -484,7 +520,6 @@ section {
 
     transition: var(--transition);
 }
-
 
 .brand:hover .brand-logo {
     transform:
@@ -498,13 +533,11 @@ section {
         );
 }
 
-
 .brand-text {
     display: flex;
 
     flex-direction: column;
 }
-
 
 .brand-name {
     font-family:
@@ -518,7 +551,6 @@ section {
     letter-spacing: 1.5px;
 }
 
-
 .brand-subtitle {
     font-size: 10px;
 
@@ -528,6 +560,10 @@ section {
 }
 
 
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
 .main-nav {
     display: flex;
 
@@ -535,7 +571,6 @@ section {
 
     gap: 28px;
 }
-
 
 .main-nav a {
     position: relative;
@@ -548,7 +583,6 @@ section {
 
     transition: var(--transition);
 }
-
 
 .main-nav a::after {
     content: "";
@@ -577,21 +611,21 @@ section {
         width 0.3s ease;
 }
 
-
 .main-nav a:hover {
     color: #ff715c;
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
-
 
 .main-nav a:hover::after {
     width: 70%;
 }
 
-
 .header-order-button {
-    padding: 12px 20px;
+    padding:
+        12px
+        20px;
 
     border-radius: 14px;
 
@@ -611,18 +645,19 @@ section {
     font-weight: 700;
 
     box-shadow:
-        0 10px 25px rgba(100, 0, 0, 0.3);
+        0 10px 25px
+        rgba(100, 0, 0, 0.3);
 
     transition: var(--transition);
 }
-
 
 .header-order-button:hover {
     transform:
         translateY(-3px);
 
     box-shadow:
-        0 14px 30px rgba(180, 0, 0, 0.35);
+        0 14px 30px
+        rgba(180, 0, 0, 0.35);
 }
 
 
@@ -647,7 +682,6 @@ section {
         100px;
 }
 
-
 .hero-container {
     display: grid;
 
@@ -660,7 +694,6 @@ section {
     gap: 70px;
 }
 
-
 .hero-content {
     animation:
         heroContent
@@ -669,7 +702,6 @@ section {
         ease
         both;
 }
-
 
 .eyebrow,
 .section-label {
@@ -690,14 +722,14 @@ section {
     margin-bottom: 20px;
 }
 
-
 .eyebrow-dot {
     width: 7px;
     height: 7px;
 
     border-radius: 50%;
 
-    background: var(--red-bright);
+    background:
+        var(--red-bright);
 
     box-shadow:
         0 0 12px
@@ -709,7 +741,6 @@ section {
         ease-in-out
         infinite;
 }
-
 
 .hero-content h1 {
     max-width: 700px;
@@ -729,17 +760,16 @@ section {
     margin-bottom: 28px;
 }
 
-
 .hero-content h1 span {
     display: block;
 
-    color: var(--red-light);
+    color:
+        var(--red-light);
 
     text-shadow:
         0 0 40px
         rgba(220, 30, 15, 0.18);
 }
-
 
 .hero-description {
     max-width: 600px;
@@ -754,6 +784,10 @@ section {
 }
 
 
+/* =========================================================
+   HERO BADGES
+========================================================= */
+
 .hero-badges {
     display: flex;
 
@@ -764,7 +798,6 @@ section {
     margin-bottom: 34px;
 }
 
-
 .price-badge,
 .minimum-badge {
     display: flex;
@@ -774,7 +807,8 @@ section {
     gap: 10px;
 
     padding:
-        12px 18px;
+        12px
+        18px;
 
     border-radius: 16px;
 
@@ -789,10 +823,12 @@ section {
         1px solid
         rgba(255, 70, 50, 0.18);
 
-    backdrop-filter: blur(14px);
+    backdrop-filter:
+        blur(14px);
 
     box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.22);
+        0 15px 40px
+        rgba(0, 0, 0, 0.22);
 
     animation:
         badgeFloat
@@ -800,7 +836,6 @@ section {
         ease-in-out
         infinite;
 }
-
 
 .price-badge .price-small,
 .minimum-badge span {
@@ -813,13 +848,11 @@ section {
     letter-spacing: 1.5px;
 }
 
-
 .price-badge strong {
     font-size: 28px;
 
     color: #fff;
 }
-
 
 .price-badge .price-unit {
     color: #e8b4ac;
@@ -828,7 +861,6 @@ section {
 
     font-weight: 700;
 }
-
 
 .minimum-badge {
     flex-direction: column;
@@ -842,13 +874,16 @@ section {
     padding-right: 20px;
 }
 
-
 .minimum-badge strong {
     font-size: 18px;
 
     color: #fff;
 }
 
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
 
 .hero-actions {
     display: flex;
@@ -859,7 +894,6 @@ section {
 
     margin-bottom: 35px;
 }
-
 
 .primary-button,
 .secondary-button {
@@ -885,7 +919,6 @@ section {
     transition: var(--transition);
 }
 
-
 .primary-button {
     position: relative;
 
@@ -907,7 +940,6 @@ section {
         rgba(130, 0, 0, 0.35);
 }
 
-
 .primary-button::before {
     content: "";
 
@@ -919,7 +951,8 @@ section {
     width: 30%;
     height: 300%;
 
-    transform: rotate(25deg);
+    transform:
+        rotate(25deg);
 
     background:
         linear-gradient(
@@ -936,7 +969,6 @@ section {
         infinite;
 }
 
-
 .primary-button:hover {
     transform:
         translateY(-4px);
@@ -946,17 +978,15 @@ section {
         rgba(180, 0, 0, 0.42);
 }
 
-
 .primary-button span {
     position: relative;
+
     z-index: 1;
 }
-
 
 .button-arrow {
     font-size: 18px;
 }
-
 
 .secondary-button {
     background:
@@ -968,9 +998,9 @@ section {
 
     color: #ddd0d0;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 }
-
 
 .secondary-button:hover {
     transform:
@@ -984,6 +1014,10 @@ section {
 }
 
 
+/* =========================================================
+   HERO TRUST
+========================================================= */
+
 .hero-trust {
     display: flex;
 
@@ -996,7 +1030,6 @@ section {
     font-size: 12px;
 }
 
-
 .hero-trust div {
     display: flex;
 
@@ -1005,13 +1038,14 @@ section {
     gap: 7px;
 }
 
-
 .trust-icon {
     font-size: 14px;
 }
 
 
-/* HERO PRODUCT */
+/* =========================================================
+   HERO PRODUCT
+========================================================= */
 
 .hero-visual {
     position: relative;
@@ -1030,7 +1064,6 @@ section {
         both;
 }
 
-
 .hero-glow {
     position: absolute;
 
@@ -1046,7 +1079,8 @@ section {
             transparent 68%
         );
 
-    filter: blur(25px);
+    filter:
+        blur(25px);
 
     animation:
         productGlow
@@ -1056,11 +1090,14 @@ section {
         alternate;
 }
 
-
 .hero-product-card {
     position: relative;
 
-    width: min(440px, 100%);
+    width:
+        min(
+            440px,
+            100%
+        );
 
     padding: 25px;
 
@@ -1077,7 +1114,8 @@ section {
         1px solid
         rgba(255, 100, 70, 0.18);
 
-    backdrop-filter: blur(22px);
+    backdrop-filter:
+        blur(22px);
 
     box-shadow:
         0 35px 90px
@@ -1096,7 +1134,6 @@ section {
         ease-in-out
         infinite;
 }
-
 
 .hero-product-card::before {
     content: "";
@@ -1117,7 +1154,6 @@ section {
         );
 }
 
-
 .product-card-top {
     display: flex;
 
@@ -1136,7 +1172,6 @@ section {
     z-index: 1;
 }
 
-
 .hero-product-image {
     position: relative;
 
@@ -1146,7 +1181,6 @@ section {
 
     place-items: center;
 }
-
 
 .hero-product-image img {
     max-height: 360px;
@@ -1166,9 +1200,9 @@ section {
     transform:
         translateZ(35px);
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .hero-product-card:hover
 .hero-product-image img {
@@ -1176,7 +1210,6 @@ section {
         translateZ(55px)
         scale(1.04);
 }
-
 
 .hero-product-info {
     display: flex;
@@ -1186,7 +1219,6 @@ section {
     gap: 4px;
 }
 
-
 .hero-product-info span {
     color: #a78d8d;
 
@@ -1194,7 +1226,6 @@ section {
 
     letter-spacing: 1.5px;
 }
-
 
 .hero-product-info strong {
     font-family:
@@ -1204,14 +1235,15 @@ section {
     font-size: 21px;
 }
 
-
 .floating-price {
     position: absolute;
 
     right: -20px;
     bottom: 90px;
 
-    padding: 12px 17px;
+    padding:
+        12px
+        17px;
 
     border-radius: 14px;
 
@@ -1240,6 +1272,10 @@ section {
 }
 
 
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
 .scroll-indicator {
     position: absolute;
 
@@ -1264,7 +1300,6 @@ section {
 
     letter-spacing: 2px;
 }
-
 
 .scroll-line {
     width: 1px;
@@ -1292,13 +1327,11 @@ section {
     max-width: 720px;
 
     margin:
-        0
-        auto
+        0 auto
         60px;
 
     text-align: center;
 }
-
 
 .section-heading h2 {
     font-family:
@@ -1316,14 +1349,14 @@ section {
     letter-spacing: -1.5px;
 }
 
-
 .section-heading h2 span {
-    color: var(--red-light);
+    color:
+        var(--red-light);
 }
 
-
 .section-heading p {
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 15px;
 
@@ -1332,7 +1365,7 @@ section {
 
 
 /* =========================================================
-   PRODUCT
+   PRODUCT SECTION
 ========================================================= */
 
 .product-grid {
@@ -1347,7 +1380,6 @@ section {
     align-items: center;
 }
 
-
 .product-showcase-card {
     position: relative;
 
@@ -1359,7 +1391,8 @@ section {
 
     overflow: hidden;
 
-    border-radius: var(--radius-lg);
+    border-radius:
+        var(--radius-lg);
 
     background:
         linear-gradient(
@@ -1372,12 +1405,12 @@ section {
         1px solid
         rgba(255, 80, 60, 0.14);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter:
+        blur(20px);
 
     box-shadow:
         var(--shadow);
 }
-
 
 .product-image-glow {
     position: absolute;
@@ -1394,9 +1427,9 @@ section {
             transparent 68%
         );
 
-    filter: blur(20px);
+    filter:
+        blur(20px);
 }
-
 
 .product-large-image {
     position: relative;
@@ -1418,11 +1451,9 @@ section {
         infinite;
 }
 
-
 .product-details {
     padding: 10px;
 }
-
 
 .detail-kicker {
     color: #d25543;
@@ -1434,7 +1465,6 @@ section {
     letter-spacing: 2px;
 }
 
-
 .product-details h3 {
     font-family:
         "Playfair Display",
@@ -1445,20 +1475,22 @@ section {
     line-height: 1.1;
 
     margin:
-        12px
-        0
-        18px;
+        12px 0 18px;
 }
 
-
 .product-details > p {
-    color: var(--muted);
+    color:
+        var(--muted);
 
     line-height: 1.8;
 
     margin-bottom: 30px;
 }
 
+
+/* =========================================================
+   FEATURES
+========================================================= */
 
 .feature-list {
     display: grid;
@@ -1467,7 +1499,6 @@ section {
 
     margin-bottom: 30px;
 }
-
 
 .feature-item {
     display: flex;
@@ -1487,9 +1518,9 @@ section {
         1px solid
         rgba(255, 255, 255, 0.06);
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .feature-item:hover {
     transform:
@@ -1501,7 +1532,6 @@ section {
     border-color:
         rgba(255, 70, 50, 0.14);
 }
-
 
 .feature-icon {
     width: 40px;
@@ -1519,18 +1549,15 @@ section {
         rgba(120, 0, 0, 0.18);
 }
 
-
 .feature-item div {
     display: flex;
 
     flex-direction: column;
 }
 
-
 .feature-item strong {
     font-size: 13px;
 }
-
 
 .feature-item small {
     color: #9d8d8d;
@@ -1538,6 +1565,10 @@ section {
     font-size: 11px;
 }
 
+
+/* =========================================================
+   PRODUCT PRICE
+========================================================= */
 
 .product-price-row {
     display: flex;
@@ -1547,13 +1578,11 @@ section {
     margin-bottom: 30px;
 }
 
-
 .product-price-row div {
     display: flex;
 
     flex-direction: column;
 }
-
 
 .product-price-row small {
     color: #8d7d7d;
@@ -1563,11 +1592,9 @@ section {
     letter-spacing: 1.5px;
 }
 
-
 .product-price-row strong {
     font-size: 25px;
 }
-
 
 .product-price-row strong span {
     color: #9e8989;
@@ -1577,7 +1604,7 @@ section {
 
 
 /* =========================================================
-   WHY
+   WHY SECTION
 ========================================================= */
 
 .why-grid {
@@ -1588,7 +1615,6 @@ section {
 
     gap: 18px;
 }
-
 
 .why-card {
     position: relative;
@@ -1610,13 +1636,14 @@ section {
         1px solid
         rgba(255, 90, 70, 0.1);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
 
     overflow: hidden;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .why-card:hover {
     transform:
@@ -1629,7 +1656,6 @@ section {
         0 25px 55px
         rgba(0, 0, 0, 0.35);
 }
-
 
 .why-number {
     position: absolute;
@@ -1644,7 +1670,6 @@ section {
 
     font-weight: 800;
 }
-
 
 .why-icon {
     width: 52px;
@@ -1664,7 +1689,6 @@ section {
     font-size: 22px;
 }
 
-
 .why-card h3 {
     font-family:
         "Playfair Display",
@@ -1675,9 +1699,9 @@ section {
     margin-bottom: 10px;
 }
 
-
 .why-card p {
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 13px;
 
@@ -1686,7 +1710,7 @@ section {
 
 
 /* =========================================================
-   GLIMPSES
+   GLIMPSES / VIDEO
 ========================================================= */
 
 .glimpses-video-card {
@@ -1717,9 +1741,9 @@ section {
 
     overflow: hidden;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .glimpses-video-card:hover {
     transform:
@@ -1733,13 +1757,11 @@ section {
         rgba(80, 0, 0, 0.35);
 }
 
-
 .video-topbar {
     min-height: 44px;
 
     padding:
-        0
-        14px;
+        0 14px;
 
     display: flex;
 
@@ -1756,7 +1778,6 @@ section {
     letter-spacing: 1.3px;
 }
 
-
 .video-topbar span:first-child {
     display: flex;
 
@@ -1764,7 +1785,6 @@ section {
 
     gap: 8px;
 }
-
 
 .video-topbar i {
     width: 7px;
@@ -1779,7 +1799,6 @@ section {
         rgba(255, 0, 0, 0.7);
 }
 
-
 .glimpses-video {
     width: 100%;
 
@@ -1793,18 +1812,19 @@ section {
 
     background: #050000;
 
-    transition: transform 0.8s ease;
+    transition:
+        transform 0.8s ease;
 }
-
 
 .glimpses-video-card:hover
 .glimpses-video {
-    transform: scale(1.012);
+    transform:
+        scale(1.012);
 }
 
 
 /* =========================================================
-   ORDER
+   ORDER SECTION
 ========================================================= */
 
 .order-layout {
@@ -1818,7 +1838,6 @@ section {
 
     align-items: start;
 }
-
 
 .order-info-card,
 .order-card {
@@ -1835,13 +1854,13 @@ section {
         1px solid
         rgba(255, 75, 55, 0.14);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter:
+        blur(20px);
 
     box-shadow:
         0 30px 75px
         rgba(0, 0, 0, 0.35);
 }
-
 
 .order-info-card {
     padding: 35px;
@@ -1851,11 +1870,9 @@ section {
     top: 110px;
 }
 
-
 .order-card {
     padding: 35px;
 }
-
 
 .order-card-label {
     color: #d15b4a;
@@ -1867,7 +1884,6 @@ section {
     letter-spacing: 2px;
 }
 
-
 .order-info-card h3 {
     font-family:
         "Playfair Display",
@@ -1876,11 +1892,8 @@ section {
     font-size: 30px;
 
     margin:
-        10px
-        0
-        15px;
+        10px 0 15px;
 }
-
 
 .order-price {
     font-size: 50px;
@@ -1888,20 +1901,17 @@ section {
     font-weight: 800;
 }
 
-
 .order-price small {
     color: #a48f8f;
 
     font-size: 14px;
 }
 
-
 .order-rule {
     height: 1px;
 
     margin:
-        25px
-        0;
+        25px 0;
 
     background:
         linear-gradient(
@@ -1911,13 +1921,11 @@ section {
         );
 }
 
-
 .order-summary-points {
     display: grid;
 
     gap: 18px;
 }
-
 
 .order-summary-points div {
     display: flex;
@@ -1927,11 +1935,9 @@ section {
     align-items: flex-start;
 }
 
-
 .order-summary-points span {
     font-size: 18px;
 }
-
 
 .order-summary-points p {
     color: #ae9d9d;
@@ -1939,6 +1945,10 @@ section {
     font-size: 12px;
 }
 
+
+/* =========================================================
+   ORDER HEADER
+========================================================= */
 
 .order-card-header {
     display: flex;
@@ -1950,7 +1960,6 @@ section {
     margin-bottom: 28px;
 }
 
-
 .order-card-header span {
     color: #d15b4a;
 
@@ -1960,7 +1969,6 @@ section {
 
     letter-spacing: 2px;
 }
-
 
 .order-card-header h3 {
     font-family:
@@ -1972,11 +1980,9 @@ section {
     margin-top: 5px;
 }
 
-
 .secure-badge {
     padding:
-        7px
-        10px;
+        7px 10px;
 
     border-radius: 10px;
 
@@ -1993,12 +1999,13 @@ section {
 }
 
 
-/* FORM */
+/* =========================================================
+   FORM
+========================================================= */
 
 .form-group {
     margin-bottom: 20px;
 }
-
 
 .form-group label {
     display: block;
@@ -2011,7 +2018,6 @@ section {
 
     font-weight: 600;
 }
-
 
 .form-group input,
 .form-group textarea {
@@ -2029,8 +2035,7 @@ section {
     border-radius: 14px;
 
     padding:
-        14px
-        15px;
+        14px 15px;
 
     outline: none;
 
@@ -2042,12 +2047,10 @@ section {
         background 0.3s ease;
 }
 
-
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: #6f6060;
 }
-
 
 .form-group input:focus,
 .form-group textarea:focus {
@@ -2065,7 +2068,9 @@ section {
 }
 
 
-/* QUANTITY */
+/* =========================================================
+   QUANTITY
+========================================================= */
 
 .quantity-control {
     display: flex;
@@ -2084,7 +2089,6 @@ section {
         rgba(255, 255, 255, 0.08);
 }
 
-
 .quantity-control button {
     width: 58px;
     height: 55px;
@@ -2098,17 +2102,17 @@ section {
 
     font-size: 25px;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .quantity-control button:hover {
     background:
         rgba(170, 0, 0, 0.45);
 
-    transform: scale(1.04);
+    transform:
+        scale(1.04);
 }
-
 
 .quantity-value {
     flex: 1;
@@ -2121,7 +2125,6 @@ section {
 
     gap: 8px;
 }
-
 
 .quantity-value input {
     width: 70px;
@@ -2141,14 +2144,12 @@ section {
     font-weight: 800;
 }
 
-
 .quantity-value input::-webkit-inner-spin-button,
 .quantity-value input::-webkit-outer-spin-button {
     appearance: none;
 
     margin: 0;
 }
-
 
 .quantity-value span {
     color: #a99494;
@@ -2157,7 +2158,6 @@ section {
 
     font-weight: 700;
 }
-
 
 .quantity-note {
     display: block;
@@ -2170,7 +2170,9 @@ section {
 }
 
 
-/* TOTAL */
+/* =========================================================
+   TOTAL
+========================================================= */
 
 .total-box {
     display: grid;
@@ -2187,8 +2189,7 @@ section {
     padding: 20px;
 
     margin:
-        25px
-        0;
+        25px 0;
 
     border-radius: 18px;
 
@@ -2204,7 +2205,6 @@ section {
         rgba(255, 70, 50, 0.12);
 }
 
-
 .total-box div:not(.total-divider) {
     display: flex;
 
@@ -2212,7 +2212,6 @@ section {
 
     gap: 4px;
 }
-
 
 .total-box span {
     color: #8f7d7d;
@@ -2224,18 +2223,15 @@ section {
     letter-spacing: 1px;
 }
 
-
 .total-box strong {
     font-size: 19px;
 }
-
 
 .total-box div:last-child strong {
     color: #ff624b;
 
     font-size: 27px;
 }
-
 
 .total-divider {
     width: 1px;
@@ -2247,12 +2243,15 @@ section {
 }
 
 
-/* MESSAGE */
+/* =========================================================
+   ORDER MESSAGE
+========================================================= */
 
 .order-message {
     display: none;
 
-    padding: 12px 14px;
+    padding:
+        12px 14px;
 
     margin-bottom: 15px;
 
@@ -2261,11 +2260,9 @@ section {
     font-size: 12px;
 }
 
-
 .order-message.show {
     display: block;
 }
-
 
 .order-message.error {
     color: #ffb3a6;
@@ -2277,7 +2274,6 @@ section {
         1px solid
         rgba(255, 60, 40, 0.18);
 }
-
 
 .order-message.success {
     color: #b9f5c7;
@@ -2291,7 +2287,9 @@ section {
 }
 
 
-/* SUBMIT */
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
 
 .submit-order-button {
     position: relative;
@@ -2321,9 +2319,9 @@ section {
 
     overflow: hidden;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .submit-order-button::before {
     content: "";
@@ -2336,7 +2334,8 @@ section {
     width: 25%;
     height: 300%;
 
-    transform: rotate(25deg);
+    transform:
+        rotate(25deg);
 
     background:
         linear-gradient(
@@ -2353,7 +2352,6 @@ section {
         infinite;
 }
 
-
 .submit-order-button:hover {
     transform:
         translateY(-3px);
@@ -2363,7 +2361,6 @@ section {
         rgba(170, 0, 0, 0.4);
 }
 
-
 .submit-order-button:disabled {
     opacity: 0.65;
 
@@ -2372,7 +2369,6 @@ section {
     transform: none;
 }
 
-
 .submit-text,
 .submit-arrow {
     position: relative;
@@ -2380,13 +2376,11 @@ section {
     z-index: 2;
 }
 
-
 .submit-arrow {
     margin-left: 8px;
 
     font-size: 18px;
 }
-
 
 .form-note {
     margin-top: 13px;
@@ -2438,7 +2432,6 @@ section {
         rgba(0, 0, 0, 0.35);
 }
 
-
 .contact-panel::before {
     content: "";
 
@@ -2459,16 +2452,15 @@ section {
             transparent 68%
         );
 
-    filter: blur(20px);
+    filter:
+        blur(20px);
 }
-
 
 .contact-content {
     position: relative;
 
     z-index: 1;
 }
-
 
 .contact-content h2 {
     max-width: 600px;
@@ -2485,20 +2477,19 @@ section {
     margin-bottom: 15px;
 }
 
-
 .contact-content h2 span {
-    color: var(--red-light);
+    color:
+        var(--red-light);
 }
-
 
 .contact-content p {
     max-width: 520px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 14px;
 }
-
 
 .contact-actions {
     position: relative;
@@ -2512,7 +2503,6 @@ section {
     gap: 12px;
 }
 
-
 .contact-button {
     min-width: 260px;
 
@@ -2523,8 +2513,7 @@ section {
     gap: 13px;
 
     padding:
-        14px
-        17px;
+        14px 17px;
 
     border-radius: 16px;
 
@@ -2535,9 +2524,9 @@ section {
         1px solid
         rgba(255, 255, 255, 0.08);
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .contact-button:hover {
     transform:
@@ -2549,7 +2538,6 @@ section {
     border-color:
         rgba(255, 80, 60, 0.2);
 }
-
 
 .contact-button > span {
     width: 40px;
@@ -2565,13 +2553,11 @@ section {
         rgba(120, 0, 0, 0.2);
 }
 
-
 .contact-button div {
     display: flex;
 
     flex-direction: column;
 }
-
 
 .contact-button small {
     color: #887676;
@@ -2581,14 +2567,13 @@ section {
     letter-spacing: 1.2px;
 }
 
-
 .contact-button strong {
     font-size: 12px;
 }
 
 
 /* =========================================================
-   MODAL
+   SUCCESS MODAL
 ========================================================= */
 
 .modal {
@@ -2607,7 +2592,6 @@ section {
     padding: 20px;
 }
 
-
 .modal.active {
     display: flex;
 
@@ -2618,7 +2602,6 @@ section {
         both;
 }
 
-
 .modal-backdrop {
     position: absolute;
 
@@ -2627,14 +2610,18 @@ section {
     background:
         rgba(0, 0, 0, 0.78);
 
-    backdrop-filter: blur(12px);
+    backdrop-filter:
+        blur(12px);
 }
-
 
 .success-modal {
     position: relative;
 
-    width: min(470px, 100%);
+    width:
+        min(
+            470px,
+            100%
+        );
 
     padding: 40px;
 
@@ -2664,7 +2651,6 @@ section {
         both;
 }
 
-
 .modal-close {
     position: absolute;
 
@@ -2685,9 +2671,9 @@ section {
 
     font-size: 22px;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .modal-close:hover {
     color: white;
@@ -2696,15 +2682,12 @@ section {
         rgba(150, 0, 0, 0.3);
 }
 
-
 .success-icon {
     width: 75px;
     height: 75px;
 
     margin:
-        0
-        auto
-        20px;
+        0 auto 20px;
 
     display: grid;
 
@@ -2736,7 +2719,6 @@ section {
         both;
 }
 
-
 .success-label {
     color: #d45a47;
 
@@ -2747,7 +2729,6 @@ section {
     letter-spacing: 2px;
 }
 
-
 .success-modal h2 {
     font-family:
         "Playfair Display",
@@ -2756,11 +2737,8 @@ section {
     font-size: 38px;
 
     margin:
-        7px
-        0
-        8px;
+        7px 0 8px;
 }
-
 
 .success-modal > p {
     color: #a99696;
@@ -2769,7 +2747,6 @@ section {
 
     margin-bottom: 25px;
 }
-
 
 .success-details {
     display: grid;
@@ -2782,9 +2759,9 @@ section {
     margin-bottom: 25px;
 }
 
-
 .success-details div {
-    padding: 13px 8px;
+    padding:
+        13px 8px;
 
     border-radius: 13px;
 
@@ -2796,7 +2773,6 @@ section {
         rgba(255, 255, 255, 0.06);
 }
 
-
 .success-details span {
     display: block;
 
@@ -2807,18 +2783,15 @@ section {
     margin-bottom: 4px;
 }
 
-
 .success-details strong {
     font-size: 12px;
 }
-
 
 .modal-actions {
     display: grid;
 
     gap: 10px;
 }
-
 
 .whatsapp-order-button,
 .continue-button {
@@ -2839,7 +2812,6 @@ section {
     font-weight: 700;
 }
 
-
 .whatsapp-order-button {
     background:
         linear-gradient(
@@ -2852,7 +2824,6 @@ section {
         1px solid
         rgba(70, 255, 140, 0.16);
 }
-
 
 .continue-button {
     color: #c4b1b1;
@@ -2872,8 +2843,7 @@ section {
 
 .site-footer {
     padding:
-        35px
-        0;
+        35px 0;
 
     border-top:
         1px solid
@@ -2882,7 +2852,6 @@ section {
     background:
         rgba(3, 0, 0, 0.55);
 }
-
 
 .footer-inner {
     display: grid;
@@ -2897,7 +2866,6 @@ section {
     gap: 30px;
 }
 
-
 .footer-brand {
     display: flex;
 
@@ -2905,7 +2873,6 @@ section {
 
     gap: 12px;
 }
-
 
 .footer-logo {
     width: 40px;
@@ -2916,7 +2883,6 @@ section {
     overflow: hidden;
 }
 
-
 .footer-logo img {
     width: 100%;
     height: 100%;
@@ -2924,13 +2890,11 @@ section {
     object-fit: contain;
 }
 
-
 .footer-brand div:last-child {
     display: flex;
 
     flex-direction: column;
 }
-
 
 .footer-brand strong {
     font-size: 13px;
@@ -2938,13 +2902,11 @@ section {
     letter-spacing: 1px;
 }
 
-
 .footer-brand span {
     color: #756565;
 
     font-size: 9px;
 }
-
 
 .footer-links {
     display: flex;
@@ -2952,20 +2914,18 @@ section {
     gap: 20px;
 }
 
-
 .footer-links a {
     color: #827171;
 
     font-size: 10px;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 }
-
 
 .footer-links a:hover {
     color: #ed654f;
 }
-
 
 .footer-copy {
     color: #665858;
@@ -2977,7 +2937,7 @@ section {
 
 
 /* =========================================================
-   FLOATING ACTIONS
+   FLOATING ACTION BUTTONS
 ========================================================= */
 
 .floating-actions {
@@ -2995,7 +2955,6 @@ section {
     gap: 12px;
 }
 
-
 .floating-call,
 .floating-whatsapp {
     width: 54px;
@@ -3009,13 +2968,13 @@ section {
 
     font-size: 20px;
 
-    transition: var(--transition);
+    transition:
+        var(--transition);
 
     box-shadow:
         0 15px 35px
         rgba(0, 0, 0, 0.35);
 }
-
 
 .floating-call {
     background:
@@ -3029,7 +2988,6 @@ section {
         1px solid
         rgba(255, 80, 60, 0.2);
 }
-
 
 .floating-whatsapp {
     position: relative;
@@ -3052,7 +3010,6 @@ section {
         infinite;
 }
 
-
 .floating-whatsapp::before {
     content: "";
 
@@ -3073,7 +3030,6 @@ section {
         infinite;
 }
 
-
 .floating-call:hover,
 .floating-whatsapp:hover {
     transform:
@@ -3083,93 +3039,985 @@ section {
 
 
 /* =========================================================
-   ANIMATIONS
+   🌶️ MANA MASALA OPENING INTRO
+========================================================= */
+
+/*
+   IMPORTANT:
+
+   masala.png is used ONLY by:
+
+   #manaIntro .intro-logo img
+
+   It is NEVER used as a background.
+*/
+
+
+#manaIntro {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    z-index: 999999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #3b0000 0%,
+            #170000 42%,
+            #030000 100%
+        );
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 1s
+        cubic-bezier(.76,0,.24,1),
+        visibility 1s
+        cubic-bezier(.76,0,.24,1);
+}
+
+
+/* =========================================================
+   INTRO GLOW
+========================================================= */
+
+#manaIntro .intro-glow {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 430px;
+    height: 430px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 55, 15, .30),
+            rgba(130, 0, 0, .14) 40%,
+            transparent 70%
+        );
+
+    filter:
+        blur(25px);
+
+    pointer-events: none;
+
+    animation:
+        introGlowPulse
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   INTRO RINGS
+========================================================= */
+
+#manaIntro .intro-ring {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 80, 30, .25);
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+
+    pointer-events: none;
+
+    animation:
+        introRingExpand
+        3s
+        ease-out
+        forwards;
+}
+
+#manaIntro .ring-two {
+
+    width: 380px;
+    height: 380px;
+
+    border-color:
+        rgba(255, 100, 40, .13);
+
+    animation-delay:
+        .35s;
+}
+
+
+/* =========================================================
+   INTRO PARTICLES
+========================================================= */
+
+#manaIntro .intro-particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+#manaIntro .intro-particles span {
+
+    position: absolute;
+
+    color:
+        rgba(255, 130, 70, .75);
+
+    font-size: 18px;
+
+    animation:
+        introParticleFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+#manaIntro .intro-particles span:nth-child(1) {
+    left: 12%;
+    top: 25%;
+}
+
+#manaIntro .intro-particles span:nth-child(2) {
+    left: 20%;
+    top: 70%;
+
+    animation-delay:
+        .5s;
+}
+
+#manaIntro .intro-particles span:nth-child(3) {
+    left: 80%;
+    top: 20%;
+
+    animation-delay:
+        1s;
+}
+
+#manaIntro .intro-particles span:nth-child(4) {
+    left: 88%;
+    top: 68%;
+
+    animation-delay:
+        1.5s;
+}
+
+#manaIntro .intro-particles span:nth-child(5) {
+    left: 32%;
+    top: 14%;
+
+    animation-delay:
+        2s;
+}
+
+#manaIntro .intro-particles span:nth-child(6) {
+    left: 70%;
+    top: 80%;
+
+    animation-delay:
+        2.5s;
+}
+
+#manaIntro .intro-particles span:nth-child(7) {
+    left: 8%;
+    top: 48%;
+
+    animation-delay:
+        1.2s;
+}
+
+#manaIntro .intro-particles span:nth-child(8) {
+    left: 92%;
+    top: 42%;
+
+    animation-delay:
+        1.8s;
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+========================================================= */
+
+#manaIntro .mana-intro-content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 90%;
+
+    max-width: 800px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    opacity: 0;
+
+    transform:
+        translateY(30px)
+        scale(.96);
+
+    animation:
+        introContentReveal
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        .25s
+        forwards;
+}
+
+
+/* =========================================================
+   ⭐ MASALA.PNG
+   ONLY CENTERED INTRO LOGO
+========================================================= */
+
+#manaIntro .intro-logo {
+
+    position: relative;
+
+    z-index: 11;
+
+    width: 145px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 auto 22px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(35, 0, 0, .65);
+
+    border:
+        1px solid
+        rgba(255, 80, 40, .25);
+
+    box-shadow:
+        0 0 35px
+        rgba(150, 0, 0, .35),
+        inset 0 0 25px
+        rgba(255, 50, 30, .08);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    overflow: hidden;
+
+    animation:
+        introLogoAppear
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        .35s
+        both;
+}
+
+
+/*
+   masala.png NEVER gets width:100%
+   NEVER gets height:100%
+   NEVER gets object-fit:cover
+*/
+
+#manaIntro .intro-logo img {
+
+    position: relative;
+
+    width: 110px;
+
+    height: 110px;
+
+    max-width: 110px;
+
+    max-height: 110px;
+
+    flex-shrink: 0;
+
+    display: block;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    background:
+        transparent !important;
+
+    border: 0;
+
+    margin: 0;
+
+    padding: 0;
+
+    filter:
+        drop-shadow(
+            0 12px 25px
+            rgba(0,0,0,.55)
+        );
+
+    animation:
+        introLogoZoom
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        .35s
+        both;
+}
+
+
+/* =========================================================
+   INTRO SMALL TEXT
+========================================================= */
+
+#manaIntro .intro-small {
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 5px;
+
+    color:
+        rgba(255,255,255,.75);
+
+    margin-bottom: 20px;
+
+    opacity: 0;
+
+    animation:
+        introFadeUp
+        .9s
+        ease
+        .8s
+        forwards;
+}
+
+
+/* =========================================================
+   INTRO TITLE
+========================================================= */
+
+#manaIntro .mana-intro-content h1 {
+
+    margin: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    line-height: .86;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    text-transform: uppercase;
+}
+
+#manaIntro .mana-intro-content h1 span {
+
+    font-size:
+        clamp(
+            52px,
+            10vw,
+            105px
+        );
+
+    font-weight: 300;
+
+    letter-spacing: 10px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 25px
+        rgba(255,255,255,.16),
+        0 0 55px
+        rgba(255,45,0,.15);
+
+    opacity: 0;
+
+    animation:
+        introTitleReveal
+        1.1s
+        cubic-bezier(.16,1,.3,1)
+        1s
+        forwards;
+}
+
+#manaIntro .mana-intro-content h1 strong {
+
+    font-size:
+        clamp(
+            60px,
+            12vw,
+            125px
+        );
+
+    font-weight: 800;
+
+    letter-spacing: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #ffb08a 30%,
+            #ff4210 60%,
+            #9d0000
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+    filter:
+        drop-shadow(
+            0 12px 28px
+            rgba(255,35,0,.30)
+        );
+
+    opacity: 0;
+
+    animation:
+        introTitleReveal
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        1.15s
+        forwards;
+}
+
+
+/* =========================================================
+   INTRO LINE
+========================================================= */
+
+#manaIntro .intro-line {
+
+    width: 0;
+
+    height: 2px;
+
+    margin:
+        25px auto 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff4a20,
+            #ffb08a,
+            #ff4a20,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255,60,20,.65);
+
+    animation:
+        introLineReveal
+        1s
+        ease
+        1.8s
+        forwards;
+}
+
+
+/* =========================================================
+   INTRO SUBTITLE
+========================================================= */
+
+#manaIntro .mana-intro-content p {
+
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    letter-spacing: 5px;
+
+    color:
+        rgba(255,255,255,.82);
+
+    opacity: 0;
+
+    animation:
+        introFadeUp
+        1s
+        ease
+        2s
+        forwards;
+}
+
+
+/* =========================================================
+   INTRO LOADING
+========================================================= */
+
+#manaIntro .intro-loading {
+
+    width: 150px;
+
+    height: 2px;
+
+    margin-top: 28px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    opacity: 0;
+
+    animation:
+        introFadeIn
+        .5s
+        ease
+        2.2s
+        forwards;
+}
+
+#manaIntro .intro-loading span {
+
+    display: block;
+
+    width: 0;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8b0000,
+            #ff4b20,
+            #ffb08a
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(255,60,20,.6);
+
+    animation:
+        introLoadingBar
+        1.2s
+        ease
+        2.3s
+        forwards;
+}
+
+
+/* =========================================================
+   INTRO FINISHED
+   COMPLETELY REMOVE INTRO FROM VIEW
+========================================================= */
+
+#manaIntro.intro-finished {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
+
+/*
+   Once finished, masala.png itself is also hidden.
+*/
+
+#manaIntro.intro-finished .intro-logo,
+#manaIntro.intro-finished .intro-logo img {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+}
+
+
+/* =========================================================
+   INTRO ANIMATIONS
+========================================================= */
+
+@keyframes introContentReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes introLogoAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.55)
+            rotate(-8deg);
+
+        filter:
+            blur(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+        filter:
+            blur(0);
+    }
+}
+
+@keyframes introLogoZoom {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.7);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+@keyframes introTitleReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.85);
+
+        filter:
+            blur(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:
+            blur(0);
+    }
+}
+
+@keyframes introFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes introFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introLineReveal {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width:
+            min(
+                400px,
+                70vw
+            );
+    }
+}
+
+@keyframes introLoadingBar {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes introGlowPulse {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(.85);
+
+        opacity: .45;
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        opacity: .8;
+    }
+}
+
+@keyframes introRingExpand {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(3.5);
+    }
+}
+
+@keyframes introParticleFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity: .3;
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            scale(1.3);
+
+        opacity: .9;
+    }
+}
+
+
+/* =========================================================
+   GENERAL ANIMATIONS
 ========================================================= */
 
 @keyframes headerEnter {
 
     from {
         opacity: 0;
-        transform: translateY(-20px);
+
+        transform:
+            translateY(-20px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
-
 
 @keyframes headerLine {
 
     0%,
     100% {
-        opacity: 0.2;
-        transform: scaleX(0.65);
+        opacity: .2;
+
+        transform:
+            scaleX(.65);
     }
 
     50% {
-        opacity: 0.8;
-        transform: scaleX(1);
+        opacity: .8;
+
+        transform:
+            scaleX(1);
     }
 }
-
 
 @keyframes heroContent {
 
     from {
         opacity: 0;
-        transform: translateY(35px);
+
+        transform:
+            translateY(35px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
-
 
 @keyframes heroVisual {
 
     from {
         opacity: 0;
-        transform: scale(0.94) translateY(30px);
+
+        transform:
+            scale(.94)
+            translateY(30px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+
+        transform:
+            scale(1)
+            translateY(0);
     }
 }
-
 
 @keyframes dotPulse {
 
     0%,
     100% {
-        transform: scale(0.8);
-        opacity: 0.6;
+        transform:
+            scale(.8);
+
+        opacity: .6;
     }
 
     50% {
-        transform: scale(1.2);
+        transform:
+            scale(1.2);
+
         opacity: 1;
     }
 }
-
 
 @keyframes badgeFloat {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-4px);
+        transform:
+            translateY(-4px);
     }
 }
-
 
 @keyframes productFloat {
 
@@ -3191,46 +4039,50 @@ section {
     }
 }
 
-
 @keyframes productGlow {
 
     from {
-        transform: scale(0.9);
-        opacity: 0.55;
+        transform:
+            scale(.9);
+
+        opacity: .55;
     }
 
     to {
-        transform: scale(1.12);
-        opacity: 0.9;
+        transform:
+            scale(1.12);
+
+        opacity: .9;
     }
 }
-
 
 @keyframes floatingPrice {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-9px);
+        transform:
+            translateY(-9px);
     }
 }
-
 
 @keyframes productImageFloat {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-8px);
+        transform:
+            translateY(-8px);
     }
 }
-
 
 @keyframes buttonShine {
 
@@ -3248,22 +4100,26 @@ section {
     }
 }
 
-
 @keyframes scrollLine {
 
     0%,
     100% {
-        opacity: 0.3;
-        transform: scaleY(0.6);
-        transform-origin: top;
+        opacity: .3;
+
+        transform:
+            scaleY(.6);
+
+        transform-origin:
+            top;
     }
 
     50% {
         opacity: 1;
-        transform: scaleY(1);
+
+        transform:
+            scaleY(1);
     }
 }
-
 
 @keyframes modalFade {
 
@@ -3276,65 +4132,74 @@ section {
     }
 }
 
-
 @keyframes modalUp {
 
     from {
         opacity: 0;
+
         transform:
             translateY(30px)
-            scale(0.96);
+            scale(.96);
     }
 
     to {
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
 }
 
-
 @keyframes successPop {
 
     0% {
-        transform: scale(0.5);
+        transform:
+            scale(.5);
+
         opacity: 0;
     }
 
     70% {
-        transform: scale(1.08);
+        transform:
+            scale(1.08);
     }
 
     100% {
-        transform: scale(1);
+        transform:
+            scale(1);
+
         opacity: 1;
     }
 }
-
 
 @keyframes whatsappFloat {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-5px);
+        transform:
+            translateY(-5px);
     }
 }
-
 
 @keyframes whatsappRing {
 
     0% {
-        transform: scale(0.85);
-        opacity: 0.65;
+        transform:
+            scale(.85);
+
+        opacity: .65;
     }
 
     70% {
-        transform: scale(1.35);
+        transform:
+            scale(1.35);
+
         opacity: 0;
     }
 
@@ -3345,7 +4210,7 @@ section {
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
@@ -3355,7 +4220,8 @@ section {
     }
 
     .hero-container {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
         text-align: center;
     }
@@ -3378,7 +4244,8 @@ section {
     }
 
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .product-details {
@@ -3393,7 +4260,8 @@ section {
     }
 
     .order-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .order-info-card {
@@ -3401,7 +4269,8 @@ section {
     }
 
     .contact-panel {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .contact-actions {
@@ -3411,7 +4280,8 @@ section {
     }
 
     .footer-inner {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
         text-align: center;
 
@@ -3424,10 +4294,15 @@ section {
 }
 
 
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
 @media (max-width: 760px) {
 
     .section {
-        padding: 80px 0;
+        padding:
+            80px 0;
     }
 
     .section-container,
@@ -3436,7 +4311,7 @@ section {
     .footer-inner {
         width:
             min(
-                100% - 28px,
+                calc(100% - 28px),
                 1180px
             );
     }
@@ -3459,15 +4334,12 @@ section {
 
     .header-order-button {
         padding:
-            10px
-            15px;
+            10px 15px;
     }
 
     .hero-section {
         padding:
-            65px
-            0
-            80px;
+            65px 0 80px;
     }
 
     .hero-content h1 {
@@ -3478,7 +4350,8 @@ section {
                 70px
             );
 
-        letter-spacing: -2px;
+        letter-spacing:
+            -2px;
     }
 
     .hero-description {
@@ -3546,7 +4419,8 @@ section {
     }
 
     .why-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .why-card {
@@ -3567,7 +4441,8 @@ section {
     }
 
     .contact-panel {
-        padding: 30px 22px;
+        padding:
+            30px 22px;
     }
 
     .contact-actions {
@@ -3582,9 +4457,7 @@ section {
 
     .success-modal {
         padding:
-            35px
-            20px
-            25px;
+            35px 20px 25px;
     }
 
     .floating-actions {
@@ -3607,6 +4480,66 @@ section {
 
 
 /* =========================================================
+   INTRO MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    #manaIntro .intro-logo {
+
+        width: 115px;
+        height: 115px;
+
+        margin-bottom: 18px;
+    }
+
+    #manaIntro .intro-logo img {
+
+        width: 88px;
+        height: 88px;
+
+        max-width: 88px;
+        max-height: 88px;
+    }
+
+    #manaIntro .intro-small {
+
+        font-size: 7px;
+
+        letter-spacing: 3px;
+    }
+
+    #manaIntro .mana-intro-content h1 span {
+
+        letter-spacing: 5px;
+    }
+
+    #manaIntro .mana-intro-content h1 strong {
+
+        letter-spacing: 3px;
+    }
+
+    #manaIntro .mana-intro-content p {
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+    }
+
+    #manaIntro .intro-loading {
+
+        width: 120px;
+    }
+
+    #manaIntro .ring-two {
+
+        width: 300px;
+        height: 300px;
+    }
+}
+
+
+/* =========================================================
    REDUCED MOTION
 ========================================================= */
 
@@ -3615,2487 +4548,17 @@ section {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
 
-        scroll-behavior: auto !important;
+        animation-duration:
+            0.01ms !important;
 
-        transition-duration: 0.01ms !important;
-    }
-}
-/* =========================================================
-   🌶️ MANA MASALA
-   CINEMATIC PREMIUM OPENING
-========================================================= */
-
-#manaIntro {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(120, 0, 0, 0.32) 0%,
-            rgba(35, 0, 0, 0.72) 38%,
-            #030000 78%
-        );
-
-    animation:
-        introExit 1.2s
-        cubic-bezier(.76,0,.24,1)
-        3.8s forwards;
-}
-
-
-/* =========================================================
-   CENTRAL GLOW
-========================================================= */
-
-.intro-glow {
-    position: absolute;
-
-    width: 320px;
-    height: 320px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 55, 20, 0.28),
-            rgba(120, 0, 0, 0.12),
-            transparent 70%
-        );
-
-    filter: blur(8px);
-
-    animation:
-        glowPulse 2.5s ease-in-out infinite;
-}
-
-
-/* =========================================================
-   LIGHT RINGS
-========================================================= */
-
-.intro-ring {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    border: 1px solid
-        rgba(255, 70, 30, 0.22);
-
-    border-radius: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        scale(.2);
-
-    opacity: 0;
-
-    animation:
-        ringExpand 3s
-        ease-out
-        forwards;
-}
-
-.ring-one {
-    width: 280px;
-    height: 280px;
-
-    animation-delay: .4s;
-}
-
-.ring-two {
-    width: 500px;
-    height: 500px;
-
-    animation-delay: .8s;
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.intro-particles {
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-}
-
-.intro-particles span {
-    position: absolute;
-
-    color:
-        rgba(255, 100, 50, .5);
-
-    font-size: 12px;
-
-    animation:
-        particleFloat
-        3s
-        ease-in-out
-        infinite;
-}
-
-.intro-particles span:nth-child(1) {
-    left: 15%;
-    top: 22%;
-}
-
-.intro-particles span:nth-child(2) {
-    left: 82%;
-    top: 18%;
-}
-
-.intro-particles span:nth-child(3) {
-    left: 24%;
-    top: 72%;
-}
-
-.intro-particles span:nth-child(4) {
-    left: 76%;
-    top: 68%;
-}
-
-.intro-particles span:nth-child(5) {
-    left: 10%;
-    top: 48%;
-}
-
-.intro-particles span:nth-child(6) {
-    left: 90%;
-    top: 45%;
-}
-
-.intro-particles span:nth-child(7) {
-    left: 42%;
-    top: 12%;
-}
-
-.intro-particles span:nth-child(8) {
-    left: 60%;
-    top: 84%;
-}
-
-
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.mana-intro-content {
-    position: relative;
-    z-index: 5;
-
-    text-align: center;
-
-    width: min(900px, 92%);
-
-    animation:
-        contentReveal
-        1.2s
-        cubic-bezier(.16,1,.3,1)
-        .2s
-        forwards;
-
-    opacity: 0;
-}
-
-
-/* =========================================================
-   CHILLI
-========================================================= */
-
-.intro-chilli {
-    font-size: clamp(38px, 7vw, 68px);
-
-    margin-bottom: 15px;
-
-    filter:
-        drop-shadow(
-            0 0 15px
-            rgba(255, 55, 20, .8)
-        );
-
-    animation:
-        chilliReveal
-        1s
-        cubic-bezier(.16,1,.3,1)
-        .3s
-        forwards;
-}
-
-
-/* =========================================================
-   SMALL TITLE
-========================================================= */
-
-.intro-small {
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size:
-        clamp(9px, 1.5vw, 13px);
-
-    letter-spacing:
-        clamp(3px, 1vw, 8px);
-
-    color:
-        rgba(255, 210, 195, .65);
-
-    margin-bottom: 18px;
-
-    opacity: 0;
-
-    animation:
-        fadeUp
-        .8s
-        ease
-        .7s
-        forwards;
-}
-
-
-/* =========================================================
-   MAIN BRAND TITLE
-========================================================= */
-
-.mana-intro-content h1 {
-    margin: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size:
-        clamp(55px, 12vw, 145px);
-
-    font-weight: 900;
-
-    line-height: .86;
-
-    letter-spacing:
-        clamp(3px, 1vw, 10px);
-
-    text-transform: uppercase;
-
-    opacity: 0;
-
-    animation:
-        titleReveal
-        1.3s
-        cubic-bezier(.16,1,.3,1)
-        .8s
-        forwards;
-}
-
-.mana-intro-content h1 span {
-    color: #fff;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.15),
-        0 0 35px rgba(150,0,0,.4);
-}
-
-.mana-intro-content h1 strong {
-    color: transparent;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffb08c,
-            #ff4b22 35%,
-            #c40000 70%,
-            #ff6a35
-        );
-
-    background-clip: text;
-    -webkit-background-clip: text;
-
-    text-shadow:
-        0 0 25px
-        rgba(255, 50, 20, .35);
-}
-
-
-/* =========================================================
-   LINE
-========================================================= */
-
-.intro-line {
-    width: 0;
-    height: 2px;
-
-    margin:
-        25px auto 18px;
-
-    border-radius: 50px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ff3518,
-            #ff9a5a,
-            #ff3518,
-            transparent
-        );
-
-    box-shadow:
-        0 0 18px
-        rgba(255, 50, 20, .8);
-
-    animation:
-        lineReveal
-        1s
-        ease
-        1.8s
-        forwards;
-}
-
-
-/* =========================================================
-   SUBTITLE
-========================================================= */
-
-.mana-intro-content p {
-    margin: 0;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size:
-        clamp(10px, 1.8vw, 15px);
-
-    letter-spacing:
-        clamp(4px, 1vw, 9px);
-
-    color:
-        rgba(255, 230, 220, .75);
-
-    opacity: 0;
-
-    animation:
-        fadeUp
-        .8s
-        ease
-        2s
-        forwards;
-}
-
-
-/* =========================================================
-   LOADING BAR
-========================================================= */
-
-.intro-loading {
-    width: 110px;
-    height: 2px;
-
-    margin:
-        30px auto 0;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.12);
-
-    border-radius: 50px;
-
-    opacity: 0;
-
-    animation:
-        fadeIn
-        .5s
-        ease
-        2.2s
-        forwards;
-}
-
-.intro-loading span {
-    display: block;
-
-    width: 0;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff2e12,
-            #ff8a55
-        );
-
-    box-shadow:
-        0 0 10px
-        rgba(255,50,20,.8);
-
-    animation:
-        loadingBar
-        1.3s
-        ease
-        2.3s
-        forwards;
-}
-
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes contentReveal {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(25px)
-            scale(.96);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-@keyframes chilliReveal {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(-25px)
-            scale(.6)
-            rotate(-15deg);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1)
-            rotate(0);
-    }
-}
-
-@keyframes titleReveal {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(35px)
-            scale(.9);
-
-        filter: blur(14px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-    }
-}
-
-@keyframes fadeUp {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes lineReveal {
-
-    from {
-        width: 0;
-    }
-
-    to {
-        width: min(420px, 70%);
-    }
-}
-
-@keyframes loadingBar {
-
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes glowPulse {
-
-    0%,
-    100% {
-        transform: scale(.85);
-        opacity: .5;
-    }
-
-    50% {
-        transform: scale(1.15);
-        opacity: .9;
-    }
-}
-
-@keyframes ringExpand {
-
-    0% {
-        opacity: 0;
-        transform:
-            translate(-50%, -50%)
-            scale(.2);
-    }
-
-    25% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translate(-50%, -50%)
-            scale(1.5);
-    }
-}
-
-@keyframes particleFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            scale(1);
-
-        opacity: .3;
-    }
-
-    50% {
-        transform:
-            translateY(-25px)
-            scale(1.4);
-
-        opacity: .9;
-    }
-}
-
-@keyframes introExit {
-
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    70% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .mana-intro-content h1 {
-        font-size: 58px;
-        letter-spacing: 4px;
-    }
-
-    .intro-small {
-        letter-spacing: 3px;
-    }
-
-    .mana-intro-content p {
-        letter-spacing: 3px;
-    }
-
-    .ring-two {
-        width: 360px;
-        height: 360px;
-    }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    #manaIntro {
-        animation: none;
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-/* =========================================================
-   🌶️ MANA MASALA CINEMATIC FULL-SCREEN REVEAL
-========================================================= */
-
-#manaIntro {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-
-    z-index: 999999;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #3a0000 0%,
-            #170000 42%,
-            #050000 100%
-        );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 1;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
-}
-
-
-/* =========================================================
-   FULL SCREEN MASALA IMAGE
-========================================================= */
-
-.intro-product-bg {
-    position: absolute;
-
-    inset: -8%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 1;
-
-    opacity: 0;
-
-    transform:
-        scale(1.35)
-        rotate(-2deg);
-
-    filter:
-        saturate(1.25)
-        contrast(1.08)
-        brightness(.75);
-
-    animation:
-        introProductReveal 2.8s
-        cubic-bezier(.16,1,.3,1)
-        forwards;
-}
-
-
-.intro-product-bg img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    display: block;
-}
-
-
-/* =========================================================
-   DARK OVERLAY
-========================================================= */
-
-.intro-dark-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 2;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.82),
-            rgba(30,0,0,.38),
-            rgba(0,0,0,.72)
-        );
-
-    mix-blend-mode: multiply;
-}
-
-
-/* =========================================================
-   CINEMATIC RED GLOW
-========================================================= */
-
-.intro-red-glow {
-    position: absolute;
-
-    width: 70vw;
-    height: 70vw;
-
-    max-width: 900px;
-    max-height: 900px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,45,0,.28),
-            rgba(130,0,0,.12) 40%,
-            transparent 70%
-        );
-
-    filter: blur(25px);
-
-    z-index: 3;
-
-    animation:
-        introGlowPulse 2.5s ease-in-out infinite;
-}
-
-
-/* =========================================================
-   RINGS
-========================================================= */
-
-.intro-ring {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,80,30,.25);
-
-    transform:
-        translate(-50%,-50%)
-        scale(.2);
-
-    z-index: 4;
-
-    animation:
-        introRingExpand 2.6s
-        ease-out
-        forwards;
-}
-
-
-.ring-two {
-    width: 350px;
-    height: 350px;
-
-    border-color:
-        rgba(255,120,50,.14);
-
-    animation-delay: .35s;
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.intro-particles {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 5;
-
-    pointer-events: none;
-}
-
-
-.intro-particles span {
-    position: absolute;
-
-    color: rgba(255,130,70,.7);
-
-    font-size: 18px;
-
-    animation:
-        introParticleFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-.intro-particles span:nth-child(1) {
-    left: 12%;
-    top: 22%;
-}
-
-
-.intro-particles span:nth-child(2) {
-    left: 22%;
-    top: 72%;
-    animation-delay: .5s;
-}
-
-
-.intro-particles span:nth-child(3) {
-    left: 78%;
-    top: 20%;
-    animation-delay: 1s;
-}
-
-
-.intro-particles span:nth-child(4) {
-    left: 88%;
-    top: 67%;
-    animation-delay: 1.5s;
-}
-
-
-.intro-particles span:nth-child(5) {
-    left: 35%;
-    top: 15%;
-    animation-delay: 2s;
-}
-
-
-.intro-particles span:nth-child(6) {
-    left: 68%;
-    top: 80%;
-    animation-delay: 2.5s;
-}
-
-
-.intro-particles span:nth-child(7) {
-    left: 8%;
-    top: 48%;
-    animation-delay: 1.2s;
-}
-
-
-.intro-particles span:nth-child(8) {
-    left: 92%;
-    top: 40%;
-    animation-delay: 1.8s;
-}
-
-
-/* =========================================================
-   BRAND CONTENT
-========================================================= */
-
-.mana-intro-content {
-    position: relative;
-
-    z-index: 10;
-
-    text-align: center;
-
-    width: min(90%, 900px);
-
-    padding: 30px;
-
-    opacity: 0;
-
-    transform: translateY(35px);
-
-    animation:
-        introContentReveal
-        1.2s
-        cubic-bezier(.16,1,.3,1)
-        .6s
-        forwards;
-}
-
-
-/* =========================================================
-   SMALL BRAND LINE
-========================================================= */
-
-.intro-small {
-    font-family: "Poppins", sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    letter-spacing: 6px;
-
-    color: rgba(255,255,255,.78);
-
-    margin-bottom: 22px;
-}
-
-
-/* =========================================================
-   MAIN TITLE
-========================================================= */
-
-.mana-intro-content h1 {
-    margin: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    line-height: .85;
-
-    font-family: "Poppins", sans-serif;
-
-    text-transform: uppercase;
-}
-
-
-.mana-intro-content h1 span {
-    font-size: clamp(55px, 11vw, 150px);
-
-    font-weight: 300;
-
-    letter-spacing: 12px;
-
-    color: #ffffff;
-
-    text-shadow:
-        0 0 25px rgba(255,255,255,.18),
-        0 0 70px rgba(255,40,0,.18);
-
-    animation:
-        manaTitleReveal
-        1.2s
-        cubic-bezier(.16,1,.3,1)
-        .8s
-        both;
-}
-
-
-.mana-intro-content h1 strong {
-    font-size: clamp(65px, 14vw, 190px);
-
-    font-weight: 800;
-
-    letter-spacing: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff 0%,
-            #ffb08a 25%,
-            #ff3b00 55%,
-            #9b0000 100%
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
-    filter:
-        drop-shadow(
-            0 15px 35px
-            rgba(255,35,0,.35)
-        );
-
-    animation:
-        manaTitleReveal
-        1.3s
-        cubic-bezier(.16,1,.3,1)
-        1s
-        both;
-}
-
-
-/* =========================================================
-   TITLE LINE
-========================================================= */
-
-.intro-line {
-    width: 0;
-
-    height: 2px;
-
-    margin: 30px auto 22px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ff4b1f,
-            #ffb08a,
-            #ff4b1f,
-            transparent
-        );
-
-    box-shadow:
-        0 0 15px rgba(255,60,20,.6);
-
-    animation:
-        introLineReveal
-        1s
-        ease
-        1.7s
-        forwards;
-}
-
-
-/* =========================================================
-   SUBTITLE
-========================================================= */
-
-.mana-intro-content p {
-    margin: 0;
-
-    color: rgba(255,255,255,.85);
-
-    font-family: "Poppins", sans-serif;
-
-    font-size: clamp(11px, 1.5vw, 16px);
-
-    font-weight: 500;
-
-    letter-spacing: 5px;
-
-    opacity: 0;
-
-    animation:
-        introSubtitleReveal
-        1s
-        ease
-        1.9s
-        forwards;
-}
-
-
-/* =========================================================
-   INTRO EXIT
-========================================================= */
-
-#manaIntro.intro-finished {
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes introProductReveal {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            scale(1.35)
-            rotate(-2deg);
-    }
-
-    35% {
-        opacity: .28;
-    }
-
-    70% {
-        opacity: .48;
-    }
-
-    100% {
-        opacity: .58;
-
-        transform:
-            scale(1)
-            rotate(0deg);
-    }
-
-}
-
-
-@keyframes introContentReveal {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(35px)
-            scale(.96);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-
-@keyframes manaTitleReveal {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(40px)
-            scale(.85);
-
-        filter: blur(10px);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-    }
-
-}
-
-
-@keyframes introLineReveal {
-
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: min(420px, 70%);
-    }
-
-}
-
-
-@keyframes introSubtitleReveal {
-
-    0% {
-        opacity: 0;
-
-        transform: translateY(15px);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-
-}
-
-
-@keyframes introGlowPulse {
-
-    0%,
-    100% {
-        transform: scale(.85);
-
-        opacity: .45;
-    }
-
-    50% {
-        transform: scale(1.08);
-
-        opacity: .8;
-    }
-
-}
-
-
-@keyframes introRingExpand {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(.2);
-    }
-
-    30% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(4);
-    }
-
-}
-
-
-@keyframes introParticleFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            scale(1);
-
-        opacity: .3;
-    }
-
-    50% {
-        transform:
-            translateY(-25px)
-            scale(1.3);
-
-        opacity: .9;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-    .intro-product-bg {
-        inset: -5%;
-
-        transform:
-            scale(1.25);
-    }
-
-    .intro-dark-overlay {
-        background:
-            linear-gradient(
-                180deg,
-                rgba(0,0,0,.68),
-                rgba(35,0,0,.40),
-                rgba(0,0,0,.78)
-            );
-    }
-
-    .intro-small {
-        font-size: 8px;
-
-        letter-spacing: 3px;
-
-        margin-bottom: 18px;
-    }
-
-    .mana-intro-content h1 span {
-        letter-spacing: 6px;
-    }
-
-    .mana-intro-content h1 strong {
-        letter-spacing: 3px;
-    }
-
-    .mana-intro-content p {
-        font-size: 9px;
-
-        letter-spacing: 3px;
-    }
-
-    .intro-line {
-        margin-top: 22px;
-        margin-bottom: 18px;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    #manaIntro *,
-    #manaIntro {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-
-}
-/* =========================================================
-   🌶️ MANA MASALA PREMIUM INTRO
-========================================================= */
-
-#manaIntro {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-
-    z-index: 999999;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #350000 0%,
-            #170000 42%,
-            #050000 100%
-        );
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
-}
-
-
-/* =========================================================
-   CENTRAL GLOW
-========================================================= */
-
-.intro-glow {
-
-    position: absolute;
-
-    width: 420px;
-    height: 420px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,55,15,.30),
-            rgba(130,0,0,.14) 40%,
-            transparent 70%
-        );
-
-    filter: blur(25px);
-
-    animation:
-        introGlowPulse 3s ease-in-out infinite;
-
-}
-
-
-/* =========================================================
-   RINGS
-========================================================= */
-
-.intro-ring {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 220px;
-    height: 220px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid rgba(255,80,30,.25);
-
-    transform:
-        translate(-50%,-50%)
-        scale(.2);
-
-    animation:
-        ringExpand 3s ease-out forwards;
-}
-
-
-.ring-two {
-
-    width: 380px;
-    height: 380px;
-
-    border-color:
-        rgba(255,100,40,.13);
-
-    animation-delay: .35s;
-
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.intro-particles {
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-}
-
-
-.intro-particles span {
-
-    position: absolute;
-
-    color:
-        rgba(255,130,70,.75);
-
-    font-size: 18px;
-
-    animation:
-        particleFloat 4s ease-in-out infinite;
-
-}
-
-
-.intro-particles span:nth-child(1) {
-    left: 12%;
-    top: 25%;
-}
-
-.intro-particles span:nth-child(2) {
-    left: 20%;
-    top: 70%;
-    animation-delay: .5s;
-}
-
-.intro-particles span:nth-child(3) {
-    left: 80%;
-    top: 20%;
-    animation-delay: 1s;
-}
-
-.intro-particles span:nth-child(4) {
-    left: 88%;
-    top: 68%;
-    animation-delay: 1.5s;
-}
-
-.intro-particles span:nth-child(5) {
-    left: 32%;
-    top: 14%;
-    animation-delay: 2s;
-}
-
-.intro-particles span:nth-child(6) {
-    left: 70%;
-    top: 80%;
-    animation-delay: 2.5s;
-}
-
-.intro-particles span:nth-child(7) {
-    left: 8%;
-    top: 48%;
-    animation-delay: 1.2s;
-}
-
-.intro-particles span:nth-child(8) {
-    left: 92%;
-    top: 42%;
-    animation-delay: 1.8s;
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
-
-.mana-intro-content {
-
-    position: relative;
-
-    z-index: 10;
-
-    width: 90%;
-
-    max-width: 700px;
-
-    text-align: center;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    opacity: 0;
-
-    transform:
-        translateY(30px)
-        scale(.96);
-
-    animation:
-        introContentReveal
-        1.2s
-        cubic-bezier(.16,1,.3,1)
-        .25s
-        forwards;
-
-}
-
-
-/* =========================================================
-   CENTERED MASALA IMAGE
-========================================================= */
-
-.intro-logo {
-
-    width: 145px;
-    height: 145px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 22px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(40,0,0,.55);
-
-    border:
-        1px solid rgba(255,90,40,.25);
-
-    box-shadow:
-        0 0 35px rgba(255,45,10,.22),
-        inset 0 0 30px rgba(255,70,30,.08);
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
-
-    animation:
-        logoReveal
-        1.3s
-        cubic-bezier(.16,1,.3,1)
-        .35s
-        both;
-
-}
-
-
-.intro-logo img {
-
-    width: 115px;
-
-    height: 115px;
-
-    object-fit: contain;
-
-    display: block;
-
-    filter:
-        drop-shadow(
-            0 12px 25px
-            rgba(0,0,0,.55)
-        );
-
-}
-
-
-/* =========================================================
-   SMALL TEXT
-========================================================= */
-
-.intro-small {
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    letter-spacing: 5px;
-
-    color:
-        rgba(255,255,255,.75);
-
-    margin-bottom: 20px;
-
-    opacity: 0;
-
-    animation:
-        fadeUp
-        .9s ease
-        .8s forwards;
-
-}
-
-
-/* =========================================================
-   MANA MASALA TITLE
-========================================================= */
-
-.mana-intro-content h1 {
-
-    margin: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    line-height: .86;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    text-transform: uppercase;
-
-}
-
-
-.mana-intro-content h1 span {
-
-    font-size:
-        clamp(52px, 10vw, 105px);
-
-    font-weight: 300;
-
-    letter-spacing: 10px;
-
-    color: #fff;
-
-    text-shadow:
-        0 0 25px rgba(255,255,255,.16),
-        0 0 55px rgba(255,45,0,.15);
-
-    opacity: 0;
-
-    animation:
-        titleReveal
-        1.1s
-        cubic-bezier(.16,1,.3,1)
-        1s
-        forwards;
-
-}
-
-
-.mana-intro-content h1 strong {
-
-    font-size:
-        clamp(60px, 12vw, 125px);
-
-    font-weight: 800;
-
-    letter-spacing: 6px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #ffb08a 30%,
-            #ff4210 60%,
-            #9d0000
-        );
-
-    -webkit-background-clip: text;
-
-    background-clip: text;
-
-    color: transparent;
-
-    filter:
-        drop-shadow(
-            0 12px 28px
-            rgba(255,35,0,.30)
-        );
-
-    opacity: 0;
-
-    animation:
-        titleReveal
-        1.2s
-        cubic-bezier(.16,1,.3,1)
-        1.15s
-        forwards;
-
-}
-
-
-/* =========================================================
-   LINE
-========================================================= */
+        animation-iteration-count:
+            1 !important;
 
-.intro-line {
+        scroll-behavior:
+            auto !important;
 
-    width: 0;
-
-    height: 2px;
-
-    margin:
-        25px auto 20px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ff4a20,
-            #ffb08a,
-            #ff4a20,
-            transparent
-        );
-
-    box-shadow:
-        0 0 15px rgba(255,60,20,.65);
-
-    animation:
-        lineReveal
-        1s ease
-        1.8s forwards;
-
-}
-
-
-/* =========================================================
-   SUBTITLE
-========================================================= */
-
-.mana-intro-content p {
-
-    margin: 0;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 500;
-
-    letter-spacing: 5px;
-
-    color:
-        rgba(255,255,255,.82);
-
-    opacity: 0;
-
-    animation:
-        fadeUp
-        1s ease
-        2s forwards;
-
-}
-
-
-/* =========================================================
-   LOADING BAR
-========================================================= */
-
-.intro-loading {
-
-    width: 150px;
-
-    height: 2px;
-
-    margin-top: 28px;
-
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,.12);
-
-}
-
-
-.intro-loading span {
-
-    display: block;
-
-    width: 0;
-
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #8b0000,
-            #ff4b20,
-            #ffb08a
-        );
-
-    box-shadow:
-        0 0 12px rgba(255,60,20,.6);
-
-    animation:
-        loadingBar
-        2.7s
-        ease
-        .8s
-        forwards;
-
-}
-
-
-/* =========================================================
-   EXIT
-========================================================= */
-
-#manaIntro.intro-finished {
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-}
-
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes introContentReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(30px)
-            scale(.96);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-@keyframes logoReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            scale(.55)
-            rotate(-8deg);
-
-        filter: blur(8px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            scale(1)
-            rotate(0deg);
-
-        filter: blur(0);
-
-    }
-
-}
-
-
-@keyframes titleReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(35px)
-            scale(.85);
-
-        filter: blur(8px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-
-    }
-
-}
-
-
-@keyframes fadeUp {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(15px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-@keyframes lineReveal {
-
-    from {
-        width: 0;
-    }
-
-    to {
-        width: min(400px, 70vw);
-    }
-
-}
-
-
-@keyframes loadingBar {
-
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
-
-}
-
-
-@keyframes introGlowPulse {
-
-    0%,
-    100% {
-
-        transform: scale(.85);
-
-        opacity: .45;
-
-    }
-
-    50% {
-
-        transform: scale(1.08);
-
-        opacity: .8;
-
-    }
-
-}
-
-
-@keyframes ringExpand {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(.2);
-
-    }
-
-    30% {
-
-        opacity: 1;
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(3.5);
-
-    }
-
-}
-
-
-@keyframes particleFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        opacity: .3;
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-25px)
-            scale(1.3);
-
-        opacity: .9;
-
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-    .intro-logo {
-
-        width: 115px;
-        height: 115px;
-
-        margin-bottom: 18px;
-
-    }
-
-
-    .intro-logo img {
-
-        width: 90px;
-        height: 90px;
-
-    }
-
-
-    .intro-small {
-
-        font-size: 7px;
-
-        letter-spacing: 3px;
-
-    }
-
-
-    .mana-intro-content h1 span {
-
-        letter-spacing: 5px;
-
-    }
-
-
-    .mana-intro-content h1 strong {
-
-        letter-spacing: 3px;
-
-    }
-
-
-    .mana-intro-content p {
-
-        font-size: 8px;
-
-        letter-spacing: 3px;
-
+        transition-duration:
+            0.01ms !important;
     }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    #manaIntro *,
-    #manaIntro {
-
-        animation-duration: .01ms !important;
-
-        animation-iteration-count: 1 !important;
-
-        transition-duration: .01ms !important;
-
-    }
-
-}
-/* =========================================================
-   FINAL FIX — MASALA.PNG MUST NOT BECOME FULL-SCREEN
-   ========================================================= */
-
-/* Never use masala.png as a background image */
-body,
-html,
-main,
-header,
-section,
-.hero,
-.hero-section,
-.product-section,
-.order-section,
-.contact-section,
-.glimpses-section,
-#manaIntro {
-    background-image: none;
-}
-
-/* Keep the actual website background */
-body {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(10, 0, 0, 0.96),
-            rgba(45, 0, 0, 0.92)
-        ),
-        url("./background.jpeg") center / cover fixed no-repeat;
-}
-
-/* Intro gets its own dark background */
-#manaIntro {
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.35),
-            rgba(5, 0, 0, 0.98) 70%
-        );
-}
-
-/* IMPORTANT:
-   masala.png is ONLY the centered logo */
-#manaIntro .intro-logo {
-    background: rgba(40, 0, 0, 0.55) !important;
-    background-image: none !important;
-}
-
-#manaIntro .intro-logo img {
-    display: block !important;
-    width: 115px !important;
-    height: 115px !important;
-    max-width: 115px !important;
-    max-height: 115px !important;
-
-    object-fit: contain !important;
-    object-position: center !important;
-
-    background: transparent !important;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-    #manaIntro .intro-logo img {
-        width: 90px !important;
-        height: 90px !important;
-        max-width: 90px !important;
-        max-height: 90px !important;
-    }
-}
-/* =====================================================
-   MANA MASALA INTRO
-   masala.png ONLY during opening
-   ===================================================== */
-
-#manaIntro {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(90, 0, 0, 0.45),
-            rgba(5, 0, 0, 0.98) 75%
-        );
-
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
-}
-
-/* Logo visible ONLY inside intro */
-#manaIntro .intro-logo {
-    width: 145px;
-    height: 145px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin: 0 auto 22px;
-
-    border-radius: 50%;
-
-    background: rgba(35, 0, 0, 0.65);
-    border: 1px solid rgba(255, 80, 40, 0.25);
-
-    box-shadow:
-        0 0 35px rgba(150, 0, 0, 0.35),
-        inset 0 0 25px rgba(255, 50, 30, 0.08);
-
-    animation: introLogoAppear 1.2s ease forwards;
-}
-
-#manaIntro .intro-logo img {
-    width: 110px;
-    height: 110px;
-
-    object-fit: contain;
-
-    display: block;
-
-    background: transparent !important;
-
-    animation: introLogoZoom 1.2s ease forwards;
-}
-
-/* =====================================================
-   AFTER NAME REVEAL
-   Completely remove intro + masala.png
-   ===================================================== */
-
-#manaIntro.intro-finished {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-/* Make absolutely sure the intro image disappears */
-#manaIntro.intro-finished .intro-logo,
-#manaIntro.intro-finished .intro-logo img {
-    opacity: 0;
-    visibility: hidden;
-}
-
-/* =====================================================
-   WEBSITE BACKGROUND
-   Uses background.jpeg — NOT masala.png
-   ===================================================== */
-
-body {
-    background-image: url("./background.jpeg") !important;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-/* Prevent masala.png from becoming any section background */
-body,
-header,
-main,
-section,
-.hero,
-.product-section,
-.why-section,
-.glimpses-section,
-.order-section,
-.contact-section {
-    background-image: none;
-}
-
-/* Restore background.jpeg only to the main page */
-body {
-    background:
-        linear-gradient(
-            rgba(10, 0, 0, 0.72),
-            rgba(10, 0, 0, 0.82)
-        ),
-        url("./background.jpeg") center / cover fixed no-repeat !important;
-}
-
-/* =====================================================
-   ANIMATIONS
-   ===================================================== */
-
-@keyframes introLogoAppear {
-    0% {
-        opacity: 0;
-        transform: scale(0.65);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes introLogoZoom {
-    0% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-
-    #manaIntro .intro-logo {
-        width: 115px;
-        height: 115px;
-    }
-
-    #manaIntro .intro-logo img {
-        width: 88px;
-        height: 88px;
-    }
-}
-/* =====================================================
-   FORCE REMOVE MASALA.PNG AS BACKGROUND
-   ===================================================== */
-
-/* The website background */
-html,
-body {
-    background-image: url("./background.jpeg") !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-}
-
-/* Never allow masala.png as a CSS background */
-* {
-    background-image: none;
-}
-
-/* Restore ONLY the website background */
-html,
-body {
-    background:
-        linear-gradient(
-            rgba(10, 0, 0, 0.72),
-            rgba(10, 0, 0, 0.82)
-        ),
-        url("./background.jpeg") center / cover fixed no-repeat !important;
-}
-
-/* Intro itself is dark — NOT masala.png */
-#manaIntro {
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.35),
-            rgba(5, 0, 0, 0.98) 75%
-        ) !important;
-}
-
-/* masala.png is an IMAGE, never a background */
-#manaIntro .intro-logo {
-    background-image: none !important;
-}
-
-#manaIntro .intro-logo img {
-    background-image: none !important;
-}
-
-/* After intro */
-#manaIntro.intro-finished {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
 }

@@ -4550,3 +4550,260 @@ body {
     }
 
 }
+/* =========================================================
+   💎 MANA MASALA - PREMIUM PRICE BADGES
+========================================================= */
+
+.price-badges {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+
+/* ---------------------------------------------------------
+   ₹350 / KG BADGE
+--------------------------------------------------------- */
+
+.price-badge {
+    position: relative;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+
+    padding: 14px 22px;
+
+    border: 1px solid rgba(255, 90, 50, 0.35);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(110, 10, 5, 0.72),
+            rgba(20, 0, 0, 0.82)
+        );
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+    transform: translateZ(0);
+
+    animation:
+        priceBadgeFloat 4s ease-in-out infinite;
+}
+
+
+.price-badge span {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+
+    letter-spacing: -1px;
+}
+
+
+.price-badge small {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+
+/* ---------------------------------------------------------
+   PRICE BADGE GLOW
+--------------------------------------------------------- */
+
+.price-badge::before {
+    content: "";
+
+    position: absolute;
+    inset: -50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 65, 30, 0.2),
+            transparent 60%
+        );
+
+    animation:
+        priceGlow 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+@keyframes priceGlow {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.9;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   PRICE SHINE
+--------------------------------------------------------- */
+
+.price-badge::after {
+    content: "";
+
+    position: absolute;
+
+    top: -100%;
+    left: -60%;
+
+    width: 35%;
+    height: 300%;
+
+    transform: rotate(25deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+
+    animation:
+        priceBadgeShine 5s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+@keyframes priceBadgeShine {
+
+    0% {
+        left: -60%;
+    }
+
+    35%,
+    100% {
+        left: 150%;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   FLOAT
+--------------------------------------------------------- */
+
+@keyframes priceBadgeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   MINIMUM ORDER BADGE
+--------------------------------------------------------- */
+
+.minimum-badge {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 13px 19px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+
+.minimum-badge:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(255, 80, 40, 0.35);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(255, 60, 30, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .price-badges {
+        gap: 12px;
+    }
+
+    .price-badge {
+        padding: 12px 17px;
+    }
+
+    .price-badge span {
+        font-size: 1.65rem;
+    }
+
+    .minimum-badge {
+        padding: 11px 15px;
+        font-size: 0.82rem;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .price-badge,
+    .price-badge::before,
+    .price-badge::after {
+        animation: none;
+    }
+
+}

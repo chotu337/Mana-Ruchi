@@ -6045,3 +6045,57 @@ body {
         height: 88px;
     }
 }
+/* =====================================================
+   FORCE REMOVE MASALA.PNG AS BACKGROUND
+   ===================================================== */
+
+/* The website background */
+html,
+body {
+    background-image: url("./background.jpeg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+}
+
+/* Never allow masala.png as a CSS background */
+* {
+    background-image: none;
+}
+
+/* Restore ONLY the website background */
+html,
+body {
+    background:
+        linear-gradient(
+            rgba(10, 0, 0, 0.72),
+            rgba(10, 0, 0, 0.82)
+        ),
+        url("./background.jpeg") center / cover fixed no-repeat !important;
+}
+
+/* Intro itself is dark — NOT masala.png */
+#manaIntro {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100, 0, 0, 0.35),
+            rgba(5, 0, 0, 0.98) 75%
+        ) !important;
+}
+
+/* masala.png is an IMAGE, never a background */
+#manaIntro .intro-logo {
+    background-image: none !important;
+}
+
+#manaIntro .intro-logo img {
+    background-image: none !important;
+}
+
+/* After intro */
+#manaIntro.intro-finished {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}

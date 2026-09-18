@@ -4562,3 +4562,92 @@ body::after {
             0.01ms !important;
     }
 }
+/* =========================================================
+   FINAL MASALA.PNG PROTECTION
+   masala.png must NEVER become a full-screen background
+========================================================= */
+
+/* Hide any masala.png used as a background */
+body,
+html,
+main,
+section,
+.hero-section,
+.hero-visual,
+.hero-product-card,
+.product-showcase-card {
+    background-image: none !important;
+}
+
+/* Restore ONLY the actual website background */
+body {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 0, 0, 0.96),
+            rgba(40, 0, 0, 0.82),
+            rgba(5, 0, 0, 0.96)
+        ),
+        url("./background.jpeg")
+        center center / cover fixed no-repeat !important;
+}
+
+/* Intro itself */
+#manaIntro {
+    background:
+        radial-gradient(
+            circle at center,
+            #3b0000 0%,
+            #170000 42%,
+            #030000 100%
+        ) !important;
+}
+
+/* masala.png ONLY inside intro */
+#manaIntro .intro-logo {
+    background:
+        rgba(35, 0, 0, .65) !important;
+}
+
+#manaIntro .intro-logo img {
+    width: 110px !important;
+    height: 110px !important;
+    max-width: 110px !important;
+    max-height: 110px !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    position: relative !important;
+    display: block !important;
+
+    background: transparent !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* COMPLETELY REMOVE INTRO AFTER REVEAL */
+#manaIntro.intro-finished,
+#manaIntro.intro-finished * {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Remove intro from layout and rendering */
+#manaIntro.intro-finished {
+    display: none !important;
+}
+
+/* Prevent any accidental full-screen image */
+img[src*="masala.png"] {
+    object-fit: contain !important;
+    background: transparent !important;
+}
+
+/* Only intro logo gets visible */
+body img[src*="masala.png"] {
+    max-width: 110px !important;
+    max-height: 110px !important;
+}

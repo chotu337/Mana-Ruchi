@@ -2,11 +2,12 @@
    🌶️ MANA MASALA
    COMPLETE ORDER SYSTEM
    Supabase + Order Saving + Notification
+   Diagnostic Version
 
    IMPORTANT:
    - Customer INSERT does NOT use .select()
-   - This prevents anonymous SELECT/RLS issues
-   - Existing notification function is preserved
+   - Exact Supabase errors are shown
+   - Existing email notification is preserved
 ========================================================= */
 
 console.log("🌶️ Mana Masala script.js loaded");
@@ -51,12 +52,14 @@ document.addEventListener(
 
         updateOrderTotal();
 
-        console.log("🌶️ Mana Masala system ready");
+        console.log(
+            "🌶️ Mana Masala system ready"
+        );
     }
 );
 
 /* =========================================================
-   SUPABASE INITIALIZATION
+   SUPABASE
 ========================================================= */
 
 function initializeSupabase() {
@@ -95,19 +98,25 @@ function initializeSupabase() {
 }
 
 /* =========================================================
-   QUANTITY SYSTEM
+   QUANTITY
 ========================================================= */
 
 function initializeQuantity() {
 
     const quantity =
-        document.getElementById("quantity");
+        document.getElementById(
+            "quantity"
+        );
 
     const minusBtn =
-        document.getElementById("minusBtn");
+        document.getElementById(
+            "minusBtn"
+        );
 
     const plusBtn =
-        document.getElementById("plusBtn");
+        document.getElementById(
+            "plusBtn"
+        );
 
     if (!quantity) {
 
@@ -130,7 +139,8 @@ function initializeQuantity() {
                     parseInt(
                         quantity.value,
                         10
-                    ) || MINIMUM_ORDER;
+                    ) ||
+                    MINIMUM_ORDER;
 
                 current--;
 
@@ -138,6 +148,7 @@ function initializeQuantity() {
                     current <
                     MINIMUM_ORDER
                 ) {
+
                     current =
                         MINIMUM_ORDER;
                 }
@@ -162,7 +173,8 @@ function initializeQuantity() {
                     parseInt(
                         quantity.value,
                         10
-                    ) || MINIMUM_ORDER;
+                    ) ||
+                    MINIMUM_ORDER;
 
                 current++;
 
@@ -231,7 +243,7 @@ function initializeQuantity() {
 }
 
 /* =========================================================
-   TOTAL CALCULATION
+   TOTAL
 ========================================================= */
 
 function updateOrderTotal() {
@@ -343,7 +355,7 @@ async function handleOrderSubmit(event) {
     event.preventDefault();
 
     console.log(
-        "🛒 Order submission started"
+        "🛒 ORDER SUBMISSION STARTED"
     );
 
     const customerName =
@@ -491,27 +503,75 @@ async function handleOrderSubmit(event) {
         return;
     }
 
+    /* =====================================================
+       SUPABASE CHECK
+    ===================================================== */
+
     if (!supabaseClient) {
 
         showOrderMessage(
-            "Connection problem. Please refresh the page and try again.",
+            "Supabase connection is not available. Please refresh the page.",
             "error"
         );
 
         console.error(
-            "❌ Supabase client unavailable"
+            "❌ SUPABASE CLIENT IS NULL"
         );
 
         return;
     }
 
-    /* =====================================================
-       TOTAL
-    ===================================================== */
-
     const totalAmount =
         quantity *
         PRICE_PER_KG;
+
+    /* =====================================================
+       DEBUG INFORMATION
+    ===================================================== */
+
+    console.log(
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    );
+
+    console.log(
+        "🌶️ MANA MASALA ORDER DEBUG"
+    );
+
+    console.log(
+        "Supabase URL:",
+        SUPABASE_URL
+    );
+
+    console.log(
+        "Supabase client:",
+        supabaseClient
+            ? "READY"
+            : "NOT READY"
+    );
+
+    console.log(
+        "Customer:",
+        customerName
+    );
+
+    console.log(
+        "Phone:",
+        customerPhone
+    );
+
+    console.log(
+        "Quantity:",
+        quantity
+    );
+
+    console.log(
+        "Total:",
+        totalAmount
+    );
+
+    console.log(
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    );
 
     /* =====================================================
        BUTTON LOADING
@@ -539,29 +599,20 @@ async function handleOrderSubmit(event) {
 
     clearOrderMessage();
 
+    /* =====================================================
+       INSERT ORDER
+    ===================================================== */
+
     try {
 
-        /* =================================================
-           INSERT ORDER
-
-           IMPORTANT:
-           NO .select()
-           NO .single()
-
-           This allows anonymous customers to insert
-           without requiring anonymous SELECT access.
-        ================================================= */
-
         console.log(
-            "📦 Saving order to Supabase..."
+            "📡 Sending INSERT request..."
         );
 
-        const {
-            error
-        } = await supabaseClient
-            .from("orders")
-            .insert([
-                {
+        const result =
+            await supabaseClient
+                .from("orders")
+                .insert({
                     customer_name:
                         customerName,
 
@@ -579,18 +630,38 @@ async function handleOrderSubmit(event) {
 
                     status:
                         "New"
-                }
-            ]);
+                });
+
+        console.log(
+            "📡 COMPLETE SUPABASE RESULT:",
+            result
+        );
+
+        console.log(
+            "📡 RESULT DATA:",
+            result?.data
+        );
+
+        console.log(
+            "📡 RESULT ERROR:",
+            result?.error
+        );
 
         /* =================================================
            INSERT ERROR
         ================================================= */
 
-        if (error) {
+        if (result.error) {
+
+            const error =
+                result.error;
 
             console.error(
-                "❌ FULL SUPABASE ERROR:",
-                error
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            );
+
+            console.error(
+                "❌ INSERT FAILED"
             );
 
             console.error(
@@ -613,28 +684,56 @@ async function handleOrderSubmit(event) {
                 error.hint
             );
 
-            throw new Error(
-                getReadableSupabaseError(
+            console.error(
+                "❌ FULL ERROR:",
+                JSON.stringify(
                     error
                 )
             );
+
+            console.error(
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            );
+
+            /*
+             * TEMPORARY DIAGNOSTIC MESSAGE
+             * This intentionally exposes the actual
+             * Supabase error.
+             */
+
+            showOrderMessage(
+                `Supabase ${error.code || "ERROR"}: ${
+                    error.message ||
+                    "Unknown error"
+                }`,
+                "error"
+            );
+
+            return;
         }
 
         /* =================================================
-           ORDER SAVED
+           INSERT SUCCESS
         ================================================= */
 
         console.log(
-            "✅ Order saved successfully"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        );
+
+        console.log(
+            "✅ ORDER INSERT SUCCESSFUL"
+        );
+
+        console.log(
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
         );
 
         /*
-           Because we intentionally don't use .select(),
-           the browser doesn't receive the database row ID.
-
-           We use a temporary client-side reference for
-           the customer confirmation.
-        */
+         * Since we intentionally don't use .select(),
+         * the database-generated ID isn't returned.
+         *
+         * Create a customer-facing reference.
+         */
 
         const temporaryOrderId =
             "MM-" +
@@ -655,12 +754,7 @@ async function handleOrderSubmit(event) {
                 "📧 Sending owner notification..."
             );
 
-            const {
-                data:
-                    notificationData,
-                error:
-                    notificationError
-            } =
+            const notificationResult =
                 await supabaseClient
                     .functions
                     .invoke(
@@ -689,13 +783,18 @@ async function handleOrderSubmit(event) {
                         }
                     );
 
+            console.log(
+                "📧 Notification result:",
+                notificationResult
+            );
+
             if (
-                notificationError
+                notificationResult.error
             ) {
 
                 console.warn(
                     "⚠️ Notification error:",
-                    notificationError
+                    notificationResult.error
                 );
 
             } else {
@@ -704,8 +803,7 @@ async function handleOrderSubmit(event) {
                     true;
 
                 console.log(
-                    "✅ Notification response:",
-                    notificationData
+                    "✅ Owner notification sent"
                 );
             }
 
@@ -720,7 +818,7 @@ async function handleOrderSubmit(event) {
         }
 
         /* =================================================
-           SUCCESS MODAL
+           SUCCESS MESSAGE / MODAL
         ================================================= */
 
         showSuccessModal({
@@ -760,20 +858,31 @@ async function handleOrderSubmit(event) {
 
         console.log(
             notificationSuccess
-                ? "🎉 Order + notification completed"
-                : "🎉 Order saved; notification may need attention"
+                ? "🎉 ORDER + NOTIFICATION COMPLETED"
+                : "🎉 ORDER SAVED; NOTIFICATION NEEDS ATTENTION"
         );
 
     } catch (error) {
 
         console.error(
-            "❌ Order process failed:",
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        );
+
+        console.error(
+            "🔥 JAVASCRIPT EXCEPTION"
+        );
+
+        console.error(
             error
         );
 
+        console.error(
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        );
+
         showOrderMessage(
-            error.message ||
-            "Unable to place the order. Please try again.",
+            error?.message ||
+            "Unexpected error occurred.",
             "error"
         );
 
@@ -800,66 +909,6 @@ async function handleOrderSubmit(event) {
 }
 
 /* =========================================================
-   SUPABASE ERROR
-========================================================= */
-
-function getReadableSupabaseError(
-    error
-) {
-
-    if (!error) {
-
-        return (
-            "Unable to place the order."
-        );
-    }
-
-    const message =
-        error.message || "";
-
-    const code =
-        error.code || "";
-
-    console.error(
-        "🔎 Supabase error code:",
-        code
-    );
-
-    console.error(
-        "🔎 Supabase error message:",
-        message
-    );
-
-    if (
-        message.includes(
-            "row-level security"
-        ) ||
-        code === "42501"
-    ) {
-
-        return (
-            "Order permission was denied. Please try again."
-        );
-    }
-
-    if (
-        message.includes(
-            "Failed to fetch"
-        )
-    ) {
-
-        return (
-            "Network connection problem. Please check your internet connection."
-        );
-    }
-
-    return (
-        message ||
-        "Unable to place the order."
-    );
-}
-
-/* =========================================================
    ORDER MESSAGE
 ========================================================= */
 
@@ -874,6 +923,11 @@ function showOrderMessage(
         );
 
     if (!message) {
+
+        console.warn(
+            "⚠️ orderMessage element not found"
+        );
+
         return;
     }
 
@@ -885,7 +939,7 @@ function showOrderMessage(
 }
 
 /* =========================================================
-   CLEAR ORDER MESSAGE
+   CLEAR MESSAGE
 ========================================================= */
 
 function clearOrderMessage() {
@@ -1008,6 +1062,11 @@ function showSuccessModal(
         );
 
     if (!modal) {
+
+        console.warn(
+            "⚠️ successModal not found"
+        );
+
         return;
     }
 
@@ -1033,7 +1092,7 @@ function showSuccessModal(
     }
 
     /* =====================================================
-       WHATSAPP ORDER MESSAGE
+       WHATSAPP
     ===================================================== */
 
     if (whatsappButton) {
@@ -1130,6 +1189,7 @@ function initializeNavigation() {
                         !targetId ||
                         targetId === "#"
                     ) {
+
                         return;
                     }
 
@@ -1213,7 +1273,7 @@ function initializeFooter() {
 }
 
 /* =========================================================
-   FINAL SAFETY LOG
+   FINAL LOG
 ========================================================= */
 
 console.log(

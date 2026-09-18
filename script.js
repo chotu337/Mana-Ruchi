@@ -570,18 +570,19 @@ async function handleOrderSubmit(event) {
             .select()
             .single();
 
+if (error) {
 
-        if (error) {
+    console.error("❌ SUPABASE FULL ERROR:", error);
 
-            console.error(
-                "❌ Supabase order error:",
-                error
-            );
+    alert(
+        "Supabase Error:\n" +
+        JSON.stringify(error, null, 2)
+    );
 
-            throw new Error(
-                getReadableSupabaseError(error)
-            );
-        }
+    throw new Error(
+        getReadableSupabaseError(error)
+    );
+}
 
 
         console.log(

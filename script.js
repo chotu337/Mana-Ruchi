@@ -14,6 +14,12 @@ console.log("🌶️ Mana Masala script.js loaded");
 const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
 
+/*
+   IMPORTANT:
+   Paste your CURRENT Supabase publishable key here.
+   It should start with:
+   sb_publishable_
+*/
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
@@ -73,8 +79,24 @@ function initializeSupabase() {
             !window.supabase ||
             typeof window.supabase.createClient !== "function"
         ) {
+
             console.error(
                 "❌ Supabase library not available"
+            );
+
+            return;
+        }
+
+
+        if (
+            !SUPABASE_PUBLISHABLE_KEY ||
+            !SUPABASE_PUBLISHABLE_KEY.startsWith(
+                "sb_publishable_"
+            )
+        ) {
+
+            console.error(
+                "❌ Invalid or missing Supabase publishable key"
             );
 
             return;
@@ -91,6 +113,63 @@ function initializeSupabase() {
         console.log(
             "✅ Supabase client created"
         );
+
+        console.log(
+            "🔎 Supabase URL:",
+            SUPABASE_URL
+        );
+
+        console.log(
+            "🔎 Supabase key type:",
+            SUPABASE_PUBLISHABLE_KEY.startsWith(
+                "sb_publishable_"
+            )
+                ? "PUBLISHABLE KEY"
+                : "OTHER KEY"
+        );
+
+
+        /*
+           Temporary session diagnostic.
+           This does NOT change authentication.
+        */
+
+        supabaseClient.auth
+            .getSession()
+            .then(
+                ({ data, error }) => {
+
+                    if (error) {
+
+                        console.warn(
+                            "⚠️ Auth session check:",
+                            error
+                        );
+
+                        return;
+                    }
+
+
+                    console.log(
+                        "🔐 Supabase session:",
+                        data?.session
+                            ? "AUTHENTICATED"
+                            : "ANONYMOUS"
+                    );
+
+                }
+            )
+            .catch(
+                error => {
+
+                    console.warn(
+                        "⚠️ Session check failed:",
+                        error
+                    );
+
+                }
+            );
+
 
     } catch (error) {
 
@@ -110,13 +189,19 @@ function initializeSupabase() {
 function initializeQuantity() {
 
     const quantity =
-        document.getElementById("quantity");
+        document.getElementById(
+            "quantity"
+        );
 
     const minusBtn =
-        document.getElementById("minusBtn");
+        document.getElementById(
+            "minusBtn"
+        );
 
     const plusBtn =
-        document.getElementById("plusBtn");
+        document.getElementById(
+            "plusBtn"
+        );
 
 
     if (!quantity) {
@@ -136,18 +221,32 @@ function initializeQuantity() {
             () => {
 
                 let current =
-                    parseInt(quantity.value, 10) ||
+                    parseInt(
+                        quantity.value,
+                        10
+                    ) ||
                     MINIMUM_ORDER;
+
 
                 current--;
 
-                if (current < MINIMUM_ORDER) {
-                    current = MINIMUM_ORDER;
+
+                if (
+                    current <
+                    MINIMUM_ORDER
+                ) {
+
+                    current =
+                        MINIMUM_ORDER;
                 }
 
-                quantity.value = current;
+
+                quantity.value =
+                    current;
+
 
                 updateOrderTotal();
+
             }
         );
 
@@ -161,14 +260,22 @@ function initializeQuantity() {
             () => {
 
                 let current =
-                    parseInt(quantity.value, 10) ||
+                    parseInt(
+                        quantity.value,
+                        10
+                    ) ||
                     MINIMUM_ORDER;
+
 
                 current++;
 
-                quantity.value = current;
+
+                quantity.value =
+                    current;
+
 
                 updateOrderTotal();
+
             }
         );
 
@@ -180,22 +287,31 @@ function initializeQuantity() {
         () => {
 
             let current =
-                parseInt(quantity.value, 10);
+                parseInt(
+                    quantity.value,
+                    10
+                );
+
 
             if (
                 Number.isNaN(current) ||
-                current < MINIMUM_ORDER
+                current <
+                MINIMUM_ORDER
             ) {
 
                 if (
                     quantity.value !== ""
                 ) {
+
                     quantity.value =
                         MINIMUM_ORDER;
                 }
+
             }
 
+
             updateOrderTotal();
+
         }
     );
 
@@ -205,17 +321,25 @@ function initializeQuantity() {
         () => {
 
             let current =
-                parseInt(quantity.value, 10);
+                parseInt(
+                    quantity.value,
+                    10
+                );
+
 
             if (
                 Number.isNaN(current) ||
-                current < MINIMUM_ORDER
+                current <
+                MINIMUM_ORDER
             ) {
+
                 quantity.value =
                     MINIMUM_ORDER;
             }
 
+
             updateOrderTotal();
+
         }
     );
 
@@ -229,13 +353,19 @@ function initializeQuantity() {
 function updateOrderTotal() {
 
     const quantity =
-        document.getElementById("quantity");
+        document.getElementById(
+            "quantity"
+        );
 
     const totalAmount =
-        document.getElementById("totalAmount");
+        document.getElementById(
+            "totalAmount"
+        );
 
     const summaryQuantity =
-        document.getElementById("summaryQuantity");
+        document.getElementById(
+            "summaryQuantity"
+        );
 
 
     if (!quantity) {
@@ -244,16 +374,21 @@ function updateOrderTotal() {
 
 
     let quantityValue =
-        parseInt(quantity.value, 10);
+        parseInt(
+            quantity.value,
+            10
+        );
 
 
     if (
         Number.isNaN(quantityValue) ||
-        quantityValue < MINIMUM_ORDER
+        quantityValue <
+        MINIMUM_ORDER
     ) {
 
         quantityValue =
             MINIMUM_ORDER;
+
 
         quantity.value =
             quantityValue;
@@ -304,7 +439,9 @@ function formatCurrency(amount) {
 function initializeOrderForm() {
 
     const orderForm =
-        document.getElementById("orderForm");
+        document.getElementById(
+            "orderForm"
+        );
 
 
     if (!orderForm) {
@@ -326,6 +463,7 @@ function initializeOrderForm() {
     console.log(
         "✅ Order submit handler attached"
     );
+
 }
 
 
@@ -337,6 +475,7 @@ async function handleOrderSubmit(event) {
 
     event.preventDefault();
 
+
     console.log(
         "🛒 Order submission started"
     );
@@ -344,35 +483,41 @@ async function handleOrderSubmit(event) {
 
     const customerName =
         document
-            .getElementById("customerName")
+            .getElementById(
+                "customerName"
+            )
             ?.value
             .trim();
 
 
     const customerPhone =
         document
-            .getElementById("phone")
+            .getElementById(
+                "phone"
+            )
             ?.value
             .trim();
 
 
     const address =
         document
-            .getElementById("address")
+            .getElementById(
+                "address"
+            )
             ?.value
             .trim();
 
 
     const quantityElement =
-        document.getElementById("quantity");
+        document.getElementById(
+            "quantity"
+        );
 
 
     const orderButton =
-        document.getElementById("orderSubmit");
-
-
-    const message =
-        document.getElementById("orderMessage");
+        document.getElementById(
+            "orderSubmit"
+        );
 
 
     let quantity =
@@ -382,9 +527,9 @@ async function handleOrderSubmit(event) {
         );
 
 
-    /* ---------------------------------------------
+    /* =====================================================
        VALIDATION
-    --------------------------------------------- */
+    ===================================================== */
 
     if (!customerName) {
 
@@ -394,7 +539,9 @@ async function handleOrderSubmit(event) {
         );
 
         document
-            .getElementById("customerName")
+            .getElementById(
+                "customerName"
+            )
             ?.focus();
 
         return;
@@ -409,7 +556,9 @@ async function handleOrderSubmit(event) {
         );
 
         document
-            .getElementById("phone")
+            .getElementById(
+                "phone"
+            )
             ?.focus();
 
         return;
@@ -424,7 +573,8 @@ async function handleOrderSubmit(event) {
 
 
     if (
-        cleanPhone.length < 10
+        cleanPhone.length <
+        10
     ) {
 
         showOrderMessage(
@@ -433,7 +583,9 @@ async function handleOrderSubmit(event) {
         );
 
         document
-            .getElementById("phone")
+            .getElementById(
+                "phone"
+            )
             ?.focus();
 
         return;
@@ -448,7 +600,9 @@ async function handleOrderSubmit(event) {
         );
 
         document
-            .getElementById("address")
+            .getElementById(
+                "address"
+            )
             ?.focus();
 
         return;
@@ -457,23 +611,29 @@ async function handleOrderSubmit(event) {
 
     if (
         Number.isNaN(quantity) ||
-        quantity < MINIMUM_ORDER
+        quantity <
+        MINIMUM_ORDER
     ) {
 
         quantity =
             MINIMUM_ORDER;
 
+
         if (quantityElement) {
+
             quantityElement.value =
                 MINIMUM_ORDER;
         }
 
+
         updateOrderTotal();
+
 
         showOrderMessage(
             `Minimum order is ${MINIMUM_ORDER} KG.`,
             "error"
         );
+
 
         return;
     }
@@ -486,26 +646,28 @@ async function handleOrderSubmit(event) {
             "error"
         );
 
+
         console.error(
             "❌ Supabase client unavailable"
         );
+
 
         return;
     }
 
 
-    /* ---------------------------------------------
+    /* =====================================================
        TOTAL
-    --------------------------------------------- */
+    ===================================================== */
 
     const totalAmount =
         quantity *
         PRICE_PER_KG;
 
 
-    /* ---------------------------------------------
+    /* =====================================================
        BUTTON LOADING
-    --------------------------------------------- */
+    ===================================================== */
 
     const originalButtonHTML =
         orderButton?.innerHTML;
@@ -513,13 +675,16 @@ async function handleOrderSubmit(event) {
 
     if (orderButton) {
 
-        orderButton.disabled = true;
+        orderButton.disabled =
+            true;
+
 
         orderButton.innerHTML =
             `
                 <span class="submit-text">
                     Placing Order...
                 </span>
+
                 <span class="submit-arrow">
                     ⏳
                 </span>
@@ -537,9 +702,47 @@ async function handleOrderSubmit(event) {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
+           DEBUG INFORMATION
+        ================================================= */
+
+        console.log(
+            "🔎 ORDER DEBUG"
+        );
+
+        console.log(
+            "Supabase URL:",
+            SUPABASE_URL
+        );
+
+        console.log(
+            "Supabase key type:",
+            SUPABASE_PUBLISHABLE_KEY.startsWith(
+                "sb_publishable_"
+            )
+                ? "PUBLISHABLE KEY"
+                : "OTHER KEY"
+        );
+
+        console.log(
+            "Customer:",
+            customerName
+        );
+
+        console.log(
+            "Quantity:",
+            quantity
+        );
+
+        console.log(
+            "Total:",
+            totalAmount
+        );
+
+
+        /* =================================================
            INSERT ORDER
-        ----------------------------------------- */
+        ================================================= */
 
         const {
             data,
@@ -570,20 +773,70 @@ async function handleOrderSubmit(event) {
             .select()
             .single();
 
-if (error) {
 
-    console.error("❌ SUPABASE FULL ERROR:", error);
+        /* =================================================
+           SUPABASE ERROR
+        ================================================= */
 
-    alert(
-        "Supabase Error:\n" +
-        JSON.stringify(error, null, 2)
-    );
+        if (error) {
 
-    throw new Error(
-        getReadableSupabaseError(error)
-    );
-}
+            console.error(
+                "❌ FULL SUPABASE ERROR:",
+                error
+            );
 
+            console.error(
+                "❌ ERROR CODE:",
+                error.code
+            );
+
+            console.error(
+                "❌ ERROR MESSAGE:",
+                error.message
+            );
+
+            console.error(
+                "❌ ERROR DETAILS:",
+                error.details
+            );
+
+            console.error(
+                "❌ ERROR HINT:",
+                error.hint
+            );
+
+
+            /*
+               TEMPORARY MOBILE DEBUG POPUP
+            */
+
+            alert(
+                "Supabase Error\n\n" +
+                "Code: " +
+                (error.code || "none") +
+                "\n\n" +
+                "Message: " +
+                (error.message || "none") +
+                "\n\n" +
+                "Details: " +
+                (error.details || "none") +
+                "\n\n" +
+                "Hint: " +
+                (error.hint || "none")
+            );
+
+
+            throw new Error(
+                getReadableSupabaseError(
+                    error
+                )
+            );
+        }
+
+
+        /* =================================================
+           ORDER SAVED
+        ================================================= */
 
         console.log(
             "✅ Order saved:",
@@ -595,9 +848,9 @@ if (error) {
             data?.id;
 
 
-        /* -----------------------------------------
+        /* =================================================
            NOTIFICATION
-        ----------------------------------------- */
+        ================================================= */
 
         let notificationSuccess =
             false;
@@ -611,36 +864,41 @@ if (error) {
 
 
             const {
-                data: notificationData,
-                error: notificationError
+                data:
+                    notificationData,
+                error:
+                    notificationError
             } =
-                await supabaseClient.functions.invoke(
-                    "new-order-notification",
-                    {
-                        body: {
-                            order_id:
-                                orderId,
+                await supabaseClient
+                    .functions
+                    .invoke(
+                        "new-order-notification",
+                        {
+                            body: {
 
-                            customer_name:
-                                customerName,
+                                order_id:
+                                    orderId,
 
-                            customer_phone:
-                                customerPhone,
+                                customer_name:
+                                    customerName,
 
-                            quantity_kg:
-                                quantity,
+                                customer_phone:
+                                    customerPhone,
 
-                            address:
-                                address,
+                                quantity_kg:
+                                    quantity,
 
-                            total_amount:
-                                totalAmount,
+                                address:
+                                    address,
 
-                            status:
-                                "New"
+                                total_amount:
+                                    totalAmount,
+
+                                status:
+                                    "New"
+                            }
                         }
-                    }
-                );
+                    );
 
 
             if (notificationError) {
@@ -655,13 +913,18 @@ if (error) {
                 notificationSuccess =
                     true;
 
+
                 console.log(
                     "✅ Notification response:",
                     notificationData
                 );
+
             }
 
-        } catch (notificationError) {
+
+        } catch (
+            notificationError
+        ) {
 
             console.warn(
                 "⚠️ Notification failed:",
@@ -671,11 +934,12 @@ if (error) {
         }
 
 
-        /* -----------------------------------------
-           SUCCESS
-        ----------------------------------------- */
+        /* =================================================
+           SUCCESS MODAL
+        ================================================= */
 
         showSuccessModal({
+
             orderId:
                 orderId,
 
@@ -724,6 +988,7 @@ if (error) {
             orderButton.disabled =
                 false;
 
+
             orderButton.innerHTML =
                 originalButtonHTML ||
                 `
@@ -750,7 +1015,9 @@ function getReadableSupabaseError(error) {
 
     if (!error) {
 
-        return "Unable to place the order.";
+        return (
+            "Unable to place the order."
+        );
     }
 
 
@@ -760,8 +1027,12 @@ function getReadableSupabaseError(error) {
 
 
     if (
-        message.includes("row-level security") ||
-        message.includes("42501")
+        message.includes(
+            "row-level security"
+        ) ||
+        message.includes(
+            "42501"
+        )
     ) {
 
         return (
@@ -771,7 +1042,21 @@ function getReadableSupabaseError(error) {
 
 
     if (
-        message.includes("Failed to fetch")
+        message.includes(
+            "Invalid API key"
+        )
+    ) {
+
+        return (
+            "Connection authentication failed. Please refresh the page and try again."
+        );
+    }
+
+
+    if (
+        message.includes(
+            "Failed to fetch"
+        )
     ) {
 
         return (
@@ -784,11 +1069,12 @@ function getReadableSupabaseError(error) {
         message ||
         "Unable to place the order."
     );
+
 }
 
 
 /* =========================================================
-   MESSAGE
+   ORDER MESSAGE
 ========================================================= */
 
 function showOrderMessage(
@@ -810,8 +1096,10 @@ function showOrderMessage(
     message.textContent =
         text;
 
+
     message.className =
         `order-message show ${type}`;
+
 }
 
 
@@ -831,8 +1119,10 @@ function clearOrderMessage() {
     message.textContent =
         "";
 
+
     message.className =
         "order-message";
+
 }
 
 
@@ -904,6 +1194,7 @@ function initializeModal() {
             "click",
             closeSuccessModal
         );
+
     }
 
 
@@ -913,6 +1204,7 @@ function initializeModal() {
             "click",
             closeSuccessModal
         );
+
     }
 
 
@@ -930,7 +1222,9 @@ function initializeModal() {
                 "click",
                 closeSuccessModal
             );
+
         }
+
     }
 
 
@@ -939,11 +1233,13 @@ function initializeModal() {
         event => {
 
             if (
-                event.key === "Escape"
+                event.key ===
+                "Escape"
             ) {
 
                 closeSuccessModal();
             }
+
         }
     );
 
@@ -996,6 +1292,7 @@ function showSuccessModal(order) {
         orderId.textContent =
             order.orderId ??
             "—";
+
     }
 
 
@@ -1003,6 +1300,7 @@ function showSuccessModal(order) {
 
         successQuantity.textContent =
             `${order.quantity} KG`;
+
     }
 
 
@@ -1012,6 +1310,7 @@ function showSuccessModal(order) {
             formatCurrency(
                 order.total
             );
+
     }
 
 
@@ -1035,6 +1334,7 @@ function showSuccessModal(order) {
             `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                 whatsappMessage
             )}`;
+
     }
 
 
@@ -1118,6 +1418,7 @@ function initializeNavigation() {
                         !targetId ||
                         targetId === "#"
                     ) {
+
                         return;
                     }
 
@@ -1137,8 +1438,11 @@ function initializeNavigation() {
 
 
                     target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "start"
                     });
 
                 }
@@ -1174,6 +1478,7 @@ function initializeVideo() {
             console.warn(
                 "⚠️ glimpse.mp4 could not be loaded."
             );
+
         }
     );
 
@@ -1185,6 +1490,7 @@ function initializeVideo() {
             console.log(
                 "🎥 Glimpses video loaded"
             );
+
         }
     );
 
@@ -1207,6 +1513,7 @@ function initializeFooter() {
 
         year.textContent =
             new Date().getFullYear();
+
     }
 
 }

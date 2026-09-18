@@ -5814,3 +5814,73 @@ section {
     }
 
 }
+/* =========================================================
+   FINAL FIX — MASALA.PNG MUST NOT BECOME FULL-SCREEN
+   ========================================================= */
+
+/* Never use masala.png as a background image */
+body,
+html,
+main,
+header,
+section,
+.hero,
+.hero-section,
+.product-section,
+.order-section,
+.contact-section,
+.glimpses-section,
+#manaIntro {
+    background-image: none;
+}
+
+/* Keep the actual website background */
+body {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 0, 0, 0.96),
+            rgba(45, 0, 0, 0.92)
+        ),
+        url("./background.jpeg") center / cover fixed no-repeat;
+}
+
+/* Intro gets its own dark background */
+#manaIntro {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100, 0, 0, 0.35),
+            rgba(5, 0, 0, 0.98) 70%
+        );
+}
+
+/* IMPORTANT:
+   masala.png is ONLY the centered logo */
+#manaIntro .intro-logo {
+    background: rgba(40, 0, 0, 0.55) !important;
+    background-image: none !important;
+}
+
+#manaIntro .intro-logo img {
+    display: block !important;
+    width: 115px !important;
+    height: 115px !important;
+    max-width: 115px !important;
+    max-height: 115px !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    background: transparent !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    #manaIntro .intro-logo img {
+        width: 90px !important;
+        height: 90px !important;
+        max-width: 90px !important;
+        max-height: 90px !important;
+    }
+}

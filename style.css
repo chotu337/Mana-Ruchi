@@ -3623,3 +3623,654 @@ section {
         transition-duration: 0.01ms !important;
     }
 }
+/* =========================================================
+   🌶️ MANA MASALA
+   CINEMATIC PREMIUM OPENING
+========================================================= */
+
+#manaIntro {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120, 0, 0, 0.32) 0%,
+            rgba(35, 0, 0, 0.72) 38%,
+            #030000 78%
+        );
+
+    animation:
+        introExit 1.2s
+        cubic-bezier(.76,0,.24,1)
+        3.8s forwards;
+}
+
+
+/* =========================================================
+   CENTRAL GLOW
+========================================================= */
+
+.intro-glow {
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 55, 20, 0.28),
+            rgba(120, 0, 0, 0.12),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    animation:
+        glowPulse 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   LIGHT RINGS
+========================================================= */
+
+.intro-ring {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border: 1px solid
+        rgba(255, 70, 30, 0.22);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+
+    opacity: 0;
+
+    animation:
+        ringExpand 3s
+        ease-out
+        forwards;
+}
+
+.ring-one {
+    width: 280px;
+    height: 280px;
+
+    animation-delay: .4s;
+}
+
+.ring-two {
+    width: 500px;
+    height: 500px;
+
+    animation-delay: .8s;
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.intro-particles {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.intro-particles span {
+    position: absolute;
+
+    color:
+        rgba(255, 100, 50, .5);
+
+    font-size: 12px;
+
+    animation:
+        particleFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+.intro-particles span:nth-child(1) {
+    left: 15%;
+    top: 22%;
+}
+
+.intro-particles span:nth-child(2) {
+    left: 82%;
+    top: 18%;
+}
+
+.intro-particles span:nth-child(3) {
+    left: 24%;
+    top: 72%;
+}
+
+.intro-particles span:nth-child(4) {
+    left: 76%;
+    top: 68%;
+}
+
+.intro-particles span:nth-child(5) {
+    left: 10%;
+    top: 48%;
+}
+
+.intro-particles span:nth-child(6) {
+    left: 90%;
+    top: 45%;
+}
+
+.intro-particles span:nth-child(7) {
+    left: 42%;
+    top: 12%;
+}
+
+.intro-particles span:nth-child(8) {
+    left: 60%;
+    top: 84%;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.mana-intro-content {
+    position: relative;
+    z-index: 5;
+
+    text-align: center;
+
+    width: min(900px, 92%);
+
+    animation:
+        contentReveal
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        .2s
+        forwards;
+
+    opacity: 0;
+}
+
+
+/* =========================================================
+   CHILLI
+========================================================= */
+
+.intro-chilli {
+    font-size: clamp(38px, 7vw, 68px);
+
+    margin-bottom: 15px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255, 55, 20, .8)
+        );
+
+    animation:
+        chilliReveal
+        1s
+        cubic-bezier(.16,1,.3,1)
+        .3s
+        forwards;
+}
+
+
+/* =========================================================
+   SMALL TITLE
+========================================================= */
+
+.intro-small {
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        clamp(9px, 1.5vw, 13px);
+
+    letter-spacing:
+        clamp(3px, 1vw, 8px);
+
+    color:
+        rgba(255, 210, 195, .65);
+
+    margin-bottom: 18px;
+
+    opacity: 0;
+
+    animation:
+        fadeUp
+        .8s
+        ease
+        .7s
+        forwards;
+}
+
+
+/* =========================================================
+   MAIN BRAND TITLE
+========================================================= */
+
+.mana-intro-content h1 {
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        clamp(55px, 12vw, 145px);
+
+    font-weight: 900;
+
+    line-height: .86;
+
+    letter-spacing:
+        clamp(3px, 1vw, 10px);
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    animation:
+        titleReveal
+        1.3s
+        cubic-bezier(.16,1,.3,1)
+        .8s
+        forwards;
+}
+
+.mana-intro-content h1 span {
+    color: #fff;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.15),
+        0 0 35px rgba(150,0,0,.4);
+}
+
+.mana-intro-content h1 strong {
+    color: transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffb08c,
+            #ff4b22 35%,
+            #c40000 70%,
+            #ff6a35
+        );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    text-shadow:
+        0 0 25px
+        rgba(255, 50, 20, .35);
+}
+
+
+/* =========================================================
+   LINE
+========================================================= */
+
+.intro-line {
+    width: 0;
+    height: 2px;
+
+    margin:
+        25px auto 18px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3518,
+            #ff9a5a,
+            #ff3518,
+            transparent
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(255, 50, 20, .8);
+
+    animation:
+        lineReveal
+        1s
+        ease
+        1.8s
+        forwards;
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.mana-intro-content p {
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        clamp(10px, 1.8vw, 15px);
+
+    letter-spacing:
+        clamp(4px, 1vw, 9px);
+
+    color:
+        rgba(255, 230, 220, .75);
+
+    opacity: 0;
+
+    animation:
+        fadeUp
+        .8s
+        ease
+        2s
+        forwards;
+}
+
+
+/* =========================================================
+   LOADING BAR
+========================================================= */
+
+.intro-loading {
+    width: 110px;
+    height: 2px;
+
+    margin:
+        30px auto 0;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border-radius: 50px;
+
+    opacity: 0;
+
+    animation:
+        fadeIn
+        .5s
+        ease
+        2.2s
+        forwards;
+}
+
+.intro-loading span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff2e12,
+            #ff8a55
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(255,50,20,.8);
+
+    animation:
+        loadingBar
+        1.3s
+        ease
+        2.3s
+        forwards;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes contentReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes chilliReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-25px)
+            scale(.6)
+            rotate(-15deg);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(0);
+    }
+}
+
+@keyframes titleReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px)
+            scale(.9);
+
+        filter: blur(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes lineReveal {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: min(420px, 70%);
+    }
+}
+
+@keyframes loadingBar {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(.85);
+        opacity: .5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: .9;
+    }
+}
+
+@keyframes ringExpand {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(.2);
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(1.5);
+    }
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity: .3;
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            scale(1.4);
+
+        opacity: .9;
+    }
+}
+
+@keyframes introExit {
+
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .mana-intro-content h1 {
+        font-size: 58px;
+        letter-spacing: 4px;
+    }
+
+    .intro-small {
+        letter-spacing: 3px;
+    }
+
+    .mana-intro-content p {
+        letter-spacing: 3px;
+    }
+
+    .ring-two {
+        width: 360px;
+        height: 360px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #manaIntro {
+        animation: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+}

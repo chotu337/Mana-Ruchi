@@ -1325,65 +1325,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* =====================================================
-       SUPABASE
-    ===================================================== */
+   /* =====================================================
+   SUPABASE
+===================================================== */
 
-    const SUPABASE_URL =
-        "https://hcczhnmdipqrnbxviuln.supabase.co";
+const SUPABASE_URL =
+    "https://hcczhnmdipqrnbxviuln.supabase.co";
 
-
-    const SUPABASE_ANON_KEY =
-        "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
-
-
-    /*
-       IMPORTANT:
-       Replace YOUR_SUPABASE_ANON_KEY with
-       your existing Supabase anon/publishable key.
-
-       Do NOT use the service_role key here.
-    */
+const SUPABASE_ANON_KEY =
+    "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
 
-    let supabaseClient = null;
+let supabaseClient = null;
 
 
-    try {
+try {
 
-        if (
-            typeof window.supabase !== "undefined" &&
-            SUPABASE_URL &&
-            SUPABASE_ANON_KEY !==
-                "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI"
-        ) {
+    if (
+        typeof window.supabase !== "undefined" &&
+        SUPABASE_URL &&
+        SUPABASE_ANON_KEY
+    ) {
 
-            supabaseClient =
-                window.supabase.createClient(
-                    SUPABASE_URL,
-                    SUPABASE_ANON_KEY
-                );
-
-            console.log(
-                "✅ Supabase client initialized"
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
             );
 
-        } else {
+        console.log(
+            "✅ Supabase client initialized"
+        );
 
-            console.warn(
-                "⚠️ Supabase key has not been configured"
-            );
+    } else {
 
-        }
-
-    } catch (error) {
-
-        console.error(
-            "❌ Supabase initialization failed:",
-            error
+        console.warn(
+            "⚠️ Supabase configuration is missing"
         );
 
     }
+
+} catch (error) {
+
+    console.error(
+        "❌ Supabase initialization failed:",
+        error
+    );
+
+}
 
 
 

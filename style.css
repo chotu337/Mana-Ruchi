@@ -2588,3 +2588,106 @@ body::after {
             0.01ms !important;
     }
 }
+/* =========================================================
+   MANA MASALA — FINAL IMAGE ISOLATION
+   Prevents favicon.png / masala.png from covering the page
+========================================================= */
+
+/* Browser favicon ONLY */
+link[rel="icon"] {
+    display: none;
+}
+
+/* Intro */
+#manaIntro {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999 !important;
+    overflow: hidden !important;
+}
+
+/* Intro chilli icon */
+#manaIntro .intro-brand-mark {
+    position: relative !important;
+    width: 90px !important;
+    height: 90px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 20px !important;
+    font-size: 55px !important;
+    line-height: 1 !important;
+}
+
+/* Intro content */
+#manaIntro .mana-intro-content {
+    position: relative !important;
+    z-index: 3 !important;
+    width: min(90%, 700px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
+/* NEVER allow intro images to become backgrounds */
+#manaIntro img {
+    display: none !important;
+}
+
+/* Product image — normal card image only */
+.mana-product-image {
+    position: relative !important;
+    inset: auto !important;
+
+    display: block !important;
+
+    width: min(360px, 80vw) !important;
+    height: auto !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    max-width: 100% !important;
+    max-height: 420px !important;
+
+    object-fit: contain !important;
+
+    margin: 0 auto !important;
+
+    transform: none !important;
+}
+
+/* Hero product image container */
+.hero-product-image,
+.product-image-wrap {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Product card */
+.hero-product-card {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Kill accidental fullscreen image positioning */
+.hero-product-card img,
+.product-image-wrap img,
+.product-showcase-card img {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+}
+
+/* Intro disappears completely */
+#manaIntro.intro-finished {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* After intro: absolutely NO intro image */
+#manaIntro.intro-finished img {
+    display: none !important;
+}

@@ -1,12 +1,7 @@
 /* =========================================================
    🌶️ MANA MASALA
    PREMIUM DARK RED / BLACK / GLASSMORPHISM
-   COMPLETE CLEAN STYLE.CSS
-========================================================= */
-
-
-/* =========================================================
-   ROOT
+   CLEAN FINAL STYLE
 ========================================================= */
 
 :root {
@@ -28,8 +23,7 @@
 
     --border: rgba(255, 80, 50, 0.20);
 
-    --shadow:
-        0 20px 60px rgba(0, 0, 0, 0.55);
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
 
     --shadow-red:
         0 15px 45px rgba(180, 0, 0, 0.30);
@@ -78,26 +72,26 @@ body {
             rgba(35, 0, 0, 0.88)
         ),
         url("./background.jpeg")
-        center center /
-        cover
-        fixed
-        no-repeat;
+        center center / cover fixed no-repeat;
 
     overflow-x: hidden;
 }
 
 
 /* =========================================================
-   GLOBAL BACKGROUND
+   GLOBAL BACKGROUND EFFECTS
 ========================================================= */
 
 body::before {
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
+
+    z-index: -5;
 
     background:
         radial-gradient(
@@ -110,17 +104,18 @@ body::before {
             rgba(180, 0, 0, 0.12),
             transparent 35%
         );
-
-    z-index: -5;
 }
 
 body::after {
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
+
+    z-index: -4;
 
     background:
         linear-gradient(
@@ -128,8 +123,6 @@ body::after {
             rgba(0, 0, 0, 0.15),
             rgba(0, 0, 0, 0.50)
         );
-
-    z-index: -4;
 }
 
 
@@ -139,6 +132,7 @@ body::after {
 
 .ambient-background {
     position: fixed;
+
     inset: 0;
 
     z-index: -3;
@@ -147,9 +141,7 @@ body::after {
 
     background:
         url("./background.jpeg")
-        center center /
-        cover
-        no-repeat;
+        center center / cover no-repeat;
 
     opacity: 0.18;
 
@@ -159,10 +151,12 @@ body::after {
 
     transform: scale(1.04);
 
-    animation: ambientMove 18s ease-in-out infinite alternate;
+    animation:
+        ambientMove 18s ease-in-out infinite alternate;
 }
 
 @keyframes ambientMove {
+
     from {
         transform: scale(1.04);
     }
@@ -187,8 +181,9 @@ body::after {
    HEADER
 ========================================================= */
 
-header {
+.site-header {
     position: sticky;
+
     top: 0;
 
     z-index: 1000;
@@ -201,100 +196,142 @@ header {
 
     border-bottom:
         1px solid rgba(255, 70, 40, 0.12);
+
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.navbar {
+.site-header.scrolled {
+    background:
+        rgba(8, 0, 0, 0.92);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+.header-inner {
+    width: min(1180px, 92%);
+
     min-height: 76px;
 
+    margin: 0 auto;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 20px;
 }
 
-.logo {
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
     display: flex;
+
     align-items: center;
+
     gap: 12px;
 
     text-decoration: none;
+
     color: white;
 }
 
-.logo img {
+.brand-logo {
     width: 48px;
     height: 48px;
+
+    flex: 0 0 48px;
 
     object-fit: contain;
 
     border-radius: 12px;
+
+    display: block;
 }
 
-.logo-text {
+.brand-text {
     display: flex;
+
     flex-direction: column;
 }
 
-.logo-title {
+.brand-name {
     font-size: 1.2rem;
+
     font-weight: 800;
+
     letter-spacing: 1px;
 }
 
-.logo-subtitle {
+.brand-tagline {
     font-size: 0.68rem;
+
     color: var(--text-muted);
+
     letter-spacing: 0.8px;
 }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 26px;
 
-    list-style: none;
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.desktop-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 26px;
 }
 
-.nav-links a {
+.desktop-nav a {
     color: var(--text-soft);
 
     text-decoration: none;
 
     font-size: 0.9rem;
+
     font-weight: 500;
 
     transition: var(--transition);
 }
 
-.nav-links a:hover {
+.desktop-nav a:hover {
     color: var(--red-light);
 }
 
 
 /* =========================================================
-   BUTTONS
+   COMMON BUTTONS
 ========================================================= */
 
-.btn {
+.primary-btn,
+.secondary-btn {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
-    gap: 8px;
+    gap: 10px;
 
-    min-height: 48px;
+    min-height: 50px;
 
-    padding: 12px 22px;
+    padding: 13px 23px;
 
     border-radius: 999px;
-
-    border: 1px solid rgba(255, 100, 70, 0.25);
 
     font-family: inherit;
 
     font-size: 0.9rem;
+
     font-weight: 700;
 
     text-decoration: none;
@@ -304,7 +341,7 @@ header {
     transition: var(--transition);
 }
 
-.btn-primary {
+.primary-btn {
     color: white;
 
     background:
@@ -314,27 +351,33 @@ header {
             var(--red-bright)
         );
 
+    border:
+        1px solid rgba(255, 100, 70, 0.25);
+
     box-shadow:
         0 10px 30px rgba(180, 0, 0, 0.25);
 }
 
-.btn-primary:hover {
+.primary-btn:hover {
     transform: translateY(-3px);
 
     box-shadow:
         0 15px 40px rgba(220, 30, 15, 0.35);
 }
 
-.btn-secondary {
+.secondary-btn {
     color: white;
 
     background:
         rgba(70, 0, 0, 0.45);
 
+    border:
+        1px solid rgba(255, 100, 70, 0.20);
+
     backdrop-filter: blur(12px);
 }
 
-.btn-secondary:hover {
+.secondary-btn:hover {
     background:
         rgba(120, 0, 0, 0.55);
 
@@ -347,15 +390,43 @@ header {
 ========================================================= */
 
 .hero-section {
+    position: relative;
+
     min-height: calc(100vh - 76px);
 
     display: flex;
+
     align-items: center;
 
     padding: 80px 0;
+
+    overflow: hidden;
 }
 
-.hero-grid {
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(150, 0, 0, 0.14),
+            transparent 35%
+        );
+}
+
+.hero-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1180px, 92%);
+
+    margin: 0 auto;
+
     display: grid;
 
     grid-template-columns:
@@ -369,10 +440,11 @@ header {
 
 .hero-content {
     position: relative;
-    z-index: 2;
+
+    z-index: 3;
 }
 
-.hero-badge {
+.hero-kicker {
     display: inline-flex;
 
     padding: 8px 15px;
@@ -389,13 +461,15 @@ header {
         #ffb1a5;
 
     font-size: 0.78rem;
+
     font-weight: 600;
 
     margin-bottom: 20px;
 }
 
-.hero-title {
-    font-size: clamp(3rem, 7vw, 6.5rem);
+.hero-content h1 {
+    font-size:
+        clamp(3rem, 7vw, 6.5rem);
 
     line-height: 0.95;
 
@@ -419,7 +493,11 @@ header {
     color: transparent;
 }
 
-.hero-description {
+.hero-content h1 span {
+    display: block;
+}
+
+.hero-content p {
     max-width: 620px;
 
     color: var(--text-soft);
@@ -431,19 +509,7 @@ header {
     margin-bottom: 28px;
 }
 
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 14px;
-}
-
-
-/* =========================================================
-   PRICE BADGES
-========================================================= */
-
-.price-badges {
+.hero-badges {
     display: flex;
 
     flex-wrap: wrap;
@@ -451,10 +517,18 @@ header {
     gap: 12px;
 
     margin-top: 28px;
+
+    margin-bottom: 28px;
 }
 
 .price-badge,
 .minimum-badge {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 5px;
+
     padding: 11px 17px;
 
     border-radius: 999px;
@@ -478,13 +552,26 @@ header {
         pricePulse 2.5s ease-in-out infinite;
 }
 
+.price-badge strong {
+    font-size: 1.05rem;
+}
+
 .minimum-badge {
     color: var(--text-soft);
 
     font-weight: 600;
 }
 
+.minimum-badge strong {
+    color: #ff8b79;
+}
+
+.minimum-badge span {
+    font-size: 0.82rem;
+}
+
 @keyframes pricePulse {
+
     0%,
     100% {
         transform: scale(1);
@@ -495,9 +582,17 @@ header {
     }
 }
 
+.hero-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
 
 /* =========================================================
-   HERO VISUAL
+   HERO PRODUCT VISUAL
 ========================================================= */
 
 .hero-visual {
@@ -505,16 +600,21 @@ header {
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
+
+    min-width: 0;
 }
 
 .hero-product-card {
     position: relative;
 
-    width: min(100%, 480px);
+    width: min(480px, 100%);
 
-    padding: 35px;
+    height: 480px;
+
+    padding: 30px;
 
     border-radius: var(--radius-lg);
 
@@ -536,6 +636,12 @@ header {
     -webkit-backdrop-filter: blur(18px);
 
     overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 }
 
 .hero-product-card::before {
@@ -543,11 +649,13 @@ header {
 
     position: absolute;
 
-    width: 240px;
-    height: 240px;
+    width: 260px;
+    height: 260px;
 
     top: -100px;
     right: -80px;
+
+    border-radius: 50%;
 
     background:
         radial-gradient(
@@ -556,31 +664,69 @@ header {
             transparent 70%
         );
 
-    border-radius: 50%;
+    pointer-events: none;
 }
 
-.hero-product-image {
+.hero-product-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    bottom: -120px;
+    left: -100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(180, 0, 0, 0.20),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   🔒 PRODUCT IMAGE HARD CONTAINER
+========================================================= */
+
+.hero-product-card .mana-product-image {
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
-    width: 100%;
+    display: block;
 
-    display: flex;
+    width: 360px;
 
-    justify-content: center;
-    align-items: center;
-}
+    height: 360px;
 
-.hero-product-image img {
-    width: 100%;
-    max-width: 360px;
+    max-width: 100%;
 
-    height: auto;
+    max-height: 100%;
+
+    min-width: 0;
+
+    min-height: 0;
 
     object-fit: contain;
 
-    display: block;
+    object-position: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+
+    transform: none;
 
     filter:
         drop-shadow(
@@ -592,17 +738,21 @@ header {
 }
 
 .hero-product-card:hover
-.hero-product-image img {
+.mana-product-image {
     transform: scale(1.04);
 }
 
 
 /* =========================================================
-   SECTION COMMON
+   COMMON SECTIONS
 ========================================================= */
 
-section {
+.content-section {
     position: relative;
+
+    width: min(1180px, 92%);
+
+    margin: 0 auto;
 
     padding: 100px 0;
 }
@@ -615,7 +765,7 @@ section {
     text-align: center;
 }
 
-.section-heading span {
+.section-kicker {
     color: var(--red-light);
 
     font-size: 0.78rem;
@@ -646,172 +796,209 @@ section {
 
 
 /* =========================================================
-   GLASS CARD
+   PRODUCT SECTION
 ========================================================= */
-
-.glass-card {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(55, 0, 0, 0.62),
-            rgba(10, 0, 0, 0.70)
-        );
-
-    border:
-        1px solid var(--border);
-
-    border-radius: var(--radius-md);
-
-    box-shadow: var(--shadow);
-
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-
-    transition: var(--transition);
-}
-
-.glass-card:hover {
-    transform: translateY(-5px);
-
-    border-color:
-        rgba(255, 80, 50, 0.35);
-
-    box-shadow:
-        var(--shadow),
-        0 15px 40px rgba(150, 0, 0, 0.16);
-}
-
-
-/* =========================================================
-   PRODUCT
-========================================================= */
-
-.product-section {
-    overflow: hidden;
-}
 
 .product-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
     gap: 30px;
+
+    align-items: stretch;
 }
 
-.product-info {
-    padding: 35px;
+.product-showcase-card,
+.product-info-card {
+    position: relative;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55, 0, 0, 0.62),
+            rgba(10, 0, 0, 0.72)
+        );
+
+    border:
+        1px solid var(--border);
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
-.product-info h3 {
-    font-size: 1.8rem;
+.product-showcase-card {
+    min-height: 500px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.product-image-wrap {
+    width: 100%;
+
+    height: 440px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.product-image-wrap .mana-product-image {
+    display: block;
+
+    width: 380px;
+
+    height: 380px;
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+
+    filter:
+        drop-shadow(
+            0 25px 35px rgba(0, 0, 0, 0.55)
+        );
+
+    transition:
+        transform 0.5s ease;
+}
+
+.product-showcase-card:hover
+.mana-product-image {
+    transform: scale(1.04);
+}
+
+.product-info-card {
+    padding: 40px;
+}
+
+.product-label {
+    color: var(--red-light);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.product-info-card h3 {
+    margin-top: 12px;
 
     margin-bottom: 15px;
+
+    font-size: 1.8rem;
+
+    line-height: 1.2;
 }
 
-.product-info p {
+.product-info-card > p {
     color: var(--text-muted);
 
     line-height: 1.8;
 }
 
-.product-features {
+.product-details {
     display: grid;
 
-    gap: 12px;
+    gap: 14px;
 
-    margin-top: 25px;
+    margin-top: 28px;
 
-    list-style: none;
+    margin-bottom: 30px;
 }
 
-.product-features li {
+.detail-item {
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 14px;
 
-    color: var(--text-soft);
-}
+    padding: 13px;
 
-.product-features li::before {
-    content: "✓";
-
-    width: 25px;
-    height: 25px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
+    border-radius: 14px;
 
     background:
-        rgba(190, 20, 10, 0.20);
-
-    color: #ff705d;
-
-    font-size: 0.75rem;
-}
-
-
-/* =========================================================
-   WHY SECTION
-========================================================= */
-
-.why-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 22px;
-}
-
-.why-card {
-    padding: 30px;
-}
-
-.why-icon {
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(170, 0, 0, 0.35),
-            rgba(80, 0, 0, 0.25)
-        );
+        rgba(70, 0, 0, 0.25);
 
     border:
-        1px solid rgba(255, 80, 50, 0.15);
-
-    font-size: 1.5rem;
-
-    margin-bottom: 20px;
+        1px solid rgba(255, 80, 50, 0.10);
 }
 
-.why-card h3 {
-    margin-bottom: 10px;
+.detail-icon {
+    width: 42px;
+    height: 42px;
 
-    font-size: 1.15rem;
+    flex: 0 0 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(160, 0, 0, 0.20);
+
+    font-size: 1.1rem;
 }
 
-.why-card p {
+.detail-item div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.detail-item strong {
+    font-size: 0.9rem;
+}
+
+.detail-item small {
     color: var(--text-muted);
 
-    line-height: 1.7;
+    margin-top: 2px;
+}
 
-    font-size: 0.9rem;
+.product-order-btn {
+    width: 100%;
 }
 
 
@@ -829,7 +1016,9 @@ section {
 }
 
 .glimpse-card {
-    min-height: 220px;
+    position: relative;
+
+    min-height: 260px;
 
     overflow: hidden;
 
@@ -844,36 +1033,86 @@ section {
     box-shadow: var(--shadow);
 }
 
-.glimpse-card img,
-.glimpse-card video {
+.glimpse-card.large {
+    min-height: 360px;
+}
+
+.glimpse-card img {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
+
     height: 100%;
 
-    min-height: 220px;
+    max-width: 100%;
 
     display: block;
 
     object-fit: cover;
 
+    object-position: center;
+
     transition:
         transform 0.6s ease;
 }
 
-.glimpse-card:hover img,
-.glimpse-card:hover video {
+.glimpse-card:hover img {
     transform: scale(1.05);
+}
+
+.glimpse-card .mana-product-image {
+    object-fit: contain;
+
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(100, 0, 0, 0.25),
+            rgba(5, 0, 0, 0.70)
+        );
+}
+
+.glimpse-overlay {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 25px;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.85)
+        );
+}
+
+.glimpse-overlay span {
+    font-size: 1.3rem;
+}
+
+.glimpse-overlay h3 {
+    margin-top: 5px;
+
+    font-size: 1rem;
 }
 
 
 /* =========================================================
-   ORDER
+   ORDER SECTION
 ========================================================= */
 
 .order-section {
-    padding-bottom: 80px;
+    padding-bottom: 90px;
 }
 
-.order-wrapper {
+.order-card {
     width: min(760px, 100%);
 
     margin: 0 auto;
@@ -904,7 +1143,8 @@ section {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group label,
+.quantity-section > label {
     display: block;
 
     margin-bottom: 8px;
@@ -916,7 +1156,8 @@ section {
     font-weight: 600;
 }
 
-.form-control {
+.form-group input,
+.form-group textarea {
     width: 100%;
 
     min-height: 52px;
@@ -942,11 +1183,13 @@ section {
     transition: var(--transition);
 }
 
-.form-control::placeholder {
+.form-group input::placeholder,
+.form-group textarea::placeholder {
     color: #876f6f;
 }
 
-.form-control:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     border-color:
         rgba(255, 80, 50, 0.50);
 
@@ -954,7 +1197,7 @@ section {
         0 0 0 4px rgba(180, 0, 0, 0.10);
 }
 
-textarea.form-control {
+.form-group textarea {
     min-height: 120px;
 
     resize: vertical;
@@ -965,19 +1208,23 @@ textarea.form-control {
    QUANTITY
 ========================================================= */
 
-.quantity-wrapper {
+.quantity-section {
+    margin-top: 10px;
+}
+
+.quantity-control {
     display: grid;
 
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: 54px 1fr 54px;
 
     gap: 10px;
 
     align-items: center;
 }
 
-.quantity-btn {
-    width: 50px;
-    height: 50px;
+.quantity-control button {
+    width: 54px;
+    height: 54px;
 
     border-radius: 14px;
 
@@ -989,31 +1236,73 @@ textarea.form-control {
 
     color: white;
 
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 
     cursor: pointer;
 
     transition: var(--transition);
 }
 
-.quantity-btn:hover {
+.quantity-control button:hover {
     background:
         rgba(170, 0, 0, 0.45);
+
+    transform: translateY(-2px);
 }
 
-.quantity-display {
-    text-align: center;
+.quantity-value {
+    min-height: 54px;
 
-    font-size: 1.1rem;
-
-    font-weight: 700;
-}
-
-.total-box {
     display: flex;
 
-    justify-content: space-between;
     align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(8, 0, 0, 0.58);
+
+    border:
+        1px solid rgba(255, 90, 60, 0.16);
+}
+
+.quantity-value strong {
+    font-size: 1.2rem;
+}
+
+.quantity-value span {
+    color: var(--text-muted);
+
+    font-size: 0.85rem;
+}
+
+.quantity-section small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--text-muted);
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.order-total-card {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
 
     margin: 25px 0;
 
@@ -1028,11 +1317,11 @@ textarea.form-control {
         1px solid rgba(255, 80, 50, 0.16);
 }
 
-.total-box span:first-child {
+.order-total-card span {
     color: var(--text-muted);
 }
 
-#totalAmount {
+.order-total-card strong {
     color: #ff806d;
 
     font-size: 1.4rem;
@@ -1042,7 +1331,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   FORM STATUS
+   FORM MESSAGE
 ========================================================= */
 
 .form-message {
@@ -1059,7 +1348,8 @@ textarea.form-control {
     line-height: 1.5;
 }
 
-.form-message.show {
+.form-message.success,
+.form-message.error {
     display: block;
 }
 
@@ -1069,6 +1359,8 @@ textarea.form-control {
 
     border:
         1px solid rgba(50, 200, 100, 0.20);
+
+    color: #dfffea;
 }
 
 .form-message.error {
@@ -1077,6 +1369,78 @@ textarea.form-control {
 
     border:
         1px solid rgba(255, 60, 50, 0.25);
+
+    color: #ffd6d0;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.submit-order-btn {
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red),
+            var(--red-bright)
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(180, 0, 0, 0.25);
+
+    transition: var(--transition);
+}
+
+.submit-order-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(220, 30, 15, 0.35);
+}
+
+.submit-order-btn:disabled {
+    opacity: 0.65;
+
+    cursor: wait;
+}
+
+.order-note {
+    margin-top: 14px;
+
+    color: var(--text-muted);
+
+    text-align: center;
+
+    font-size: 0.75rem;
+
+    line-height: 1.6;
 }
 
 
@@ -1094,55 +1458,101 @@ textarea.form-control {
 }
 
 .contact-card {
+    min-width: 0;
+
     padding: 28px;
 
-    text-align: center;
-}
+    display: flex;
 
-.contact-card h3 {
-    margin-bottom: 10px;
-}
+    align-items: center;
 
-.contact-card p {
-    color: var(--text-muted);
+    justify-content: center;
 
-    font-size: 0.9rem;
+    gap: 15px;
 
-    line-height: 1.6;
-}
-
-.contact-card a {
-    display: inline-block;
-
-    margin-top: 12px;
-
-    color: #ff7865;
+    text-align: left;
 
     text-decoration: none;
 
-    font-weight: 700;
-}
-
-.contact-card a:hover {
     color: white;
+
+    border-radius: var(--radius-md);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55, 0, 0, 0.62),
+            rgba(10, 0, 0, 0.70)
+        );
+
+    border:
+        1px solid var(--border);
+
+    box-shadow: var(--shadow);
+
+    transition: var(--transition);
 }
 
+.contact-card:hover {
+    transform: translateY(-5px);
 
-/* =========================================================
-   WHATSAPP BUTTON
-========================================================= */
+    border-color:
+        rgba(255, 80, 50, 0.35);
+}
 
-.whatsapp-button {
-    display: inline-flex;
+.contact-icon {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    display: flex;
 
     align-items: center;
     justify-content: center;
 
+    border-radius: 14px;
+
+    background:
+        rgba(160, 0, 0, 0.20);
+
+    font-size: 1.25rem;
+}
+
+.contact-card div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.contact-card span {
+    color: var(--text-muted);
+
+    font-size: 0.75rem;
+}
+
+.contact-card strong {
+    margin-top: 3px;
+
+    font-size: 0.9rem;
+}
+
+.contact-action {
+    margin-top: 30px;
+
+    text-align: center;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     gap: 8px;
 
-    margin-top: 16px;
-
-    padding: 11px 18px;
+    padding: 13px 22px;
 
     border-radius: 999px;
 
@@ -1161,7 +1571,7 @@ textarea.form-control {
     transition: var(--transition);
 }
 
-.whatsapp-button:hover {
+.whatsapp-btn:hover {
     transform: translateY(-2px);
 
     background:
@@ -1177,6 +1587,7 @@ textarea.form-control {
     position: fixed;
 
     right: 22px;
+
     bottom: 22px;
 
     z-index: 1500;
@@ -1218,11 +1629,53 @@ textarea.form-control {
 
 
 /* =========================================================
+   MOBILE ORDER BUTTON
+========================================================= */
+
+.mobile-order-button {
+    display: none;
+
+    position: fixed;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 14px;
+
+    z-index: 1400;
+
+    min-height: 48px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red),
+            var(--red-bright)
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
    FOOTER
 ========================================================= */
 
-footer {
-    padding: 45px 0 35px;
+.site-footer {
+    padding: 45px 20px 35px;
 
     border-top:
         1px solid rgba(255, 80, 50, 0.10);
@@ -1233,118 +1686,47 @@ footer {
     text-align: center;
 }
 
-footer p {
-    color: var(--text-muted);
-
-    font-size: 0.8rem;
-}
-
 .footer-brand {
     color: #ff7663;
 
     font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.site-footer p {
+    color: var(--text-muted);
+
+    font-size: 0.8rem;
+
+    margin-top: 7px;
+}
+
+.site-footer .copyright {
+    margin-top: 15px;
+
+    font-size: 0.72rem;
 }
 
 
 /* =========================================================
-   MODAL
+   🌶️ OPENING INTRO
 ========================================================= */
-
-.modal {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 3000;
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    background:
-        rgba(0, 0, 0, 0.78);
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-content {
-    width: min(560px, 100%);
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    padding: 30px;
-
-    border-radius: var(--radius-lg);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(55, 0, 0, 0.94),
-            rgba(8, 0, 0, 0.96)
-        );
-
-    border:
-        1px solid rgba(255, 80, 50, 0.22);
-
-    box-shadow:
-        0 30px 90px rgba(0, 0, 0, 0.70);
-}
-
-.modal-close {
-    float: right;
-
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid rgba(255, 80, 50, 0.20);
-
-    background:
-        rgba(100, 0, 0, 0.25);
-
-    color: white;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   🌶️ MANA MASALA OPENING INTRO
-========================================================= */
-
-/*
-   IMPORTANT:
-   masala.png is NOT a background here.
-
-   It exists ONLY as:
-   #manaIntro .intro-logo img
-*/
 
 #manaIntro {
     position: fixed;
 
     inset: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
     z-index: 99999;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     overflow: hidden;
@@ -1359,6 +1741,7 @@ footer p {
         );
 
     opacity: 1;
+
     visibility: visible;
 
     transition:
@@ -1380,7 +1763,8 @@ footer p {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -1401,6 +1785,7 @@ footer p {
 }
 
 @keyframes introGlow {
+
     from {
         transform:
             translate(-50%, -50%)
@@ -1432,7 +1817,8 @@ footer p {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -1449,6 +1835,7 @@ footer p {
 }
 
 @keyframes introRing {
+
     from {
         transform:
             translate(-50%, -50%)
@@ -1494,8 +1881,7 @@ footer p {
             transparent 2px
         );
 
-    background-size:
-        75px 75px;
+    background-size: 75px 75px;
 
     animation:
         particleMove 18s linear infinite;
@@ -1504,8 +1890,7 @@ footer p {
 }
 
 .intro-particles::after {
-    background-size:
-        110px 110px;
+    background-size: 110px 110px;
 
     animation-duration: 25s;
 
@@ -1513,6 +1898,7 @@ footer p {
 }
 
 @keyframes particleMove {
+
     from {
         transform: translateY(0);
     }
@@ -1534,8 +1920,6 @@ footer p {
 
     width: min(90%, 600px);
 
-    text-align: center;
-
     display: flex;
 
     flex-direction: column;
@@ -1543,22 +1927,27 @@ footer p {
     align-items: center;
 
     justify-content: center;
+
+    text-align: center;
 }
 
 
 /* =========================================================
-   INTRO LOGO CONTAINER
+   🔒 INTRO LOGO — HARD SIZE LIMIT
 ========================================================= */
 
 #manaIntro .intro-logo {
     position: relative;
 
-    width: 145px;
-    height: 145px;
+    width: 150px;
+    height: 150px;
+
+    flex: 0 0 150px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     overflow: hidden;
@@ -1582,36 +1971,38 @@ footer p {
         forwards;
 }
 
-
-/* =========================================================
-   🌶️ INTRO MASALA.PNG ONLY
-========================================================= */
-
 #manaIntro .intro-logo img {
-    width: 110px;
-    height: 110px;
-
-    max-width: 110px;
-    max-height: 110px;
-
-    min-width: 0;
-    min-height: 0;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    background: transparent;
-
-    border: 0;
-
-    margin: 0;
-    padding: 0;
-
     position: relative;
 
     z-index: 2;
+
+    display: block;
+
+    width: 110px;
+
+    height: 110px;
+
+    max-width: 110px;
+
+    max-height: 110px;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    transform: none;
 
     filter:
         drop-shadow(
@@ -1619,40 +2010,36 @@ footer p {
         );
 
     animation:
-        introImageIn 1s
-        ease-out
-        forwards;
+        introImageIn 1s ease-out forwards;
 }
 
 @keyframes introLogoIn {
+
     from {
         opacity: 0;
 
-        transform:
-            scale(0.65);
+        transform: scale(0.65);
     }
 
     to {
         opacity: 1;
 
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 }
 
 @keyframes introImageIn {
+
     from {
         opacity: 0;
 
-        transform:
-            scale(0.5);
+        transform: scale(0.5);
     }
 
     to {
         opacity: 1;
 
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 }
 
@@ -1686,11 +2073,11 @@ footer p {
 }
 
 @keyframes introTitleReveal {
+
     from {
         opacity: 0;
 
-        transform:
-            translateY(20px);
+        transform: translateY(20px);
 
         letter-spacing: 14px;
     }
@@ -1698,8 +2085,7 @@ footer p {
     to {
         opacity: 1;
 
-        transform:
-            translateY(0);
+        transform: translateY(0);
 
         letter-spacing:
             clamp(3px, 1vw, 8px);
@@ -1733,18 +2119,17 @@ footer p {
 }
 
 @keyframes introSubtitleReveal {
+
     from {
         opacity: 0;
 
-        transform:
-            translateY(10px);
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
 
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -1776,6 +2161,7 @@ footer p {
 }
 
 @keyframes introLineReveal {
+
     from {
         width: 0;
     }
@@ -1787,7 +2173,7 @@ footer p {
 
 
 /* =========================================================
-   INTRO LOADING BAR
+   INTRO LOADING
 ========================================================= */
 
 .intro-loading {
@@ -1809,6 +2195,7 @@ footer p {
     display: block;
 
     width: 0;
+
     height: 100%;
 
     border-radius: inherit;
@@ -1828,6 +2215,7 @@ footer p {
 }
 
 @keyframes introLoading {
+
     from {
         width: 0;
     }
@@ -1839,7 +2227,7 @@ footer p {
 
 
 /* =========================================================
-   🌶️ INTRO FINISHED — REMOVE EVERYTHING
+   INTRO FINISHED
 ========================================================= */
 
 #manaIntro.intro-finished {
@@ -1850,57 +2238,49 @@ footer p {
     pointer-events: none !important;
 
     display: none !important;
+
+    width: 0 !important;
+
+    height: 0 !important;
+
+    overflow: hidden !important;
 }
 
-#manaIntro.intro-finished .mana-intro-content,
-#manaIntro.intro-finished .intro-logo,
-#manaIntro.intro-finished .intro-logo img,
-#manaIntro.intro-finished .intro-glow,
-#manaIntro.intro-finished .intro-ring,
-#manaIntro.intro-finished .intro-particles {
+#manaIntro.intro-finished * {
     opacity: 0 !important;
 
     visibility: hidden !important;
+
+    pointer-events: none !important;
 }
 
 
 /* =========================================================
-   🚫 IMPORTANT MASALA.PNG PROTECTION
+   🚫 GLOBAL MASALA RULES ARE INTENTIONALLY ABSENT
 ========================================================= */
 
 /*
-   DO NOT use:
+   DO NOT ADD:
 
-   img[src*="masala.png"]
+   img[src="masala.png"] { ... }
 
-   globally.
+   img[src*="masala.png"] { ... }
 
-   That would also affect the normal product image.
+   body img[src*="masala.png"] { ... }
 
-   Only the intro image is controlled above.
+   background: url("masala.png");
+
+   masala.png is controlled ONLY by its containers/classes.
 */
 
 
 /* =========================================================
-   MOBILE ORDER BAR
-========================================================= */
-
-.mobile-order-bar {
-    display: none;
-}
-
-
-/* =========================================================
-   RESPONSIVE — TABLET
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
 
-    .nav-links {
-        gap: 16px;
-    }
-
-    .hero-grid {
+    .hero-container {
         grid-template-columns: 1fr;
 
         gap: 45px;
@@ -1916,17 +2296,18 @@ footer p {
         align-items: center;
     }
 
-    .hero-description {
+    .hero-content p {
         max-width: 680px;
+    }
+
+    .hero-product-card {
+        width: min(480px, 100%);
+
+        height: 440px;
     }
 
     .product-grid {
         grid-template-columns: 1fr;
-    }
-
-    .why-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
     }
 
     .glimpses-grid {
@@ -1942,7 +2323,7 @@ footer p {
 
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 650px) {
@@ -1951,32 +2332,26 @@ footer p {
         background-attachment: scroll;
     }
 
-    .container {
-        width: min(92%, 100%);
-    }
-
-    header {
-        position: sticky;
-    }
-
-    .navbar {
+    .header-inner {
         min-height: 68px;
     }
 
-    .logo img {
+    .brand-logo {
         width: 42px;
         height: 42px;
+
+        flex-basis: 42px;
     }
 
-    .logo-title {
+    .brand-name {
         font-size: 1rem;
     }
 
-    .logo-subtitle {
+    .brand-tagline {
         display: none;
     }
 
-    .nav-links {
+    .desktop-nav {
         display: none;
     }
 
@@ -1988,17 +2363,25 @@ footer p {
             70px;
     }
 
-    .hero-title {
+    .hero-container {
+        width: 92%;
+    }
+
+    .hero-content h1 {
         font-size:
             clamp(2.8rem, 15vw, 4.5rem);
 
         letter-spacing: -2px;
     }
 
-    .hero-description {
+    .hero-content p {
         font-size: 0.9rem;
 
         line-height: 1.7;
+    }
+
+    .hero-badges {
+        justify-content: center;
     }
 
     .hero-actions {
@@ -2007,15 +2390,34 @@ footer p {
         flex-direction: column;
     }
 
-    .hero-actions .btn {
+    .hero-actions .primary-btn,
+    .hero-actions .secondary-btn {
         width: 100%;
     }
 
-    .price-badges {
-        justify-content: center;
+    .hero-product-card {
+        width: 92vw;
+
+        max-width: 420px;
+
+        height: 350px;
+
+        padding: 20px;
     }
 
-    section {
+    .hero-product-card .mana-product-image {
+        width: 280px;
+
+        height: 280px;
+
+        max-width: 280px;
+
+        max-height: 280px;
+    }
+
+    .content-section {
+        width: 92%;
+
         padding: 75px 0;
     }
 
@@ -2027,90 +2429,83 @@ footer p {
         font-size: 2rem;
     }
 
-    .hero-product-card {
-        padding: 25px;
+    .product-showcase-card {
+        min-height: 380px;
+
+        padding: 20px;
     }
 
-    .hero-product-image img {
+    .product-image-wrap {
+        height: 340px;
+    }
+
+    .product-image-wrap .mana-product-image {
+        width: 280px;
+
+        height: 280px;
+
         max-width: 280px;
+
+        max-height: 280px;
     }
 
-    .why-grid,
+    .product-info-card {
+        padding: 28px 22px;
+    }
+
     .glimpses-grid,
     .contact-grid {
         grid-template-columns: 1fr;
     }
 
-    .why-card {
-        padding: 24px;
+    .glimpse-card,
+    .glimpse-card.large {
+        min-height: 260px;
     }
 
-    .order-wrapper {
+    .order-card {
         padding: 24px 18px;
     }
 
-    .total-box {
-        padding: 15px;
-    }
-
     .floating-whatsapp {
+        right: 16px;
+
+        bottom: 75px;
+
         width: 54px;
         height: 54px;
-
-        right: 16px;
-        bottom: 75px;
     }
 
-    .mobile-order-bar {
-        position: fixed;
-
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        z-index: 1400;
-
+    .mobile-order-button {
         display: flex;
-
-        align-items: center;
-        justify-content: space-between;
-
-        gap: 12px;
-
-        padding:
-            10px
-            14px
-            calc(10px + env(safe-area-inset-bottom));
-
-        background:
-            rgba(10, 0, 0, 0.92);
-
-        border-top:
-            1px solid rgba(255, 80, 50, 0.16);
-
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
     }
 
-    .mobile-order-bar span {
-        color: #ff8a78;
-
-        font-weight: 800;
-
-        font-size: 0.85rem;
+    .site-footer {
+        padding-bottom: 95px;
     }
 
-    .mobile-order-bar .btn {
-        min-height: 42px;
+    #manaIntro .intro-logo {
+        width: 125px;
 
-        padding:
-            9px 17px;
+        height: 125px;
 
-        font-size: 0.8rem;
+        flex-basis: 125px;
     }
 
-    footer {
-        padding-bottom: 100px;
+    #manaIntro .intro-logo img {
+        width: 92px;
+
+        height: 92px;
+
+        max-width: 92px;
+
+        max-height: 92px;
+    }
+
+    .mana-intro-title {
+        font-size: 2.2rem;
+
+        letter-spacing: 3px;
     }
 }
 
@@ -2121,35 +2516,51 @@ footer p {
 
 @media (max-width: 400px) {
 
-    .hero-title {
+    .hero-content h1 {
         font-size: 2.7rem;
     }
 
-    .mana-intro-title {
-        font-size: 2.2rem;
-
-        letter-spacing: 3px;
-    }
-
-    #manaIntro .intro-logo {
-        width: 125px;
-        height: 125px;
-    }
-
-    #manaIntro .intro-logo img {
-        width: 92px;
-        height: 92px;
-
-        max-width: 92px;
-        max-height: 92px;
-    }
-
     .hero-product-card {
-        padding: 20px;
+        height: 320px;
     }
 
-    .btn {
-        padding: 11px 18px;
+    .hero-product-card .mana-product-image {
+        width: 250px;
+
+        height: 250px;
+
+        max-width: 250px;
+
+        max-height: 250px;
+    }
+
+    .product-image-wrap {
+        height: 300px;
+    }
+
+    .product-image-wrap .mana-product-image {
+        width: 245px;
+
+        height: 245px;
+
+        max-width: 245px;
+
+        max-height: 245px;
+    }
+
+    .quantity-control {
+        grid-template-columns:
+            48px 1fr 48px;
+    }
+
+    .quantity-control button {
+        width: 48px;
+
+        height: 48px;
+    }
+
+    .quantity-value {
+        min-height: 48px;
     }
 }
 
@@ -2163,308 +2574,17 @@ footer p {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
     }
-}
-
-
-/* =========================================================
-   FINAL RULE
-========================================================= */
-
-/*
-   NEVER add a global rule such as:
-
-   body img[src*="masala.png"] {
-       max-width: 110px;
-   }
-
-   because masala.png is also the normal product image.
-
-   The intro image is safely restricted here:
-
-   #manaIntro .intro-logo img
-*/
-/* =========================================================
-   🌶️ FINAL FIX — MASALA.PNG MUST NEVER COVER THE PAGE
-========================================================= */
-
-/* Intro contains NO masala.png */
-#manaIntro {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 99999;
-
-    overflow: hidden;
-}
-
-/* Normal product image only */
-.hero-product-image {
-    position: relative;
-
-    width: 100%;
-    max-width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-.hero-product-image img {
-    position: relative;
-
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    max-width: 100%;
-    max-height: 420px;
-
-    object-fit: contain;
-
-    margin: 0;
-
-    background: transparent;
-
-    z-index: 1;
-}
-
-
-/* Product card cannot become full screen */
-.hero-product-card {
-    position: relative;
-
-    width: min(100%, 480px);
-
-    max-width: 480px;
-
-    overflow: hidden;
-}
-
-
-/* Glimpse images stay inside their cards */
-.glimpse-card img {
-    position: relative;
-
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: 100%;
-
-    object-fit: cover;
-}
-
-
-/* =========================================================
-   🚫 NEVER ALLOW MASALA.PNG TO BECOME A BACKGROUND
-========================================================= */
-
-body {
-    background-image:
-        linear-gradient(
-            135deg,
-            rgba(7, 0, 0, 0.96),
-            rgba(35, 0, 0, 0.88)
-        ),
-        url("./background.jpeg");
-}
-
-
-/* No full-page image positioning */
-img[src="masala.png"] {
-    position: relative !important;
-
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    max-width: 100% !important;
-
-    transform: none;
-}
-/* =========================================================
-   MANA MASALA IMAGE - FINAL SIZE CONTROL
-   masala.png MUST NEVER COVER THE WEBSITE
-========================================================= */
-
-/* Never allow the image itself to behave like a background */
-img.mana-product-image {
-    position: relative !important;
-    display: block !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    max-width: 100% !important;
-    max-height: 420px !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    object-fit: contain !important;
-    object-position: center !important;
-
-    margin: 0 auto !important;
-    padding: 0 !important;
-
-    background: transparent !important;
-
-    transform: none !important;
-}
-
-/* Hero image */
-.hero-product-card {
-    position: relative !important;
-    width: min(420px, 90vw) !important;
-    height: 420px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    overflow: hidden !important;
-}
-
-.hero-product-card img.mana-product-image {
-    width: min(360px, 80vw) !important;
-    height: min(360px, 80vw) !important;
-
-    max-width: 360px !important;
-    max-height: 360px !important;
-}
-
-/* Product section */
-.product-image-wrap {
-    position: relative !important;
-
-    width: 100% !important;
-    max-width: 500px !important;
-
-    height: 430px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    overflow: hidden !important;
-}
-
-.product-image-wrap img.mana-product-image {
-    width: min(380px, 85vw) !important;
-    height: min(380px, 85vw) !important;
-
-    max-width: 380px !important;
-    max-height: 380px !important;
-}
-
-
-/* =========================================================
-   INTRO LOGO
-========================================================= */
-
-#manaIntro .intro-logo {
-    position: relative !important;
-
-    width: 150px !important;
-    height: 150px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    overflow: hidden !important;
-
-    background: transparent !important;
-}
-
-#manaIntro .intro-logo img {
-    position: relative !important;
-
-    width: 110px !important;
-    height: 110px !important;
-
-    max-width: 110px !important;
-    max-height: 110px !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    object-fit: contain !important;
-
-    display: block !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    background: transparent !important;
-
-    transform: none !important;
-}
-
-
-/* =========================================================
-   INTRO MUST DISAPPEAR COMPLETELY
-========================================================= */
-
-#manaIntro.intro-finished {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    display: none !important;
-
-    width: 0 !important;
-    height: 0 !important;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .hero-product-card {
-        width: 90vw !important;
-        height: 330px !important;
-    }
-
-    .hero-product-card img.mana-product-image {
-        width: 280px !important;
-        height: 280px !important;
-
-        max-width: 280px !important;
-        max-height: 280px !important;
-    }
-
-    .product-image-wrap {
-        height: 330px !important;
-    }
-
-    .product-image-wrap img.mana-product-image {
-        width: 280px !important;
-        height: 280px !important;
-
-        max-width: 280px !important;
-        max-height: 280px !important;
-    }
-
 }

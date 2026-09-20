@@ -1,16 +1,10 @@
 /* =========================================================
    🌶️ MANA MASALA
    COMPLETE ORDER SYSTEM
-   Supabase + Order Saving + Notification
-   Diagnostic Version
-
-   IMPORTANT:
-   - Customer INSERT does NOT use .select()
-   - Exact Supabase errors are shown
-   - Existing email notification is preserved
+   Supabase + Order Form + WhatsApp + Email Notification
 ========================================================= */
 
-console.log("🌶️ Mana Masala script.js loaded");
+console.log("🌶️ Mana Masala website starting...");
 
 /* =========================================================
    CONFIGURATION
@@ -19,313 +13,118 @@ console.log("🌶️ Mana Masala script.js loaded");
 const SUPABASE_URL =
     "https://hcczhnmdipqrnbxviuln.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_ANON_KEY =
     "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
 const PRICE_PER_KG = 350;
-const MINIMUM_ORDER = 10;
-const WHATSAPP_NUMBER = "918367450301";
+const MIN_QUANTITY = 10;
 
-/* =========================================================
-   GLOBAL
-========================================================= */
+const OWNER_WHATSAPP = "918367450301";
 
 let supabaseClient = null;
+
+
+/* =========================================================
+   SUPABASE INITIALIZATION
+========================================================= */
+
+try {
+
+    if (
+        typeof window.supabase !== "undefined" &&
+        SUPABASE_URL &&
+        SUPABASE_ANON_KEY
+    ) {
+
+        supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+        console.log("✅ Supabase client initialized");
+
+    } else {
+
+        console.error("❌ Supabase configuration missing");
+
+    }
+
+} catch (error) {
+
+    console.error(
+        "❌ Supabase initialization failed:",
+        error
+    );
+
+}
+
 
 /* =========================================================
    DOM READY
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        console.log("✅ DOM ready");
+    console.log("🌶️ Mana Masala DOM loaded");
 
-        initializeSupabase();
-        initializeQuantity();
-        initializeOrderForm();
-        initializeModal();
-        initializeNavigation();
-        initializeFooter();
-        initializeVideo();
-
-        updateOrderTotal();
-
-        console.log(
-            "🌶️ Mana Masala system ready"
-        );
-    }
-);
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-function initializeSupabase() {
-
-    try {
-
-        if (
-            !window.supabase ||
-            typeof window.supabase.createClient !== "function"
-        ) {
-
-            console.error(
-                "❌ Supabase library not available"
-            );
-
-            return;
-        }
-
-        supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_PUBLISHABLE_KEY
-            );
-
-        console.log(
-            "✅ Supabase client created"
-        );
-
-    } catch (error) {
-
-        console.error(
-            "❌ Supabase initialization failed:",
-            error
-        );
-    }
-}
-
-/* =========================================================
-   QUANTITY
-========================================================= */
-
-function initializeQuantity() {
-
-    const quantity =
-        document.getElementById(
-            "quantity"
-        );
-
-    const minusBtn =
-        document.getElementById(
-            "minusBtn"
-        );
-
-    const plusBtn =
-        document.getElementById(
-            "plusBtn"
-        );
-
-    if (!quantity) {
-
-        console.error(
-            "❌ Quantity element not found"
-        );
-
-        return;
-    }
-
-    /* MINUS */
-
-    if (minusBtn) {
-
-        minusBtn.addEventListener(
-            "click",
-            () => {
-
-                let current =
-                    parseInt(
-                        quantity.value,
-                        10
-                    ) ||
-                    MINIMUM_ORDER;
-
-                current--;
-
-                if (
-                    current <
-                    MINIMUM_ORDER
-                ) {
-
-                    current =
-                        MINIMUM_ORDER;
-                }
-
-                quantity.value =
-                    current;
-
-                updateOrderTotal();
-            }
-        );
-    }
-
-    /* PLUS */
-
-    if (plusBtn) {
-
-        plusBtn.addEventListener(
-            "click",
-            () => {
-
-                let current =
-                    parseInt(
-                        quantity.value,
-                        10
-                    ) ||
-                    MINIMUM_ORDER;
-
-                current++;
-
-                quantity.value =
-                    current;
-
-                updateOrderTotal();
-            }
-        );
-    }
-
-    /* INPUT */
-
-    quantity.addEventListener(
-        "input",
-        () => {
-
-            let current =
-                parseInt(
-                    quantity.value,
-                    10
-                );
-
-            if (
-                Number.isNaN(current) ||
-                current < MINIMUM_ORDER
-            ) {
-
-                if (
-                    quantity.value !== ""
-                ) {
-
-                    quantity.value =
-                        MINIMUM_ORDER;
-                }
-            }
-
-            updateOrderTotal();
-        }
-    );
-
-    /* BLUR */
-
-    quantity.addEventListener(
-        "blur",
-        () => {
-
-            let current =
-                parseInt(
-                    quantity.value,
-                    10
-                );
-
-            if (
-                Number.isNaN(current) ||
-                current < MINIMUM_ORDER
-            ) {
-
-                quantity.value =
-                    MINIMUM_ORDER;
-            }
-
-            updateOrderTotal();
-        }
-    );
-}
-
-/* =========================================================
-   TOTAL
-========================================================= */
-
-function updateOrderTotal() {
-
-    const quantity =
-        document.getElementById(
-            "quantity"
-        );
-
-    const totalAmount =
-        document.getElementById(
-            "totalAmount"
-        );
-
-    const summaryQuantity =
-        document.getElementById(
-            "summaryQuantity"
-        );
-
-    if (!quantity) {
-        return;
-    }
-
-    let quantityValue =
-        parseInt(
-            quantity.value,
-            10
-        );
-
-    if (
-        Number.isNaN(quantityValue) ||
-        quantityValue < MINIMUM_ORDER
-    ) {
-
-        quantityValue =
-            MINIMUM_ORDER;
-
-        quantity.value =
-            quantityValue;
-    }
-
-    const total =
-        quantityValue *
-        PRICE_PER_KG;
-
-    if (summaryQuantity) {
-
-        summaryQuantity.textContent =
-            `${quantityValue} KG`;
-    }
-
-    if (totalAmount) {
-
-        totalAmount.textContent =
-            formatCurrency(total);
-    }
-}
-
-/* =========================================================
-   CURRENCY
-========================================================= */
-
-function formatCurrency(amount) {
-
-    return (
-        "₹" +
-        Number(amount).toLocaleString(
-            "en-IN"
-        )
-    );
-}
-
-/* =========================================================
-   ORDER FORM
-========================================================= */
-
-function initializeOrderForm() {
+    /* -----------------------------------------------------
+       ELEMENTS
+    ----------------------------------------------------- */
 
     const orderForm =
-        document.getElementById(
-            "orderForm"
-        );
+        document.getElementById("orderForm");
+
+    const customerName =
+        document.getElementById("customerName");
+
+    const phone =
+        document.getElementById("phone");
+
+    const address =
+        document.getElementById("address");
+
+    const quantityInput =
+        document.getElementById("quantity");
+
+    const quantityDisplay =
+        document.getElementById("quantityDisplay");
+
+    const minusBtn =
+        document.getElementById("minusBtn");
+
+    const plusBtn =
+        document.getElementById("plusBtn");
+
+    const totalAmount =
+        document.getElementById("totalAmount");
+
+    const orderSubmit =
+        document.getElementById("orderSubmit");
+
+    const formMessage =
+        document.getElementById("formMessage");
+
+
+    /* =====================================================
+       ELEMENT CHECK
+    ===================================================== */
+
+    console.log("🔍 Checking order form elements...");
+
+    console.log({
+        orderForm: !!orderForm,
+        customerName: !!customerName,
+        phone: !!phone,
+        address: !!address,
+        quantityInput: !!quantityInput,
+        quantityDisplay: !!quantityDisplay,
+        minusBtn: !!minusBtn,
+        plusBtn: !!plusBtn,
+        totalAmount: !!totalAmount,
+        orderSubmit: !!orderSubmit,
+        formMessage: !!formMessage
+    });
+
 
     if (!orderForm) {
 
@@ -334,948 +133,907 @@ function initializeOrderForm() {
         );
 
         return;
+
     }
 
-    orderForm.addEventListener(
-        "submit",
-        handleOrderSubmit
-    );
-
-    console.log(
-        "✅ Order submit handler attached"
-    );
-}
-
-/* =========================================================
-   SUBMIT ORDER
-========================================================= */
-
-async function handleOrderSubmit(event) {
-
-    event.preventDefault();
-
-    console.log(
-        "🛒 ORDER SUBMISSION STARTED"
-    );
-
-    const customerName =
-        document
-            .getElementById(
-                "customerName"
-            )
-            ?.value
-            .trim();
-
-    const customerPhone =
-        document
-            .getElementById(
-                "phone"
-            )
-            ?.value
-            .trim();
-
-    const address =
-        document
-            .getElementById(
-                "address"
-            )
-            ?.value
-            .trim();
-
-    const quantityElement =
-        document.getElementById(
-            "quantity"
-        );
-
-    const orderButton =
-        document.getElementById(
-            "orderSubmit"
-        );
-
-    const orderForm =
-        document.getElementById(
-            "orderForm"
-        );
-
-    let quantity =
-        parseInt(
-            quantityElement?.value,
-            10
-        );
 
     /* =====================================================
-       VALIDATION
+       HELPER FUNCTIONS
     ===================================================== */
 
-    if (!customerName) {
+    function formatCurrency(amount) {
 
-        showOrderMessage(
-            "Please enter your full name.",
-            "error"
-        );
+        return "₹" + Number(amount).toLocaleString("en-IN");
 
-        document
-            .getElementById(
-                "customerName"
-            )
-            ?.focus();
-
-        return;
     }
 
-    if (!customerPhone) {
 
-        showOrderMessage(
-            "Please enter your phone number.",
-            "error"
-        );
+    function getQuantity() {
 
-        document
-            .getElementById(
-                "phone"
-            )
-            ?.focus();
+        let quantity =
+            parseInt(
+                quantityInput?.value ||
+                quantityDisplay?.textContent ||
+                MIN_QUANTITY,
+                10
+            );
 
-        return;
-    }
+        if (
+            isNaN(quantity) ||
+            quantity < MIN_QUANTITY
+        ) {
 
-    const cleanPhone =
-        customerPhone.replace(
-            /\D/g,
-            ""
-        );
+            quantity = MIN_QUANTITY;
 
-    if (
-        cleanPhone.length < 10
-    ) {
-
-        showOrderMessage(
-            "Please enter a valid phone number.",
-            "error"
-        );
-
-        document
-            .getElementById(
-                "phone"
-            )
-            ?.focus();
-
-        return;
-    }
-
-    if (!address) {
-
-        showOrderMessage(
-            "Please enter your delivery address.",
-            "error"
-        );
-
-        document
-            .getElementById(
-                "address"
-            )
-            ?.focus();
-
-        return;
-    }
-
-    if (
-        Number.isNaN(quantity) ||
-        quantity < MINIMUM_ORDER
-    ) {
-
-        quantity =
-            MINIMUM_ORDER;
-
-        if (quantityElement) {
-
-            quantityElement.value =
-                MINIMUM_ORDER;
         }
 
-        updateOrderTotal();
+        return quantity;
 
-        showOrderMessage(
-            `Minimum order is ${MINIMUM_ORDER} KG.`,
-            "error"
-        );
-
-        return;
     }
 
-    /* =====================================================
-       SUPABASE CHECK
-    ===================================================== */
 
-    if (!supabaseClient) {
+    function updateQuantityDisplay(quantity) {
 
-        showOrderMessage(
-            "Supabase connection is not available. Please refresh the page.",
-            "error"
-        );
+        if (quantityInput) {
 
-        console.error(
-            "❌ SUPABASE CLIENT IS NULL"
-        );
+            quantityInput.value = quantity;
 
-        return;
+        }
+
+        if (quantityDisplay) {
+
+            quantityDisplay.textContent =
+                quantity;
+
+        }
+
     }
 
-    const totalAmount =
-        quantity *
-        PRICE_PER_KG;
 
-    /* =====================================================
-       DEBUG INFORMATION
-    ===================================================== */
+    function updateTotal() {
 
-    console.log(
-        "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
+        const quantity =
+            getQuantity();
 
-    console.log(
-        "🌶️ MANA MASALA ORDER DEBUG"
-    );
+        const total =
+            quantity * PRICE_PER_KG;
 
-    console.log(
-        "Supabase URL:",
-        SUPABASE_URL
-    );
+        if (quantityInput) {
 
-    console.log(
-        "Supabase client:",
-        supabaseClient
-            ? "READY"
-            : "NOT READY"
-    );
+            quantityInput.value =
+                quantity;
 
-    console.log(
-        "Customer:",
-        customerName
-    );
+        }
 
-    console.log(
-        "Phone:",
-        customerPhone
-    );
+        if (quantityDisplay) {
 
-    console.log(
-        "Quantity:",
-        quantity
-    );
+            quantityDisplay.textContent =
+                quantity;
 
-    console.log(
-        "Total:",
-        totalAmount
-    );
+        }
 
-    console.log(
-        "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
+        if (totalAmount) {
 
-    /* =====================================================
-       BUTTON LOADING
-    ===================================================== */
+            totalAmount.textContent =
+                formatCurrency(total);
 
-    const originalButtonHTML =
-        orderButton?.innerHTML;
+        }
 
-    if (orderButton) {
+        console.log(
+            "📦 Quantity:",
+            quantity,
+            "KG"
+        );
 
-        orderButton.disabled =
-            true;
+        console.log(
+            "💰 Total:",
+            formatCurrency(total)
+        );
 
-        orderButton.innerHTML =
-            `
-                <span class="submit-text">
-                    Placing Order...
-                </span>
+        return total;
 
-                <span class="submit-arrow">
-                    ⏳
-                </span>
-            `;
     }
 
-    clearOrderMessage();
 
-    /* =====================================================
-       INSERT ORDER
-    ===================================================== */
+    function showMessage(
+        message,
+        type = "success"
+    ) {
 
-    try {
+        if (!formMessage) {
 
-        console.log(
-            "📡 Sending INSERT request..."
-        );
-
-        const result =
-            await supabaseClient
-                .from("orders")
-                .insert({
-                    customer_name:
-                        customerName,
-
-                    customer_phone:
-                        customerPhone,
-
-                    quantity_kg:
-                        quantity,
-
-                    address:
-                        address,
-
-                    total_amount:
-                        totalAmount,
-
-                    status:
-                        "New"
-                });
-
-        console.log(
-            "📡 COMPLETE SUPABASE RESULT:",
-            result
-        );
-
-        console.log(
-            "📡 RESULT DATA:",
-            result?.data
-        );
-
-        console.log(
-            "📡 RESULT ERROR:",
-            result?.error
-        );
-
-        /* =================================================
-           INSERT ERROR
-        ================================================= */
-
-        if (result.error) {
-
-            const error =
-                result.error;
-
-            console.error(
-                "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            );
-
-            console.error(
-                "❌ INSERT FAILED"
-            );
-
-            console.error(
-                "❌ ERROR CODE:",
-                error.code
-            );
-
-            console.error(
-                "❌ ERROR MESSAGE:",
-                error.message
-            );
-
-            console.error(
-                "❌ ERROR DETAILS:",
-                error.details
-            );
-
-            console.error(
-                "❌ ERROR HINT:",
-                error.hint
-            );
-
-            console.error(
-                "❌ FULL ERROR:",
-                JSON.stringify(
-                    error
-                )
-            );
-
-            console.error(
-                "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            );
-
-            /*
-             * TEMPORARY DIAGNOSTIC MESSAGE
-             * This intentionally exposes the actual
-             * Supabase error.
-             */
-
-            showOrderMessage(
-                `Supabase ${error.code || "ERROR"}: ${
-                    error.message ||
-                    "Unknown error"
-                }`,
-                "error"
+            console.log(
+                `[${type}] ${message}`
             );
 
             return;
+
         }
 
-        /* =================================================
-           INSERT SUCCESS
-        ================================================= */
+        formMessage.textContent =
+            message;
 
-        console.log(
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        );
+        formMessage.className =
+            "form-message " + type;
 
-        console.log(
-            "✅ ORDER INSERT SUCCESSFUL"
-        );
+        formMessage.style.display =
+            "block";
 
-        console.log(
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        );
+        /* Scroll message into view */
 
-        /*
-         * Since we intentionally don't use .select(),
-         * the database-generated ID isn't returned.
-         *
-         * Create a customer-facing reference.
-         */
+        formMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
 
-        const temporaryOrderId =
-            "MM-" +
-            Date.now()
-                .toString()
-                .slice(-8);
+    }
 
-        /* =================================================
-           OWNER NOTIFICATION
-        ================================================= */
 
-        let notificationSuccess =
-            false;
+    function setButtonLoading(
+        loading
+    ) {
 
-        try {
+        if (!orderSubmit) {
+            return;
+        }
 
-            console.log(
-                "📧 Sending owner notification..."
-            );
+        if (loading) {
 
-            const notificationResult =
-                await supabaseClient
-                    .functions
-                    .invoke(
-                        "new-order-notification",
-                        {
-                            body: {
+            orderSubmit.disabled = true;
 
-                                customer_name:
-                                    customerName,
+            orderSubmit.dataset.originalText =
+                orderSubmit.innerHTML;
 
-                                customer_phone:
-                                    customerPhone,
+            orderSubmit.innerHTML =
+                "⏳ Placing Order...";
 
-                                quantity_kg:
-                                    quantity,
+        } else {
 
-                                address:
-                                    address,
-
-                                total_amount:
-                                    totalAmount,
-
-                                status:
-                                    "New"
-                            }
-                        }
-                    );
-
-            console.log(
-                "📧 Notification result:",
-                notificationResult
-            );
+            orderSubmit.disabled = false;
 
             if (
-                notificationResult.error
+                orderSubmit.dataset.originalText
             ) {
 
-                console.warn(
-                    "⚠️ Notification error:",
-                    notificationResult.error
-                );
+                orderSubmit.innerHTML =
+                    orderSubmit.dataset.originalText;
 
             } else {
 
-                notificationSuccess =
-                    true;
+                orderSubmit.innerHTML =
+                    "🌶️ Place Order";
 
-                console.log(
-                    "✅ Owner notification sent"
-                );
             }
 
-        } catch (
-            notificationError
-        ) {
-
-            console.warn(
-                "⚠️ Notification failed:",
-                notificationError
-            );
         }
 
-        /* =================================================
-           SUCCESS MESSAGE / MODAL
-        ================================================= */
-
-        showSuccessModal({
-
-            orderId:
-                temporaryOrderId,
-
-            quantity:
-                quantity,
-
-            total:
-                totalAmount,
-
-            customerName:
-                customerName,
-
-            customerPhone:
-                customerPhone
-        });
-
-        /* =================================================
-           RESET FORM
-        ================================================= */
-
-        if (orderForm) {
-
-            orderForm.reset();
-        }
-
-        if (quantityElement) {
-
-            quantityElement.value =
-                MINIMUM_ORDER;
-        }
-
-        updateOrderTotal();
-
-        console.log(
-            notificationSuccess
-                ? "🎉 ORDER + NOTIFICATION COMPLETED"
-                : "🎉 ORDER SAVED; NOTIFICATION NEEDS ATTENTION"
-        );
-
-    } catch (error) {
-
-        console.error(
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        );
-
-        console.error(
-            "🔥 JAVASCRIPT EXCEPTION"
-        );
-
-        console.error(
-            error
-        );
-
-        console.error(
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        );
-
-        showOrderMessage(
-            error?.message ||
-            "Unexpected error occurred.",
-            "error"
-        );
-
-    } finally {
-
-        if (orderButton) {
-
-            orderButton.disabled =
-                false;
-
-            orderButton.innerHTML =
-                originalButtonHTML ||
-                `
-                    <span class="submit-text">
-                        Confirm & Place Order
-                    </span>
-
-                    <span class="submit-arrow">
-                        →
-                    </span>
-                `;
-        }
-    }
-}
-
-/* =========================================================
-   ORDER MESSAGE
-========================================================= */
-
-function showOrderMessage(
-    text,
-    type = "error"
-) {
-
-    const message =
-        document.getElementById(
-            "orderMessage"
-        );
-
-    if (!message) {
-
-        console.warn(
-            "⚠️ orderMessage element not found"
-        );
-
-        return;
     }
 
-    message.textContent =
-        text;
-
-    message.className =
-        `order-message show ${type}`;
-}
-
-/* =========================================================
-   CLEAR MESSAGE
-========================================================= */
-
-function clearOrderMessage() {
-
-    const message =
-        document.getElementById(
-            "orderMessage"
-        );
-
-    if (!message) {
-        return;
-    }
-
-    message.textContent =
-        "";
-
-    message.className =
-        "order-message";
-}
-
-/* =========================================================
-   SUCCESS MODAL
-========================================================= */
-
-function initializeModal() {
-
-    const modal =
-        document.getElementById(
-            "successModal"
-        );
-
-    const closeButton =
-        document.getElementById(
-            "modalClose"
-        );
-
-    const continueButton =
-        document.getElementById(
-            "continueBtn"
-        );
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
-
-    if (continueButton) {
-
-        continueButton.addEventListener(
-            "click",
-            closeSuccessModal
-        );
-    }
-
-    if (modal) {
-
-        const backdrop =
-            modal.querySelector(
-                ".modal-backdrop"
-            );
-
-        if (backdrop) {
-
-            backdrop.addEventListener(
-                "click",
-                closeSuccessModal
-            );
-        }
-    }
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-
-                closeSuccessModal();
-            }
-        }
-    );
-}
-
-/* =========================================================
-   SHOW SUCCESS MODAL
-========================================================= */
-
-function showSuccessModal(
-    order
-) {
-
-    const modal =
-        document.getElementById(
-            "successModal"
-        );
-
-    const orderId =
-        document.getElementById(
-            "orderId"
-        );
-
-    const successQuantity =
-        document.getElementById(
-            "successQuantity"
-        );
-
-    const successTotal =
-        document.getElementById(
-            "successTotal"
-        );
-
-    const whatsappButton =
-        document.getElementById(
-            "whatsappOrderButton"
-        );
-
-    if (!modal) {
-
-        console.warn(
-            "⚠️ successModal not found"
-        );
-
-        return;
-    }
-
-    if (orderId) {
-
-        orderId.textContent =
-            order.orderId ??
-            "—";
-    }
-
-    if (successQuantity) {
-
-        successQuantity.textContent =
-            `${order.quantity} KG`;
-    }
-
-    if (successTotal) {
-
-        successTotal.textContent =
-            formatCurrency(
-                order.total
-            );
-    }
 
     /* =====================================================
-       WHATSAPP
+       INITIAL QUANTITY
     ===================================================== */
 
-    if (whatsappButton) {
+    updateQuantityDisplay(
+        MIN_QUANTITY
+    );
 
-        const whatsappMessage =
-            [
-                "Hello Mana Masala,",
-                "",
-                "I have placed an order.",
-                `Order Reference: ${order.orderId ?? "N/A"}`,
-                `Name: ${order.customerName}`,
-                `Phone: ${order.customerPhone}`,
-                `Quantity: ${order.quantity} KG`,
-                `Total: ${formatCurrency(order.total)}`,
-                "",
-                "Thank you."
-            ].join("\n");
+    updateTotal();
 
-        whatsappButton.href =
-            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                whatsappMessage
-            )}`;
-    }
 
     /* =====================================================
-       OPEN MODAL
+       QUANTITY INPUT
     ===================================================== */
 
-    modal.classList.add(
-        "active"
-    );
+    if (quantityInput) {
 
-    modal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+        quantityInput.addEventListener(
+            "input",
+            () => {
 
-    document.body.style.overflow =
-        "hidden";
-}
+                let quantity =
+                    parseInt(
+                        quantityInput.value,
+                        10
+                    );
 
-/* =========================================================
-   CLOSE SUCCESS MODAL
-========================================================= */
+                if (isNaN(quantity)) {
 
-function closeSuccessModal() {
+                    quantity =
+                        MIN_QUANTITY;
 
-    const modal =
-        document.getElementById(
-            "successModal"
-        );
-
-    if (!modal) {
-        return;
-    }
-
-    modal.classList.remove(
-        "active"
-    );
-
-    modal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    document.body.style.overflow =
-        "";
-}
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function initializeNavigation() {
-
-    const navLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
-
-    navLinks.forEach(
-        link => {
-
-            link.addEventListener(
-                "click",
-                event => {
-
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-
-                        return;
-                    }
-
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-                    if (!target) {
-                        return;
-                    }
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "start"
-                    });
                 }
-            );
-        }
-    );
-}
 
-/* =========================================================
-   VIDEO
-========================================================= */
+                if (
+                    quantity <
+                    MIN_QUANTITY
+                ) {
 
-function initializeVideo() {
+                    quantity =
+                        MIN_QUANTITY;
 
-    const video =
-        document.querySelector(
-            ".glimpses-video"
+                }
+
+                updateQuantityDisplay(
+                    quantity
+                );
+
+                updateTotal();
+
+            }
         );
 
-    if (!video) {
-        return;
     }
 
-    video.addEventListener(
-        "error",
-        () => {
 
-            console.warn(
-                "⚠️ glimpse.mp4 could not be loaded."
-            );
-        }
-    );
+    /* =====================================================
+       MINUS BUTTON
+    ===================================================== */
 
-    video.addEventListener(
-        "loadeddata",
-        () => {
+    if (minusBtn) {
+
+        minusBtn.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                let quantity =
+                    getQuantity();
+
+                if (
+                    quantity >
+                    MIN_QUANTITY
+                ) {
+
+                    quantity--;
+
+                }
+
+                updateQuantityDisplay(
+                    quantity
+                );
+
+                updateTotal();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PLUS BUTTON
+    ===================================================== */
+
+    if (plusBtn) {
+
+        plusBtn.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                let quantity =
+                    getQuantity();
+
+                quantity++;
+
+                updateQuantityDisplay(
+                    quantity
+                );
+
+                updateTotal();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FORM SUBMIT
+    ===================================================== */
+
+    orderForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
 
             console.log(
-                "🎥 Glimpses video loaded"
+                "📦 Submitting order..."
             );
+
+
+            /* -------------------------------------------------
+               CHECK SUPABASE
+            ------------------------------------------------- */
+
+            if (!supabaseClient) {
+
+                console.error(
+                    "❌ Supabase client unavailable"
+                );
+
+                showMessage(
+                    "Order system is temporarily unavailable. Please contact us on WhatsApp.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               GET FORM VALUES
+            ------------------------------------------------- */
+
+            const name =
+                customerName?.value.trim() || "";
+
+            const customerPhone =
+                phone?.value.trim() || "";
+
+            const customerAddress =
+                address?.value.trim() || "";
+
+            const quantityValue =
+                getQuantity();
+
+            const total =
+                quantityValue *
+                PRICE_PER_KG;
+
+
+            console.log(
+                "📦 Order data:",
+                {
+                    customer_name: name,
+                    customer_phone: customerPhone,
+                    quantity_kg: quantityValue,
+                    address: customerAddress,
+                    total_amount: total
+                }
+            );
+
+
+            /* -------------------------------------------------
+               VALIDATE NAME
+            ------------------------------------------------- */
+
+            if (!name) {
+
+                showMessage(
+                    "Please enter your name.",
+                    "error"
+                );
+
+                customerName?.focus();
+
+                return;
+
+            }
+
+
+            if (name.length < 2) {
+
+                showMessage(
+                    "Please enter a valid name.",
+                    "error"
+                );
+
+                customerName?.focus();
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               VALIDATE PHONE
+            ------------------------------------------------- */
+
+            const cleanPhone =
+                customerPhone.replace(
+                    /\D/g,
+                    ""
+                );
+
+            if (!cleanPhone) {
+
+                showMessage(
+                    "Please enter your phone number.",
+                    "error"
+                );
+
+                phone?.focus();
+
+                return;
+
+            }
+
+
+            if (
+                cleanPhone.length !== 10
+            ) {
+
+                showMessage(
+                    "Please enter a valid 10-digit phone number.",
+                    "error"
+                );
+
+                phone?.focus();
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               VALIDATE ADDRESS
+            ------------------------------------------------- */
+
+            if (!customerAddress) {
+
+                showMessage(
+                    "Please enter your delivery address.",
+                    "error"
+                );
+
+                address?.focus();
+
+                return;
+
+            }
+
+
+            if (
+                customerAddress.length < 5
+            ) {
+
+                showMessage(
+                    "Please enter a complete delivery address.",
+                    "error"
+                );
+
+                address?.focus();
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               VALIDATE QUANTITY
+            ------------------------------------------------- */
+
+            if (
+                quantityValue <
+                MIN_QUANTITY
+            ) {
+
+                showMessage(
+                    `Minimum order is ${MIN_QUANTITY} KG.`,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               ORDER OBJECT
+            ------------------------------------------------- */
+
+            const orderData = {
+
+                customer_name:
+                    name,
+
+                customer_phone:
+                    cleanPhone,
+
+                quantity_kg:
+                    quantityValue,
+
+                address:
+                    customerAddress,
+
+                total_amount:
+                    total,
+
+                status:
+                    "New"
+
+            };
+
+
+            console.log(
+                "📦 Final order data:",
+                orderData
+            );
+
+
+            /* -------------------------------------------------
+               BUTTON LOADING
+            ------------------------------------------------- */
+
+            setButtonLoading(true);
+
+
+            try {
+
+                /* =================================================
+                   SAVE ORDER TO SUPABASE
+
+                   IMPORTANT:
+                   DO NOT USE .select().single()
+
+                   Customer has INSERT permission,
+                   but does NOT have SELECT permission.
+
+                   Therefore:
+
+                   .insert([orderData])
+
+                   is correct.
+
+                   .insert(...).select()
+
+                   would require SELECT permission.
+                ================================================= */
+
+                console.log(
+                    "📤 Sending order to Supabase..."
+                );
+
+
+                const {
+                    error
+                } = await supabaseClient
+                    .from("orders")
+                    .insert([
+                        orderData
+                    ]);
+
+
+                /* -------------------------------------------------
+                   DATABASE ERROR
+                ------------------------------------------------- */
+
+                if (error) {
+
+                    console.error(
+                        "========== SUPABASE ORDER ERROR =========="
+                    );
+
+                    console.error(
+                        "Code:",
+                        error.code
+                    );
+
+                    console.error(
+                        "Message:",
+                        error.message
+                    );
+
+                    console.error(
+                        "Details:",
+                        error.details
+                    );
+
+                    console.error(
+                        "Hint:",
+                        error.hint
+                    );
+
+                    console.error(
+                        "Full error:",
+                        error
+                    );
+
+                    console.error(
+                        "=========================================="
+                    );
+
+
+                    if (
+                        error.code ===
+                        "42501"
+                    ) {
+
+                        showMessage(
+                            "Database permission denied. Please contact us on WhatsApp.",
+                            "error"
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "Order could not be submitted. Please try again.",
+                            "error"
+                        );
+
+                    }
+
+                    setButtonLoading(false);
+
+                    return;
+
+                }
+
+
+                /* -------------------------------------------------
+                   SUCCESS
+                ------------------------------------------------- */
+
+                console.log(
+                    "✅ Order inserted successfully"
+                );
+
+
+                /* =================================================
+                   EMAIL NOTIFICATION
+
+                   This calls the Supabase Edge Function.
+
+                   IMPORTANT:
+                   Email failure will NOT cancel the order.
+
+                   The order is already saved successfully.
+                ================================================= */
+
+                try {
+
+                    console.log(
+                        "📧 Sending owner notification..."
+                    );
+
+
+                    const {
+                        data:
+                            notificationData,
+                        error:
+                            notificationError
+                    } =
+                        await supabaseClient.functions.invoke(
+                            "new-order-notification",
+                            {
+                                body: {
+                                    order:
+                                        orderData
+                                }
+                            }
+                        );
+
+
+                    if (
+                        notificationError
+                    ) {
+
+                        console.error(
+                            "⚠️ Email notification failed:",
+                            notificationError
+                        );
+
+                    } else {
+
+                        console.log(
+                            "✅ Email notification response:",
+                            notificationData
+                        );
+
+                    }
+
+                } catch (
+                    notificationException
+                ) {
+
+                    console.error(
+                        "⚠️ Email notification exception:",
+                        notificationException
+                    );
+
+                }
+
+
+                /* =================================================
+                   WHATSAPP MESSAGE
+                ================================================= */
+
+                const whatsappMessage =
+                    `🌶️ *NEW MANA MASALA ORDER*
+
+👤 *Customer:* ${name}
+
+📞 *Phone:* ${cleanPhone}
+
+📦 *Quantity:* ${quantityValue} KG
+
+💰 *Total Amount:* ${formatCurrency(total)}
+
+📍 *Address:*
+${customerAddress}
+
+🌶️ *Product:* Homemade Chilli Powder
+
+💵 *Price:* ₹${PRICE_PER_KG}/KG
+
+📦 *Minimum Order:* ${MIN_QUANTITY} KG`;
+
+
+                const whatsappURL =
+                    "https://wa.me/" +
+                    OWNER_WHATSAPP +
+                    "?text=" +
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+
+                /* =================================================
+                   SUCCESS MESSAGE
+                ================================================= */
+
+                showMessage(
+                    `✅ Order placed successfully! ${quantityValue} KG of Mana Masala has been ordered.`,
+                    "success"
+                );
+
+
+                /* =================================================
+                   RESET FORM
+                ================================================= */
+
+                orderForm.reset();
+
+
+                updateQuantityDisplay(
+                    MIN_QUANTITY
+                );
+
+                updateTotal();
+
+
+                /* =================================================
+                   OPEN WHATSAPP
+                ================================================= */
+
+                setTimeout(
+                    () => {
+
+                        window.open(
+                            whatsappURL,
+                            "_blank"
+                        );
+
+                    },
+                    700
+                );
+
+
+                console.log(
+                    "🌶️ Order process completed successfully"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "❌ Unexpected order error:",
+                    error
+                );
+
+
+                showMessage(
+                    "Something went wrong while placing the order. Please try again or contact us on WhatsApp.",
+                    "error"
+                );
+
+            } finally {
+
+                setButtonLoading(false);
+
+            }
+
         }
     );
-}
 
-/* =========================================================
-   FOOTER YEAR
-========================================================= */
 
-function initializeFooter() {
+    /* =====================================================
+       PHONE NUMBER CLEANUP
+    ===================================================== */
 
-    const year =
-        document.getElementById(
-            "currentYear"
+    if (phone) {
+
+        phone.addEventListener(
+            "input",
+            () => {
+
+                let value =
+                    phone.value.replace(
+                        /\D/g,
+                        ""
+                    );
+
+                if (
+                    value.length >
+                    10
+                ) {
+
+                    value =
+                        value.substring(
+                            0,
+                            10
+                        );
+
+                }
+
+                phone.value =
+                    value;
+
+            }
         );
 
-    if (year) {
-
-        year.textContent =
-            new Date()
-                .getFullYear();
     }
-}
 
-/* =========================================================
-   FINAL LOG
-========================================================= */
 
-console.log(
-    "🌶️ Mana Masala frontend initialized"
-);
+    /* =====================================================
+       PREVENT INVALID QUANTITY
+    ===================================================== */
+
+    if (quantityInput) {
+
+        quantityInput.addEventListener(
+            "blur",
+            () => {
+
+                let quantity =
+                    parseInt(
+                        quantityInput.value,
+                        10
+                    );
+
+                if (
+                    isNaN(quantity) ||
+                    quantity <
+                    MIN_QUANTITY
+                ) {
+
+                    quantity =
+                        MIN_QUANTITY;
+
+                }
+
+                updateQuantityDisplay(
+                    quantity
+                );
+
+                updateTotal();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       READY
+    ===================================================== */
+
+    console.log(
+        "✅ Mana Masala system ready"
+    );
+
+    console.log(
+        `💰 Price: ₹${PRICE_PER_KG}/KG`
+    );
+
+    console.log(
+        `📦 Minimum order: ${MIN_QUANTITY} KG`
+    );
+
+});

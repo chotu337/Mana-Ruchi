@@ -3306,3 +3306,484 @@ link[rel="icon"] {
     }
 }
 ```
+/* =========================================================
+   MANA MASALA
+   PREMIUM HOME BUTTON DESIGN
+========================================================= */
+
+.home-buttons-section {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 20px 70px;
+}
+
+.home-buttons-container {
+    width: min(900px, 100%);
+    margin: auto;
+    text-align: center;
+}
+
+
+/* BRAND */
+
+.home-brand {
+    margin-bottom: 25px;
+}
+
+.home-chilli {
+    display: block;
+    font-size: 55px;
+    margin-bottom: 8px;
+    animation: chilliFloat 3s ease-in-out infinite;
+}
+
+.home-brand h1 {
+    margin: 0;
+    font-size: clamp(38px, 8vw, 72px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow:
+        0 0 15px rgba(255, 0, 0, .35),
+        0 0 40px rgba(150, 0, 0, .25);
+}
+
+.home-brand h1 span {
+    color: #c40000;
+}
+
+.home-brand p {
+    margin: 10px 0 0;
+    color: rgba(255,255,255,.65);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+
+/* INTRO */
+
+.home-intro {
+    margin: 30px auto;
+    max-width: 650px;
+}
+
+.home-badge {
+    display: inline-block;
+    padding: 9px 18px;
+    border-radius: 50px;
+
+    background: rgba(120, 0, 0, .18);
+    border: 1px solid rgba(255, 60, 60, .25);
+
+    color: #ffb0b0;
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(15px);
+}
+
+.home-intro h2 {
+    margin: 22px 0 12px;
+
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.1;
+
+    color: #fff;
+}
+
+.home-intro h2 span {
+    color: #d00000;
+}
+
+.home-intro p {
+    max-width: 600px;
+    margin: auto;
+
+    color: rgba(255,255,255,.65);
+    line-height: 1.7;
+}
+
+
+/* BUTTON GRID */
+
+.home-button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+
+    margin: 35px auto;
+}
+
+
+/* GLASS BUTTON */
+
+.home-action-btn {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 82px;
+    padding: 15px 18px;
+
+    text-decoration: none;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(120, 0, 0, .30),
+            rgba(20, 0, 0, .55)
+        );
+
+    border: 1px solid rgba(255, 70, 70, .18);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+    overflow: hidden;
+}
+
+
+/* RED LIGHT */
+
+.home-action-btn::before {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    top: -60px;
+    left: -60px;
+
+    background: rgba(220,0,0,.20);
+
+    border-radius: 50%;
+
+    filter: blur(30px);
+
+    transition: .4s ease;
+}
+
+
+.home-action-btn:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(255,70,70,.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(150, 0, 0, .40),
+            rgba(25, 0, 0, .65)
+        );
+
+    box-shadow:
+        0 15px 45px rgba(120,0,0,.30),
+        0 0 25px rgba(180,0,0,.15);
+}
+
+
+.home-action-btn:hover::before {
+    transform: scale(2);
+}
+
+
+/* ICON */
+
+.btn-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background: rgba(120,0,0,.25);
+
+    border: 1px solid rgba(255,70,70,.15);
+
+    font-size: 23px;
+
+    transition: .3s ease;
+}
+
+
+.home-action-btn:hover .btn-icon {
+    transform: scale(1.08) rotate(-3deg);
+
+    background: rgba(170,0,0,.35);
+}
+
+
+/* TEXT */
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+
+    flex: 1;
+
+    text-align: left;
+
+    margin-left: 14px;
+}
+
+.btn-content strong {
+    display: block;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+.btn-content small {
+    color: rgba(255,255,255,.52);
+
+    font-size: 11px;
+}
+
+
+/* ARROW */
+
+.btn-arrow {
+    position: relative;
+    z-index: 2;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.05);
+
+    color: #fff;
+
+    font-size: 18px;
+
+    transition: .3s ease;
+}
+
+.home-action-btn:hover .btn-arrow {
+    transform: translateX(5px);
+
+    background: rgba(180,0,0,.45);
+}
+
+
+/* PRICE CARD */
+
+.home-price-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 35px;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 25px auto;
+
+    padding: 18px 28px;
+
+    border-radius: 20px;
+
+    background: rgba(30,0,0,.35);
+
+    border: 1px solid rgba(255,70,70,.16);
+
+    backdrop-filter: blur(18px);
+}
+
+.home-price-card div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-price-card span {
+    color: rgba(255,255,255,.45);
+
+    font-size: 9px;
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+.home-price-card strong {
+    color: #fff;
+
+    font-size: 23px;
+}
+
+.home-price-card small {
+    color: rgba(255,255,255,.5);
+}
+
+.price-divider {
+    width: 1px;
+    height: 40px;
+
+    background: rgba(255,255,255,.12);
+}
+
+
+/* ORDER BUTTON */
+
+.home-order-btn {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    max-width: 500px;
+    margin: 20px auto 0;
+
+    padding: 18px 22px;
+
+    border-radius: 18px;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a00000,
+            #580000
+        );
+
+    border: 1px solid rgba(255,100,100,.35);
+
+    box-shadow:
+        0 12px 35px rgba(100,0,0,.35);
+
+    color: #fff;
+
+    transition: .3s ease;
+
+    overflow: hidden;
+}
+
+.home-order-btn:hover {
+    transform: translateY(-4px) scale(1.01);
+
+    box-shadow:
+        0 18px 45px rgba(130,0,0,.45),
+        0 0 25px rgba(180,0,0,.20);
+}
+
+.order-icon {
+    font-size: 25px;
+    margin-right: 15px;
+}
+
+.home-order-btn span:nth-child(2) {
+    flex: 1;
+    text-align: left;
+}
+
+.home-order-btn strong {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.home-order-btn small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    color: rgba(255,255,255,.65);
+}
+
+.order-arrow {
+    font-size: 23px;
+
+    transition: .3s ease;
+}
+
+.home-order-btn:hover .order-arrow {
+    transform: translateX(6px);
+}
+
+
+/* FLOATING CHILLI */
+
+@keyframes chilliFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(-4deg);
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .home-buttons-section {
+        padding: 70px 15px 50px;
+    }
+
+    .home-brand h1 {
+        letter-spacing: 2px;
+    }
+
+    .home-button-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .home-action-btn {
+        min-height: 75px;
+    }
+
+    .home-price-card {
+        width: 100%;
+        gap: 20px;
+        padding: 16px 12px;
+    }
+
+    .home-price-card strong {
+        font-size: 19px;
+    }
+
+    .home-order-btn {
+        width: 100%;
+    }
+}

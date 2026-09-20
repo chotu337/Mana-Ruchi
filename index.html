@@ -12,18 +12,20 @@
           content="#120000">
 
     <meta name="description"
-          content="Mana Masala - Homemade Chilli Powder">
+          content="Mana Masala - Authentic Homemade Chilli Powder">
 
     <title>Mana Masala | Homemade Chilli Powder</title>
 
+
     <!-- =====================================================
          FAVICON
-         ONLY browser tab icon
+         ONLY USED BY THE BROWSER TAB
     ====================================================== -->
 
     <link rel="icon"
           type="image/png"
           href="favicon.png">
+
 
     <!-- =====================================================
          GOOGLE FONT
@@ -39,15 +41,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
+
     <!-- =====================================================
          MAIN CSS
     ====================================================== -->
 
     <link rel="stylesheet"
-          href="style.css?v=310">
+          href="style.css?v=311">
+
 
     <!-- =====================================================
-         SUPABASE
+         SUPABASE JS
     ====================================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -57,14 +61,13 @@
 
 <body>
 
-<!-- =========================================================
-     INTRO / BRAND REVEAL
 
+<!-- =========================================================
+     INTRO
+     
      IMPORTANT:
      NO favicon.png
      NO masala.png
-
-     Therefore neither image can cover the website.
 ========================================================= -->
 
 <div id="manaIntro"
@@ -78,8 +81,7 @@
 
     <div class="mana-intro-content">
 
-        <div class="intro-brand-mark"
-             aria-hidden="true">
+        <div class="intro-brand-mark">
             🌶️
         </div>
 
@@ -103,860 +105,369 @@
 
 
 <!-- =========================================================
-     PAGE
+     WEBSITE
 ========================================================= -->
 
 <div id="siteContent">
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-    <header class="site-header">
+<header class="site-header">
 
-        <div class="header-container">
+    <div class="header-container">
 
-            <a href="#home"
-               class="brand">
 
-                <span class="brand-icon">
-                    🌶️
-                </span>
+        <a href="#home"
+           class="brand">
 
-                <span class="brand-text">
-                    MANA MASALA
-                </span>
+            <span class="brand-icon">
+                🌶️
+            </span>
 
+            <span class="brand-text">
+                MANA MASALA
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="#home">
+                Home
             </a>
 
-
-            <nav class="main-nav">
-
-                <a href="#home">
-                    Home
-                </a>
-
-                <a href="#product">
-                    Product
-                </a>
-
-                <a href="#about">
-                    About
-                </a>
-
-                <a href="#glimpses">
-                    Glimpses
-                </a>
-
-                <a href="#order">
-                    Order
-                </a>
-
-                <a href="#contact">
-                    Contact
-                </a>
-
-            </nav>
-
-
-            <a href="#order"
-               class="header-order-btn">
-
-                Order Now
-
+            <a href="#product">
+                Product
             </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#glimpses">
+                Glimpses
+            </a>
+
+            <a href="#order">
+                Order
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <a href="#order"
+           class="header-order-btn">
+
+            Order Now
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section id="home"
+         class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-container">
+
+
+        <!-- HERO CONTENT -->
+
+        <div class="hero-content">
+
+
+            <div class="hero-badge">
+
+                🌶️ Homemade • Authentic • Fresh
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                Pure Chilli Powder.
+
+                <span>
+                    Real Homemade Taste.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Traditionally prepared homemade chilli powder
+                with authentic flavour, rich colour and the
+                taste of home.
+
+            </p>
+
+
+            <div class="hero-price">
+
+                <span class="price-symbol">
+                    ₹
+                </span>
+
+                <span class="price-number">
+                    350
+                </span>
+
+                <span class="price-unit">
+                    / KG
+                </span>
+
+            </div>
+
+
+            <div class="hero-minimum">
+
+                <span>
+                    📦
+                </span>
+
+                <strong>
+                    10 KG Minimum Order
+                </strong>
+
+            </div>
+
+
+            <div class="hero-actions">
+
+                <a href="#order"
+                   class="primary-btn">
+
+                    Order Now
+
+                </a>
+
+
+                <a href="https://wa.me/918367450301"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="secondary-btn">
+
+                    WhatsApp Us
+
+                </a>
+
+            </div>
 
         </div>
 
-    </header>
 
 
+        <!-- HERO PRODUCT -->
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
+        <div class="hero-visual">
 
-    <main>
+            <div class="hero-product-card">
 
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
-
-        <section id="home"
-                 class="hero-section">
-
-            <div class="hero-overlay"></div>
-
-            <div class="hero-container">
+                <div class="product-glow"></div>
 
 
-                <!-- HERO TEXT -->
+                <div class="hero-product-image">
 
-                <div class="hero-content">
-
-                    <div class="hero-badge">
-
-                        🌶️ Homemade • Authentic • Fresh
-
-                    </div>
-
-
-                    <h1 class="hero-title">
-
-                        Pure Chilli Powder.
-                        <span>
-                            Real Homemade Taste.
-                        </span>
-
-                    </h1>
-
-
-                    <p class="hero-description">
-
-                        Traditionally prepared homemade chilli
-                        powder with authentic flavour, rich colour
-                        and the taste of home.
-
-                    </p>
-
-
-                    <!-- PRICE -->
-
-                    <div class="hero-price">
-
-                        <span class="price-symbol">
-                            ₹
-                        </span>
-
-                        <span class="price-number">
-                            350
-                        </span>
-
-                        <span class="price-unit">
-                            / KG
-                        </span>
-
-                    </div>
-
-
-                    <!-- MINIMUM ORDER -->
-
-                    <div class="hero-minimum">
-
-                        <span>
-                            📦
-                        </span>
-
-                        <strong>
-                            10 KG Minimum Order
-                        </strong>
-
-                    </div>
-
-
-                    <!-- BUTTONS -->
-
-                    <div class="hero-actions">
-
-                        <a href="#order"
-                           class="primary-btn">
-
-                            Order Now
-
-                        </a>
-
-
-                        <a href="https://wa.me/918367450301"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="secondary-btn">
-
-                            WhatsApp Us
-
-                        </a>
-
-                    </div>
+                    <img src="masala.png"
+                         class="mana-product-image"
+                         alt="Mana Masala Homemade Chilli Powder"
+                         loading="eager">
 
                 </div>
 
 
+                <div class="hero-product-label">
 
-                <!-- HERO PRODUCT -->
+                    <span>
+                        MANA MASALA
+                    </span>
 
-                <div class="hero-visual">
+                    <small>
+                        Homemade Chilli Powder
+                    </small>
 
-                    <div class="hero-product-card">
+                </div>
 
-                        <div class="product-glow"></div>
+            </div>
 
-                        <div class="hero-product-image">
-
-                            <!-- MASALA.PNG IS ONLY HERE -->
-
-                            <img src="masala.png"
-                                 class="mana-product-image"
-                                 alt="Mana Masala Homemade Chilli Powder"
-                                 loading="eager">
-
-                        </div>
+        </div>
 
 
-                        <div class="hero-product-label">
+    </div>
 
-                            <span>
-                                MANA MASALA
-                            </span>
+</section>
+
+
+
+<!-- =========================================================
+     PRODUCT
+========================================================= -->
+
+<section id="product"
+         class="section product-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                OUR PRODUCT
+            </span>
+
+            <h2>
+                Homemade Chilli Powder
+            </h2>
+
+            <p>
+                Simple ingredients. Authentic preparation.
+                Powerful flavour.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <div class="product-showcase-card">
+
+                <div class="product-image-wrap">
+
+                    <img src="masala.png"
+                         class="mana-product-image"
+                         alt="Mana Masala Chilli Powder"
+                         loading="lazy">
+
+                </div>
+
+            </div>
+
+
+            <div class="product-info-card">
+
+                <span class="card-tag">
+                    MANA MASALA
+                </span>
+
+                <h3>
+                    Authentic Homemade Flavour
+                </h3>
+
+                <p>
+                    Mana Masala brings the traditional taste
+                    of homemade chilli powder directly to
+                    your kitchen.
+                </p>
+
+
+                <div class="feature-list">
+
+
+                    <div class="feature-item">
+
+                        <span>
+                            🌶️
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Rich Chilli Flavour
+                            </strong>
 
                             <small>
-                                Homemade Chilli Powder
+                                Authentic traditional taste
                             </small>
 
                         </div>
 
                     </div>
 
-                </div>
 
-            </div>
+                    <div class="feature-item">
 
-        </section>
-
-
-
-        <!-- =================================================
-             PRODUCT
-        ================================================== -->
-
-        <section id="product"
-                 class="section product-section">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <span class="section-tag">
-                        OUR PRODUCT
-                    </span>
-
-                    <h2>
-                        Homemade Chilli Powder
-                    </h2>
-
-                    <p>
-                        Simple ingredients. Authentic preparation.
-                        Powerful flavour.
-                    </p>
-
-                </div>
-
-
-                <div class="product-grid">
-
-
-                    <div class="product-showcase-card">
-
-                        <div class="product-image-wrap">
-
-                            <img src="masala.png"
-                                 class="mana-product-image"
-                                 alt="Mana Masala Chilli Powder"
-                                 loading="lazy">
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="product-info-card">
-
-                        <span class="card-tag">
-                            MANA MASALA
+                        <span>
+                            🏠
                         </span>
 
-                        <h3>
-                            Authentic Homemade Flavour
-                        </h3>
+                        <div>
 
-                        <p>
-                            Mana Masala brings the traditional taste
-                            of homemade chilli powder directly to
-                            your kitchen.
-                        </p>
-
-
-                        <div class="feature-list">
-
-                            <div class="feature-item">
-
-                                <span>
-                                    🌶️
-                                </span>
-
-                                <div>
-
-                                    <strong>
-                                        Rich Chilli Flavour
-                                    </strong>
-
-                                    <small>
-                                        Authentic traditional taste
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="feature-item">
-
-                                <span>
-                                    🏠
-                                </span>
-
-                                <div>
-
-                                    <strong>
-                                        Homemade
-                                    </strong>
-
-                                    <small>
-                                        Prepared with care
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="feature-item">
-
-                                <span>
-                                    📦
-                                </span>
-
-                                <div>
-
-                                    <strong>
-                                        Bulk Orders
-                                    </strong>
-
-                                    <small>
-                                        Minimum order 10 KG
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="feature-item">
-
-                                <span>
-                                    💰
-                                </span>
-
-                                <div>
-
-                                    <strong>
-                                        ₹350 / KG
-                                    </strong>
-
-                                    <small>
-                                        Current product price
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <a href="#order"
-                           class="primary-btn">
-
-                            Place Your Order
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             ABOUT
-        ================================================== -->
-
-        <section id="about"
-                 class="section about-section">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <span class="section-tag">
-                        ABOUT MANA MASALA
-                    </span>
-
-                    <h2>
-                        The Taste of Home
-                    </h2>
-
-                    <p>
-                        Traditional flavour made for everyday
-                        cooking.
-                    </p>
-
-                </div>
-
-
-                <div class="about-grid">
-
-
-                    <div class="glass-card">
-
-                        <div class="card-icon">
-                            🌶️
-                        </div>
-
-                        <h3>
-                            Authentic Taste
-                        </h3>
-
-                        <p>
-                            Enjoy the familiar flavour and aroma
-                            of traditionally prepared chilli powder.
-                        </p>
-
-                    </div>
-
-
-                    <div class="glass-card">
-
-                        <div class="card-icon">
-                            🏠
-                        </div>
-
-                        <h3>
-                            Homemade
-                        </h3>
-
-                        <p>
-                            Mana Masala focuses on the traditional
-                            homemade style of preparation.
-                        </p>
-
-                    </div>
-
-
-                    <div class="glass-card">
-
-                        <div class="card-icon">
-                            ❤️
-                        </div>
-
-                        <h3>
-                            Made With Care
-                        </h3>
-
-                        <p>
-                            Every order is prepared and handled
-                            with attention to quality and taste.
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             GLIMPSES
-        ================================================== -->
-
-        <section id="glimpses"
-                 class="section glimpses-section">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <span class="section-tag">
-                        GLIMPSES
-                    </span>
-
-                    <h2>
-                        A Glimpse of Mana Masala
-                    </h2>
-
-                    <p>
-                        Discover the look and feel of our
-                        homemade chilli powder.
-                    </p>
-
-                </div>
-
-
-                <div class="glimpses-grid">
-
-
-                    <div class="glimpse-card">
-
-                        <img src="masala.png"
-                             class="glimpse-image"
-                             alt="Mana Masala product"
-                             loading="lazy">
-
-                        <div class="glimpse-overlay">
-
-                            <span>
-                                Mana Masala
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="glimpse-card">
-
-                        <img src="background.jpeg"
-                             class="glimpse-image"
-                             alt="Mana Masala background"
-                             loading="lazy">
-
-                        <div class="glimpse-overlay">
-
-                            <span>
-                                Homemade Tradition
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="glimpse-card">
-
-                        <img src="masala.png"
-                             class="glimpse-image"
-                             alt="Mana Masala chilli powder"
-                             loading="lazy">
-
-                        <div class="glimpse-overlay">
-
-                            <span>
-                                Authentic Flavour
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             ORDER
-        ================================================== -->
-
-        <section id="order"
-                 class="section order-section">
-
-            <div class="section-container">
-
-
-                <div class="section-heading">
-
-                    <span class="section-tag">
-                        PLACE YOUR ORDER
-                    </span>
-
-                    <h2>
-                        Order Mana Masala
-                    </h2>
-
-                    <p>
-                        Minimum order quantity is 10 KG.
-                    </p>
-
-                </div>
-
-
-                <div class="order-card">
-
-
-                    <form id="orderForm"
-                          autocomplete="on">
-
-
-                        <!-- NAME -->
-
-                        <div class="form-group">
-
-                            <label for="customerName">
-                                Customer Name
-                            </label>
-
-                            <input type="text"
-                                   id="customerName"
-                                   name="customerName"
-                                   placeholder="Enter your name"
-                                   autocomplete="name"
-                                   required>
-
-                        </div>
-
-
-
-                        <!-- PHONE -->
-
-                        <div class="form-group">
-
-                            <label for="phone">
-                                Phone Number
-                            </label>
-
-                            <input type="tel"
-                                   id="phone"
-                                   name="phone"
-                                   placeholder="Enter 10-digit mobile number"
-                                   inputmode="numeric"
-                                   maxlength="10"
-                                   autocomplete="tel"
-                                   required>
-
-                        </div>
-
-
-
-                        <!-- ADDRESS -->
-
-                        <div class="form-group">
-
-                            <label for="address">
-                                Delivery Address
-                            </label>
-
-                            <textarea id="address"
-                                      name="address"
-                                      rows="4"
-                                      placeholder="Enter complete delivery address"
-                                      autocomplete="street-address"
-                                      required></textarea>
-
-                        </div>
-
-
-
-                        <!-- QUANTITY -->
-
-                        <div class="form-group">
-
-                            <label>
-                                Quantity
-                            </label>
-
-
-                            <div class="quantity-control">
-
-                                <button type="button"
-                                        id="minusBtn"
-                                        aria-label="Decrease quantity">
-
-                                    −
-
-                                </button>
-
-
-                                <div class="quantity-display">
-
-                                    <span id="quantityDisplay">
-                                        10
-                                    </span>
-
-                                    <small>
-                                        KG
-                                    </small>
-
-                                </div>
-
-
-                                <button type="button"
-                                        id="plusBtn"
-                                        aria-label="Increase quantity">
-
-                                    +
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- TOTAL -->
-
-                        <div class="order-total">
-
-                            <span>
-                                Total Amount
-                            </span>
-
-                            <strong id="totalAmount">
-                                ₹3,500
+                            <strong>
+                                Homemade
                             </strong>
 
+                            <small>
+                                Prepared with care
+                            </small>
+
                         </div>
 
+                    </div>
 
 
-                        <!-- MESSAGE -->
+                    <div class="feature-item">
 
-                        <div id="formMessage"
-                             class="form-message"
-                             aria-live="polite">
-                        </div>
-
-
-
-                        <!-- SUBMIT -->
-
-                        <button type="submit"
-                                id="orderSubmit"
-                                class="submit-order-btn">
-
-                            <span>
-                                Place Order
-                            </span>
-
-                        </button>
-
-
-                    </form>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             CONTACT
-        ================================================== -->
-
-        <section id="contact"
-                 class="section contact-section">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <span class="section-tag">
-                        CONTACT
-                    </span>
-
-                    <h2>
-                        Contact Mana Masala
-                    </h2>
-
-                    <p>
-                        Have a question or want to place an order?
-                        Contact us directly.
-                    </p>
-
-                </div>
-
-
-                <div class="contact-grid">
-
-
-                    <a href="https://wa.me/918367450301"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="contact-card">
-
-                        <div class="contact-icon">
-                            💬
-                        </div>
+                        <span>
+                            📦
+                        </span>
 
                         <div>
 
-                            <span>
-                                WhatsApp
-                            </span>
-
                             <strong>
-                                +91 83674 50301
+                                Bulk Orders
                             </strong>
 
+                            <small>
+                                Minimum order 10 KG
+                            </small>
+
                         </div>
 
-                    </a>
+                    </div>
 
 
+                    <div class="feature-item">
 
-                    <a href="tel:+918367450301"
-                       class="contact-card">
-
-                        <div class="contact-icon">
-                            📞
-                        </div>
+                        <span>
+                            💰
+                        </span>
 
                         <div>
 
-                            <span>
-                                Call Us
-                            </span>
-
                             <strong>
-                                +91 83674 50301
+                                ₹350 / KG
                             </strong>
 
-                        </div>
-
-                    </a>
-
-
-
-                    <div class="contact-card">
-
-                        <div class="contact-icon">
-                            🌶️
-                        </div>
-
-                        <div>
-
-                            <span>
-                                Brand
-                            </span>
-
-                            <strong>
-                                Mana Masala
-                            </strong>
+                            <small>
+                                Current product price
+                            </small>
 
                         </div>
 
@@ -966,60 +477,547 @@
                 </div>
 
 
-                <a href="https://wa.me/918367450301"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="whatsapp-contact-btn">
+                <a href="#order"
+                   class="primary-btn">
 
-                    💬 Contact Mana Masala on WhatsApp
+                    Place Your Order
 
                 </a>
 
             </div>
 
-        </section>
 
-    </main>
+        </div>
+
+    </div>
+
+</section>
 
 
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
+<!-- =========================================================
+     ABOUT
+========================================================= -->
 
-    <footer class="site-footer">
+<section id="about"
+         class="section about-section">
 
-        <div class="footer-container">
+    <div class="section-container">
 
-            <div class="footer-brand">
 
-                <span>
-                    🌶️
-                </span>
+        <div class="section-heading">
 
-                <strong>
-                    MANA MASALA
-                </strong>
+            <span class="section-tag">
+                ABOUT MANA MASALA
+            </span>
 
-            </div>
-
+            <h2>
+                The Taste of Home
+            </h2>
 
             <p>
-                Homemade Chilli Powder
-            </p>
-
-
-            <p class="copyright">
-
-                © <span id="currentYear"></span>
-                Mana Masala.
-                All rights reserved.
-
+                Traditional flavour made for everyday cooking.
             </p>
 
         </div>
 
-    </footer>
+
+        <div class="about-grid">
+
+
+            <div class="glass-card">
+
+                <div class="card-icon">
+                    🌶️
+                </div>
+
+                <h3>
+                    Authentic Taste
+                </h3>
+
+                <p>
+                    Enjoy the familiar flavour and aroma
+                    of traditionally prepared chilli powder.
+                </p>
+
+            </div>
+
+
+            <div class="glass-card">
+
+                <div class="card-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Homemade
+                </h3>
+
+                <p>
+                    Mana Masala focuses on the traditional
+                    homemade style of preparation.
+                </p>
+
+            </div>
+
+
+            <div class="glass-card">
+
+                <div class="card-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Made With Care
+                </h3>
+
+                <p>
+                    Every order is prepared and handled
+                    with attention to quality and taste.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     GLIMPSES
+========================================================= -->
+
+<section id="glimpses"
+         class="section glimpses-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                GLIMPSES
+            </span>
+
+            <h2>
+                A Glimpse of Mana Masala
+            </h2>
+
+            <p>
+                Discover the look and feel of our
+                homemade chilli powder.
+            </p>
+
+        </div>
+
+
+        <div class="glimpses-grid">
+
+
+            <div class="glimpse-card">
+
+                <img src="./glimpse.mp4"
+                     class="glimpse-image"
+                     alt="Mana Masala product"
+                     loading="lazy">
+
+                <div class="glimpse-overlay">
+
+                    <span>
+                        Mana Masala
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="glimpse-card">
+
+                <img src="background.jpeg"
+                     class="glimpse-image"
+                     alt="Mana Masala"
+                     loading="lazy">
+
+                <div class="glimpse-overlay">
+
+                    <span>
+                        Homemade Tradition
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="glimpse-card">
+
+                <img src="masala.png"
+                     class="glimpse-image"
+                     alt="Mana Masala chilli powder"
+                     loading="lazy">
+
+                <div class="glimpse-overlay">
+
+                    <span>
+                        Authentic Flavour
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ORDER
+========================================================= -->
+
+<section id="order"
+         class="section order-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                PLACE YOUR ORDER
+            </span>
+
+            <h2>
+                Order Mana Masala
+            </h2>
+
+            <p>
+                Minimum order quantity is 10 KG.
+            </p>
+
+        </div>
+
+
+        <div class="order-card">
+
+
+            <form id="orderForm"
+                  autocomplete="on">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="customerName">
+                        Customer Name
+                    </label>
+
+                    <input type="text"
+                           id="customerName"
+                           name="customerName"
+                           placeholder="Enter your name"
+                           autocomplete="name"
+                           required>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           placeholder="Enter 10-digit mobile number"
+                           inputmode="numeric"
+                           maxlength="10"
+                           autocomplete="tel"
+                           required>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+
+                    <label for="address">
+                        Delivery Address
+                    </label>
+
+                    <textarea id="address"
+                              name="address"
+                              rows="4"
+                              placeholder="Enter complete delivery address"
+                              autocomplete="street-address"
+                              required></textarea>
+
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+
+                    <div class="quantity-control">
+
+
+                        <button type="button"
+                                id="minusBtn"
+                                aria-label="Decrease quantity">
+
+                            −
+
+                        </button>
+
+
+                        <div class="quantity-display">
+
+                            <span id="quantityDisplay">
+                                10
+                            </span>
+
+                            <small>
+                                KG
+                            </small>
+
+                        </div>
+
+
+                        <button type="button"
+                                id="plusBtn"
+                                aria-label="Increase quantity">
+
+                            +
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="order-total">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong id="totalAmount">
+                        ₹3,500
+                    </strong>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div id="formMessage"
+                     class="form-message"
+                     aria-live="polite">
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button type="submit"
+                        id="orderSubmit"
+                        class="submit-order-btn">
+
+                    Place Order
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section id="contact"
+         class="section contact-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                CONTACT
+            </span>
+
+            <h2>
+                Contact Mana Masala
+            </h2>
+
+            <p>
+                Have a question or want to place an order?
+                Contact us directly.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+            <a href="https://wa.me/918367450301"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="contact-card">
+
+                <div class="contact-icon">
+                    💬
+                </div>
+
+                <div>
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                    <strong>
+                        +91 83674 50301
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a href="tel:+918367450301"
+               class="contact-card">
+
+                <div class="contact-icon">
+                    📞
+                </div>
+
+                <div>
+
+                    <span>
+                        Call Us
+                    </span>
+
+                    <strong>
+                        +91 83674 50301
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <div class="contact-card">
+
+                <div class="contact-icon">
+                    🌶️
+                </div>
+
+                <div>
+
+                    <span>
+                        Brand
+                    </span>
+
+                    <strong>
+                        Mana Masala
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <a href="https://wa.me/918367450301"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="whatsapp-contact-btn">
+
+            💬 Contact Mana Masala on WhatsApp
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <span>
+                🌶️
+            </span>
+
+            <strong>
+                MANA MASALA
+            </strong>
+
+        </div>
+
+
+        <p>
+            Homemade Chilli Powder
+        </p>
+
+
+        <p class="copyright">
+
+            © <span id="currentYear"></span>
+            Mana Masala. All rights reserved.
+
+        </p>
+
+    </div>
+
+</footer>
 
 
 </div>
@@ -1047,491 +1045,630 @@
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("🌶️ Mana Masala website starting...");
-
-
-    /* =====================================================
-       SUPABASE CONFIGURATION
-    ====================================================== */
-
-    const SUPABASE_URL =
-        "https://hcczhnmdipqrnbxviuln.supabase.co";
-
-    const SUPABASE_ANON_KEY =
-        "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-    let supabaseClient = null;
-
-
-    try {
-
-        if (
-            typeof window.supabase !== "undefined" &&
-            SUPABASE_URL &&
-            SUPABASE_ANON_KEY
-        ) {
-
-            supabaseClient =
-                window.supabase.createClient(
-                    SUPABASE_URL,
-                    SUPABASE_ANON_KEY
-                );
-
-            console.log(
-                "✅ Supabase client initialized"
-            );
-
-        } else {
-
-            console.error(
-                "❌ Supabase configuration is missing"
-            );
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "❌ Supabase initialization failed:",
-            error
+        console.log(
+            "🌶️ Mana Masala website starting..."
         );
 
-    }
+
+        /* =================================================
+           SUPABASE
+        ================================================== */
+
+        const SUPABASE_URL =
+            "https://hcczhnmdipqrnbxviuln.supabase.co";
 
 
+        /*
+         * IMPORTANT:
+         * This must be the CURRENT publishable key
+         * from the SAME Supabase project.
+         *
+         * Never use a service_role / secret key here.
+         */
 
-    /* =====================================================
-       CONSTANTS
-    ====================================================== */
-
-    const MIN_QUANTITY = 10;
-
-    const PRICE_PER_KG = 350;
-
-    const OWNER_WHATSAPP =
-        "918367450301";
-
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
 
 
-    /* =====================================================
-       ELEMENTS
-    ====================================================== */
-
-    const orderForm =
-        document.getElementById("orderForm");
-
-    const customerName =
-        document.getElementById("customerName");
-
-    const phone =
-        document.getElementById("phone");
-
-    const address =
-        document.getElementById("address");
-
-    const quantity =
-        document.getElementById("quantityDisplay");
-
-    const totalAmount =
-        document.getElementById("totalAmount");
-
-    const minusBtn =
-        document.getElementById("minusBtn");
-
-    const plusBtn =
-        document.getElementById("plusBtn");
-
-    const orderSubmit =
-        document.getElementById("orderSubmit");
-
-    const formMessage =
-        document.getElementById("formMessage");
-
-    const currentYear =
-        document.getElementById("currentYear");
+        let supabaseClient = null;
 
 
+        try {
 
-    /* =====================================================
-       YEAR
-    ====================================================== */
+            if (
+                typeof window.supabase !== "undefined" &&
+                SUPABASE_URL &&
+                SUPABASE_ANON_KEY
+            ) {
 
-    if (currentYear) {
-
-        currentYear.textContent =
-            new Date().getFullYear();
-
-    }
-
-
-
-    /* =====================================================
-       QUANTITY
-    ====================================================== */
-
-    let quantityValue = MIN_QUANTITY;
+                supabaseClient =
+                    window.supabase.createClient(
+                        SUPABASE_URL,
+                        SUPABASE_ANON_KEY
+                    );
 
 
-    function updateTotal() {
+                console.log(
+                    "✅ Supabase client initialized"
+                );
 
-        if (quantity) {
+            } else {
 
-            quantity.textContent =
-                quantityValue;
+                console.error(
+                    "❌ Supabase configuration missing"
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "❌ Supabase initialization failed:",
+                error
+            );
 
         }
 
-        const total =
-            quantityValue * PRICE_PER_KG;
 
 
-        if (totalAmount) {
+        /* =================================================
+           CONSTANTS
+        ================================================== */
 
-            totalAmount.textContent =
-                "₹" +
-                total.toLocaleString("en-IN");
+        const MIN_QUANTITY = 10;
+
+        const PRICE_PER_KG = 350;
+
+        const OWNER_WHATSAPP =
+            "918367450301";
+
+
+
+        /* =================================================
+           ELEMENTS
+        ================================================== */
+
+        const orderForm =
+            document.getElementById(
+                "orderForm"
+            );
+
+        const customerName =
+            document.getElementById(
+                "customerName"
+            );
+
+        const phone =
+            document.getElementById(
+                "phone"
+            );
+
+        const address =
+            document.getElementById(
+                "address"
+            );
+
+        const quantityDisplay =
+            document.getElementById(
+                "quantityDisplay"
+            );
+
+        const totalAmount =
+            document.getElementById(
+                "totalAmount"
+            );
+
+        const minusBtn =
+            document.getElementById(
+                "minusBtn"
+            );
+
+        const plusBtn =
+            document.getElementById(
+                "plusBtn"
+            );
+
+        const orderSubmit =
+            document.getElementById(
+                "orderSubmit"
+            );
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+        const currentYear =
+            document.getElementById(
+                "currentYear"
+            );
+
+
+
+        /* =================================================
+           YEAR
+        ================================================== */
+
+        if (currentYear) {
+
+            currentYear.textContent =
+                new Date().getFullYear();
 
         }
 
-    }
 
 
-    updateTotal();
+        /* =================================================
+           QUANTITY
+        ================================================== */
+
+        let quantityValue =
+            MIN_QUANTITY;
+
+
+        function updateTotal() {
+
+            if (quantityDisplay) {
+
+                quantityDisplay.textContent =
+                    quantityValue;
+
+            }
+
+
+            const total =
+                quantityValue *
+                PRICE_PER_KG;
+
+
+            if (totalAmount) {
+
+                totalAmount.textContent =
+                    "₹" +
+                    total.toLocaleString(
+                        "en-IN"
+                    );
+
+            }
+
+        }
+
+
+        updateTotal();
 
 
 
-    /* =====================================================
-       MINUS
-    ====================================================== */
+        /* =================================================
+           MINUS
+        ================================================== */
 
-    if (minusBtn) {
+        if (minusBtn) {
 
-        minusBtn.addEventListener(
-            "click",
-            function () {
+            minusBtn.addEventListener(
+                "click",
+                function () {
 
-                if (quantityValue > MIN_QUANTITY) {
+                    if (
+                        quantityValue >
+                        MIN_QUANTITY
+                    ) {
 
-                    quantityValue--;
+                        quantityValue--;
+
+                        updateTotal();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           PLUS
+        ================================================== */
+
+        if (plusBtn) {
+
+            plusBtn.addEventListener(
+                "click",
+                function () {
+
+                    quantityValue++;
 
                     updateTotal();
 
                 }
+            );
 
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       PLUS
-    ====================================================== */
-
-    if (plusBtn) {
-
-        plusBtn.addEventListener(
-            "click",
-            function () {
-
-                quantityValue++;
-
-                updateTotal();
-
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       PHONE VALIDATION
-    ====================================================== */
-
-    if (phone) {
-
-        phone.addEventListener(
-            "input",
-            function () {
-
-                this.value =
-                    this.value
-                        .replace(/\D/g, "")
-                        .slice(0, 10);
-
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       FORM MESSAGE
-    ====================================================== */
-
-    function showMessage(
-        message,
-        type
-    ) {
-
-        if (!formMessage) {
-            return;
         }
 
-        formMessage.textContent =
-            message;
-
-        formMessage.className =
-            "form-message " +
-            type;
-
-    }
 
 
+        /* =================================================
+           PHONE
+        ================================================== */
 
-    /* =====================================================
-       ORDER SUBMISSION
-    ====================================================== */
+        if (phone) {
 
-    if (orderForm) {
+            phone.addEventListener(
+                "input",
+                function () {
 
-        orderForm.addEventListener(
-            "submit",
-            async function (event) {
-
-                event.preventDefault();
-
-
-                console.log(
-                    "📦 Submitting order..."
-                );
-
-
-                const name =
-                    customerName.value.trim();
-
-                const customerPhone =
-                    phone.value.trim();
-
-                const customerAddress =
-                    address.value.trim();
-
-
-                /* -----------------------------------------
-                   VALIDATION
-                ------------------------------------------ */
-
-                if (!name) {
-
-                    showMessage(
-                        "Please enter your name.",
-                        "error"
-                    );
-
-                    customerName.focus();
-
-                    return;
+                    this.value =
+                        this.value
+                            .replace(
+                                /\D/g,
+                                ""
+                            )
+                            .slice(
+                                0,
+                                10
+                            );
 
                 }
+            );
+
+        }
 
 
-                if (
-                    !/^[0-9]{10}$/.test(
-                        customerPhone
-                    )
-                ) {
 
-                    showMessage(
-                        "Please enter a valid 10-digit mobile number.",
-                        "error"
+        /* =================================================
+           MESSAGE
+        ================================================== */
+
+        function showMessage(
+            message,
+            type
+        ) {
+
+            if (!formMessage) {
+                return;
+            }
+
+
+            formMessage.textContent =
+                message;
+
+
+            formMessage.className =
+                "form-message " +
+                type;
+
+        }
+
+
+
+        /* =================================================
+           ORDER
+        ================================================== */
+
+        if (orderForm) {
+
+            orderForm.addEventListener(
+                "submit",
+                async function (event) {
+
+
+                    event.preventDefault();
+
+
+                    console.log(
+                        "📦 Submitting order..."
                     );
 
-                    phone.focus();
 
-                    return;
-
-                }
-
-
-                if (!customerAddress) {
-
-                    showMessage(
-                        "Please enter your delivery address.",
-                        "error"
-                    );
-
-                    address.focus();
-
-                    return;
-
-                }
+                    const name =
+                        customerName
+                            .value
+                            .trim();
 
 
-                if (
-                    quantityValue <
-                    MIN_QUANTITY
-                ) {
-
-                    showMessage(
-                        "Minimum order is 10 KG.",
-                        "error"
-                    );
-
-                    return;
-
-                }
+                    const customerPhone =
+                        phone
+                            .value
+                            .trim();
 
 
-                if (!supabaseClient) {
-
-                    showMessage(
-                        "Unable to connect to the order system. Please contact us on WhatsApp.",
-                        "error"
-                    );
-
-                    console.error(
-                        "❌ Supabase client unavailable"
-                    );
-
-                    return;
-
-                }
-
-
-
-                /* -----------------------------------------
-                   TOTAL
-                ------------------------------------------ */
-
-                const total =
-                    quantityValue *
-                    PRICE_PER_KG;
-
-
-
-                /* -----------------------------------------
-                   ORDER DATA
-                ------------------------------------------ */
-
-                const orderData = {
-
-                    customer_name:
-                        name,
-
-                    customer_phone:
-                        customerPhone,
-
-                    quantity_kg:
-                        quantityValue,
-
-                    address:
-                        customerAddress,
-
-                    total_amount:
-                        total,
-
-                    status:
-                        "New"
-
-                };
-
-
-                console.log(
-                    "📦 Order data:",
-                    orderData
-                );
-
-
-
-                /* -----------------------------------------
-                   BUTTON LOADING
-                ------------------------------------------ */
-
-                const originalButtonText =
-                    orderSubmit.innerHTML;
-
-
-                orderSubmit.disabled = true;
-
-                orderSubmit.innerHTML =
-                    "⏳ Placing Order...";
-
-
-                showMessage(
-                    "Submitting your order...",
-                    "loading"
-                );
-
-
-
-                try {
+                    const customerAddress =
+                        address
+                            .value
+                            .trim();
 
 
                     /* -------------------------------------
-                       INSERT ORDER
+                       VALIDATION
                     -------------------------------------- */
 
-                    const {
-                        data,
-                        error
-                    } =
-                        await supabaseClient
-                            .from("orders")
-                            .insert([
-                                orderData
-                            ])
-                            .select()
-                            .single();
+                    if (!name) {
 
-
-                    if (error) {
-
-                        console.error(
-                            "❌ Order insert failed:",
-                            error
+                        showMessage(
+                            "Please enter your name.",
+                            "error"
                         );
 
-                        throw error;
+                        customerName.focus();
+
+                        return;
 
                     }
 
 
+                    if (
+                        !/^[0-9]{10}$/.test(
+                            customerPhone
+                        )
+                    ) {
+
+                        showMessage(
+                            "Please enter a valid 10-digit mobile number.",
+                            "error"
+                        );
+
+                        phone.focus();
+
+                        return;
+
+                    }
+
+
+                    if (!customerAddress) {
+
+                        showMessage(
+                            "Please enter your delivery address.",
+                            "error"
+                        );
+
+                        address.focus();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        quantityValue <
+                        MIN_QUANTITY
+                    ) {
+
+                        showMessage(
+                            "Minimum order is 10 KG.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!supabaseClient) {
+
+                        showMessage(
+                            "Order system is not connected. Please contact us on WhatsApp.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    /* -------------------------------------
+                       TOTAL
+                    -------------------------------------- */
+
+                    const total =
+                        quantityValue *
+                        PRICE_PER_KG;
+
+
+
+                    /* -------------------------------------
+                       DATA
+                    -------------------------------------- */
+
+                    const orderData = {
+
+                        customer_name:
+                            name,
+
+                        customer_phone:
+                            customerPhone,
+
+                        quantity_kg:
+                            quantityValue,
+
+                        address:
+                            customerAddress,
+
+                        total_amount:
+                            total,
+
+                        status:
+                            "New"
+
+                    };
+
+
                     console.log(
-                        "✅ Order saved:",
-                        data
+                        "📦 Order data:",
+                        orderData
                     );
 
 
 
                     /* -------------------------------------
-                       SUCCESS MESSAGE
+                       BUTTON
                     -------------------------------------- */
+
+                    const oldButtonText =
+                        orderSubmit.innerHTML;
+
+
+                    orderSubmit.disabled =
+                        true;
+
+
+                    orderSubmit.innerHTML =
+                        "⏳ Placing Order...";
+
 
                     showMessage(
-                        "✅ Order placed successfully!",
-                        "success"
+                        "Submitting your order...",
+                        "loading"
                     );
 
 
 
-                    /* -------------------------------------
-                       WHATSAPP MESSAGE
-                    -------------------------------------- */
-
-                    const orderId =
-                        data &&
-                        data.id
-                            ? data.id
-                            : "New";
+                    try {
 
 
-                    const whatsappMessage =
+                        /* =================================
+                           SUPABASE INSERT
+                        ================================== */
+
+                        const {
+                            data,
+                            error
+                        } =
+                            await supabaseClient
+                                .from("orders")
+                                .insert(
+                                    [orderData]
+                                )
+                                .select()
+                                .single();
+
+
+                        if (error) {
+
+
+                            /*
+                             * SHOW THE REAL ERROR
+                             * IN CONSOLE
+                             */
+
+                            console.error(
+                                "========== SUPABASE ORDER ERROR =========="
+                            );
+
+                            console.error(
+                                "Code:",
+                                error.code
+                            );
+
+                            console.error(
+                                "Message:",
+                                error.message
+                            );
+
+                            console.error(
+                                "Details:",
+                                error.details
+                            );
+
+                            console.error(
+                                "Hint:",
+                                error.hint
+                            );
+
+                            console.error(
+                                "Full error:",
+                                error
+                            );
+
+                            console.error(
+                                "=========================================="
+                            );
+
+
+                            /*
+                             * DO NOT incorrectly call every
+                             * error an RLS error.
+                             */
+
+                            if (
+                                error.code ===
+                                "42501"
+                            ) {
+
+                                showMessage(
+                                    "Database permission denied. Please check the Supabase INSERT policy.",
+                                    "error"
+                                );
+
+                            }
+
+                            else if (
+                                error.code ===
+                                "401"
+                            ) {
+
+                                showMessage(
+                                    "Supabase authentication failed. Please verify the current Publishable API key.",
+                                    "error"
+                                );
+
+                            }
+
+                            else {
+
+                                showMessage(
+                                    "Order could not be submitted. Please try again or contact us on WhatsApp.",
+                                    "error"
+                                );
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+
+                        /* =================================
+                           SUCCESS
+                        ================================== */
+
+                        console.log(
+                            "✅ Order saved successfully:",
+                            data
+                        );
+
+
+                        showMessage(
+                            "✅ Order placed successfully!",
+                            "success"
+                        );
+
+
+
+                        /* =================================
+                           ORDER ID
+                        ================================== */
+
+                        const orderId =
+                            data &&
+                            data.id
+                                ? data.id
+                                : "New";
+
+
+
+                        /* =================================
+                           WHATSAPP
+                        ================================== */
+
+                        const whatsappMessage =
 
 `🌶️ *MANA MASALA ORDER*
 
@@ -1553,366 +1690,390 @@ ${customerAddress}
 Thank you for ordering from Mana Masala! 🌶️`;
 
 
-                    const whatsappURL =
-                        "https://wa.me/" +
-                        OWNER_WHATSAPP +
-                        "?text=" +
-                        encodeURIComponent(
-                            whatsappMessage
+                        const whatsappURL =
+                            "https://wa.me/" +
+                            OWNER_WHATSAPP +
+                            "?text=" +
+                            encodeURIComponent(
+                                whatsappMessage
+                            );
+
+
+
+                        /* =================================
+                           RESET
+                        ================================== */
+
+                        orderForm.reset();
+
+
+                        quantityValue =
+                            MIN_QUANTITY;
+
+
+                        updateTotal();
+
+
+
+                        /* =================================
+                           OPEN WHATSAPP
+                        ================================== */
+
+                        setTimeout(
+                            function () {
+
+                                window.open(
+                                    whatsappURL,
+                                    "_blank"
+                                );
+
+                            },
+                            600
                         );
 
 
-                    /* -------------------------------------
-                       RESET FORM
-                    -------------------------------------- */
+                    }
 
-                    orderForm.reset();
-
-                    quantityValue =
-                        MIN_QUANTITY;
-
-                    updateTotal();
+                    catch (error) {
 
 
+                        console.error(
+                            "❌ Unexpected order error:",
+                            error
+                        );
 
-                    /* -------------------------------------
-                       OPEN WHATSAPP
-                    -------------------------------------- */
+
+                        showMessage(
+                            "Unexpected error. Please contact us on WhatsApp.",
+                            "error"
+                        );
+
+
+                    }
+
+                    finally {
+
+                        orderSubmit.disabled =
+                            false;
+
+
+                        orderSubmit.innerHTML =
+                            oldButtonText;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           SMOOTH SCROLL
+        ================================================== */
+
+        document
+            .querySelectorAll(
+                'a[href^="#"]'
+            )
+            .forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function (event) {
+
+                            const targetId =
+                                this.getAttribute(
+                                    "href"
+                                );
+
+
+                            if (
+                                !targetId ||
+                                targetId === "#"
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const target =
+                                document.querySelector(
+                                    targetId
+                                );
+
+
+                            if (!target) {
+                                return;
+                            }
+
+
+                            event.preventDefault();
+
+
+                            target.scrollIntoView({
+                                behavior:
+                                    "smooth",
+                                block:
+                                    "start"
+                            });
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =================================================
+           INTRO
+        ================================================== */
+
+        const intro =
+            document.getElementById(
+                "manaIntro"
+            );
+
+
+        if (intro) {
+
+            setTimeout(
+                function () {
+
+
+                    intro.classList.add(
+                        "intro-finished"
+                    );
+
 
                     setTimeout(
                         function () {
 
-                            window.open(
-                                whatsappURL,
-                                "_blank"
-                            );
+                            if (
+                                intro &&
+                                intro.parentNode
+                            ) {
+
+                                intro.parentNode
+                                    .removeChild(
+                                        intro
+                                    );
+
+                            }
 
                         },
-                        500
+                        900
                     );
 
 
-                } catch (error) {
+                },
+                3000
+            );
+
+        }
 
 
-                    console.error(
-                        "❌ Order submission error:",
-                        error
-                    );
 
-
-                    let errorMessage =
-                        "Unable to place the order right now. Please try again or contact us on WhatsApp.";
-
-
-                    if (
-                        error &&
-                        error.code === "42501"
-                    ) {
-
-                        errorMessage =
-                            "Order permission was denied by the database. Please contact us on WhatsApp.";
-
-                    }
-
-
-                    if (
-                        error &&
-                        error.code === "401"
-                    ) {
-
-                        errorMessage =
-                            "The order system authentication failed. Please contact us on WhatsApp.";
-
-                    }
-
-
-                    showMessage(
-                        errorMessage,
-                        "error"
-                    );
-
-
-                } finally {
-
-                    orderSubmit.disabled =
-                        false;
-
-                    orderSubmit.innerHTML =
-                        originalButtonText;
-
-                }
-
-            }
+        console.log(
+            "✅ Mana Masala system ready"
         );
 
-    }
-
-
-
-    /* =====================================================
-       SMOOTH SCROLL
-    ====================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href^="#"]'
-        )
-        .forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function (event) {
-
-                        const targetId =
-                            this.getAttribute(
-                                "href"
-                            );
-
-                        if (
-                            !targetId ||
-                            targetId === "#"
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        const target =
-                            document.querySelector(
-                                targetId
-                            );
-
-
-                        if (!target) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
-                );
-
-            }
-        );
-
-
-
-    /* =====================================================
-       INTRO REVEAL
-    ====================================================== */
-
-    const intro =
-        document.getElementById(
-            "manaIntro"
-        );
-
-
-    if (intro) {
-
-        setTimeout(
-            function () {
-
-                intro.classList.add(
-                    "intro-finished"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        if (
-                            intro &&
-                            intro.parentNode
-                        ) {
-
-                            intro.parentNode
-                                .removeChild(
-                                    intro
-                                );
-
-                        }
-
-                    },
-                    900
-                );
-
-
-            },
-            3000
-        );
-
-    }
-
-
-
-    console.log(
-        "✅ Mana Masala system ready"
-    );
-
-});
+    });
 
 </script>
 
 
-<!-- =========================================================
-     EMERGENCY IMAGE ISOLATION
 
-     These rules are scoped.
-     They DO NOT affect the whole website.
+<!-- =========================================================
+     IMAGE SAFETY OVERRIDES
+     
+     These are deliberately scoped.
 ========================================================= -->
 
 <style>
 
-    /*
-       IMPORTANT:
-       favicon.png is NOT used as an HTML image.
-       It exists only in <link rel="icon">.
-    */
 
-    #manaIntro img[src*="favicon"] {
-        display: none !important;
-    }
+/* ---------------------------------------------------------
+   INTRO
+--------------------------------------------------------- */
 
+#manaIntro {
 
-    /*
-       Intro has no product image.
-    */
+    position: fixed !important;
 
-    #manaIntro img[src*="masala"] {
-        display: none !important;
-    }
+    inset: 0 !important;
 
+    width: 100% !important;
 
-    /*
-       Product images stay inside their containers.
-    */
+    height: 100% !important;
 
-    .mana-product-image {
+    z-index: 99999 !important;
 
-        position: relative !important;
+    overflow: hidden !important;
 
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-
-        width: min(360px, 80vw) !important;
-
-        height: auto !important;
-
-        min-width: 0 !important;
-        min-height: 0 !important;
-
-        max-width: 100% !important;
-        max-height: 420px !important;
-
-        display: block !important;
-
-        object-fit: contain !important;
-
-        margin-left: auto !important;
-        margin-right: auto !important;
-
-        transform: none !important;
-
-    }
+}
 
 
-    /*
-       Glimpse images
-    */
+/* ---------------------------------------------------------
+   NEVER DISPLAY IMAGES INSIDE INTRO
+--------------------------------------------------------- */
 
-    .glimpse-image {
+#manaIntro img {
 
-        position: relative !important;
+    display: none !important;
 
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-
-        width: 100% !important;
-
-        height: 100% !important;
-
-        max-width: 100% !important;
-
-        object-fit: cover !important;
-
-    }
+}
 
 
-    /*
-       Product containers
-    */
+/* ---------------------------------------------------------
+   INTRO ICON
+--------------------------------------------------------- */
 
-    .hero-product-image,
-    .product-image-wrap {
+#manaIntro .intro-brand-mark {
 
-        position: relative !important;
+    position: relative !important;
 
-        overflow: hidden !important;
+    width: 90px !important;
 
-    }
+    height: 90px !important;
 
+    display: flex !important;
 
-    /*
-       Hero card cannot become fullscreen.
-    */
+    align-items: center !important;
 
-    .hero-product-card {
+    justify-content: center !important;
 
-        position: relative !important;
+    margin: 0 auto 20px !important;
 
-        overflow: hidden !important;
+    font-size: 55px !important;
 
-    }
+    line-height: 1 !important;
 
-
-    /*
-       Intro only is fullscreen.
-    */
-
-    #manaIntro {
-
-        position: fixed !important;
-
-        inset: 0 !important;
-
-        width: 100% !important;
-
-        height: 100% !important;
-
-        z-index: 99999 !important;
-
-        overflow: hidden !important;
-
-    }
+}
 
 
-    /*
-       Intro disappearance
-    */
+/* ---------------------------------------------------------
+   PRODUCT IMAGE
+--------------------------------------------------------- */
 
-    #manaIntro.intro-finished {
+.mana-product-image {
 
-        opacity: 0 !important;
+    position: relative !important;
 
-        visibility: hidden !important;
+    inset: auto !important;
 
-        pointer-events: none !important;
+    display: block !important;
 
-    }
+    width: min(360px, 80vw) !important;
+
+    height: auto !important;
+
+    min-width: 0 !important;
+
+    min-height: 0 !important;
+
+    max-width: 100% !important;
+
+    max-height: 420px !important;
+
+    object-fit: contain !important;
+
+    margin-left: auto !important;
+
+    margin-right: auto !important;
+
+    transform: none !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   PRODUCT CONTAINERS
+--------------------------------------------------------- */
+
+.hero-product-image,
+.product-image-wrap {
+
+    position: relative !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   PRODUCT CARD
+--------------------------------------------------------- */
+
+.hero-product-card {
+
+    position: relative !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   GLIMPSE IMAGE
+--------------------------------------------------------- */
+
+.glimpse-card {
+
+    position: relative !important;
+
+    overflow: hidden !important;
+
+}
+
+
+.glimpse-image {
+
+    position: relative !important;
+
+    inset: auto !important;
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    max-width: 100% !important;
+
+    object-fit: cover !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   INTRO FINISH
+--------------------------------------------------------- */
+
+#manaIntro.intro-finished {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   PREVENT INTRO FROM LEAVING AN IMAGE
+--------------------------------------------------------- */
+
+#manaIntro.intro-finished img {
+
+    display: none !important;
+
+}
 
 </style>
 

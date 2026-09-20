@@ -47,7 +47,7 @@
     ====================================================== -->
 
     <link rel="stylesheet"
-          href="style.css?v=311">
+          href="style.css?v=312">
 
 
     <!-- =====================================================
@@ -618,12 +618,25 @@
         <div class="glimpses-grid">
 
 
+            <!-- VIDEO -->
+
             <div class="glimpse-card">
 
-                <img src="./glimpse.mp4"
-                     class="glimpse-image"
-                     alt="Mana Masala product"
-                     loading="lazy">
+                <video class="glimpse-image"
+                       autoplay
+                       muted
+                       loop
+                       playsinline
+                       preload="metadata">
+
+                    <source src="./glimpse.mp4"
+                            type="video/mp4">
+
+                    Your browser does not support
+                    the video element.
+
+                </video>
+
 
                 <div class="glimpse-overlay">
 
@@ -636,11 +649,13 @@
             </div>
 
 
+            <!-- BACKGROUND IMAGE -->
+
             <div class="glimpse-card">
 
                 <img src="background.jpeg"
                      class="glimpse-image"
-                     alt="Mana Masala"
+                     alt="Mana Masala Homemade Tradition"
                      loading="lazy">
 
                 <div class="glimpse-overlay">
@@ -653,6 +668,8 @@
 
             </div>
 
+
+            <!-- PRODUCT IMAGE -->
 
             <div class="glimpse-card">
 
@@ -893,6 +910,8 @@
         <div class="contact-grid">
 
 
+            <!-- WHATSAPP -->
+
             <a href="https://wa.me/918367450301"
                target="_blank"
                rel="noopener noreferrer"
@@ -917,6 +936,8 @@
             </a>
 
 
+            <!-- CALL -->
+
             <a href="tel:+918367450301"
                class="contact-card">
 
@@ -938,6 +959,8 @@
 
             </a>
 
+
+            <!-- BRAND -->
 
             <div class="contact-card">
 
@@ -989,6 +1012,7 @@
 <footer class="site-footer">
 
     <div class="footer-container">
+
 
         <div class="footer-brand">
 
@@ -1049,27 +1073,18 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
         console.log(
             "🌶️ Mana Masala website starting..."
         );
 
 
-        /* =================================================
+        /* =====================================================
            SUPABASE
-        ================================================== */
+        ===================================================== */
 
         const SUPABASE_URL =
             "https://hcczhnmdipqrnbxviuln.supabase.co";
 
-
-        /*
-         * IMPORTANT:
-         * This must be the CURRENT publishable key
-         * from the SAME Supabase project.
-         *
-         * Never use a service_role / secret key here.
-         */
 
         const SUPABASE_ANON_KEY =
             "sb_publishable_EHoyeiRqm91Y1XIUoLHZvw_37-6eJhI";
@@ -1115,10 +1130,9 @@ document.addEventListener(
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            CONSTANTS
-        ================================================== */
+        ===================================================== */
 
         const MIN_QUANTITY = 10;
 
@@ -1128,60 +1142,69 @@ document.addEventListener(
             "918367450301";
 
 
-
-        /* =================================================
-           ELEMENTS
-        ================================================== */
+        /* =====================================================
+           DOM ELEMENTS
+        ===================================================== */
 
         const orderForm =
             document.getElementById(
                 "orderForm"
             );
 
+
         const customerName =
             document.getElementById(
                 "customerName"
             );
+
 
         const phone =
             document.getElementById(
                 "phone"
             );
 
+
         const address =
             document.getElementById(
                 "address"
             );
+
 
         const quantityDisplay =
             document.getElementById(
                 "quantityDisplay"
             );
 
+
         const totalAmount =
             document.getElementById(
                 "totalAmount"
             );
+
 
         const minusBtn =
             document.getElementById(
                 "minusBtn"
             );
 
+
         const plusBtn =
             document.getElementById(
                 "plusBtn"
             );
+
 
         const orderSubmit =
             document.getElementById(
                 "orderSubmit"
             );
 
+
         const formMessage =
             document.getElementById(
                 "formMessage"
             );
+
 
         const currentYear =
             document.getElementById(
@@ -1189,10 +1212,9 @@ document.addEventListener(
             );
 
 
-
-        /* =================================================
+        /* =====================================================
            YEAR
-        ================================================== */
+        ===================================================== */
 
         if (currentYear) {
 
@@ -1202,10 +1224,9 @@ document.addEventListener(
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            QUANTITY
-        ================================================== */
+        ===================================================== */
 
         let quantityValue =
             MIN_QUANTITY;
@@ -1242,16 +1263,18 @@ document.addEventListener(
         updateTotal();
 
 
-
-        /* =================================================
+        /* =====================================================
            MINUS
-        ================================================== */
+        ===================================================== */
 
         if (minusBtn) {
 
             minusBtn.addEventListener(
                 "click",
-                function () {
+                function (event) {
+
+                    event.preventDefault();
+
 
                     if (
                         quantityValue >
@@ -1270,16 +1293,18 @@ document.addEventListener(
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            PLUS
-        ================================================== */
+        ===================================================== */
 
         if (plusBtn) {
 
             plusBtn.addEventListener(
                 "click",
-                function () {
+                function (event) {
+
+                    event.preventDefault();
+
 
                     quantityValue++;
 
@@ -1291,10 +1316,9 @@ document.addEventListener(
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            PHONE
-        ================================================== */
+        ===================================================== */
 
         if (phone) {
 
@@ -1319,10 +1343,9 @@ document.addEventListener(
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            MESSAGE
-        ================================================== */
+        ===================================================== */
 
         function showMessage(
             message,
@@ -1330,7 +1353,13 @@ document.addEventListener(
         ) {
 
             if (!formMessage) {
+
+                console.log(
+                    `[${type}] ${message}`
+                );
+
                 return;
+
             }
 
 
@@ -1342,20 +1371,22 @@ document.addEventListener(
                 "form-message " +
                 type;
 
+
+            formMessage.style.display =
+                "block";
+
         }
 
 
-
-        /* =================================================
-           ORDER
-        ================================================== */
+        /* =====================================================
+           ORDER FORM
+        ===================================================== */
 
         if (orderForm) {
 
             orderForm.addEventListener(
                 "submit",
                 async function (event) {
-
 
                     event.preventDefault();
 
@@ -1364,6 +1395,26 @@ document.addEventListener(
                         "📦 Submitting order..."
                     );
 
+
+                    /* =========================================
+                       SUPABASE CHECK
+                    ========================================== */
+
+                    if (!supabaseClient) {
+
+                        showMessage(
+                            "Order system is not connected. Please contact us on WhatsApp.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =========================================
+                       GET FORM VALUES
+                    ========================================== */
 
                     const name =
                         customerName
@@ -1383,9 +1434,9 @@ document.addEventListener(
                             .trim();
 
 
-                    /* -------------------------------------
+                    /* =========================================
                        VALIDATION
-                    -------------------------------------- */
+                    ========================================== */
 
                     if (!name) {
 
@@ -1448,32 +1499,18 @@ document.addEventListener(
                     }
 
 
-                    if (!supabaseClient) {
-
-                        showMessage(
-                            "Order system is not connected. Please contact us on WhatsApp.",
-                            "error"
-                        );
-
-                        return;
-
-                    }
-
-
-
-                    /* -------------------------------------
+                    /* =========================================
                        TOTAL
-                    -------------------------------------- */
+                    ========================================== */
 
                     const total =
                         quantityValue *
                         PRICE_PER_KG;
 
 
-
-                    /* -------------------------------------
-                       DATA
-                    -------------------------------------- */
+                    /* =========================================
+                       ORDER DATA
+                    ========================================== */
 
                     const orderData = {
 
@@ -1504,10 +1541,9 @@ document.addEventListener(
                     );
 
 
-
-                    /* -------------------------------------
+                    /* =========================================
                        BUTTON
-                    -------------------------------------- */
+                    ========================================== */
 
                     const oldButtonText =
                         orderSubmit.innerHTML;
@@ -1527,73 +1563,82 @@ document.addEventListener(
                     );
 
 
-
                     try {
 
 
-                        /* =================================
+                        /* =====================================
                            SUPABASE INSERT
-                        ================================== */
+
+                           IMPORTANT:
+
+                           DO NOT ADD:
+                           .select()
+                           .single()
+
+                           Customer has INSERT permission
+                           but does not have SELECT permission.
+                        ====================================== */
+
+                        console.log(
+                            "📤 Sending order to Supabase..."
+                        );
+
 
                         const {
-                            data,
                             error
                         } =
                             await supabaseClient
                                 .from("orders")
-                                .insert(
-                                    [orderData]
-                                )
-                                .select()
-                                .single();
+                                .insert([
+                                    orderData
+                                ]);
 
+
+                        /* =====================================
+                           DATABASE ERROR
+                        ====================================== */
 
                         if (error) {
-
-
-                            /*
-                             * SHOW THE REAL ERROR
-                             * IN CONSOLE
-                             */
 
                             console.error(
                                 "========== SUPABASE ORDER ERROR =========="
                             );
+
 
                             console.error(
                                 "Code:",
                                 error.code
                             );
 
+
                             console.error(
                                 "Message:",
                                 error.message
                             );
+
 
                             console.error(
                                 "Details:",
                                 error.details
                             );
 
+
                             console.error(
                                 "Hint:",
                                 error.hint
                             );
+
 
                             console.error(
                                 "Full error:",
                                 error
                             );
 
+
                             console.error(
                                 "=========================================="
                             );
 
-
-                            /*
-                             * DO NOT incorrectly call every
-                             * error an RLS error.
-                             */
 
                             if (
                                 error.code ===
@@ -1602,18 +1647,6 @@ document.addEventListener(
 
                                 showMessage(
                                     "Database permission denied. Please check the Supabase INSERT policy.",
-                                    "error"
-                                );
-
-                            }
-
-                            else if (
-                                error.code ===
-                                "401"
-                            ) {
-
-                                showMessage(
-                                    "Supabase authentication failed. Please verify the current Publishable API key.",
                                     "error"
                                 );
 
@@ -1634,60 +1667,110 @@ document.addEventListener(
                         }
 
 
-
-                        /* =================================
+                        /* =====================================
                            SUCCESS
-                        ================================== */
+                        ====================================== */
 
                         console.log(
-                            "✅ Order saved successfully:",
-                            data
+                            "✅ Order inserted successfully"
                         );
 
 
-                        showMessage(
-                            "✅ Order placed successfully!",
-                            "success"
+                        console.log(
+                            "📦 Saved order:",
+                            orderData
                         );
 
 
+                        /* =====================================
+                           EMAIL NOTIFICATION
 
-                        /* =================================
-                           ORDER ID
-                        ================================== */
+                           Order is already saved.
+                           Email failure will not cancel order.
+                        ====================================== */
 
-                        const orderId =
-                            data &&
-                            data.id
-                                ? data.id
-                                : "New";
+                        try {
+
+                            console.log(
+                                "📧 Sending owner notification..."
+                            );
 
 
+                            const {
+                                data:
+                                    notificationData,
+                                error:
+                                    notificationError
+                            } =
+                                await supabaseClient
+                                    .functions
+                                    .invoke(
+                                        "new-order-notification",
+                                        {
+                                            body: {
+                                                order:
+                                                    orderData
+                                            }
+                                        }
+                                    );
 
-                        /* =================================
+
+                            if (
+                                notificationError
+                            ) {
+
+                                console.error(
+                                    "⚠️ Email notification failed:",
+                                    notificationError
+                                );
+
+                            }
+
+                            else {
+
+                                console.log(
+                                    "✅ Owner notification response:",
+                                    notificationData
+                                );
+
+                            }
+
+                        }
+
+                        catch (
+                            notificationException
+                        ) {
+
+                            console.error(
+                                "⚠️ Email notification exception:",
+                                notificationException
+                            );
+
+                        }
+
+
+                        /* =====================================
                            WHATSAPP
-                        ================================== */
+                        ====================================== */
 
                         const whatsappMessage =
 
 `🌶️ *MANA MASALA ORDER*
 
-📦 Order ID: ${orderId}
+👤 *Customer:* ${name}
 
-👤 Name: ${name}
+📞 *Phone:* ${customerPhone}
 
-📱 Phone: ${customerPhone}
+📦 *Quantity:* ${quantityValue} KG
 
-📍 Address:
+💰 *Price:* ₹${PRICE_PER_KG}/KG
+
+💵 *Total:* ₹${total.toLocaleString("en-IN")}
+
+📍 *Delivery Address:*
 ${customerAddress}
 
-⚖️ Quantity: ${quantityValue} KG
-
-💰 Price: ₹${PRICE_PER_KG}/KG
-
-💵 Total: ₹${total.toLocaleString("en-IN")}
-
-Thank you for ordering from Mana Masala! 🌶️`;
+🌶️ *Product:* Homemade Chilli Powder`;
 
 
                         const whatsappURL =
@@ -1699,10 +1782,19 @@ Thank you for ordering from Mana Masala! 🌶️`;
                             );
 
 
+                        /* =====================================
+                           SUCCESS MESSAGE
+                        ====================================== */
 
-                        /* =================================
+                        showMessage(
+                            "✅ Order placed successfully! Opening WhatsApp...",
+                            "success"
+                        );
+
+
+                        /* =====================================
                            RESET
-                        ================================== */
+                        ====================================== */
 
                         orderForm.reset();
 
@@ -1714,10 +1806,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
                         updateTotal();
 
 
-
-                        /* =================================
-                           OPEN WHATSAPP
-                        ================================== */
+                        /* =====================================
+                           WHATSAPP
+                        ====================================== */
 
                         setTimeout(
                             function () {
@@ -1728,14 +1819,18 @@ Thank you for ordering from Mana Masala! 🌶️`;
                                 );
 
                             },
-                            600
+                            700
+                        );
+
+
+                        console.log(
+                            "🌶️ Order process completed successfully"
                         );
 
 
                     }
 
                     catch (error) {
-
 
                         console.error(
                             "❌ Unexpected order error:",
@@ -1748,8 +1843,8 @@ Thank you for ordering from Mana Masala! 🌶️`;
                             "error"
                         );
 
-
                     }
+
 
                     finally {
 
@@ -1768,10 +1863,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
         }
 
 
-
-        /* =================================================
+        /* =====================================================
            SMOOTH SCROLL
-        ================================================== */
+        ===================================================== */
 
         document
             .querySelectorAll(
@@ -1807,7 +1901,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 
 
                             if (!target) {
+
                                 return;
+
                             }
 
 
@@ -1817,6 +1913,7 @@ Thank you for ordering from Mana Masala! 🌶️`;
                             target.scrollIntoView({
                                 behavior:
                                     "smooth",
+
                                 block:
                                     "start"
                             });
@@ -1828,10 +1925,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
             );
 
 
-
-        /* =================================================
+        /* =====================================================
            INTRO
-        ================================================== */
+        ===================================================== */
 
         const intro =
             document.getElementById(
@@ -1843,7 +1939,6 @@ Thank you for ordering from Mana Masala! 🌶️`;
 
             setTimeout(
                 function () {
-
 
                     intro.classList.add(
                         "intro-finished"
@@ -1877,9 +1972,22 @@ Thank you for ordering from Mana Masala! 🌶️`;
         }
 
 
+        /* =====================================================
+           READY
+        ===================================================== */
 
         console.log(
             "✅ Mana Masala system ready"
+        );
+
+
+        console.log(
+            `💰 Price: ₹${PRICE_PER_KG}/KG`
+        );
+
+
+        console.log(
+            `📦 Minimum order: ${MIN_QUANTITY} KG`
         );
 
     });
@@ -1890,16 +1998,14 @@ Thank you for ordering from Mana Masala! 🌶️`;
 
 <!-- =========================================================
      IMAGE SAFETY OVERRIDES
-     
-     These are deliberately scoped.
 ========================================================= -->
 
 <style>
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    INTRO
---------------------------------------------------------- */
+========================================================= */
 
 #manaIntro {
 
@@ -1918,9 +2024,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    NEVER DISPLAY IMAGES INSIDE INTRO
---------------------------------------------------------- */
+========================================================= */
 
 #manaIntro img {
 
@@ -1929,9 +2035,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    INTRO ICON
---------------------------------------------------------- */
+========================================================= */
 
 #manaIntro .intro-brand-mark {
 
@@ -1956,9 +2062,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PRODUCT IMAGE
---------------------------------------------------------- */
+========================================================= */
 
 .mana-product-image {
 
@@ -1991,9 +2097,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PRODUCT CONTAINERS
---------------------------------------------------------- */
+========================================================= */
 
 .hero-product-image,
 .product-image-wrap {
@@ -2005,9 +2111,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PRODUCT CARD
---------------------------------------------------------- */
+========================================================= */
 
 .hero-product-card {
 
@@ -2018,9 +2124,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
-   GLIMPSE IMAGE
---------------------------------------------------------- */
+/* =========================================================
+   GLIMPSE CARD
+========================================================= */
 
 .glimpse-card {
 
@@ -2030,6 +2136,10 @@ Thank you for ordering from Mana Masala! 🌶️`;
 
 }
 
+
+/* =========================================================
+   GLIMPSE IMAGE + VIDEO
+========================================================= */
 
 .glimpse-image {
 
@@ -2050,9 +2160,20 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
+   GLIMPSE VIDEO
+========================================================= */
+
+video.glimpse-image {
+
+    background: #120000 !important;
+
+}
+
+
+/* =========================================================
    INTRO FINISH
---------------------------------------------------------- */
+========================================================= */
 
 #manaIntro.intro-finished {
 
@@ -2065,9 +2186,9 @@ Thank you for ordering from Mana Masala! 🌶️`;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PREVENT INTRO FROM LEAVING AN IMAGE
---------------------------------------------------------- */
+========================================================= */
 
 #manaIntro.intro-finished img {
 
